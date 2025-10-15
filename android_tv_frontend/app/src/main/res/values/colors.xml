@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nord-like palette -->
+    <color name="nord_bg">#2E3440</color>
+    <color name="nord_surface">#3B4252</color>
+    <color name="nord_text">#ECEFF4</color>
+    <color name="nord_accent">#88C0D0</color>
+    <color name="nord_secondary">#81A1C1</color>
+    <color name="nord_shadow">#1A000000</color>
+</resources>
