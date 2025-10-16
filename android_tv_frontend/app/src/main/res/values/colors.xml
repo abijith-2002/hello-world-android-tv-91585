@@ -6,8 +6,13 @@
     <color name="nord_surface">#3B4252</color>
     <!-- Text: near-white for high contrast on dark surfaces/background -->
     <color name="nord_text">#ECEFF4</color>
-    <color name="nord_accent">#88C0D0</color>
-    <color name="nord_secondary">#81A1C1</color>
+
+    <!-- Grey accents replacing previous green/blue tones -->
+    <!-- Medium grey for primary accent (sufficient contrast on dark bg) -->
+    <color name="nord_accent">#9CA3AF</color>
+    <!-- Lighter grey for secondary accents and subtle highlights -->
+    <color name="nord_secondary">#D1D5DB</color>
+
     <!-- Shadow with low alpha for subtle TV elevation -->
     <color name="nord_shadow">#1A000000</color>
 </resources>

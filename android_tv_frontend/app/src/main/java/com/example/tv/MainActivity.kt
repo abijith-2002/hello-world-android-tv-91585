@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         // Temporary: Add a debug border to verify visibility at runtime. Remove once validated.
         binding.cardContentDebug?.apply {
-            // Semi-transparent green overlay to confirm content area; remove after debugging.
-            setBackgroundColor(Color.parseColor("#4000FF00"))
+            // Semi-transparent neutral overlay to confirm content area; remove after debugging.
+            setBackgroundColor(Color.parseColor("#406B7280")) // neutral grey-blue at ~25% alpha
             alpha = 1.0f
             visibility = View.VISIBLE
         }

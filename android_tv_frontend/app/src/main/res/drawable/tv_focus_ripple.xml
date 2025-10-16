@@ -5,7 +5,8 @@
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <corners android:radius="16dp" />
-            <solid android:color="#4088C0D0" />
+            <!-- 25% alpha of light grey for subtle ripple -->
+            <solid android:color="#40D1D5DB" />
         </shape>
     </item>
 </ripple>
