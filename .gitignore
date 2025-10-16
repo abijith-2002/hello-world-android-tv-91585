@@ -61,3 +61,6 @@ core.*
 .core
 *.log
 post_process_status.lock
+
+# Ensure android_tv_frontend/install.sh is tracked (override any broad ignore rules)
+!android_tv_frontend/install.sh
