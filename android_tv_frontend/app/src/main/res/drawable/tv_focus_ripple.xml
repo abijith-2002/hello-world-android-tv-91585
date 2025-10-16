@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/nord_accent">
-    <!-- Keep mask translucent to avoid covering content -->
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <corners android:radius="16dp" />
-            <!-- 25% alpha of light grey for subtle ripple -->
-            <solid android:color="#40D1D5DB" />
+            <solid android:color="@color/nord_ripple_mask" />
         </shape>
     </item>
 </ripple>

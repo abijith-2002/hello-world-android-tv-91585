@@ -1,6 +1,5 @@
 package com.example.tv
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -36,14 +35,6 @@ class MainActivity : AppCompatActivity() {
             alpha = 1.0f
             visibility = View.VISIBLE
             requestFocus()
-        }
-
-        // Temporary: Add a debug border to verify visibility at runtime. Remove once validated.
-        binding.cardContentDebug?.apply {
-            // Semi-transparent neutral overlay to confirm content area; remove after debugging.
-            setBackgroundColor(Color.parseColor("#406B7280")) // neutral grey-blue at ~25% alpha
-            alpha = 1.0f
-            visibility = View.VISIBLE
         }
     }
 }

@@ -1,52 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App theme using Material 3 dark with Nord colors -->
     <style name="Theme.TV.NordDark" parent="Theme.Material3.Dark.NoActionBar">
-        <!-- Background and surfaces -->
+        <!-- Colors -->
         <item name="android:windowBackground">@color/nord_bg</item>
+
 
         <item name="colorSurface">@color/nord_surface</item>
         <item name="colorSurfaceVariant">@color/nord_surface</item>
 
-        <!-- High-contrast content colors -->
-        <item name="colorOnBackground">@color/nord_text</item>
-        <item name="colorOnSurface">@color/nord_text</item>
-        <item name="colorOnSurfaceVariant">@color/nord_text</item>
+        <item name="colorOnBackground">@color/nord_on_surface</item>
+        <item name="colorOnSurface">@color/nord_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/nord_on_surface</item>
 
-        <!-- Accents -->
-        <item name="colorPrimary">@color/nord_accent</item>
+        <item name="colorPrimary">@color/nord_grey_400</item>
         <item name="colorOnPrimary">@color/nord_bg</item>
-        <item name="colorSecondary">@color/nord_secondary</item>
+        <item name="colorSecondary">@color/nord_grey_300</item>
 
-        <!-- Typography: prefer Reddit Sans, gracefully falls back if not available -->
-        <item name="android:fontFamily">@font/reddit_sans_regular</item>
-        <item name="fontFamily">@font/reddit_sans_regular</item>
-        <!-- Fallbacks -->
-        <item name="android:typeface">sans</item>
+        <!-- Typography: Reddit Sans with fallback to system sans -->
+        <item name="android:fontFamily">@font/reddit_sans</item>
+        <item name="fontFamily">@font/reddit_sans</item>
 
-        <!-- Ensure default text appearances use high-contrast colorOnSurface -->
-        <!-- Removed invalid theme-level textColor attributes to avoid aapt errors.
-             Text colors are defined via component styles and TextAppearance using colorOnSurface. -->
-
-        <!-- Material Card defaults -->
+        <!-- Material components defaults -->
         <item name="materialCardViewStyle">@style/Widget.Card.Nord</item>
 
         <!-- Rounded shapes across components -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Medium.Rounded</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Medium.Rounded</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Medium.Rounded</item>
 
-        <!-- Avoid subtle default unfocused alpha on TV -->
+        <!-- Ensure full opacity for TV -->
         <item name="android:alpha">1.0</item>
     </style>
 
+    <!-- Card widget styled for TV with subtle elevation and strokes -->
     <style name="Widget.Card.Nord" parent="Widget.Material3.CardView.Elevated">
-        <!-- Use solid background with proper elevation; avoid overlay that could mask text -->
         <item name="cardBackgroundColor">@color/nord_surface</item>
-        <item name="contentPadding">8dp</item>
+        <item name="contentPadding">16dp</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardElevation">8dp</item>
-        <item name="strokeColor">@color/nord_accent</item>
-        <item name="strokeWidth">0dp</item>
+        <item name="strokeColor">@color/nord_unfocused_stroke</item>
+        <item name="strokeWidth">1dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Medium.Rounded</item>
-        <!-- Do not set cardForegroundColor to avoid referencing unsupported attrs -->
     </style>
 
     <!-- ShapeAppearance helper -->
@@ -55,12 +50,11 @@
         <item name="cornerSize">16dp</item>
     </style>
 
-    <!-- Card title text appearance using onSurface with Reddit Sans and fallback -->
+    <!-- Card title text appearance using high-contrast onSurface -->
     <style name="TextAppearance.Card.Title" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
         <item name="fontFamily">@font/reddit_sans_regular</item>
-        <!-- Fallback size to avoid collapsed text if font fails to load -->
         <item name="android:textSize">28sp</item>
     </style>
 </resources>

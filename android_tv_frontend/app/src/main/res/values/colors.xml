@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nord-like palette -->
-    <!-- Background: very dark; surfaces slightly lighter for elevation contrast -->
-    <color name="nord_bg">#2E3440</color>
-    <color name="nord_surface">#3B4252</color>
-    <!-- Text: near-white for high contrast on dark surfaces/background -->
-    <color name="nord_text">#ECEFF4</color>
+    <!-- Nord palette tokens -->
+    <!-- Core -->
+    <color name="nord_bg">#2E3440</color>          <!-- Background -->
+    <color name="nord_surface">#3B4252</color>     <!-- Surface -->
+    <color name="nord_on_surface">#ECEFF4</color>  <!-- On-surface text/icons -->
 
-    <!-- Grey accents replacing previous green/blue tones -->
-    <!-- Medium grey for primary accent (sufficient contrast on dark bg) -->
-    <color name="nord_accent">#9CA3AF</color>
-    <!-- Lighter grey for secondary accents and subtle highlights -->
-    <color name="nord_secondary">#D1D5DB</color>
+    <!-- Greys (accents/highlight strokes) -->
+    <color name="nord_grey_300">#D1D5DB</color>    <!-- Light grey -->
+    <color name="nord_grey_400">#9CA3AF</color>    <!-- Medium grey -->
+    <color name="nord_grey_500">#6B7280</color>    <!-- Darker grey -->
+
+    <!-- Aliases for clarity -->
+    <color name="nord_text">@color/nord_on_surface</color>
+    <color name="nord_accent">@color/nord_grey_400</color>
+    <color name="nord_secondary">@color/nord_grey_300</color>
+
+    <!-- Focus/press visual states -->
+    <color name="nord_focus_stroke">@color/nord_grey_300</color>
+    <color name="nord_unfocused_stroke">@color/nord_grey_500</color>
+    <color name="nord_ripple_mask">#40D1D5DB</color> <!-- ~25% alpha of light grey -->
 
     <!-- Shadow with low alpha for subtle TV elevation -->
     <color name="nord_shadow">#1A000000</color>
