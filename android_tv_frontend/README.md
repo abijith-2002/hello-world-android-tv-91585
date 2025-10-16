@@ -19,3 +19,9 @@ To run the application, first install it on a connected Android device using:
 ```
 
 Then search for "Sample Declarative Gradle Android App" and launch app to see a hello world message.
+
+## Debugging visibility (temporary)
+- The card content has a temporary debug background overlay (semi-transparent red/green) to verify visibility on TV devices/emulators.
+- Once you confirm the text is visible with good contrast, you can remove the debug overlays:
+  - In `activity_main.xml`, remove `cardContentDebug` background and container or revert to the previous version.
+  - In `MainActivity.kt`, remove the block that sets the debug background color on `cardContentDebug`.

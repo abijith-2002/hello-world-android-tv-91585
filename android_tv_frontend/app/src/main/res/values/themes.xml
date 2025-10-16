@@ -20,6 +20,12 @@
         <!-- Typography: prefer Reddit Sans, gracefully falls back if not available -->
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
         <item name="fontFamily">@font/reddit_sans_regular</item>
+        <!-- Fallbacks -->
+        <item name="android:typeface">sans</item>
+
+        <!-- Ensure default text appearances use high-contrast colorOnSurface -->
+        <!-- Removed invalid theme-level textColor attributes to avoid aapt errors.
+             Text colors are defined via component styles and TextAppearance using colorOnSurface. -->
 
         <!-- Material Card defaults -->
         <item name="materialCardViewStyle">@style/Widget.Card.Nord</item>
@@ -27,16 +33,20 @@
         <!-- Rounded shapes across components -->
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Medium.Rounded</item>
 
-
+        <!-- Avoid subtle default unfocused alpha on TV -->
+        <item name="android:alpha">1.0</item>
     </style>
 
     <style name="Widget.Card.Nord" parent="Widget.Material3.CardView.Elevated">
+        <!-- Use solid background with proper elevation; avoid overlay that could mask text -->
         <item name="cardBackgroundColor">@color/nord_surface</item>
-        <!-- Foreground is used for stroke and content overlay; map to onSurface for readability -->
-        <item name="cardForegroundColor">?attr/colorOnSurface</item>
+        <item name="contentPadding">8dp</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardElevation">8dp</item>
+        <item name="strokeColor">@color/nord_accent</item>
+        <item name="strokeWidth">0dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Medium.Rounded</item>
+        <!-- Do not set cardForegroundColor to avoid referencing unsupported attrs -->
     </style>
 
     <!-- ShapeAppearance helper -->
@@ -45,10 +55,12 @@
         <item name="cornerSize">16dp</item>
     </style>
 
-    <!-- Card title text appearance using onSurface with Reddit Sans -->
+    <!-- Card title text appearance using onSurface with Reddit Sans and fallback -->
     <style name="TextAppearance.Card.Title" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
         <item name="fontFamily">@font/reddit_sans_regular</item>
+        <!-- Fallback size to avoid collapsed text if font fails to load -->
+        <item name="android:textSize">28sp</item>
     </style>
 </resources>

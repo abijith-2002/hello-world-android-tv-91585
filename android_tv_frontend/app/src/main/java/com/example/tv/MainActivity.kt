@@ -1,6 +1,8 @@
 package com.example.tv
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.databinding.ActivityMainBinding
 
@@ -20,13 +22,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set text and request initial focus for D-pad navigation.
-        // Note: Theme sets unfocusedAlpha=1.0 to avoid dimming text on TV previews.
-        binding.titleText.text = getString(R.string.hello_world)
+        // Ensure content is visible and not clipped
+        binding.titleText.apply {
+            text = getString(R.string.hello_world)
+            alpha = 1.0f
+            visibility = View.VISIBLE
+        }
+
+        // Card visibility and focus behavior for TV
         binding.helloCard.apply {
             isFocusable = true
             isFocusableInTouchMode = true
+            alpha = 1.0f
+            visibility = View.VISIBLE
             requestFocus()
+        }
+
+        // Temporary: Add a debug border to verify visibility at runtime. Remove once validated.
+        binding.cardContentDebug?.apply {
+            // Semi-transparent green overlay to confirm content area; remove after debugging.
+            setBackgroundColor(Color.parseColor("#4000FF00"))
+            alpha = 1.0f
+            visibility = View.VISIBLE
         }
     }
 }
