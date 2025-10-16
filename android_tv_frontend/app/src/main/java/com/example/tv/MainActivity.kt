@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set text and request initial focus for D-pad navigation
+        // Set text and request initial focus for D-pad navigation.
+        // Note: Theme sets unfocusedAlpha=1.0 to avoid dimming text on TV previews.
         binding.titleText.text = getString(R.string.hello_world)
         binding.helloCard.apply {
             isFocusable = true

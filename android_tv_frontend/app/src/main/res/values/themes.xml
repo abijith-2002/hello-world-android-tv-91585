@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.TV.NordDark" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Background and surfaces -->
         <item name="android:windowBackground">@color/nord_bg</item>
+
         <item name="colorSurface">@color/nord_surface</item>
+        <item name="colorSurfaceVariant">@color/nord_surface</item>
+
+        <!-- High-contrast content colors -->
+        <item name="colorOnBackground">@color/nord_text</item>
         <item name="colorOnSurface">@color/nord_text</item>
+        <item name="colorOnSurfaceVariant">@color/nord_text</item>
+
+        <!-- Accents -->
         <item name="colorPrimary">@color/nord_accent</item>
+        <item name="colorOnPrimary">@color/nord_bg</item>
         <item name="colorSecondary">@color/nord_secondary</item>
+
+        <!-- Typography: prefer Reddit Sans, gracefully falls back if not available -->
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
+        <item name="fontFamily">@font/reddit_sans_regular</item>
+
+        <!-- Material Card defaults -->
         <item name="materialCardViewStyle">@style/Widget.Card.Nord</item>
+
         <!-- Rounded shapes across components -->
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Medium.Rounded</item>
+
+
     </style>
 
     <style name="Widget.Card.Nord" parent="Widget.Material3.CardView.Elevated">
         <item name="cardBackgroundColor">@color/nord_surface</item>
-        <item name="cardForegroundColor">@color/nord_text</item>
+        <!-- Foreground is used for stroke and content overlay; map to onSurface for readability -->
+        <item name="cardForegroundColor">?attr/colorOnSurface</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardElevation">8dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Medium.Rounded</item>
@@ -26,9 +45,10 @@
         <item name="cornerSize">16dp</item>
     </style>
 
-    <!-- Focused state text style -->
+    <!-- Card title text appearance using onSurface with Reddit Sans -->
     <style name="TextAppearance.Card.Title" parent="TextAppearance.Material3.TitleLarge">
-        <item name="android:textColor">@color/nord_text</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
+        <item name="fontFamily">@font/reddit_sans_regular</item>
     </style>
 </resources>

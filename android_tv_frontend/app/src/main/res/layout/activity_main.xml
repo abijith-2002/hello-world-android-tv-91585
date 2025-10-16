@@ -31,10 +31,9 @@
             android:layout_height="wrap_content"
             android:padding="32dp"
             android:text="@string/hello_world"
-            android:textColor="@color/nord_text"
             android:textSize="28sp"
-            android:fontFamily="@font/reddit_sans_regular"
-            android:gravity="center" />
+            android:gravity="center"
+            style="@style/TextAppearance.Card.Title" />
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
