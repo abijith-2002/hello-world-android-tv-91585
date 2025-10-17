@@ -2,6 +2,18 @@
     <string name="app_name">Hello World TV</string>
     <string name="hello_world">Hello world</string>
 
+    <!-- Splash -->
+    <string name="splash_brand">MyTV</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_setting">Setting</string>
+    <string name="menu_my_plan">My Plan</string>
+
+    <!-- Content descriptions -->
+    <string name="thumb_image_cd">Content thumbnail</string>
+
     <!-- Login -->
     <string name="login_title">Sign in</string>
     <string name="label_username_email">Email or Username</string>

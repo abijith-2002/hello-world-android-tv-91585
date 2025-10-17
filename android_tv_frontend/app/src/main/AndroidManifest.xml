@@ -12,16 +12,33 @@
         android:supportsRtl="true"
         android:banner="@drawable/banner_tv">
 
+        <!-- Launcher: SplashActivity -->
         <activity
-            android:name="com.example.tv.ui.login.LoginActivity"
+            android:name="com.example.tv.ui.SplashActivity"
             android:exported="true"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:banner="@drawable/banner_tv"
+            android:icon="@mipmap/ic_launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Home screen -->
+        <activity
+            android:name="com.example.tv.ui.home.HomeActivity"
+            android:exported="false"
+            android:banner="@drawable/banner_tv"
+            android:icon="@mipmap/ic_launcher" />
+
+        <!-- Login -->
+        <activity
+            android:name="com.example.tv.ui.login.LoginActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <!-- Existing Hello World page -->
         <activity
             android:name="com.example.tv.MainActivity"
             android:banner="@drawable/banner_tv"
