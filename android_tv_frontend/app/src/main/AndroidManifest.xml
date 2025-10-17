@@ -10,6 +10,12 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.TV.NordDark"
         android:supportsRtl="true">
+
+        <activity
+            android:name="com.example.tv.ui.login.LoginActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
         <activity
             android:name="com.example.tv.MainActivity"
             android:banner="@drawable/banner_tv"
@@ -20,7 +26,6 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-
 
     </application>
 </manifest>

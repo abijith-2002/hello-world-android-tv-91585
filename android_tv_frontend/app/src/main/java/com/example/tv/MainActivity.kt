@@ -1,14 +1,17 @@
 package com.example.tv
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.databinding.ActivityMainBinding
+import com.example.tv.ui.login.LoginActivity
 
 /**
  * PUBLIC_INTERFACE
  * MainActivity
- * This is the TV launcher activity that shows a single centered card with "Hello world".
+ * This is the TV launcher activity that shows a single centered card with "Hello world"
+ * and allows navigation to a Login screen.
  * - Accepts no parameters.
  * - Returns no value; displays UI.
  */
@@ -35,6 +38,19 @@ class MainActivity : AppCompatActivity() {
             alpha = 1.0f
             visibility = View.VISIBLE
             requestFocus()
+
+            // Act as a button to open Login
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            }
+
+            // Add simple scale focus feedback
+            setOnFocusChangeListener { v, hasFocus ->
+                v.animate().scaleX(if (hasFocus) 1.03f else 1.0f)
+                    .scaleY(if (hasFocus) 1.03f else 1.0f)
+                    .setDuration(120)
+                    .start()
+            }
         }
     }
 }

@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Hello World TV</string>
     <string name="hello_world">Hello world</string>
+
+    <!-- Login -->
+    <string name="login_title">Sign in</string>
+    <string name="label_username_email">Email or Username</string>
+    <string name="hint_username_email">you@example.com or username</string>
+    <string name="label_password">Password</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="action_sign_in">Submit</string>
+    <string name="back">Back</string>
+
+    <!-- Validation -->
+    <string name="error_username_required">Email/Username is required</string>
+    <string name="error_username_invalid">Enter a valid email or at least 3 characters username</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_length">Password should be at least 4 characters</string>
+
+    <!-- Placeholder submit -->
+    <string name="sign_in_success">Signed in as %1$s</string>
 </resources>
