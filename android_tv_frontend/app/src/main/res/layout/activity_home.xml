@@ -23,6 +23,8 @@
         <TextView
             android:id="@+id/menuHome"
             style="@style/TextAppearance.Card.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/menu_home"
             android:background="@drawable/card_bg"
             android:paddingLeft="20dp"
@@ -36,6 +38,8 @@
         <TextView
             android:id="@+id/menuLogin"
             style="@style/TextAppearance.Card.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/menu_login"
             android:background="@drawable/card_bg"
             android:paddingLeft="20dp"
@@ -49,6 +53,8 @@
         <TextView
             android:id="@+id/menuSetting"
             style="@style/TextAppearance.Card.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/menu_setting"
             android:background="@drawable/card_bg"
             android:paddingLeft="20dp"
@@ -62,6 +68,8 @@
         <TextView
             android:id="@+id/menuMyPlan"
             style="@style/TextAppearance.Card.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/menu_my_plan"
             android:background="@drawable/card_bg"
             android:paddingLeft="20dp"
