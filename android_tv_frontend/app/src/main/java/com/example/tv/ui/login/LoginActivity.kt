@@ -126,7 +126,13 @@ class LoginActivity : AppCompatActivity() {
 
         // Placeholder sign-in action
         Toast.makeText(this, getString(R.string.sign_in_success, username), Toast.LENGTH_SHORT).show()
-        // Navigate back after "success"
+
+        // Navigate to MainActivity and finish Login so Back doesn't return here
+        val intent = Intent(this, com.example.tv.MainActivity::class.java).apply {
+            // Clear any intermediate activities and start main as a fresh task top
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(intent)
         finish()
     }
 
