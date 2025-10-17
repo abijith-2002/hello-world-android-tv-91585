@@ -88,7 +88,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/banner_tv"
+        android:src="@drawable/banner_tv"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/app_name" />
 
     <!-- Rails list -->
