@@ -1,0 +1,1 @@
+mv /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app-debug.apk 
