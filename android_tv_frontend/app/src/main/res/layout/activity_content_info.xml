@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contentInfoRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nord_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <!-- Background poster image -->
+    <ImageView
+        android:id="@+id/contentBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/content_bg_cd" />
+
+    <!-- Subtle gradient overlay for text legibility -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/card_bg"
+        android:alpha="0.0" />
+
+    <!-- Foreground content panel aligned per Figma (approx left:96dp, top:108dp) -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/panelContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="96dp"
+            android:paddingTop="108dp"
+            android:paddingEnd="48dp"
+            android:paddingBottom="48dp">
+
+            <include layout="@layout/include_content_info_header" />
+
+            <include layout="@layout/include_content_info_details" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

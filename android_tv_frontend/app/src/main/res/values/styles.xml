@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Additional text appearances if we need to reuse across screens -->
+    <style name="TextAppearance.ContentInfo.ProgramTitle" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textColor">@color/nord_on_surface</item>
+        <item name="android:fontFamily">@font/reddit_sans_regular</item>
+        <item name="fontFamily">@font/reddit_sans_regular</item>
+        <item name="android:textSize">60sp</item>
+    </style>
+</resources>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailsRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:orientation="vertical">
+
+    <!-- Description limited to ~3 lines visually by width; actual lines not enforced for TV -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="925dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/nord_on_surface"
+        android:textSize="26sp"
+        android:lineSpacingExtra="13dp"
+        android:text="@string/content_description_fallback" />
+
+    <!-- Buttons row: 3 main buttons (Play, Add, More) with 142x156 panels approximately -->
+    <LinearLayout
+        android:id="@+id/buttonsRow"
+        android:layout_width="wrap_content"
+        android:layout_height="156dp"
+        android:orientation="horizontal">
+
+        <!-- Play -->
+        <LinearLayout
+            android:id="@+id/btnPlay"
+            android:layout_width="142dp"
+            android:layout_height="156dp"
+            android:foreground="@drawable/tv_focus_ripple"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="104dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_bg">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_play"
+                    android:contentDescription="@string/content_action_play" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="2dp"
+                android:gravity="center"
+                android:text="@string/content_action_play"
+                android:textColor="@color/nord_on_surface"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <!-- Add -->
+        <LinearLayout
+            android:id="@+id/btnAdd"
+            android:layout_width="142dp"
+            android:layout_height="156dp"
+            android:layout_marginStart="2dp"
+            android:foreground="@drawable/tv_focus_ripple"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="104dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_bg">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_add"
+                    android:contentDescription="@string/content_action_add" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="2dp"
+                android:gravity="center"
+                android:text="@string/content_action_add"
+                android:textColor="@color/nord_on_surface"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <!-- More -->
+        <LinearLayout
+            android:id="@+id/btnMore"
+            android:layout_width="142dp"
+            android:layout_height="156dp"
+            android:layout_marginStart="2dp"
+            android:foreground="@drawable/tv_focus_ripple"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="104dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_bg">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more"
+                    android:contentDescription="@string/content_action_more" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="2dp"
+                android:gravity="center"
+                android:text="@string/content_action_more"
+                android:textColor="@color/nord_on_surface"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

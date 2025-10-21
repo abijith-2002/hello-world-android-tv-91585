@@ -2,4 +2,8 @@
 <resources>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_elevation_focused">16dp</dimen>
+
+    <!-- Content Info specific -->
+    <dimen name="contentinfo_panel_padding_start">96dp</dimen>
+    <dimen name="contentinfo_panel_padding_top">108dp</dimen>
 </resources>
