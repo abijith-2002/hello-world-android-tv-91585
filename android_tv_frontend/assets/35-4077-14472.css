@@ -1,0 +1,209 @@
+/* Screen: 35 (4077:14472) */
+@import url("./common.css");
+
+/* Root container corresponds to screen frame with style_4 (white background) */
+#root-4077-14472 {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: var(--style-4-background);
+  overflow: hidden;
+}
+
+/* Background vector placeholders (no explicit imagePath in JSON) */
+#image-4077-14473 {
+  position: absolute;
+  left: 0px; top: 0px;
+  width: 1920px; height: 1080px;
+}
+#gradient-4077-14474 {
+  position: absolute;
+  left: 0px; top: 0px;
+  width: 1920px; height: 1080px;
+}
+#gradient-4077-14474 .degradado-abajo {
+  position: absolute;
+  left: 0px; top: 0px;
+  width: 1920px; height: 1080px;
+}
+
+/* MetadataInfoPanel position relative to root:
+   left = 17407 - 17311 = 96px, top = 23426 - 23318 = 108px */
+#metapanel-4077-14475 {
+  position: absolute;
+  left: 96px;
+  top: 108px;
+  width: 1150px;
+  height: 590px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Frame 29360 inside MetadataInfoPanel: top-left (0,0) relative */
+#meta-f29360 {
+  position: relative;
+  width: 1150px;
+  height: 227px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Frame 29354 (channel row) - horizontal */
+#meta-f29354-row {
+  position: relative;
+  width: 529px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Channel Adaptable */
+#channel-adaptable {
+  position: relative;
+  width: 56px; height: 40px;
+  display: flex; flex-direction: column;
+}
+#channel-inside {
+  position: absolute;
+  left: 0px; top: 1px; /* 23427 - 23426 = 1 */
+  width: 56px; height: 38px;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+}
+#channel-number {
+  width: 56px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--typo-149-color);
+}
+
+/* Channel Small text next to it; left gap: 17475 - 17407 = 68px from panel left, but within row flow it naturally aligns with flex; still ensure text spans row height */
+#channel-small {
+  position: relative;
+  margin-left: 12px; /* approximated visual gap within flex; exact x diff equals 68-56=12 */
+  height: 40px; display: flex; align-items: center;
+  color: var(--typo-165-color);
+}
+
+/* Frame 29359 (program info block) located at y: 23493 -> relative top 67px in parent  (235 - actually: 23493 - 23426 = 67) */
+#meta-f29359 {
+  position: absolute;
+  left: 0px;
+  top: 67px;
+  width: 1150px;
+  height: 160px;
+}
+
+/* Program Name (top of f29359) */
+#program-name {
+  position: absolute;
+  left: 0px; top: 0px;
+  width: 1150px; height: 70px;
+  display: flex; align-items: center;
+  color: var(--typo-166-color);
+}
+
+/* Row with details (Gladiator II | 2h 28m | genres | + age) - it's under program name: at y = 23569 - 23493 = 76px */
+#meta-details-row {
+  position: absolute;
+  left: 0px; top: 76px;
+  width: 743px; height: 32px;
+  display: flex; flex-direction: row; align-items: center; gap: 0px;
+  color: var(--typo-167-color);
+}
+.divider-slim, .divider-32 {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 29px;
+}
+.age-pill {
+  margin-left: 22px; /* 18026 - 18004 = 22 after last divider; approximate spacing in row */
+  height: 32px; padding: 0 var(--spacing-sm);
+}
+
+/* Second line within f29359: Tag/TimeStamp + Hour range + dividers + icons row; located at y = 23615 - 23493 = 122px */
+#meta-timestamp-row {
+  position: absolute;
+  left: 0px; top: 122px;
+  width: 487px; height: 32px;
+  display: flex; flex-direction: row; align-items: center;
+  color: var(--typo-169-color);
+}
+#tag-later {
+  height: 32px; padding: 0 var(--spacing-sm);
+}
+#hours-group {
+  display: inline-flex; flex-direction: row; align-items: center; margin-left: 20px;
+}
+#hour-start, #hour-end, #bar-between {
+  display: inline-flex; align-items: center; height: 32px;
+}
+#divider32-left, #divider32-right {
+  display: inline-flex; align-items: center; height: 29px; margin: 0 12px;
+}
+
+/* Icon 32x32 slots */
+.icon-32 {
+  width: 32px; height: 32px; position: relative;
+}
+
+/* Frame 29355 (description + buttons) relative to MetadataInfoPanel: y = 23702 - 23426 = 276px */
+#meta-f29355 {
+  position: absolute;
+  left: 0px; top: 276px;
+  width: 1150px; height: 314px;
+}
+
+/* TextBox3Lines inside f29355: at (0,0), w:925 h:117 */
+#textbox3 {
+  position: absolute;
+  left: 0px; top: 0px; width: 925px; height: 117px;
+  color: var(--typo-171-color);
+}
+
+/* Buttons group at y = 23860 - 23702 = 158px */
+#buttons-row {
+  position: absolute;
+  left: 0px; top: 158px; width: 916px; height: 156px;
+}
+
+/* Each PanelButtons is 142x156; computed left offsets:
+   btn1 x: 17407 -> 0; btn2 x: 17551 -> 144; btn3: 17695 -> 288; btn4: 17839 -> 432; btn5: 17983 -> 576; btn6: 18127 -> 720
+*/
+.panel-btn { position: absolute; width: 142px; height: 156px; }
+#panel-btn-1 { left: 0px; top: 0px; }
+#panel-btn-2 { left: 144px; top: 0px; }
+#panel-btn-3 { left: 288px; top: 0px; }
+#panel-btn-4 { left: 432px; top: 0px; }
+#panel-btn-5 { left: 576px; top: 0px; }
+#panel-btn-6 { left: 720px; top: 0px; }
+
+/* Within each panel button, the round 104x80 container is at approx (19,8) per JSON (x 17426 - 17407 = 19, y 23864 - 23856 = 8) */
+.panel-btn .round-ctn {
+  position: absolute; left: 19px; top: 8px; width: 104px; height: 80px;
+  border-radius: var(--style-35-border-radius);
+  background: var(--style-35-background);
+}
+/* Icon 40x40 centered within the 104x80 container: from JSON the icon sits at x offset ~32, y ~20 (17458-17426=32; 23884-23864=20) */
+.panel-btn .round-ctn .icon-slot {
+  position: absolute; left: 32px; top: 20px; width: 40px; height: 40px;
+}
+/* Button label areas at y ~ (23960-23856)=104 and (23988-23856)=132; we use the 23960 block for label (Programar) */
+.panel-btn .label {
+  position: absolute; left: 2px; top: 104px; width: 138px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--typo-172-color);
+}
+
+/* SystemDate at root: x=19035 -> 724 from root (19035-17311), y=23373 -> 55 from root */
+#systemdate-4077-14476 {
+  position: absolute; left: 1724px; top: 55px; width: 100px; height: 90px;
+}
+#systemdate-4077-14476 .time {
+  position: absolute; left: 0px; top: 0px; width: 100px; height: 48px;
+  color: var(--typo-173-color);
+}
+#systemdate-4077-14476 .date {
+  position: absolute; left: 19px; top: 58px; width: 81px; height: 32px; /* left = 19054-19035=19, top=23431-23373=58 */
+  color: var(--typo-146-color);
+}
