@@ -3,42 +3,45 @@
     android:id="@+id/contentInfoRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/nord_bg"
+    android:theme="@style/ThemeOverlay.ContentInfo"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <!-- Background poster image -->
+    <!-- Full-bleed background poster -->
     <ImageView
         android:id="@+id/contentBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:src="@drawable/bg_content_info"
         android:scaleType="centerCrop"
         android:contentDescription="@string/content_bg_cd" />
 
-    <!-- Figma-accurate gradient overlay for text legibility -->
+    <!-- Gradient overlay for text legibility (Figma-accurate downward gradient) -->
     <View
         android:id="@+id/bgGradientOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_gradient"
+        android:background="@drawable/bg_content_info_gradient"
         android:clickable="false"
         android:focusable="false"
         android:importantForAccessibility="no" />
 
-    <!-- Foreground content panel aligned per Figma (approx left:96dp, top:108dp) -->
+    <!-- Foreground content panel aligned per Figma (left:96dp, top:108dp) -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:fadeScrollbars="false"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/panelContainer"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/contentinfo_meta_panel_width"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="96dp"
-            android:paddingTop="108dp"
-            android:paddingEnd="48dp"
+            android:paddingStart="@dimen/contentinfo_panel_padding_start"
+            android:paddingTop="@dimen/contentinfo_panel_padding_top"
+            android:paddingEnd="0dp"
             android:paddingBottom="48dp">
 
             <include layout="@layout/include_content_info_header" />

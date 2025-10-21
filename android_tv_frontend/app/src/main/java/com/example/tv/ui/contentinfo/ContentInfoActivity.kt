@@ -36,6 +36,8 @@ class ContentInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Explicitly enforce local theme override to avoid any Nord theme bleed
+        setTheme(R.style.Theme_TV_ContentInfo_NoNord)
         setContentView(R.layout.activity_content_info)
 
         // Read extras into a simple ViewModel
@@ -63,32 +65,21 @@ class ContentInfoActivity : AppCompatActivity() {
         val btnAdd = findViewById<View>(R.id.btnAdd)
         val btnMore = findViewById<View>(R.id.btnMore)
 
-        // Apply data
-        if (viewModel.posterResId != null) {
-            bgImage.setImageResource(viewModel.posterResId!!)
-        } else {
-            // Default to designed background image; resolve dynamically to avoid build-time symbol issues
-            val fallbackRes = resources.getIdentifier("bg_content", "drawable", packageName)
-            if (fallbackRes != 0) {
-                bgImage.setImageResource(fallbackRes)
-            } else {
-                bgImage.setImageResource(R.drawable.banner_tv)
-            }
-        }
-        tvChannelNumber.text = viewModel.channelNumber ?: getString(R.string.content_channel_number_default)
-        tvChannelName.text = viewModel.channelName ?: getString(R.string.content_channel_name_default)
+        // Background is defined in XML (bg_content_info) with gradient overlay for pixel accuracy; do not override here.
+        tvChannelNumber?.text = viewModel.channelNumber ?: getString(R.string.content_channel_number_default)
+        tvChannelName?.text = viewModel.channelName ?: getString(R.string.content_channel_name_default)
 
-        tvProgramName.text = viewModel.title
-        tvOriginalTitle.text = viewModel.subtitle ?: viewModel.title
-        tvDuration.text = getString(R.string.content_duration_default) // Placeholder; can be replaced from data source
-        tvGenres.text = getString(R.string.content_genres_default)
-        tvAge.text = getString(R.string.content_age_default)
+        tvProgramName?.text = viewModel.title
+        tvOriginalTitle?.text = viewModel.subtitle ?: viewModel.title
+        tvDuration?.text = getString(R.string.content_duration_default) // Placeholder; can be replaced from data source
+        tvGenres?.text = getString(R.string.content_genres_default)
+        tvAge?.text = getString(R.string.content_age_default)
 
-        tvLaterTag.text = getString(R.string.content_later_tag)
-        tvHourStart.text = getString(R.string.content_hour_start_default)
-        tvHourEnd.text = getString(R.string.content_hour_end_default)
+        tvLaterTag?.text = getString(R.string.content_later_tag)
+        tvHourStart?.text = getString(R.string.content_hour_start_default)
+        tvHourEnd?.text = getString(R.string.content_hour_end_default)
 
-        tvDescription.text = viewModel.description ?: getString(R.string.content_description_fallback)
+        tvDescription?.text = viewModel.description ?: getString(R.string.content_description_fallback)
 
         // Focus and interactions
         val focusScaler = View.OnFocusChangeListener { v, hasFocus ->

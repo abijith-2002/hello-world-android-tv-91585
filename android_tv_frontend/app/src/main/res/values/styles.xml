@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Additional text appearances if we need to reuse across screens -->
+    <!-- Title -->
     <style name="TextAppearance.ContentInfo.ProgramTitle" parent="TextAppearance.Material3.DisplayMedium">
-        <item name="android:textColor">@color/nord_on_surface</item>
-        <item name="android:fontFamily">@font/reddit_sans_regular</item>
-        <item name="fontFamily">@font/reddit_sans_regular</item>
+        <item name="android:textColor">@color/content_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
         <item name="android:textSize">60sp</item>
+        <item name="android:lineHeight">70sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Buttons label -->
+    <style name="TextAppearance.ContentInfo.ButtonLabel">
+        <item name="android:textColor">@color/content_text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Content Info base text appearance -->
+    <style name="TextAppearance.ContentInfo" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/content_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Meta row text (25sp, ~29sp line-height) -->
+    <style name="TextAppearance.ContentInfo.Meta" parent="TextAppearance.ContentInfo">
+        <item name="android:textSize">25sp</item>
+        <item name="android:lineHeight">29sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Tag text (Later) 22sp, 32sp line-height -->
+    <style name="TextAppearance.ContentInfo.Tag" parent="TextAppearance.ContentInfo">
+        <item name="android:textSize">22sp</item>
+        <item name="android:lineHeight">32sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Divider 32 style (28sp, ~33sp line-height) -->
+    <style name="TextAppearance.ContentInfo.Divider32" parent="TextAppearance.ContentInfo">
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineHeight">33sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Age pill text (24sp, 32sp line-height) -->
+    <style name="TextAppearance.ContentInfo.AgePill" parent="TextAppearance.ContentInfo">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineHeight">32sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Theme overlay to remove Nord influence in Content Info screen only -->
+    <style name="ThemeOverlay.ContentInfo" parent="ThemeOverlay.Material3">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="colorOnBackground">@color/content_text_primary</item>
+        <item name="colorOnSurface">@color/content_text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/content_text_primary</item>
+        <item name="colorPrimary">@color/content_text_primary</item>
+    </style>
+
+    <!-- Full theme for Content Info activity to avoid any Nord theme influence -->
+    <style name="Theme.TV.ContentInfo.NoNord" parent="Theme.Material3.NoActionBar">
+        <item name="colorOnBackground">@color/content_text_primary</item>
+        <item name="colorOnSurface">@color/content_text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/content_text_primary</item>
+        <item name="colorPrimary">@color/content_text_primary</item>
+        <item name="colorSecondary">@color/content_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Medium.Rounded</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Medium.Rounded</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Medium.Rounded</item>
     </style>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/headerRoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -19,9 +20,11 @@
             android:layout_height="38dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/nord_on_surface"
+            android:textColor="@color/content_text_primary"
             android:textSize="32sp"
-            android:text="242" />
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:text="@string/content_channel_number_default" />
 
         <TextView
             android:id="@+id/tvChannelName"
@@ -30,9 +33,11 @@
             android:layout_marginStart="12dp"
             android:gravity="center_vertical"
             android:textStyle="bold"
-            android:textColor="@color/nord_on_surface"
+            android:textColor="@color/content_text_primary"
             android:textSize="32sp"
-            android:text="TNT" />
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:text="@string/content_channel_name_default" />
     </LinearLayout>
 
     <!-- Program info block -->
@@ -47,10 +52,9 @@
             android:id="@+id/tvProgramName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/nord_on_surface"
-            android:textSize="60sp"
+            style="@style/TextAppearance.ContentInfo.ProgramTitle"
             android:textStyle="normal"
-            android:text="Gladiador II" />
+            tools:text="Gladiador II" />
 
         <!-- Details row: Original title | duration | genres | + age -->
         <LinearLayout
@@ -65,41 +69,36 @@
                 android:id="@+id/tvOriginalTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="Gladiator II" />
+                style="@style/TextAppearance.ContentInfo.Meta"
+                tools:text="Gladiator II" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.ContentInfo.Meta"
                 android:layout_marginHorizontal="16dp"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="|" />
+                android:text="@string/divider_bar" />
 
             <TextView
                 android:id="@+id/tvDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="2 h 28 min" />
+                style="@style/TextAppearance.ContentInfo.Meta"
+                android:text="@string/content_duration_default" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.ContentInfo.Meta"
                 android:layout_marginHorizontal="16dp"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="|" />
+                android:text="@string/divider_bar" />
 
             <TextView
                 android:id="@+id/tvGenres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="Acción, aventura, drama" />
+                style="@style/TextAppearance.ContentInfo.Meta"
+                android:text="@string/content_genres_default" />
 
             <!-- Age pill -->
             <TextView
@@ -110,10 +109,9 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:gravity="center"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="24sp"
-                android:text="+ 16 Años"
-                android:background="@drawable/card_bg" />
+                style="@style/TextAppearance.ContentInfo.AgePill"
+                android:text="@string/content_age_default"
+                android:background="@drawable/bg_age_pill" />
         </LinearLayout>
 
         <!-- Timestamp row: MÁS TARDE 20:00 - 22:20 | icons -->
@@ -132,9 +130,9 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:gravity="center"
+                style="@style/TextAppearance.ContentInfo.Tag"
                 android:text="@string/content_later_tag"
                 android:textColor="@android:color/white"
-                android:textSize="22sp"
                 android:background="@drawable/bg_later_tag" />
 
             <TextView
@@ -142,55 +140,58 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="20:00" />
+                style="@style/TextAppearance.ContentInfo.Meta"
+                android:text="@string/content_hour_start_default" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.ContentInfo.Meta"
                 android:layout_marginHorizontal="8dp"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="-" />
+                android:text="@string/hyphen" />
 
             <TextView
                 android:id="@+id/tvHourEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="25sp"
-                android:text="22:20" />
+                style="@style/TextAppearance.ContentInfo.Meta"
+                android:text="@string/content_hour_end_default" />
 
-            <!-- Dividers and icon slots (visual placeholders) -->
+            <!-- Dividers and icon slots -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.ContentInfo.Divider32"
                 android:layout_marginStart="20dp"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="28sp"
-                android:text="|" />
+                android:text="@string/divider_bar"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no" />
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginHorizontal="12dp"
                 android:src="@drawable/ic_more"
-                android:contentDescription="@string/content_icon_cd" />
+                android:tint="@color/content_text_primary"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/nord_on_surface"
-                android:textSize="28sp"
-                android:text="|" />
+                style="@style/TextAppearance.ContentInfo.Divider32"
+                android:text="@string/divider_bar"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no" />
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:src="@drawable/ic_add"
-                android:contentDescription="@string/content_icon_cd" />
+                android:tint="@color/content_text_primary"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

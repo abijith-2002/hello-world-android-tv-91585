@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Content Info specific tokens -->
+    <color name="ci_later_tag_green">#3F9321</color>
+</resources>

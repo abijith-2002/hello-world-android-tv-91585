@@ -47,4 +47,8 @@
     <string name="content_hour_start_default">20:00</string>
     <string name="content_hour_end_default">22:20</string>
     <string name="content_description_fallback">Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo.</string>
+
+    <!-- Non-translatable separators -->
+    <string name="divider_bar" translatable="false">|</string>
+    <string name="hyphen" translatable="false">-</string>
 </resources>

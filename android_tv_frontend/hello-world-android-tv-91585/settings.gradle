@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "android-tv-hello-world"
+
+include(":app", ":list", ":utilities")
+
+project(":app").projectDir = file("android_tv_frontend/app")
+project(":list").projectDir = file("android_tv_frontend/list")
+project(":utilities").projectDir = file("android_tv_frontend/utilities")

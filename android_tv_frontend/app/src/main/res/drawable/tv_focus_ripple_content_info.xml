@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ci_grad_center">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <!-- Match the 100dp roundness of btn_round_light for perfect overlay alignment -->
+            <corners android:radius="100dp" />
+            <solid android:color="#33FFFFFF" />
+        </shape>
+    </item>
+</ripple>

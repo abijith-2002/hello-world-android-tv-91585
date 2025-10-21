@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Keep Content Info gradient identical in night mode -->
+    <color name="ci_grad_start">#00000000</color>
+    <color name="ci_grad_center">#99000000</color>
+    <color name="ci_grad_end">#F2000000</color>
+</resources>
