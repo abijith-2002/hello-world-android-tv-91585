@@ -86,18 +86,6 @@ class HomeActivity : AppCompatActivity() {
         menuHome.requestFocus()
     }
 
-    private fun openContentInfo(railTitle: String, posterResId: Int) {
-        val intent = Intent(this, com.example.tv.ui.contentinfo.ContentInfoActivity::class.java).apply {
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_TITLE, railTitle)
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_SUBTITLE, railTitle)
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_DESCRIPTION, getString(R.string.content_description_fallback))
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_POSTER_RES_ID, posterResId)
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_CHANNEL_NUMBER, getString(R.string.content_channel_number_default))
-            putExtra(com.example.tv.ui.contentinfo.ContentInfoActivity.EXTRA_CHANNEL_NAME, getString(R.string.content_channel_name_default))
-        }
-        startActivity(intent)
-    }
-
     private fun setupRails() {
         val container = findViewById<LinearLayout>(R.id.railsContainer)
         rails.forEachIndexed { index, title ->
@@ -132,22 +120,6 @@ class HomeActivity : AppCompatActivity() {
                     v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
                         R.dimen.card_elevation
                     )
-                }
-
-                // Click for mouse/touch to navigate as well
-                card.setOnClickListener {
-                    openContentInfo(title, resId)
-                }
-                // Handle DPAD_CENTER explicitly
-                card.setOnKeyListener { _, keyCode, event ->
-                    if (keyCode == android.view.KeyEvent.KEYCODE_DPAD_CENTER &&
-                        event.action == android.view.KeyEvent.ACTION_DOWN
-                    ) {
-                        openContentInfo(title, resId)
-                        true
-                    } else {
-                        false
-                    }
                 }
 
                 row.addView(card)

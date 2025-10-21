@@ -23,16 +23,4 @@
 
     <!-- Shadow with low alpha for subtle TV elevation -->
     <color name="nord_shadow">#1A000000</color>
-    <!-- Content Info specific (override Nord on this screen) -->
-    <color name="content_text_primary">#FFFFFF</color>
-    <color name="content_light_container">#F4F4F4</color>
-    <!-- Content Info (Figma #35) specific tokens -->
-    <color name="ci_text_primary">#FFFFFFFF</color>
-    <color name="ci_icon">#FFFFFFFF</color>
-
-    <!-- Gradient stops for bg_content_info_gradient.xml -->
-    <!-- Top transparent, middle ~50% alpha black, bottom ~90% alpha black -->
-    <color name="ci_grad_start">#00000000</color>
-    <color name="ci_grad_center">#99000000</color>
-    <color name="ci_grad_end">#F2000000</color>
 </resources>

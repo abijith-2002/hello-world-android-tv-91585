@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Card elevation -->
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_elevation_focused">16dp</dimen>
-
-    <!-- Content Info paddings (panel position from Figma) -->
-    <dimen name="contentinfo_panel_padding_start">96dp</dimen>
-    <dimen name="contentinfo_panel_padding_top">108dp</dimen>
-
-    <!-- Content Info fixed widths/heights from Figma 35 -->
-    <dimen name="contentinfo_meta_panel_width">1150dp</dimen>
-    <dimen name="contentinfo_description_width">925dp</dimen>
-
-    <!-- Buttons layout -->
-    <dimen name="contentinfo_button_panel_width">142dp</dimen>
-    <dimen name="contentinfo_button_panel_height">156dp</dimen>
-    <dimen name="contentinfo_icon_container_width">104dp</dimen>
-    <dimen name="contentinfo_icon_container_height">80dp</dimen>
-    <dimen name="contentinfo_action_icon_size">40dp</dimen>
-    <dimen name="contentinfo_action_label_width">138dp</dimen>
-    <dimen name="contentinfo_action_label_height">28dp</dimen>
 </resources>

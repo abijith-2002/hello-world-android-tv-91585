@@ -1,0 +1,5 @@
+rootProject.name = "android-tv-hello-world"
+
+include(":app")
+include(":list")
+include(":utilities")

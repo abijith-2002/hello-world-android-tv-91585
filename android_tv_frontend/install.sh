@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # Install Kotlin support and a GitHub theme in code-server if available
-code-server --install-extension mathiasfrohlich.Kotlin || true
-code-server --install-extension github.github-vscode-theme || true
+codeserver --install-extension mathiasfrohlich.Kotlin || true
+codeserver --install-extension github.github-vscode-theme || true
 
 echo "Development extensions installation completed."
