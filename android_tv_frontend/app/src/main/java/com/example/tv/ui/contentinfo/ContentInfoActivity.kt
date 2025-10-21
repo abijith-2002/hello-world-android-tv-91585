@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import com.example.tv.R
 
 /**
@@ -42,7 +43,10 @@ class ContentInfoActivity : AppCompatActivity() {
 
         // Bind views
         val bgImage = findViewById<ImageView>(R.id.contentBackground)
-        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        val btnBack: ImageButton? = findViewById(R.id.btnBack)
+        if (btnBack == null) {
+            Log.w("ContentInfoActivity", "btnBack view not found in layout; skipping back button setup")
+        }
         val tvChannelNumber = findViewById<TextView>(R.id.tvChannelNumber)
         val tvChannelName = findViewById<TextView>(R.id.tvChannelName)
         val tvProgramName = findViewById<TextView>(R.id.tvProgramName)
@@ -88,26 +92,27 @@ class ContentInfoActivity : AppCompatActivity() {
                 .start()
             v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(R.dimen.card_elevation)
         }
-        listOf(btnPlay, btnAdd, btnMore, btnBack).forEach {
-            it.isFocusable = true
-            it.isFocusableInTouchMode = true
-            it.onFocusChangeListener = focusScaler
+        // Apply focusability safely in case any view is missing from layout variations
+        listOfNotNull<View>(btnPlay, btnAdd, btnMore, btnBack).forEach { v ->
+            v.isFocusable = true
+            v.isFocusableInTouchMode = true
+            v.onFocusChangeListener = focusScaler
         }
 
-        btnBack.setOnClickListener { finish() }
-        btnPlay.setOnClickListener {
+        btnBack?.setOnClickListener { finish() }
+        btnPlay?.setOnClickListener {
             // Placeholder action - in a real app, start playback or schedule
-            it.announceForAccessibility(getString(R.string.content_action_play))
+            it.announceForAccessibility(getString(com.example.tv.R.string.content_action_play))
         }
-        btnAdd.setOnClickListener {
-            it.announceForAccessibility(getString(R.string.content_action_add))
+        btnAdd?.setOnClickListener {
+            it.announceForAccessibility(getString(com.example.tv.R.string.content_action_add))
         }
-        btnMore.setOnClickListener {
-            it.announceForAccessibility(getString(R.string.content_action_more))
+        btnMore?.setOnClickListener {
+            it.announceForAccessibility(getString(com.example.tv.R.string.content_action_more))
         }
 
         // Handle BACK key
-        findViewById<View>(R.id.contentInfoRoot).setOnKeyListener { _, keyCode, event ->
+        findViewById<View>(R.id.contentInfoRoot)?.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
                 finish()
                 true
@@ -117,7 +122,7 @@ class ContentInfoActivity : AppCompatActivity() {
         }
 
         // Initial focus on Play
-        btnPlay.requestFocus()
+        btnPlay?.requestFocus()
     }
 
     companion object {
