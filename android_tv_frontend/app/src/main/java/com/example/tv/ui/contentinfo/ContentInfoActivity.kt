@@ -67,7 +67,13 @@ class ContentInfoActivity : AppCompatActivity() {
         if (viewModel.posterResId != null) {
             bgImage.setImageResource(viewModel.posterResId!!)
         } else {
-            bgImage.setImageResource(R.drawable.banner_tv)
+            // Default to designed background image; resolve dynamically to avoid build-time symbol issues
+            val fallbackRes = resources.getIdentifier("bg_content", "drawable", packageName)
+            if (fallbackRes != 0) {
+                bgImage.setImageResource(fallbackRes)
+            } else {
+                bgImage.setImageResource(R.drawable.banner_tv)
+            }
         }
         tvChannelNumber.text = viewModel.channelNumber ?: getString(R.string.content_channel_number_default)
         tvChannelName.text = viewModel.channelName ?: getString(R.string.content_channel_name_default)

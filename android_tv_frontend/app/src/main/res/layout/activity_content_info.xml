@@ -15,13 +15,15 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/content_bg_cd" />
 
-    <!-- Subtle gradient overlay for text legibility -->
-    <LinearLayout
+    <!-- Figma-accurate gradient overlay for text legibility -->
+    <View
+        android:id="@+id/bgGradientOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/card_bg"
-        android:alpha="0.0" />
+        android:background="@drawable/bg_gradient"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no" />
 
     <!-- Foreground content panel aligned per Figma (approx left:96dp, top:108dp) -->
     <ScrollView
