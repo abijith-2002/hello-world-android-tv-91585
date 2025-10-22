@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import com.example.tv.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,7 +45,7 @@ import java.util.*
  * @param None
  * @return Displays UI and handles user interaction
  */
-class ContentInfoActivity : AppCompatActivity() {
+class ContentInfoActivity : ComponentActivity() {
 
     private lateinit var actionButtons: List<FrameLayout>
     private var currentFocusIndex = 0
