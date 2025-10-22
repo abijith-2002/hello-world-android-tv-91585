@@ -7,16 +7,16 @@
     android:focusableInTouchMode="true"
     android:clickable="true">
 
-    <!-- Icon Container (Circular Background) -->
+    <!-- Icon Container (Circular Background) - 104x80dp oval/circular shape -->
     <FrameLayout
         android:id="@+id/iconContainer"
         android:layout_width="104dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/button_icon_background">
 
-        <!-- Icon Image -->
+        <!-- Icon Image - 40x40dp centered -->
         <ImageView
             android:id="@+id/buttonIcon"
             android:layout_width="40dp"
@@ -25,18 +25,22 @@
             android:contentDescription="Button icon" />
     </FrameLayout>
 
-    <!-- Button Label (Hidden by default) -->
+    <!-- Button Label (Hidden by default, visible when focused) -->
     <TextView
         android:id="@+id/buttonLabel"
         android:layout_width="138dp"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="28dp"
         android:text="Programar"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
+        android:lineHeight="24sp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:alpha="0"
-        android:includeFontPadding="false" />
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end" />
 </FrameLayout>
