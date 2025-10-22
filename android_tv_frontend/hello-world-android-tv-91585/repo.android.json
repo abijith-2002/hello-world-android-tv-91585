@@ -1,0 +1,9 @@
+{
+  "workspace": ".",
+  "android": {
+    "nested_root": "android_tv_frontend",
+    "modules": [":app", ":list", ":utilities"],
+    "wrapper": "android_tv_frontend/gradlew",
+    "default_task": ":app:assembleDebug"
+  }
+}

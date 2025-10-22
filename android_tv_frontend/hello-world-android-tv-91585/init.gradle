@@ -1,0 +1,12 @@
+allprojects {
+    logger.lifecycle("[init.gradle] Delegating to nested Android project at android_tv_frontend/")
+}
+gradle.settingsEvaluated { settings ->
+    def nested = new File(settings.settingsDir, "android_tv_frontend/settings.gradle")
+    if (nested.exists()) {
+        settings.apply from: nested
+        settings.logger.lifecycle("[init.gradle] Applied nested settings.gradle")
+    } else {
+        settings.logger.error("[init.gradle] Nested settings.gradle not found at android_tv_frontend/settings.gradle")
+    }
+}

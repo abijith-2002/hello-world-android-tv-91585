@@ -1,0 +1,4 @@
+# Android application module marker for tooling discovery
+module=app
+type=application
+path=android_tv_frontend/app

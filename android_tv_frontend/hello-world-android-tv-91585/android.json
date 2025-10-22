@@ -1,0 +1,10 @@
+{
+  "root": "android_tv_frontend",
+  "modules": [
+    "app",
+    "list",
+    "utilities"
+  ],
+  "wrapper": true,
+  "notes": "This repository contains a nested Android project under android_tv_frontend."
+}

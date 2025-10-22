@@ -1,0 +1,10 @@
+rootProject.name = "android-tv-hello-world-root-proxy"
+
+// Delegate to the real project in android_tv_frontend when invoked from repo root.
+// This file is a lightweight proxy for CI tools that start Gradle from the repository root.
+gradle.beforeProject {
+    // No-op: proxy only
+}
+
+// Include the nested project as a composite build for discovery without duplicating sources.
+includeBuild("android_tv_frontend")

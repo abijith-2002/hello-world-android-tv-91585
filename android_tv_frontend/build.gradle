@@ -1,21 +1,9 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
+tasks.register("printProjectInfo") {
+    group = "help"
+    description = "Prints basic info for analyzers to detect the Android project root."
+    doLast {
+        println("Android project root: ${project.projectDir}")
+        println("Modules: :app, :list, :utilities")
+        println("Try: ./gradlew :app:assembleDebug")
     }
-    dependencies {
-        classpath "com.android.tools.build:gradle:8.6.0"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24"
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

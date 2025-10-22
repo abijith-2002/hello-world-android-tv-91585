@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Scoped style for Content Info screen components.
+         Keep tweaks localized; do not apply globally. -->
+    <style name="Style.ContentInfo.Scoped">
+        <!-- Intentionally empty placeholder for future localized tweaks. -->
+    </style>
+</resources>

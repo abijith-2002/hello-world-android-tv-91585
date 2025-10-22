@@ -1,0 +1,7 @@
+{
+  "project_type": "android",
+  "nested_project_root": ".",
+  "wrapper": "gradlew",
+  "default_task": ":app:assembleDebug",
+  "modules": [":app", ":list", ":utilities"]
+}

@@ -1,0 +1,4 @@
+root_dir=android_tv_frontend
+settings_file=android_tv_frontend/settings.gradle
+wrapper=android_tv_frontend/gradlew
+primary_module=android_tv_frontend/app

@@ -1,0 +1,11 @@
+allprojects {
+    // Proxy build file so CI analyzers running from repo root can resolve the nested Gradle build.
+    // No dependencies or tasks here; actual build logic lives in android_tv_frontend/.
+    tasks.register("helpProxy") {
+        group = "help"
+        description = "Proxy task: prints info about the nested Android project."
+        doLast {
+            println("This is a proxy. Build the Android app via ./android_tv_frontend/gradlew :app:assembleDebug")
+        }
+    }
+}

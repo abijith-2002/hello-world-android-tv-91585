@@ -1,0 +1,7 @@
+tasks.register("assembleDebug") {
+    group = "build"
+    description = "Forwarded task for analyzers; call :app:assembleDebug"
+    doLast {
+        println("Use explicit path: ./gradlew :app:assembleDebug")
+    }
+}

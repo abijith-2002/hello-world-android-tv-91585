@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Preview-only wrapper to visualize scaled Content Info screen in Studio.
+     This file is not referenced at runtime. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/previewRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <!-- Scaled container to preview approximate 0.9 scale -->
+    <FrameLayout
+        android:id="@+id/scaledContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleX="0.9"
+        android:scaleY="0.9">
+
+        <include layout="@layout/activity_content_info" />
+    </FrameLayout>
+</FrameLayout>

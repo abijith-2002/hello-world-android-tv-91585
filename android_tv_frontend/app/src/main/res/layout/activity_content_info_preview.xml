@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Preview-only: full Content Info screen at 1920x1080 canvas -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="1920dp"
+    android:layout_height="1080dp"
+    android:background="@android:color/black">
+
+    <include layout="@layout/activity_content_info" />
+</FrameLayout>

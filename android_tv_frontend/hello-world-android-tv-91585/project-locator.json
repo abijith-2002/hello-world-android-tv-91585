@@ -1,0 +1,7 @@
+{
+  "androidRoot": "android_tv_frontend",
+  "appModule": "android_tv_frontend/app",
+  "settingsGradle": "android_tv_frontend/settings.gradle",
+  "wrapper": "android_tv_frontend/gradlew",
+  "build": "./android_tv_frontend/gradlew -p android_tv_frontend :app:assembleDebug"
+}

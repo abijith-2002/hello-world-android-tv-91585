@@ -1,0 +1,8 @@
+{
+  "name": "android-tv-monorepo-root",
+  "private": true,
+  "scripts": {
+    "android:build": "bash ./build-android.sh",
+    "android:ci": "bash ./.ci/build-android.sh"
+  }
+}

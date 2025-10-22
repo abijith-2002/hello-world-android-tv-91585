@@ -1,0 +1,10 @@
+gradle.projectsLoaded {
+    logger.lifecycle("[init.forwarder] Android Gradle project is nested at: android_tv_frontend/")
+}
+tasks.register("verifyAndroidRoot") {
+    group = "verification"
+    description = "Logs the nested Android project root for CI discovery."
+    doLast {
+        println("[verifyAndroidRoot] android_tv_frontend/")
+    }
+}

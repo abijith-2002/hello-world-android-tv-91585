@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Content Info Detail Screen Layout
-    MATCHeS Figma screen pixel-for-pixel in: copy (esp. casing), spacing, font size/weight, lineheight and alignment.
-    See: 20251022_063948_35.png; use only system sans (Android TV), no Reddit/Nord font.
+    Content Info Detail Screen Layout (scoped scale-down via ci_* dimens)
+    Maintains Nord dark + Reddit Sans styling and TV D-pad focus.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -44,10 +43,12 @@
     <!-- Metadata & content panel -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/metadataPanel"
-        android:layout_width="1150dp"
-        android:layout_height="590dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="108dp"
+        android:layout_width="@dimen/ci_panel_width"
+        android:layout_height="@dimen/ci_panel_height"
+        android:layout_marginStart="@dimen/ci_margin_start"
+        android:layout_marginTop="@dimen/ci_margin_top"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -55,14 +56,13 @@
         <TextView
             android:id="@+id/channelNumber"
             android:layout_width="56dp"
-            android:layout_height="38dp"
+            android:layout_height="@dimen/ci_channel_height"
             android:text="242"
             android:textColor="#E3E3E3"
-            android:textSize="30sp"
+            android:textSize="@dimen/ci_channel_text_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:textStyle="bold"
             android:letterSpacing="0"
-            android:layout_marginTop="0dp"
             android:gravity="bottom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,29 +70,28 @@
 
         <TextView
             android:id="@+id/channelName"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ci_channel_height"
             android:text="TNT"
             android:textColor="#E3E3E3"
-            android:textSize="30sp"
+            android:textSize="@dimen/ci_channel_text_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:textStyle="bold"
             android:letterSpacing="0.2"
             app:layout_constraintStart_toEndOf="@id/channelNumber"
             app:layout_constraintTop_toTopOf="@id/channelNumber"
-            android:layout_marginStart="12dp"
-            tools:ignore="HardcodedText"
-        />
+            android:layout_marginStart="@dimen/ci_divider_side_margin"
+            tools:ignore="HardcodedText"/>
 
         <!-- Program (Title) -->
         <TextView
             android:id="@+id/contentTitle"
-            android:layout_width="1150dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="67dp"
+            android:layout_width="@dimen/ci_panel_width"
+            android:layout_height="@dimen/ci_title_height"
+            android:layout_marginTop="@dimen/ci_title_margin_top"
             android:text="Gladiador II"
             android:textColor="#FFFFFF"
-            android:textSize="56sp"
+            android:textSize="@dimen/ci_title_text_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:textStyle="bold"
             android:letterSpacing="0"
@@ -101,17 +100,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText"
             android:maxLines="1"
-            android:ellipsize="end"
-        />
+            android:ellipsize="end" />
 
         <!-- Meta row: subtitle | duration | genres | age tag -->
         <LinearLayout
             android:id="@+id/metadataRow"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/ci_meta_row_height"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="143dp"
+            android:layout_marginTop="@dimen/ci_meta_row_margin_top"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -121,24 +119,23 @@
                 android:layout_height="28dp"
                 android:text="Gladiator II"
                 android:textColor="#E3E3E3"
-                android:textSize="22sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="normal"
                 android:gravity="center_vertical"
                 android:letterSpacing="0"
-                tools:ignore="HardcodedText"
-            />
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="|"
                 android:textColor="#E3E3E3"
-                android:textSize="22sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="normal"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/ci_divider_side_margin"
+                android:layout_marginEnd="@dimen/ci_divider_side_margin"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -147,24 +144,23 @@
                 android:layout_height="28dp"
                 android:text="2 h 28 min"
                 android:textColor="#E3E3E3"
-                android:textSize="22sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="normal"
                 android:letterSpacing="0"
                 android:gravity="center_vertical"
-                tools:ignore="HardcodedText"
-            />
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:text="|"
                 android:textColor="#E3E3E3"
-                android:textSize="24sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/ci_divider_side_margin"
+                android:layout_marginEnd="@dimen/ci_divider_side_margin"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -173,7 +169,7 @@
                 android:layout_height="28dp"
                 android:text="Acción, aventura, drama"
                 android:textColor="#E3E3E3"
-                android:textSize="22sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="normal"
                 tools:ignore="HardcodedText" />
@@ -183,113 +179,148 @@
                 android:layout_height="28dp"
                 android:text="|"
                 android:textColor="#E3E3E3"
-                android:textSize="24sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="normal"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/ci_divider_side_margin"
+                android:layout_marginEnd="@dimen/ci_divider_side_margin"
                 tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/ageRating"
                 android:layout_width="124dp"
-                android:layout_height="32dp"
+                android:layout_height="@dimen/ci_age_height"
                 android:text="+ 16 Años"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:letterSpacing="0.5"
                 android:background="@drawable/tag_age_bg"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:paddingLeft="@dimen/ci_age_padding_side"
+                android:paddingRight="@dimen/ci_age_padding_side"
                 android:includeFontPadding="false"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Time row: time tag | slot | | | action/replay icons (dummy for TV, handled in code) -->
+        <!-- Time row: time tag | slot -->
         <LinearLayout
             android:id="@+id/timeInfoRow"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/ci_time_row_height"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/ci_time_row_margin_top"
+            android:nextFocusDown="@id/actionButton1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/metadataRow">
 
             <TextView
                 android:id="@+id/timeLabel"
                 android:layout_width="156dp"
-                android:layout_height="32dp"
+                android:layout_height="@dimen/ci_time_row_height"
                 android:text="MÁS TARDE"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="@dimen/ci_time_label_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="bold"
                 android:background="@drawable/tag_time_bg"
                 android:gravity="center"
                 android:letterSpacing="1.2"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"
+                android:paddingLeft="@dimen/ci_time_label_padding_side"
+                android:paddingRight="@dimen/ci_time_label_padding_side"
                 android:includeFontPadding="false"
                 tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/timeSlot"
                 android:layout_width="143dp"
-                android:layout_height="32dp"
+                android:layout_height="@dimen/ci_time_row_height"
                 android:text="20:00 - 22:20"
                 android:textColor="#E3E3E3"
-                android:textSize="22sp"
+                android:textSize="@dimen/ci_meta_text_size"
                 android:fontFamily="@font/reddit_sans_regular"
                 android:textStyle="normal"
                 android:gravity="center"
-                android:layout_marginStart="22dp"
+                android:layout_marginStart="@dimen/ci_time_slot_margin_start"
                 tools:ignore="HardcodedText" />
-
         </LinearLayout>
 
         <!-- Description -->
         <TextView
             android:id="@+id/description"
             android:layout_width="925dp"
-            android:layout_height="117dp"
-            android:layout_marginTop="94dp"
+            android:layout_height="@dimen/ci_desc_height"
+            android:layout_marginTop="@dimen/ci_desc_margin_top"
             android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
             android:textColor="#E3E3E3"
-            android:textSize="20sp"
+            android:textSize="@dimen/ci_desc_text_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:letterSpacing="0.2"
-            android:lineSpacingExtra="16sp"
+            android:lineSpacingExtra="@dimen/ci_desc_line_spacing_extra"
             android:maxLines="3"
             android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timeInfoRow"
             tools:ignore="HardcodedText" />
 
-        <!-- Actions row: 6 horizontal buttons, precisely sized -->
+        <!-- Actions row: 6 horizontal buttons -->
         <LinearLayout
             android:id="@+id/actionButtonsRow"
-            android:layout_width="916dp"
-            android:layout_height="156dp"
-            android:layout_marginTop="41dp"
+            android:layout_width="@dimen/ci_actions_width"
+            android:layout_height="@dimen/ci_action_item_height"
+            android:layout_marginTop="@dimen/ci_actions_margin_top"
             android:orientation="horizontal"
+            android:nextFocusUp="@id/timeInfoRow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description">
 
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton1" />
-            <Space android:layout_width="16dp" android:layout_height="1dp" />
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton2" />
-            <Space android:layout_width="16dp" android:layout_height="1dp" />
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton3" />
-            <Space android:layout_width="16dp" android:layout_height="1dp" />
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton4" />
-            <Space android:layout_width="16dp" android:layout_height="1dp" />
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton5" />
-            <Space android:layout_width="16dp" android:layout_height="1dp" />
-            <include layout="@layout/view_action_button" android:id="@+id/actionButton6" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton1"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusRight="@id/actionButton2" />
+            <Space android:layout_width="@dimen/ci_action_space" android:layout_height="1dp" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton2"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusLeft="@id/actionButton1"
+                android:nextFocusRight="@id/actionButton3" />
+            <Space android:layout_width="@dimen/ci_action_space" android:layout_height="1dp" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton3"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusLeft="@id/actionButton2"
+                android:nextFocusRight="@id/actionButton4" />
+            <Space android:layout_width="@dimen/ci_action_space" android:layout_height="1dp" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton4"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusLeft="@id/actionButton3"
+                android:nextFocusRight="@id/actionButton5" />
+            <Space android:layout_width="@dimen/ci_action_space" android:layout_height="1dp" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton5"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusLeft="@id/actionButton4"
+                android:nextFocusRight="@id/actionButton6" />
+            <Space android:layout_width="@dimen/ci_action_space" android:layout_height="1dp" />
+            <include
+                layout="@layout/view_action_button"
+                android:id="@+id/actionButton6"
+                android:layout_width="@dimen/ci_action_item_width"
+                android:layout_height="@dimen/ci_action_item_height"
+                android:nextFocusLeft="@id/actionButton5" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -299,8 +330,8 @@
         android:id="@+id/systemDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginTop="@dimen/ci_sys_margin_top"
+        android:layout_marginEnd="@dimen/ci_sys_margin_end"
         android:orientation="vertical"
         android:gravity="end"
         app:layout_constraintEnd_toEndOf="parent"
@@ -308,11 +339,11 @@
 
         <TextView
             android:id="@+id/systemTime"
-            android:layout_width="100dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/ci_sys_time_width"
+            android:layout_height="@dimen/ci_sys_time_height"
             android:text="20:44"
             android:textColor="#FFFFFF"
-            android:textSize="38sp"
+            android:textSize="@dimen/ci_system_time_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:textStyle="bold"
             android:gravity="right"
@@ -321,12 +352,12 @@
 
         <TextView
             android:id="@+id/systemDate"
-            android:layout_width="81dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="@dimen/ci_sys_date_width"
+            android:layout_height="@dimen/ci_sys_date_height"
+            android:layout_marginTop="@dimen/ci_sys_date_margin_top"
             android:text="7 abr."
             android:textColor="#E3E3E3"
-            android:textSize="18sp"
+            android:textSize="@dimen/ci_system_date_size"
             android:fontFamily="@font/reddit_sans_regular"
             android:textStyle="bold"
             android:gravity="right"

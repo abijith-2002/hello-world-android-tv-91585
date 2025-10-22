@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tools-only preview hints; not used at runtime -->
+    <item name="tools_preview_note" type="string" tools:ignore="MissingTranslation">
+        Preview uses ci_* dimens to render Content Info at ~0.9 scale to ensure TV safe-area fit.
+    </item>
+</resources>

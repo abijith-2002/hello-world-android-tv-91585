@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Preview-only flags and notes for design-time rendering.
+         These values are not referenced at runtime and serve as documentation for tooling. -->
+    <bool name="is_content_info_preview">true</bool>
+    <string name="content_info_preview_note">This project includes activity_content_info_preview.xml for design-time checks only.</string>
+</resources>

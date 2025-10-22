@@ -1,0 +1,10 @@
+{
+  "root": ".",
+  "modules": [":app", ":list", ":utilities"],
+  "settingsGradle": "settings.gradle",
+  "gradleWrapper": "gradlew",
+  "buildCommand": "./gradlew assembleDebug",
+  "artifacts": {
+    "debug": "app/build/outputs/apk/debug/app-debug.apk"
+  }
+}

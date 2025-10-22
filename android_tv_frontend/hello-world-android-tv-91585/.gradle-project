@@ -1,0 +1,3 @@
+settings=android_tv_frontend/settings.gradle
+root=android_tv_frontend
+module=android_tv_frontend/app

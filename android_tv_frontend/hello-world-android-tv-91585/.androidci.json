@@ -1,0 +1,5 @@
+{
+  "android_gradle_project_root": "android_tv_frontend",
+  "wrapper": "android_tv_frontend/gradlew",
+  "default_task": ":app:assembleDebug"
+}

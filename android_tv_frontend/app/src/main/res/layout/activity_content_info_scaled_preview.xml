@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Preview-only: 0.9f scaled canvas to emulate overscan-safe visualization -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="1728dp"
+    android:layout_height="972dp"
+    android:background="@android:color/black">
+
+    <include layout="@layout/activity_content_info" />
+</FrameLayout>

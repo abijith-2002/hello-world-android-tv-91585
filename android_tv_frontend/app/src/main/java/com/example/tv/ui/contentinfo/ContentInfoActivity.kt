@@ -26,6 +26,12 @@ import java.util.Locale
  */
 class ContentInfoActivity : AppCompatActivity() {
 
+    // Note for maintainers:
+    // The Content Info screen uses screen-scoped dimens (values/dimens_content_info.xml)
+    // to reduce overall sizing so that all elements, including the bottom action buttons,
+    // stay within typical TV safe areas. Avoid modifying global dimens; if tweaks are
+    // required for overscan scenarios, adjust only the ci_* values in that file.
+
     private lateinit var backgroundImage: ImageView
     private lateinit var channelNumber: TextView
     private lateinit var channelName: TextView
@@ -61,6 +67,41 @@ class ContentInfoActivity : AppCompatActivity() {
         setupSystemDateTime()
         setupActionButtons()
         setupFocusHandling()
+
+        // Optionally apply small wrapper scale if enabled via resources (default is disabled)
+        findViewById<View>(R.id.tvSafeWrapper)?.let { wrapper ->
+            val enable = resources.getBoolean(R.bool.ci_enable_wrapper_scale)
+            if (enable) {
+                // Fractions defined in values_content_info.xml (100% by default)
+                val sx = resources.getFraction(R.fraction.ci_wrapper_scale_x, 1, 1)
+                val sy = resources.getFraction(R.fraction.ci_wrapper_scale_y, 1, 1)
+                wrapper.scaleX = sx
+                wrapper.scaleY = sy
+            }
+        }
+
+        // Ensure initial focus safely lands on the first action after layout pass
+        window.decorView.post {
+            if (actionButtons.isNotEmpty()) {
+                actionButtons[0].requestFocus()
+            }
+        }
+
+        // Make sure the system date/time block is not focusable (defensive)
+        findViewById<View>(R.id.systemDateTime)?.apply {
+            isFocusable = false
+            isFocusableInTouchMode = false
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+        }
+
+        // Ensure root container is focusable and initial focus goes to first action button.
+        findViewById<View>(R.id.rootContainer)?.apply {
+            isFocusable = true
+            isFocusableInTouchMode = true
+        }
+        if (actionButtons.isNotEmpty()) {
+            actionButtons[0].requestFocus()
+        }
     }
 
     private fun initializeViews() {
@@ -232,9 +273,12 @@ class ContentInfoActivity : AppCompatActivity() {
             button.onFocusChangeListener = focusScaler
         }
 
-        // Set initial focus to first action button
+        // Set initial focus to first action button; if not available, fall back to time row or title
         if (actionButtons.isNotEmpty()) {
             actionButtons[0].requestFocus()
+        } else {
+            findViewById<View?>(R.id.timeInfoRow)?.requestFocus()
+                ?: findViewById<View?>(R.id.contentTitle)?.requestFocus()
         }
     }
 

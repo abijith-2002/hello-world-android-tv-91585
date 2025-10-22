@@ -1,0 +1,4 @@
+ANDROID_PROJECT_DIR=android_tv_frontend
+ANDROID_SETTINGS=android_tv_frontend/settings.gradle
+ANDROID_WRAPPER=android_tv_frontend/gradlew
+DEFAULT_BUILD_CMD=./android_tv_frontend/gradlew -p android_tv_frontend :app:assembleDebug

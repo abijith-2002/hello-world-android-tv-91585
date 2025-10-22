@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Developer note: To open ContentInfoActivity quickly during manual validation,
+     run the app, navigate Home -> select any card (DPAD_CENTER). -->
+<resources>
+    <item name="instructions" format="string">Open Home and press DPAD_CENTER on any card to navigate to Content Info.</item>
+</resources>

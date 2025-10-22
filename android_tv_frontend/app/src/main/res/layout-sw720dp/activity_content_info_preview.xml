@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Preview-only wrapper to visualize the Content Info screen in a TV-safe area.
+  Uses a valid root view (FrameLayout) with an include inside to satisfy resource merging.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/activity_content_info" />
+
+</FrameLayout>

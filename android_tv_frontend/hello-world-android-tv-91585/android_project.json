@@ -1,0 +1,6 @@
+{
+  "android_project_root": "android_tv_frontend",
+  "modules": [":app", ":list", ":utilities"],
+  "wrapper": true,
+  "build_cmd": "cd android_tv_frontend && ./gradlew build"
+}

@@ -1,0 +1,3 @@
+.PHONY: android-build
+android-build:
+\tbash ./build-android.sh

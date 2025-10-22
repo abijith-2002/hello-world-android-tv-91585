@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Proxy script to the actual Gradle wrapper in the nested Android project
+exec "$(dirname "$0")/android_tv_frontend/gradlew" "$@"

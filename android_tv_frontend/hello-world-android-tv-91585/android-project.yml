@@ -1,0 +1,5 @@
+android:
+  root_dir: android_tv_frontend
+  settings: android_tv_frontend/settings.gradle
+  wrapper: android_tv_frontend/gradlew
+  default_task: :app:assembleDebug

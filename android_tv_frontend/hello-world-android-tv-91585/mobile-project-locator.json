@@ -1,0 +1,10 @@
+{
+  "kind": "android-gradle-project",
+  "root": "android_tv_frontend",
+  "primaryModule": ":app",
+  "modules": [":app", ":list", ":utilities"],
+  "settings": "android_tv_frontend/settings.gradle",
+  "wrapper": "android_tv_frontend/gradlew",
+  "build": ["cd android_tv_frontend", "./gradlew assembleDebug"],
+  "artifactDebug": "android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
+}

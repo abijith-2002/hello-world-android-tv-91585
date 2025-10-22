@@ -1,0 +1,5 @@
+{
+  "android_gradle_root": "android_tv_frontend",
+  "default_module": ":app",
+  "wrapper": "android_tv_frontend/gradlew"
+}

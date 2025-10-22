@@ -1,0 +1,10 @@
+{
+  "androidRoot": "android_tv_frontend",
+  "modules": [
+    { "name": "app", "path": "android_tv_frontend/app" },
+    { "name": "list", "path": "android_tv_frontend/list" },
+    { "name": "utilities", "path": "android_tv_frontend/utilities" }
+  ],
+  "settingsGradle": "android_tv_frontend/settings.gradle",
+  "gradleWrapper": "android_tv_frontend/gradlew"
+}

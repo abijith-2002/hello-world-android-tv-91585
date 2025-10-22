@@ -1,0 +1,4 @@
+include ':app', ':list', ':utilities'
+project(':app').projectDir = new File('android_tv_frontend/app')
+project(':list').projectDir = new File('android_tv_frontend/list')
+project(':utilities').projectDir = new File('android_tv_frontend/utilities')

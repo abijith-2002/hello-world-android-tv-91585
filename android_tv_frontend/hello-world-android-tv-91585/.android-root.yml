@@ -1,0 +1,3 @@
+root: android_tv_frontend
+task: ":app:assembleDebug"
+wrapper: android_tv_frontend/gradlew

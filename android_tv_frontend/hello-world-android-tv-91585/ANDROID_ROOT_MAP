@@ -1,0 +1,3 @@
+repo_root=.
+android_gradle_root=android_tv_frontend
+module=:app

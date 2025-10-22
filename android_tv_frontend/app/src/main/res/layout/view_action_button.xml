@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Action button for the content info panel.
-    Sizing and typography strictly match the provided design spec.
+    Action button for the content info panel with scoped ci_* dimens.
+    Focus/ripple alignment preserved.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/actionButtonContainer"
-    android:layout_width="142dp"
-    android:layout_height="156dp"
+    android:layout_width="@dimen/ci_action_item_width"
+    android:layout_height="@dimen/ci_action_item_height"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@android:color/transparent">
 
-    <!-- Icon Box (background, border, correct dimensions) -->
+    <!-- Icon Box -->
     <FrameLayout
         android:id="@+id/iconBox"
-        android:layout_width="104dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/ci_icon_box_width"
+        android:layout_height="@dimen/ci_icon_box_height"
+        android:layout_marginStart="@dimen/ci_icon_box_margin_start"
+        android:layout_marginTop="@dimen/ci_icon_box_margin_top"
         android:background="@drawable/action_button_selector">
 
         <ImageView
             android:id="@+id/actionIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/ci_icon_size"
+            android:layout_height="@dimen/ci_icon_size"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:contentDescription="@string/action_schedule"
             tools:src="@drawable/ic_launcher_foreground" />
     </FrameLayout>
 
-    <!-- Label: 20sp, bold, #E3E3E3, tight line height, centered -->
+    <!-- Label -->
     <TextView
         android:id="@+id/actionLabel"
-        android:layout_width="138dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="@dimen/ci_label_width"
+        android:layout_height="@dimen/ci_label_height"
+        android:layout_marginTop="@dimen/ci_label_margin_top"
         android:text="Programar"
         android:textColor="#E3E3E3"
-        android:textSize="18sp"
+        android:textSize="@dimen/ci_label_text_size"
         android:fontFamily="@font/reddit_sans_regular"
         android:textStyle="bold"
         android:gravity="center"

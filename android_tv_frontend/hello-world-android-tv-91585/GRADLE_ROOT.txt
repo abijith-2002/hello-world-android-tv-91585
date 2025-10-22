@@ -1,0 +1,5 @@
+Android Gradle project is located at:
+android_tv_frontend
+
+Use the forwarded wrapper at repo root:
+./gradlew :app:assembleDebug

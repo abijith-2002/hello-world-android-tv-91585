@@ -1,0 +1,19 @@
+{
+  "root": ".",
+  "modules": [
+    {
+      "name": "app",
+      "path": "app"
+    },
+    {
+      "name": "list",
+      "path": "list"
+    },
+    {
+      "name": "utilities",
+      "path": "utilities"
+    }
+  ],
+  "settingsGradle": "settings.gradle",
+  "gradleWrapper": "gradlew"
+}

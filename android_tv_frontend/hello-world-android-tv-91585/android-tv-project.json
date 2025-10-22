@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "name": "android_tv_frontend",
+      "rootDir": "android_tv_frontend",
+      "settingsGradle": "android_tv_frontend/settings.gradle",
+      "appModule": "android_tv_frontend/app",
+      "gradleWrapper": "android_tv_frontend/gradlew",
+      "buildCommand": "./android_tv_frontend/gradlew -p android_tv_frontend :app:assembleDebug"
+    }
+  ]
+}

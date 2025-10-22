@@ -1,0 +1,2 @@
+# Android Gradle project is nested; path for discovery tools:
+android_gradle_root = "android_tv_frontend"

@@ -1,0 +1,17 @@
+name: Discover Android Root
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/discover-android-root.yml'
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Print Android project root
+        run: |
+          echo "android_tv_frontend"
+          test -f android_tv_frontend/settings.gradle && echo "settings.gradle found"
+          test -x android_tv_frontend/gradlew && echo "gradlew present"

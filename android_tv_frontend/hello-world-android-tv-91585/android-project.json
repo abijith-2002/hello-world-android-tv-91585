@@ -1,0 +1,7 @@
+{
+  "type": "android-gradle",
+  "project_root": "android_tv_frontend",
+  "gradle_wrapper": "android_tv_frontend/gradlew",
+  "default_module": ":app",
+  "notes": "Nested Android project; use the provided gradle wrapper path."
+}

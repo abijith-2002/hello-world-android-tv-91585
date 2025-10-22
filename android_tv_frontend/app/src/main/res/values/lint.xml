@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- Suppress preview-only MissingConstraints warnings for the Content Info layout previews -->
+    <issue id="MissingConstraints">
+        <ignore path="res/layout/activity_content_info_preview.xml" />
+        <ignore path="res/layout-sw600dp/activity_content_info_preview_wrapper.xml" />
+    </issue>
+</lint>

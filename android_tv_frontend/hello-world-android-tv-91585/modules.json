@@ -1,0 +1,6 @@
+{
+  "android": {
+    "root": "android_tv_frontend",
+    "modules": ["app", "list", "utilities"]
+  }
+}

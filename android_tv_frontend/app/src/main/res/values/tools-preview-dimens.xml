@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Design-time hints; not used at runtime -->
+    <dimen name="tools_tv_width" tools:override="true">1920dp</dimen>
+    <dimen name="tools_tv_height" tools:override="true">1080dp</dimen>
+</resources>

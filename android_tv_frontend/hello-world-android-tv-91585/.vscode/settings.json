@@ -1,0 +1,8 @@
+{
+  "gradle.nestedProjects": [
+    "android_tv_frontend"
+  ],
+  "java.import.gradle.wrapper.enabled": true,
+  "java.import.gradle.enabled": true,
+  "java.configuration.updateBuildConfiguration": "interactive"
+}

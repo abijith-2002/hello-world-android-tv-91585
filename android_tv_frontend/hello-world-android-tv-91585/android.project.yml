@@ -1,0 +1,6 @@
+project:
+  type: android-gradle
+  root: android_tv_frontend
+  wrapper: android_tv_frontend/gradlew
+  module: ":app"
+  assemble_task: ":app:assembleDebug"

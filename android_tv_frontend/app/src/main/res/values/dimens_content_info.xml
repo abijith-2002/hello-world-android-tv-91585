@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Scoped Content Info sizing (approx 0.92x) -->
+    <!-- Panel -->
+    <dimen name="ci_panel_width">1090dp</dimen>
+    <dimen name="ci_panel_height">560dp</dimen>
+    <dimen name="ci_margin_start">88dp</dimen>
+    <dimen name="ci_margin_top">96dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="ci_channel_text_size">28sp</dimen>
+    <dimen name="ci_title_text_size">52sp</dimen>
+    <dimen name="ci_meta_text_size">20sp</dimen>
+    <dimen name="ci_time_label_size">15sp</dimen>
+    <dimen name="ci_desc_text_size">19sp</dimen>
+    <dimen name="ci_system_time_size">36sp</dimen>
+    <dimen name="ci_system_date_size">17sp</dimen>
+
+    <!-- Heights -->
+    <dimen name="ci_channel_height">36dp</dimen>
+    <dimen name="ci_title_height">66dp</dimen>
+    <dimen name="ci_meta_row_height">30dp</dimen>
+    <dimen name="ci_time_row_height">30dp</dimen>
+    <dimen name="ci_age_height">30dp</dimen>
+    <dimen name="ci_desc_height">112dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="ci_title_margin_top">60dp</dimen>
+    <dimen name="ci_meta_row_margin_top">132dp</dimen>
+    <dimen name="ci_time_row_margin_top">28dp</dimen>
+    <dimen name="ci_desc_margin_top">84dp</dimen>
+    <dimen name="ci_actions_margin_top">34dp</dimen>
+
+    <!-- Actions -->
+    <dimen name="ci_actions_width">880dp</dimen>
+    <dimen name="ci_action_item_width">134dp</dimen>
+    <dimen name="ci_action_item_height">148dp</dimen>
+    <dimen name="ci_action_space">12dp</dimen>
+    <dimen name="ci_icon_box_width">98dp</dimen>
+    <dimen name="ci_icon_box_height">76dp</dimen>
+    <dimen name="ci_icon_box_margin_start">17dp</dimen>
+    <dimen name="ci_icon_box_margin_top">8dp</dimen>
+    <dimen name="ci_icon_size">38dp</dimen>
+    <dimen name="ci_label_width">132dp</dimen>
+    <dimen name="ci_label_height">24dp</dimen>
+    <dimen name="ci_label_margin_top">20dp</dimen>
+    <dimen name="ci_label_text_size">17sp</dimen>
+
+    <!-- System date/time -->
+    <dimen name="ci_sys_margin_top">48dp</dimen>
+    <dimen name="ci_sys_margin_end">88dp</dimen>
+    <dimen name="ci_sys_time_width">96dp</dimen>
+    <dimen name="ci_sys_time_height">46dp</dimen>
+    <dimen name="ci_sys_date_width">76dp</dimen>
+    <dimen name="ci_sys_date_height">30dp</dimen>
+    <dimen name="ci_sys_date_margin_top">8dp</dimen>
+
+    <!-- Misc -->
+    <dimen name="ci_divider_side_margin">14dp</dimen>
+    <dimen name="ci_time_slot_margin_start">20dp</dimen>
+    <dimen name="ci_age_padding_side">8dp</dimen>
+    <dimen name="ci_time_label_padding_side">16dp</dimen>
+    <dimen name="ci_desc_line_spacing_extra">14sp</dimen>
+</resources>

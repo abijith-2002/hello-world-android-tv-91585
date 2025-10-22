@@ -1,0 +1,8 @@
+{
+  "root": ".",
+  "modules": {
+    "app": "app",
+    "list": "list",
+    "utilities": "utilities"
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Optional wrapper style if we need to enforce max width/height without scaling transforms -->
+    <style name="Style.ContentInfo.Wrapper">
+        <item name="android:paddingStart">@dimen/ci_side_inset</item>
+        <item name="android:paddingEnd">@dimen/ci_side_inset</item>
+        <item name="android:paddingTop">@dimen/ci_side_inset</item>
+        <item name="android:paddingBottom">@dimen/ci_bottom_inset</item>
+    </style>
+</resources>

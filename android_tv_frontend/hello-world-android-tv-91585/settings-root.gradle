@@ -1,0 +1,6 @@
+/*
+  Root-level Gradle settings marker for CI discovery.
+  Delegates to the actual Android project in android_tv_frontend/.
+*/
+rootProject.name = "android-monorepo-root"
+apply from: new File(rootDir, "android_tv_frontend/settings.gradle")

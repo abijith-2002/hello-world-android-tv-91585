@@ -1,0 +1,13 @@
+plugins {
+    // no plugins; module builds are defined in subprojects
+}
+
+tasks.register("printProjectInfo") {
+    group = "help"
+    description = "Prints basic info for analyzers to detect the Android project root."
+    doLast {
+        println("Android project root: ${project.projectDir}")
+        println("Modules: :app, :list, :utilities")
+        println("Try: ./gradlew :app:assembleDebug")
+    }
+}

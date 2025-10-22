@@ -1,0 +1,7 @@
+Use the nested Gradle wrapper to build the Android TV app:
+  ./android_tv_frontend/gradlew -p android_tv_frontend :app:assembleDebug
+
+Modules:
+  - android_tv_frontend/app
+  - android_tv_frontend/list
+  - android_tv_frontend/utilities

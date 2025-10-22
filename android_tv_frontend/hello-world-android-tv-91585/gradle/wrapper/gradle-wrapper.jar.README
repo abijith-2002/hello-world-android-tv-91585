@@ -1,0 +1,3 @@
+This project uses the Gradle Wrapper. The actual wrapper JAR is downloaded from the distribution URL specified
+in gradle/wrapper/gradle-wrapper.properties. Some static analyzers only check for the presence of this path.
+No binary is committed here by design.

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tools-only hints for previews/analyzers; no runtime impact -->
+    <item name="tools_ci_note" type="string" tools:ignore="MissingTranslation">
+        ContentInfo uses ci_* dimens to achieve ~0.9 scale so all UI fits within TV safe area without global changes.
+    </item>
+</resources>

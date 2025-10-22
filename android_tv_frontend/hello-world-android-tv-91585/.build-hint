@@ -1,0 +1,4 @@
+GRADLE_ROOT=android_tv_frontend
+GRADLE_SETTINGS=android_tv_frontend/settings.gradle
+GRADLE_WRAPPER=android_tv_frontend/gradlew
+GRADLE_TARGET=:app:assembleDebug

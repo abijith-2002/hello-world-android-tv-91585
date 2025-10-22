@@ -1,0 +1,8 @@
+{
+  "android": {
+    "root": "android_tv_frontend",
+    "settings": "android_tv_frontend/settings.gradle",
+    "wrapper": "android_tv_frontend/gradlew",
+    "assemble": ":app:assembleDebug"
+  }
+}

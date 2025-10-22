@@ -1,0 +1,11 @@
+{
+  "gradleSettings": "android_tv_frontend/settings.gradle",
+  "gradleWrapper": "android_tv_frontend/gradlew",
+  "projectRoot": "android_tv_frontend",
+  "modules": [
+    "android_tv_frontend/app",
+    "android_tv_frontend/list",
+    "android_tv_frontend/utilities"
+  ],
+  "defaultTask": ":app:assembleDebug"
+}

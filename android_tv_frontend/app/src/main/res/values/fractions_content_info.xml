@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fractions used for optional tvSafeWrapper scaling; default is 100% (no scale). -->
+    <item name="ci_wrapper_scale_x" type="fraction">100%</item>
+    <item name="ci_wrapper_scale_y" type="fraction">100%</item>
+</resources>

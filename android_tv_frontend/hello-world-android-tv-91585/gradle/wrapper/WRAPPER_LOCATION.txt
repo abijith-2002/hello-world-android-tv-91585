@@ -1,0 +1,5 @@
+This repository uses a nested Gradle wrapper at:
+- android_tv_frontend/gradle/wrapper/gradle-wrapper.properties
+- android_tv_frontend/gradle/wrapper/gradle-wrapper.jar
+
+Use the forwarding scripts at repo root (./gradlew, ./gradlew.bat) which delegate to the nested wrapper.

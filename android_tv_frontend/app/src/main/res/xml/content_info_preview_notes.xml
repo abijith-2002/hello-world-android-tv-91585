@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Preview notes for Content Info compact layout.
+     This XML is informational for maintainers and is not used at runtime. -->
+<resources>
+    <item name="content_info_preview_scale_hint" type="string">Use activity_content_info_preview.xml with scale 0.9 to validate safe area.</item>
+    <item name="content_info_preview_dimens" type="string">ci_* from values/dimens_content_info.xml</item>
+</resources>

@@ -1,0 +1,13 @@
+android:
+  gradle_root: android_tv_frontend
+  settings: android_tv_frontend/settings.gradle
+  wrapper: android_tv_frontend/gradlew
+  modules:
+    - :app
+    - :list
+    - :utilities
+  build:
+    - cd android_tv_frontend
+    - ./gradlew assembleDebug
+  artifacts:
+    debug_apk: android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk

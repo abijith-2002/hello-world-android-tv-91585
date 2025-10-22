@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compact-only action button for the Content Info screen (optional use).
+     Matches focus/ripple geometry using the same selector; sizes are driven by ci_* dimens. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionButtonCompact"
+    android:layout_width="@dimen/ci_action_item_width"
+    android:layout_height="@dimen/ci_action_item_height"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@android:color/transparent">
+
+    <FrameLayout
+        android:id="@+id/iconBox"
+        android:layout_width="@dimen/ci_icon_box_width"
+        android:layout_height="@dimen/ci_icon_box_height"
+        android:layout_marginStart="@dimen/ci_icon_box_margin_start"
+        android:layout_marginTop="@dimen/ci_icon_box_margin_top"
+        android:background="@drawable/action_button_selector">
+
+        <ImageView
+            android:id="@+id/actionIcon"
+            android:layout_width="@dimen/ci_icon_size"
+            android:layout_height="@dimen/ci_icon_size"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/action_schedule" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/actionLabel"
+        android:layout_width="@dimen/ci_label_width"
+        android:layout_height="@dimen/ci_label_height"
+        android:layout_marginTop="@dimen/ci_label_margin_top"
+        android:textColor="#E3E3E3"
+        android:textSize="@dimen/ci_label_text_size"
+        android:fontFamily="@font/reddit_sans_regular"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:includeFontPadding="false" />
+</LinearLayout>

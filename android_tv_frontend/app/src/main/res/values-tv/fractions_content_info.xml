@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TV-specific fraction overrides; kept at 100% (no scaling) by default -->
+    <item name="ci_wrapper_scale_x" type="fraction">100%</item>
+    <item name="ci_wrapper_scale_y" type="fraction">100%</item>
+</resources>

@@ -1,0 +1,5 @@
+This directory contains the actual Gradle wrapper configuration for the Android TV app.
+Wrapper JAR and properties are already present here for builds:
+ - gradle-wrapper.jar
+ - gradle-wrapper.properties
+Use ./gradlew in this folder to build modules (e.g., :app:assembleDebug).
