@@ -45,5 +45,13 @@
             android:icon="@mipmap/ic_launcher"
             android:exported="false" />
 
+        <!-- Content Info screen -->
+        <activity
+            android:name="com.example.tv.ui.ContentInfoActivity"
+            android:banner="@drawable/banner_tv"
+            android:icon="@mipmap/ic_launcher"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.example.tv.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.MainActivity
 import com.example.tv.R
+import com.example.tv.ui.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 
 /**
@@ -120,6 +122,50 @@ class HomeActivity : AppCompatActivity() {
                     v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
                         R.dimen.card_elevation
                     )
+                }
+
+                // DPAD_CENTER handling to open ContentInfo screen
+                card.setOnKeyListener { v, keyCode, event ->
+                    if (event.action == KeyEvent.ACTION_DOWN && 
+                        (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        
+                        // Generate sample content data based on rail and position
+                        val contentTitle = when {
+                            title == "Available subscriptions" -> "Premium Content"
+                            title.contains("Action") -> "Action Movie"
+                            title.contains("Drama") -> "Drama Series"
+                            title.contains("Horror") -> "Horror Film"
+                            title.contains("Comedy") -> "Comedy Show"
+                            else -> "Featured Content"
+                        }
+                        
+                        val contentDescription = "Experience thrilling entertainment with our carefully curated selection of premium content. " +
+                                "This content features exceptional storytelling, outstanding performances, and high production values that will keep you engaged from start to finish."
+                        
+                        val intent = ContentInfoActivity.createIntent(
+                            context = this@HomeActivity,
+                            title = contentTitle,
+                            description = contentDescription,
+                            channel = if (title == "Available subscriptions") "Premium" else "TNT",
+                            channelNumber = "242",
+                            duration = "1 h 45 min",
+                            genre = when {
+                                title.contains("Action") -> "Action, Adventure"
+                                title.contains("Drama") -> "Drama, Family"
+                                title.contains("Horror") -> "Horror, Thriller"
+                                title.contains("Comedy") -> "Comedy, Entertainment"
+                                else -> "General, Entertainment"
+                            },
+                            rating = "+ 13 Years",
+                            startTime = "20:00",
+                            endTime = "21:45"
+                        )
+                        
+                        startActivity(intent)
+                        true
+                    } else {
+                        false
+                    }
                 }
 
                 row.addView(card)
