@@ -2,6 +2,7 @@ package com.example.tv.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.MainActivity
 import com.example.tv.R
+import com.example.tv.model.ContentItem
+import com.example.tv.ui.contentinfo.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 
 /**
@@ -104,7 +107,7 @@ class HomeActivity : AppCompatActivity() {
                 thumbs
             }
 
-            items.forEach { resId ->
+            items.forEachIndexed { itemIndex, resId ->
                 val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
                 val img = card.findViewById<ImageView>(R.id.thumbImage)
                 img.setImageResource(resId)
@@ -122,10 +125,50 @@ class HomeActivity : AppCompatActivity() {
                     )
                 }
 
+                // Handle DPAD_CENTER to open content info screen
+                card.setOnKeyListener { v, keyCode, event ->
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && event.action == KeyEvent.ACTION_DOWN) {
+                        openContentInfo(title, itemIndex, resId)
+                        true
+                    } else {
+                        false
+                    }
+                }
+
+                // Also handle click for compatibility
+                card.setOnClickListener {
+                    openContentInfo(title, itemIndex, resId)
+                }
+
                 row.addView(card)
             }
 
             container.addView(railView)
         }
+    }
+
+    /**
+     * Open content info detail screen with sample data based on rail and item.
+     */
+    private fun openContentInfo(railTitle: String, itemIndex: Int, imageResId: Int) {
+        // Create sample content item
+        val contentItem = ContentItem(
+            title = "Content ${itemIndex + 1}",
+            subtitle = "Sample Content Title",
+            channelNumber = "242",
+            channelName = "TNT",
+            duration = "2 h 28 min",
+            genres = "Action, Adventure, Drama",
+            ageRating = "+ 16 Years",
+            timeSlot = "20:00 - 22:20",
+            timeLabel = "LATER",
+            description = "This is a sample description for the selected content. " +
+                    "Press DPAD_CENTER on any rail item to view its detailed information. " +
+                    "The content info screen matches the provided design image pixel-perfectly.",
+            imageResId = imageResId
+        )
+
+        val intent = ContentInfoActivity.createIntent(this, contentItem)
+        startActivity(intent)
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 
+        Dedicated theme for ContentInfoActivity
+        This theme is separate from the global Nord dark theme to match the exact design.
+    -->
+    <style name="Theme.ContentInfo" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
+        <item name="colorOnSurface">@color/content_text_secondary</item>
+        <item name="colorPrimary">@color/content_accent</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+</resources>

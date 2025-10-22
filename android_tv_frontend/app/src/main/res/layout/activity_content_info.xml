@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Content Info Detail Screen Layout
+  Designed for 1920x1080 TV resolution matching the provided design image.
+  Uses absolute positioning with ConstraintLayout for pixel-perfect layout.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <!-- Background Image -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/content_info_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/thumb_1" />
+
+    <!-- Gradient Overlay -->
+    <View
+        android:id="@+id/gradientOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient_content_overlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Metadata Panel - positioned at left:96px, top:108px -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/metadataPanel"
+        android:layout_width="1150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Channel Number - 32sp, bold, #E3E3E3 -->
+        <TextView
+            android:id="@+id/channelNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:lineSpacingExtra="6sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="242" />
+
+        <!-- Channel Name - 32sp, semi-bold, #E3E3E3 -->
+        <TextView
+            android:id="@+id/channelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="32sp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="8sp"
+            app:layout_constraintStart_toEndOf="@id/channelNumber"
+            app:layout_constraintTop_toTopOf="@id/channelNumber"
+            tools:text="TNT" />
+
+        <!-- Title - 60sp, extra-bold, #FFFFFF, positioned 67dp from top -->
+        <TextView
+            android:id="@+id/contentTitle"
+            android:layout_width="1150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="67dp"
+            android:textSize="60sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:lineSpacingExtra="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Gladiador II" />
+
+        <!-- Metadata Row Container - 76dp below title -->
+        <LinearLayout
+            android:id="@+id/metadataRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contentTitle">
+
+            <!-- Subtitle - 24sp, medium, #E3E3E3 -->
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                tools:text="Gladiator II" />
+
+            <!-- Divider -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/divider"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3" />
+
+            <!-- Duration -->
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                tools:text="2 h 28 min" />
+
+            <!-- Divider -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/divider"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3" />
+
+            <!-- Genres -->
+            <TextView
+                android:id="@+id/genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                tools:text="Acción, aventura, drama" />
+
+            <!-- Divider -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/divider"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3" />
+
+            <!-- Age Rating Tag -->
+            <TextView
+                android:id="@+id/ageRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/tag_age_bg"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:letterSpacing="0.025"
+                tools:text="+ 16 Años" />
+        </LinearLayout>
+
+        <!-- Time Info Row - 46dp below metadata -->
+        <LinearLayout
+            android:id="@+id/timeInfoRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/metadataRow">
+
+            <!-- Time Label Tag -->
+            <TextView
+                android:id="@+id/timeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="@drawable/tag_time_bg"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:letterSpacing="0.067"
+                tools:text="MÁS TARDE" />
+
+            <!-- Time Slot -->
+            <TextView
+                android:id="@+id/timeSlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:textSize="24sp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                tools:text="20:00 - 22:20" />
+        </LinearLayout>
+
+        <!-- Description - 158dp below time info -->
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="925dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="158dp"
+            android:textSize="22sp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="17sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeInfoRow"
+            tools:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro." />
+
+        <!-- Action Buttons Row - 158 + 117 = 275dp total from timeInfo -->
+        <LinearLayout
+            android:id="@+id/actionButtonsRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description">
+
+            <!-- Action Button Template (repeated 6 times) -->
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton1" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton2" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton3" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton4" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton5" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <include layout="@layout/view_action_button"
+                android:id="@+id/actionButton6" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- System Time/Date - top right corner -->
+    <LinearLayout
+        android:id="@+id/systemDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="96dp"
+        android:orientation="vertical"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Time - 40sp, bold, #FFFFFF -->
+        <TextView
+            android:id="@+id/systemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:lineSpacingExtra="8sp"
+            tools:text="20:44" />
+
+        <!-- Date - 20sp, semi-bold, #E3E3E3 -->
+        <TextView
+            android:id="@+id/systemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="12sp"
+            tools:text="7 abr." />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

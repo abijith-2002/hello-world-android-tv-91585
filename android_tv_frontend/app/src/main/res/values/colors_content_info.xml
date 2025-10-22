@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Content Info Screen Colors (from design spec) -->
+    <color name="content_text_primary">#FFFFFF</color>
+    <color name="content_text_secondary">#E3E3E3</color>
+    <color name="content_bg_overlay">#DD000000</color>
+    <color name="content_tag_bg">#59000000</color>
+    <color name="content_tag_time_bg">#402563EB</color>
+    <color name="content_button_bg">#0FFFFFFF</color>
+    <color name="content_button_border">#1FFFFFFF</color>
+    <color name="content_accent">#2563EB</color>
+</resources>

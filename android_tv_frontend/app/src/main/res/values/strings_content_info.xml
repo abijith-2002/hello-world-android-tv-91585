@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Content Info Screen -->
+    <string name="content_info_title">Content Information</string>
+    <string name="action_schedule">Schedule</string>
+    <string name="action_replay">Replay</string>
+    <string name="action_play">Play</string>
+    <string name="action_record">Record</string>
+    <string name="action_info">Info</string>
+    <string name="action_audio_subtitles">Audio &amp; Subtitles</string>
+    <string name="divider">|</string>
+    <string name="time_separator">-</string>
+</resources>

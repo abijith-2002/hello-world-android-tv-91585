@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reusable action button for content info screen -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actionButtonContainer"
+    android:layout_width="142dp"
+    android:layout_height="156dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@android:color/transparent">
+
+    <!-- Icon Container Box - 104x80dp with 19dp left margin -->
+    <FrameLayout
+        android:id="@+id/iconBox"
+        android:layout_width="104dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="19dp"
+        android:background="@drawable/action_button_selector">
+
+        <!-- Icon - 40x40dp centered -->
+        <ImageView
+            android:id="@+id/actionIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/action_schedule"
+            tools:src="@drawable/ic_launcher_foreground" />
+    </FrameLayout>
+
+    <!-- Label - 20sp, semi-bold, #E3E3E3, centered below icon -->
+    <TextView
+        android:id="@+id/actionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:textColor="#E3E3E3"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingExtra="4sp"
+        android:gravity="center"
+        tools:text="Programar" />
+</LinearLayout>
