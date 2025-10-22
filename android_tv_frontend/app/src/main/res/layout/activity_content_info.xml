@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Content Info Detail Screen Layout
-  Designed for 1920x1080 TV resolution matching the provided design image.
-  Uses absolute positioning with ConstraintLayout for pixel-perfect layout.
+    Content Info Detail Screen Layout
+    MATCHeS Figma screen pixel-for-pixel in: copy (esp. casing), spacing, font size/weight, lineheight and alignment.
+    See: 20251022_063948_35.png; use only system sans (Android TV), no Reddit/Nord font.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,9 +13,10 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:ignore="MissingConstraints">
 
-    <!-- Background Image -->
+    <!-- Background image and left-to-right gradient overlay -->
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="0dp"
@@ -26,9 +27,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="ContentDescription"
         tools:src="@drawable/thumb_1" />
 
-    <!-- Gradient Overlay -->
     <View
         android:id="@+id/gradientOverlay"
         android:layout_width="0dp"
@@ -37,260 +38,263 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="ContentDescription" />
 
-    <!-- Metadata Panel - positioned at left:96px, top:108px -->
+    <!-- Metadata & content panel -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/metadataPanel"
         android:layout_width="1150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="590dp"
         android:layout_marginStart="96dp"
         android:layout_marginTop="108dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Channel Number - 32sp, bold, #E3E3E3 -->
+        <!-- Channel number and name -->
         <TextView
             android:id="@+id/channelNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
+            android:layout_width="56dp"
+            android:layout_height="38dp"
+            android:text="242"
             android:textColor="#E3E3E3"
+            android:textSize="32sp"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
-            android:lineSpacingExtra="6sp"
+            android:letterSpacing="0"
+            android:layout_marginTop="0dp"
+            android:gravity="bottom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="242" />
+            tools:ignore="HardcodedText" />
 
-        <!-- Channel Name - 32sp, semi-bold, #E3E3E3 -->
         <TextView
             android:id="@+id/channelName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="32sp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="TNT"
             android:textColor="#E3E3E3"
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="8sp"
+            android:textSize="32sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
             app:layout_constraintStart_toEndOf="@id/channelNumber"
             app:layout_constraintTop_toTopOf="@id/channelNumber"
-            tools:text="TNT" />
+            android:layout_marginStart="12dp"
+            tools:ignore="HardcodedText"
+        />
 
-        <!-- Title - 60sp, extra-bold, #FFFFFF, positioned 67dp from top -->
+        <!-- Program (Title) -->
         <TextView
             android:id="@+id/contentTitle"
             android:layout_width="1150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginTop="67dp"
-            android:textSize="60sp"
+            android:text="Gladiador II"
             android:textColor="#FFFFFF"
+            android:textSize="60sp"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
-            android:lineSpacingExtra="10sp"
-            android:maxLines="1"
-            android:ellipsize="end"
+            android:letterSpacing="0"
+            android:gravity="bottom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Gladiador II" />
+            tools:ignore="HardcodedText"
+            android:maxLines="1"
+            android:ellipsize="end"
+        />
 
-        <!-- Metadata Row Container - 76dp below title -->
+        <!-- Meta row: subtitle | duration | genres | age tag -->
         <LinearLayout
             android:id="@+id/metadataRow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
+            android:layout_height="32dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_marginTop="143dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contentTitle">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Subtitle - 24sp, medium, #E3E3E3 -->
             <TextView
                 android:id="@+id/subtitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:layout_height="28dp"
+                android:text="Gladiator II"
                 android:textColor="#E3E3E3"
+                android:textSize="24sp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="Gladiator II" />
+                android:textStyle="normal"
+                android:gravity="center_vertical"
+                android:letterSpacing="0"
+                tools:ignore="HardcodedText"
+            />
 
-            <!-- Divider -->
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
+                android:text="|"
+                android:textColor="#E3E3E3"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/divider"
-                android:textSize="24sp"
-                android:textColor="#E3E3E3" />
+                tools:ignore="HardcodedText" />
 
-            <!-- Duration -->
             <TextView
                 android:id="@+id/duration"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:layout_height="28dp"
+                android:text="2 h 28 min"
                 android:textColor="#E3E3E3"
+                android:textSize="24sp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="2 h 28 min" />
+                android:textStyle="normal"
+                android:letterSpacing="0"
+                android:gravity="center_vertical"
+                tools:ignore="HardcodedText"
+            />
 
-            <!-- Divider -->
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
+                android:text="|"
+                android:textColor="#E3E3E3"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/divider"
-                android:textSize="24sp"
-                android:textColor="#E3E3E3" />
+                tools:ignore="HardcodedText" />
 
-            <!-- Genres -->
             <TextView
                 android:id="@+id/genres"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:layout_height="28dp"
+                android:text="Acción, aventura, drama"
                 android:textColor="#E3E3E3"
+                android:textSize="24sp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="Acción, aventura, drama" />
+                android:textStyle="normal"
+                tools:ignore="HardcodedText" />
 
-            <!-- Divider -->
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
+                android:text="|"
+                android:textColor="#E3E3E3"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="normal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/divider"
-                android:textSize="24sp"
-                android:textColor="#E3E3E3" />
+                tools:ignore="HardcodedText" />
 
-            <!-- Age Rating Tag -->
             <TextView
                 android:id="@+id/ageRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:background="@drawable/tag_age_bg"
-                android:textSize="20sp"
+                android:layout_width="124dp"
+                android:layout_height="32dp"
+                android:text="+ 16 Años"
                 android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:letterSpacing="0.025"
-                tools:text="+ 16 Años" />
+                android:gravity="center"
+                android:letterSpacing="0.5"
+                android:background="@drawable/tag_age_bg"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:includeFontPadding="false"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Time Info Row - 46dp below metadata -->
+        <!-- Time row: time tag | slot | | | action/replay icons (dummy for TV, handled in code) -->
         <LinearLayout
             android:id="@+id/timeInfoRow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
+            android:layout_height="32dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/metadataRow">
 
-            <!-- Time Label Tag -->
             <TextView
                 android:id="@+id/timeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:background="@drawable/tag_time_bg"
-                android:textSize="18sp"
+                android:layout_width="156dp"
+                android:layout_height="32dp"
+                android:text="MÁS TARDE"
                 android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:letterSpacing="0.067"
-                tools:text="MÁS TARDE" />
+                android:background="@drawable/tag_time_bg"
+                android:gravity="center"
+                android:letterSpacing="1.2"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:includeFontPadding="false"
+                tools:ignore="HardcodedText" />
 
-            <!-- Time Slot -->
             <TextView
                 android:id="@+id/timeSlot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:textSize="24sp"
+                android:layout_width="143dp"
+                android:layout_height="32dp"
+                android:text="20:00 - 22:20"
                 android:textColor="#E3E3E3"
+                android:textSize="24sp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="20:00 - 22:20" />
+                android:textStyle="normal"
+                android:gravity="center"
+                android:layout_marginStart="22dp"
+                tools:ignore="HardcodedText" />
+
         </LinearLayout>
 
-        <!-- Description - 158dp below time info -->
+        <!-- Description -->
         <TextView
             android:id="@+id/description"
             android:layout_width="925dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="158dp"
-            android:textSize="22sp"
+            android:layout_height="117dp"
+            android:layout_marginTop="94dp"
+            android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
             android:textColor="#E3E3E3"
+            android:textSize="22sp"
             android:fontFamily="sans-serif"
+            android:letterSpacing="0.2"
             android:lineSpacingExtra="17sp"
             android:maxLines="3"
             android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timeInfoRow"
-            tools:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro." />
+            tools:ignore="HardcodedText" />
 
-        <!-- Action Buttons Row - 158 + 117 = 275dp total from timeInfo -->
+        <!-- Actions row: 6 horizontal buttons, precisely sized -->
         <LinearLayout
             android:id="@+id/actionButtonsRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="916dp"
+            android:layout_height="156dp"
             android:layout_marginTop="41dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description">
 
-            <!-- Action Button Template (repeated 6 times) -->
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton1" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton2" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton3" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton4" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton5" />
-
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <include layout="@layout/view_action_button"
-                android:id="@+id/actionButton6" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton1" />
+            <Space android:layout_width="16dp" android:layout_height="1dp" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton2" />
+            <Space android:layout_width="16dp" android:layout_height="1dp" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton3" />
+            <Space android:layout_width="16dp" android:layout_height="1dp" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton4" />
+            <Space android:layout_width="16dp" android:layout_height="1dp" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton5" />
+            <Space android:layout_width="16dp" android:layout_height="1dp" />
+            <include layout="@layout/view_action_button" android:id="@+id/actionButton6" />
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- System Time/Date - top right corner -->
+    <!-- System Date/Time: top-right -->
     <LinearLayout
         android:id="@+id/systemDateTime"
         android:layout_width="wrap_content"
@@ -302,29 +306,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Time - 40sp, bold, #FFFFFF -->
         <TextView
             android:id="@+id/systemTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:text="20:44"
             android:textColor="#FFFFFF"
+            android:textSize="40sp"
             android:fontFamily="sans-serif"
             android:textStyle="bold"
+            android:gravity="right"
             android:lineSpacingExtra="8sp"
-            tools:text="20:44" />
+            tools:ignore="HardcodedText" />
 
-        <!-- Date - 20sp, semi-bold, #E3E3E3 -->
         <TextView
             android:id="@+id/systemDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="81dp"
+            android:layout_height="32dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:text="7 abr."
             android:textColor="#E3E3E3"
+            android:textSize="20sp"
             android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:gravity="right"
             android:lineSpacingExtra="12sp"
-            tools:text="7 abr." />
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

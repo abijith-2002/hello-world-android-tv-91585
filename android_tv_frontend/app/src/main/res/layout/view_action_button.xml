@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Reusable action button for content info screen -->
+<!--
+    Action button for the content info panel.
+    Sizing and typography strictly match the provided design spec.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/actionButtonContainer"
@@ -11,15 +14,15 @@
     android:focusableInTouchMode="true"
     android:background="@android:color/transparent">
 
-    <!-- Icon Container Box - 104x80dp with 19dp left margin -->
+    <!-- Icon Box (background, border, correct dimensions) -->
     <FrameLayout
         android:id="@+id/iconBox"
         android:layout_width="104dp"
         android:layout_height="80dp"
         android:layout_marginStart="19dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/action_button_selector">
 
-        <!-- Icon - 40x40dp centered -->
         <ImageView
             android:id="@+id/actionIcon"
             android:layout_width="40dp"
@@ -30,16 +33,19 @@
             tools:src="@drawable/ic_launcher_foreground" />
     </FrameLayout>
 
-    <!-- Label - 20sp, semi-bold, #E3E3E3, centered below icon -->
+    <!-- Label: 20sp, bold, #E3E3E3, tight line height, centered -->
     <TextView
         android:id="@+id/actionLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="24dp"
         android:layout_marginTop="24dp"
-        android:textSize="20sp"
+        android:text="Programar"
         android:textColor="#E3E3E3"
+        android:textSize="20sp"
         android:fontFamily="sans-serif-medium"
-        android:lineSpacingExtra="4sp"
+        android:textStyle="bold"
         android:gravity="center"
-        tools:text="Programar" />
+        android:includeFontPadding="false"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>
