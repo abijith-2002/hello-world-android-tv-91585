@@ -1,0 +1,522 @@
+/* =============================================================================
+   SCREEN 35 (4077:14472) - PIXEL-PERFECT IMPLEMENTATION
+   Nord Dark Theme with Reddit Sans Typography
+   ============================================================================= */
+
+@import url('common.css');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+/* =============================================================================
+   CSS RESET AND BASE STYLES
+   ============================================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--theme-background);
+  color: var(--theme-on-surface);
+  font-family: var(--typo-family-reddit-sans);
+  overflow: hidden;
+}
+
+/* =============================================================================
+   VIEWPORT AND ARTBOARD SETUP FOR ANDROID TV
+   ============================================================================= */
+
+#viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-background);
+  overflow: hidden;
+}
+
+#artboard {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+  background: var(--theme-background);
+  overflow: hidden;
+}
+
+/* =============================================================================
+   BACKGROUND LAYERS
+   ============================================================================= */
+
+#layer-4077-14473 {
+  background-image: url("figmaimages/4077-14473.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#layer-I4077-14474-456-5182 {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+/* =============================================================================
+   METADATA INFO PANEL STRUCTURE
+   ============================================================================= */
+
+#layer-4077-14475 {
+  /* Container positioning from Figma coordinates */
+  left: 96px;
+  top: 108px;
+  width: 1150px;
+  height: 590px;
+  background: rgba(46, 52, 64, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: var(--spacing-md);
+  border: 1px solid rgba(236, 239, 244, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Channel Information Section */
+#layer-I4077-14475-456-11821 {
+  /* Frame 29360 - Channel and Program Info */
+  padding: var(--spacing-lg);
+}
+
+#layer-I4077-14475-456-11822 {
+  /* Frame 29354 - Channel row */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Channel Number */
+#layer-I4077-14475-862-9907 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-primary);
+  border-radius: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-width: 56px;
+  height: 40px;
+}
+
+#layer-I4077-14475-862-9907-862-9617-1-481 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 37.5px;
+  color: var(--theme-background);
+  text-align: center;
+  margin: 0;
+}
+
+/* Channel Name */
+#layer-I4077-14475-456-11824-1-484 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 37.5px;
+  color: var(--theme-on-surface);
+  margin: 0;
+}
+
+/* Program Name */
+#layer-I4077-14475-456-11826-1-477 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 70.3125px;
+  color: var(--theme-on-surface);
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+/* =============================================================================
+   METADATA ROW (GENRES, DURATION, AGE RATING)
+   ============================================================================= */
+
+#layer-I4077-14475-456-11828 {
+  /* Frame 29355 - Metadata row */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+/* General text elements */
+.metadata-text {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 29.296875px;
+  color: var(--theme-on-surface);
+  margin: 0;
+}
+
+/* Dividers */
+.metadata-divider {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 29.296875px;
+  color: var(--nord-snow-storm-0);
+  margin: 0;
+  opacity: 0.6;
+}
+
+/* Age Rating Tag */
+#layer-I4077-14475-456-11835 {
+  background: var(--color-ffffff);
+  border: 1px solid var(--color-ffffff);
+  border-radius: 3px;
+  padding: 4px var(--spacing-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#layer-I4077-14475-456-11835-341-5435 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--theme-background);
+  margin: 0;
+}
+
+/* =============================================================================
+   TIMESTAMP AND ACTIONS ROW
+   ============================================================================= */
+
+#layer-I4077-14475-456-11836 {
+  /* Frame 29356 - Timestamp and actions */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Time Tag */
+#layer-I4077-14475-456-11837 {
+  background: var(--color-3f9321);
+  border-radius: 16px;
+  padding: 4px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#layer-I4077-14475-456-11837-341-5440 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 1.2px;
+  color: var(--color-ffffff);
+  margin: 0;
+}
+
+/* Hour Display Group */
+#layer-I4077-14475-456-11838 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hour-text {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  color: var(--theme-on-surface);
+  margin: 0;
+}
+
+/* Action Icons */
+.action-icon {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon:hover {
+  transform: scale(1.1);
+}
+
+.action-icon:focus-visible {
+  outline: 3px solid var(--theme-accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* =============================================================================
+   DESCRIPTION TEXT BOX
+   ============================================================================= */
+
+#layer-I4077-14475-493-14053 {
+  margin-bottom: var(--spacing-xl);
+}
+
+#layer-I4077-14475-493-14053-431-7990 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 39px;
+  color: var(--theme-on-surface);
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* =============================================================================
+   PANEL BUTTONS SECTION
+   ============================================================================= */
+
+#layer-I4077-14475-456-11848 {
+  /* Panel buttons container */
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+.panel-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 142px;
+}
+
+.panel-button-box {
+  background: rgba(244, 244, 244, 0.1);
+  border: 1px solid rgba(244, 244, 244, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  width: 104px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panel-button-box:hover {
+  background: rgba(244, 244, 244, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.panel-button-box:focus-visible {
+  outline: 3px solid var(--theme-accent);
+  outline-offset: 3px;
+}
+
+.panel-button-icon {
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  filter: brightness(0) saturate(100%) invert(92%) sepia(6%) saturate(316%) hue-rotate(190deg) brightness(106%) contrast(96%);
+}
+
+.panel-button-text {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--theme-on-surface);
+  text-align: center;
+  margin: 0;
+}
+
+/* Specific button icons */
+#layer-I4077-14475-456-11853-66-6725-408-11230 {
+  background-image: url("figmaimages/icon_reminder_Vector.png");
+}
+
+#layer-I4077-14475-456-11854-66-6741-408-11191 {
+  background-image: url("figmaimages/Replay_Forma_2.png");
+}
+
+#layer-I4077-14475-456-11854-66-6741-408-11192 {
+  background-image: url("figmaimages/Replay_Vector_2.png");
+}
+
+#layer-I4077-14475-456-11855-66-6741-408-11208 {
+  background-image: url("figmaimages/Icon_Vector_Square.png");
+}
+
+#layer-I4077-14475-456-11856-66-6741-31-35 {
+  background-image: url("figmaimages/Icon_Vector_Triangle.png");
+}
+
+#layer-I4077-14475-456-11857-66-6741-408-11218 {
+  background-image: url("figmaimages/Icon_Vector_Rect.png");
+}
+
+#layer-I4077-14475-456-11858-66-6741-408-11195 {
+  background-image: url("figmaimages/AudioSubtitles_Union.png");
+}
+
+#layer-I4077-14475-456-11858-66-6741-408-11200 {
+  background-image: url("figmaimages/subtitles_24dp_E3E3E3.png");
+}
+
+/* =============================================================================
+   SYSTEM DATE COMPONENT
+   ============================================================================= */
+
+#layer-4077-14476 {
+  /* SystemDate positioning */
+  right: 96px;
+  top: 55px;
+  width: 200px;
+  height: 90px;
+  text-align: right;
+}
+
+#layer-I4077-14476-456-15482-1-482 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 46.875px;
+  color: var(--theme-on-surface);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+#layer-I4077-14476-456-15483-1-483 {
+  font-family: var(--typo-family-reddit-sans);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 32.8125px;
+  color: var(--nord-snow-storm-0);
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN FOR DIFFERENT TV SIZES
+   ============================================================================= */
+
+@media (max-width: 1920px) {
+  #artboard {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 1600px) {
+  #artboard {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 1280px) {
+  #artboard {
+    transform: scale(0.7);
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --theme-on-surface: #ffffff;
+    --theme-primary: #ffffff;
+    --theme-accent: #ffffff;
+  }
+  
+  .panel-button-box {
+    border: 2px solid #ffffff;
+  }
+  
+  .tag {
+    border: 2px solid #ffffff;
+  }
+}
+
+/* Focus management for TV remote navigation */
+:focus-visible {
+  outline: 3px solid var(--theme-accent) !important;
+  outline-offset: 3px !important;
+  border-radius: 12px !important;
+}
+
+/* Screen reader improvements */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* =============================================================================
+   ANDROID TV SPECIFIC OPTIMIZATIONS
+   ============================================================================= */
+
+/* Ensure crisp text rendering on TV displays */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optimize for TV viewing distance */
+.typo-166 {
+  font-size: 64px; /* Slightly larger for TV viewing */
+}
+
+.typo-167 {
+  font-size: 26px; /* Better readability on TV */
+}
+
+/* Button focus states optimized for TV remote */
+.panel-button-box:focus,
+.action-icon:focus {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Ensure sufficient color contrast for TV displays */
+#layer-I4077-14475-456-11835 {
+  background: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Improved text shadows for better readability over images */
+.metadata-text,
+.hour-text,
+#layer-I4077-14475-456-11826-1-477 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
