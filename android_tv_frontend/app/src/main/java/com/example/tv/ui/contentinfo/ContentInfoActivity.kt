@@ -98,10 +98,8 @@ class ContentInfoActivity : AppCompatActivity() {
     }
 
     private fun populateContent(item: ContentItem) {
-        // Set background image
-        if (item.imageResId != 0) {
-            backgroundImage.setImageResource(item.imageResId)
-        }
+        // Set background image - load Gladiator II background from assets
+        loadBackgroundFromAssets()
 
         // Channel info
         channelNumber.text = item.channelNumber
@@ -174,8 +172,20 @@ class ContentInfoActivity : AppCompatActivity() {
                 "corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza " +
                 "y devolver la gloria de Roma a su pueblo."
         
-        // Use a placeholder thumbnail
-        backgroundImage.setImageResource(R.drawable.thumb_1)
+        // Load the Gladiator II background image from assets
+        loadBackgroundFromAssets()
+    }
+
+    private fun loadBackgroundFromAssets() {
+        try {
+            assets.open("content_info_bg.jpg").use { inputStream ->
+                val bitmap = android.graphics.BitmapFactory.decodeStream(inputStream)
+                backgroundImage.setImageBitmap(bitmap)
+            }
+        } catch (e: Exception) {
+            // Fallback to a default drawable if asset loading fails
+            backgroundImage.setImageResource(R.drawable.thumb_1)
+        }
     }
 
     private fun setupSystemDateTime() {
