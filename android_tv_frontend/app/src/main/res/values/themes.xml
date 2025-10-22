@@ -57,4 +57,26 @@
         <item name="fontFamily">@font/reddit_sans_regular</item>
         <item name="android:textSize">28sp</item>
     </style>
+
+    <!-- Content Info Activity theme - AppCompat compatible with fullscreen appearance -->
+    <style name="Theme.ContentInfo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Fullscreen setup -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <!-- Background -->
+        <item name="android:windowBackground">@android:color/black</item>
+        
+        <!-- Disable Reddit Sans and Nord theme as per requirements -->
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        
+        <!-- Ensure full opacity for TV -->
+        <item name="android:alpha">1.0</item>
+    </style>
 </resources>
