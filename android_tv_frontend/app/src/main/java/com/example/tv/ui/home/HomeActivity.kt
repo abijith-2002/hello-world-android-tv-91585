@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.MainActivity
 import com.example.tv.R
+import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 
 /**
@@ -120,6 +121,17 @@ class HomeActivity : AppCompatActivity() {
                     v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
                         R.dimen.card_elevation
                     )
+                }
+                
+                // Open ContentInfoActivity on DPAD_CENTER press
+                card.setOnClickListener {
+                    val intent = ContentInfoActivity.createIntent(
+                        context = this,
+                        programTitle = "Sample Content",
+                        description = "This is a sample content description that will be displayed on the content info screen.",
+                        genres = "Action, Adventure, Drama"
+                    )
+                    startActivity(intent)
                 }
 
                 row.addView(card)
