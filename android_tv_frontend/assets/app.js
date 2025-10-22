@@ -12,28 +12,42 @@
   function scaleArtboard() {
     var artboard = document.getElementById('artboard');
     var viewport = document.getElementById('viewport');
-    if (!artboard || !viewport) return;
+    if (!artboard || !viewport) {
+      console.warn('Artboard or viewport not found for scaling');
+      return;
+    }
 
     var vw = viewport.clientWidth;
     var vh = viewport.clientHeight;
     var baseW = 1920;
     var baseH = 1080;
 
+    if (vw <= 0 || vh <= 0) {
+      console.warn('Invalid viewport dimensions:', vw, vh);
+      return;
+    }
+
     var scale = Math.min(vw / baseW, vh / baseH);
 
     // Snap scale to 1/1000 increments to reduce subpixel blurring on TV
     var snapped = Math.round(scale * 1000) / 1000;
+    
+    // Ensure minimum scale for readability
+    snapped = Math.max(snapped, 0.5);
 
+    // Use CSS custom property for better integration with responsive design
+    document.documentElement.style.setProperty('--scale-factor', snapped);
     artboard.style.transform = 'scale(' + snapped + ')';
 
-    // Center by padding since transform origin is top-left
-    var scaledW = baseW * snapped;
-    var scaledH = baseH * snapped;
-    var padX = Math.max(0, (vw - scaledW) / 2);
-    var padY = Math.max(0, (vh - scaledH) / 2);
-
-    artboard.style.marginLeft = padX + 'px';
-    artboard.style.marginTop = padY + 'px';
+    // Center using flexbox parent (better method)
+    viewport.style.alignItems = 'center';
+    viewport.style.justifyContent = 'center';
+    
+    // Remove manual positioning for better responsive behavior
+    artboard.style.marginLeft = '';
+    artboard.style.marginTop = '';
+    
+    console.debug('Artboard scaled to:', snapped);
   }
 
   // =============================================================================
@@ -64,12 +78,13 @@
         'button[tabindex="0"]',
         '.action-icon[tabindex="0"]',
         '.panel-button-box',
-        '[role="button"][tabindex="0"]'
+        '[role="button"][tabindex="0"]',
+        '[data-focus]'
       ];
       
       this.focusableElements = Array.from(document.querySelectorAll(selectors.join(', ')))
         .filter(function(el) {
-          return el.offsetParent !== null && !el.disabled;
+          return el.offsetParent !== null && !el.disabled && !el.hidden;
         });
 
       // Sort elements by visual position (top to bottom, left to right)
@@ -82,6 +97,8 @@
         }
         return rectA.top - rectB.top;
       });
+      
+      console.debug('Found focusable elements:', this.focusableElements.length);
     },
 
     /**
@@ -268,14 +285,20 @@
      * Visual highlight for focused elements
      */
     highlightElement: function(element) {
-      // Remove previous highlights
-      var highlighted = document.querySelectorAll('.tv-focused');
+      // Remove previous highlights and data-focus attributes
+      var highlighted = document.querySelectorAll('.tv-focused, [data-focus="true"]');
       highlighted.forEach(function(el) {
         el.classList.remove('tv-focused');
+        if (el.hasAttribute('data-focus')) {
+          el.setAttribute('data-focus', 'false');
+        }
       });
 
       // Add highlight to current element
       element.classList.add('tv-focused');
+      if (element.hasAttribute('data-focus')) {
+        element.setAttribute('data-focus', 'true');
+      }
       
       // Ensure element is visible
       this.ensureElementVisible(element);

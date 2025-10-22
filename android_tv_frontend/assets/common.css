@@ -1,7 +1,11 @@
 /* =============================================================================
    DESIGN SYSTEM CSS VARIABLES - COMPLETE INTEGRATION
    Generated from design_system_tataelxsimockapisolutions5451-91576-izGJWjAvhdRPoXT4Qc4qKh.json
+   Nord Dark Theme + Reddit Sans Typography Optimized for Android TV
    ============================================================================= */
+
+/* Reddit Sans Font Loading with font-display: swap for performance */
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   /* =============================================================================
@@ -72,124 +76,124 @@
      TYPOGRAPHY DESIGN TOKENS - COMPLETE SET
      ============================================================================= */
   
-  /* Typography Family Variables */
-  --typo-family-inter: 'Inter', system-ui, -apple-system, sans-serif;
-  --typo-family-roboto: 'Roboto', system-ui, -apple-system, sans-serif;
-  --typo-family-helvetica: 'Helvetica', system-ui, -apple-system, sans-serif;
-  --typo-family-reddit-sans: 'Reddit Sans', system-ui, -apple-system, sans-serif;
+  /* Typography Family Variables - Reddit Sans Primary */
+  --typo-family-inter: 'Reddit Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --typo-family-roboto: 'Reddit Sans', 'Roboto', system-ui, -apple-system, sans-serif;
+  --typo-family-helvetica: 'Reddit Sans', 'Helvetica', system-ui, -apple-system, sans-serif;
+  --typo-family-reddit-sans: 'Reddit Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  /* Typography Styles for Screen Elements */
-  --typo-142-family: var(--typo-family-roboto);
+  /* Typography Styles for Screen Elements - Reddit Sans + TV Optimized */
+  --typo-142-family: var(--typo-family-reddit-sans);
   --typo-142-size: 100px;
   --typo-142-weight: 700;
   --typo-142-line-height: 117.1875px;
   --typo-142-letter-spacing: 0px;
   --typo-142-text-align: left;
-  --typo-142-color: var(--color-ffffff);
+  --typo-142-color: var(--nord-snow-storm-2);
 
-  --typo-143-family: var(--typo-family-roboto);
+  --typo-143-family: var(--typo-family-reddit-sans);
   --typo-143-size: 64px;
   --typo-143-weight: 400;
   --typo-143-line-height: 75px;
   --typo-143-letter-spacing: 0px;
   --typo-143-text-align: left;
-  --typo-143-color: var(--color-ffffff);
+  --typo-143-color: var(--nord-snow-storm-2);
 
-  --typo-144-family: var(--typo-family-roboto);
-  --typo-144-size: 24px;
+  --typo-144-family: var(--typo-family-reddit-sans);
+  --typo-144-size: 26px; /* Slightly larger for TV */
   --typo-144-weight: 400;
-  --typo-144-line-height: 28.125px;
+  --typo-144-line-height: 30.125px;
   --typo-144-letter-spacing: 0px;
   --typo-144-text-align: left;
-  --typo-144-color: var(--color-ffffff);
+  --typo-144-color: var(--nord-snow-storm-2);
 
-  --typo-146-family: var(--typo-family-roboto);
-  --typo-146-size: 28px;
+  --typo-146-family: var(--typo-family-reddit-sans);
+  --typo-146-size: 30px; /* Slightly larger for TV */
   --typo-146-weight: 400;
-  --typo-146-line-height: 32.8125px;
+  --typo-146-line-height: 34.8125px;
   --typo-146-letter-spacing: 0px;
   --typo-146-text-align: right;
-  --typo-146-color: var(--color-ffffff);
+  --typo-146-color: var(--nord-snow-storm-0);
 
-  --typo-149-family: var(--typo-family-roboto);
-  --typo-149-size: 32px;
+  --typo-149-family: var(--typo-family-reddit-sans);
+  --typo-149-size: 34px; /* Slightly larger for TV */
   --typo-149-weight: 800;
-  --typo-149-line-height: 37.5px;
+  --typo-149-line-height: 39.5px;
   --typo-149-letter-spacing: 0px;
   --typo-149-text-align: right;
-  --typo-149-color: var(--color-ffffff);
+  --typo-149-color: var(--nord-snow-storm-2);
 
-  --typo-165-family: var(--typo-family-roboto);
-  --typo-165-size: 32px;
+  --typo-165-family: var(--typo-family-reddit-sans);
+  --typo-165-size: 34px; /* Slightly larger for TV */
   --typo-165-weight: 800;
-  --typo-165-line-height: 37.5px;
+  --typo-165-line-height: 39.5px;
   --typo-165-letter-spacing: 0px;
   --typo-165-text-align: left;
-  --typo-165-color: var(--color-ffffff);
+  --typo-165-color: var(--nord-snow-storm-2);
 
-  --typo-166-family: var(--typo-family-roboto);
-  --typo-166-size: 60px;
+  --typo-166-family: var(--typo-family-reddit-sans);
+  --typo-166-size: 64px; /* Optimized for TV viewing distance */
   --typo-166-weight: 400;
-  --typo-166-line-height: 70.3125px;
-  --typo-166-letter-spacing: 0px;
+  --typo-166-line-height: 74.3125px;
+  --typo-166-letter-spacing: -0.5px; /* Tighter spacing for larger text */
   --typo-166-text-align: left;
-  --typo-166-color: var(--color-ffffff);
+  --typo-166-color: var(--nord-snow-storm-2);
 
-  --typo-167-family: var(--typo-family-roboto);
-  --typo-167-size: 25px;
+  --typo-167-family: var(--typo-family-reddit-sans);
+  --typo-167-size: 27px; /* Slightly larger for TV */
   --typo-167-weight: 400;
-  --typo-167-line-height: 29.296875px;
+  --typo-167-line-height: 31.296875px;
   --typo-167-letter-spacing: 0px;
   --typo-167-text-align: left;
-  --typo-167-color: var(--color-ffffff);
+  --typo-167-color: var(--nord-snow-storm-1);
 
-  --typo-168-family: var(--typo-family-roboto);
-  --typo-168-size: 24px;
-  --typo-168-weight: 400;
+  --typo-168-family: var(--typo-family-reddit-sans);
+  --typo-168-size: 22px; /* Optimized for readability */
+  --typo-168-weight: 600; /* Slightly bolder for contrast */
   --typo-168-line-height: 32px;
   --typo-168-letter-spacing: 0px;
   --typo-168-text-align: center;
-  --typo-168-color: var(--color-ffffff);
+  --typo-168-color: var(--nord-polar-night-0);
 
-  --typo-169-family: var(--typo-family-roboto);
-  --typo-169-size: 22px;
-  --typo-169-weight: 500;
+  --typo-169-family: var(--typo-family-reddit-sans);
+  --typo-169-size: 20px; /* Optimized for tags */
+  --typo-169-weight: 700; /* Bolder for visibility */
   --typo-169-line-height: 32px;
-  --typo-169-letter-spacing: 0px;
+  --typo-169-letter-spacing: 1.2px;
   --typo-169-text-align: left;
   --typo-169-color: var(--color-ffffff);
 
-  --typo-170-family: var(--typo-family-roboto);
-  --typo-170-size: 28px;
-  --typo-170-weight: 400;
-  --typo-170-line-height: 32.8125px;
+  --typo-170-family: var(--typo-family-reddit-sans);
+  --typo-170-size: 26px; /* Optimized for TV */
+  --typo-170-weight: 500;
+  --typo-170-line-height: 30.8125px;
   --typo-170-letter-spacing: 0px;
   --typo-170-text-align: left;
-  --typo-170-color: var(--color-ffffff);
+  --typo-170-color: var(--nord-snow-storm-1);
 
-  --typo-171-family: var(--typo-family-roboto);
-  --typo-171-size: 26px;
+  --typo-171-family: var(--typo-family-reddit-sans);
+  --typo-171-size: 28px; /* Larger for better TV readability */
   --typo-171-weight: 400;
-  --typo-171-line-height: 39px;
-  --typo-171-letter-spacing: 0px;
+  --typo-171-line-height: 42px;
+  --typo-171-letter-spacing: 0.1px;
   --typo-171-text-align: left;
-  --typo-171-color: var(--color-ffffff);
+  --typo-171-color: var(--nord-snow-storm-1);
 
-  --typo-172-family: var(--typo-family-roboto);
-  --typo-172-size: 22px;
-  --typo-172-weight: 500;
-  --typo-172-line-height: 24px;
-  --typo-172-letter-spacing: 0px;
+  --typo-172-family: var(--typo-family-reddit-sans);
+  --typo-172-size: 22px; /* Button text optimization */
+  --typo-172-weight: 600;
+  --typo-172-line-height: 26px;
+  --typo-172-letter-spacing: 0.2px;
   --typo-172-text-align: center;
-  --typo-172-color: var(--color-ffffff);
+  --typo-172-color: var(--nord-snow-storm-2);
 
-  --typo-173-family: var(--typo-family-roboto);
-  --typo-173-size: 40px;
-  --typo-173-weight: 400;
-  --typo-173-line-height: 46.875px;
-  --typo-173-letter-spacing: 0px;
+  --typo-173-family: var(--typo-family-reddit-sans);
+  --typo-173-size: 42px; /* Time display optimization */
+  --typo-173-weight: 700; /* Bolder for prominence */
+  --typo-173-line-height: 48.875px;
+  --typo-173-letter-spacing: 0.2px;
   --typo-173-text-align: left;
-  --typo-173-color: var(--color-ffffff);
+  --typo-173-color: var(--nord-snow-storm-2);
 
   /* =============================================================================
      SPACING DESIGN TOKENS
@@ -569,5 +573,172 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================================================
+   ENHANCED TV RESPONSIVE DESIGN & CROSS-BROWSER SUPPORT
+   ============================================================================= */
+
+/* Responsive scaling for different TV resolutions */
+@media (max-width: 3840px) and (min-width: 2560px) {
+  /* 4K TVs */
+  :root {
+    --scale-factor: 1.2;
+    --spacing-scale: 1.15;
+  }
+  body { font-size: 120%; }
+}
+
+@media (max-width: 2559px) and (min-width: 1920px) {
+  /* Full HD TVs */
+  :root {
+    --scale-factor: 1.0;
+    --spacing-scale: 1.0;
+  }
+  body { font-size: 100%; }
+}
+
+@media (max-width: 1919px) and (min-width: 1600px) {
+  /* Smaller TVs/Large monitors */
+  :root {
+    --scale-factor: 0.9;
+    --spacing-scale: 0.95;
+  }
+  body { font-size: 95%; }
+}
+
+@media (max-width: 1599px) and (min-width: 1280px) {
+  /* Compact TVs */
+  :root {
+    --scale-factor: 0.8;
+    --spacing-scale: 0.9;
+  }
+  body { font-size: 90%; }
+}
+
+@media (max-width: 1279px) {
+  /* Very small displays */
+  :root {
+    --scale-factor: 0.7;
+    --spacing-scale: 0.85;
+  }
+  body { font-size: 85%; }
+}
+
+/* Cross-browser grid support fallbacks */
+@supports not (display: grid) {
+  .panel-button {
+    float: left;
+    width: 16.666%;
+    margin-right: 2%;
+  }
+  
+  #layer-I4077-14475-456-11848::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/* Cross-browser flexbox fallbacks */
+@supports not (display: flex) {
+  #layer-I4077-14475-456-11822,
+  #layer-I4077-14475-456-11828,
+  #layer-I4077-14475-456-11836,
+  #layer-I4077-14475-456-11838 {
+    display: table;
+    width: 100%;
+  }
+  
+  #layer-I4077-14475-456-11822 > *,
+  #layer-I4077-14475-456-11828 > *,
+  #layer-I4077-14475-456-11836 > *,
+  #layer-I4077-14475-456-11838 > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+/* Enhanced font loading and rendering */
+@font-face {
+  font-family: 'Reddit Sans Fallback';
+  src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont');
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* TV-specific text rendering optimizations */
+.screen-35 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: none;
+  font-feature-settings: "kern" 1, "liga" 0;
+}
+
+/* Enhanced focus management for TV navigation */
+.screen-35 [data-focus="true"] {
+  outline: 4px solid var(--nord-frost-1);
+  outline-offset: 4px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(136, 192, 208, 0.6);
+  transform: scale(1.05);
+  z-index: 100;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* TV remote activation feedback */
+.screen-35 [data-focus="true"]:active,
+.screen-35 .tv-activated {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Color scheme support for different TV displays */
+@media (color-gamut: srgb) {
+  :root {
+    --theme-background: #2e3440;
+    --theme-surface: #3b4252;
+    --theme-on-surface: #eceff4;
+  }
+}
+
+@media (color-gamut: p3) {
+  :root {
+    --theme-background: color(display-p3 0.18 0.20 0.25);
+    --theme-surface: color(display-p3 0.23 0.26 0.32);
+    --theme-on-surface: color(display-p3 0.93 0.94 0.96);
+  }
+}
+
+/* Overscan safe area for older TVs */
+.screen-35 {
+  padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+}
+
+/* Performance optimizations */
+.screen-35 * {
+  will-change: auto;
+}
+
+.screen-35 .panel-button-box,
+.screen-35 .action-icon {
+  will-change: transform, box-shadow;
+}
+
+/* Ensure text contrast on all TV types */
+@media (prefers-contrast: more) {
+  :root {
+    --theme-on-surface: #ffffff;
+    --nord-snow-storm-2: #ffffff;
+    --nord-snow-storm-1: #f0f0f0;
+    --nord-snow-storm-0: #e0e0e0;
+  }
+  
+  .metadata-text,
+  .hour-text,
+  .panel-button-text {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   }
 }

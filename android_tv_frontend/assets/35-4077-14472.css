@@ -1,10 +1,10 @@
 /* =============================================================================
    SCREEN 35 (4077:14472) - PIXEL-PERFECT IMPLEMENTATION
    Nord Dark Theme with Reddit Sans Typography
+   Optimized for Android TV with Responsive Scaling
    ============================================================================= */
 
 @import url('common.css');
-@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 /* =============================================================================
    CSS RESET AND BASE STYLES
@@ -28,7 +28,7 @@ html, body {
    VIEWPORT AND ARTBOARD SETUP FOR ANDROID TV
    ============================================================================= */
 
-#viewport {
+.screen-35 #viewport {
   position: fixed;
   inset: 0;
   display: flex;
@@ -36,67 +36,86 @@ html, body {
   justify-content: center;
   background: var(--theme-background);
   overflow: hidden;
+  /* Improved centering for different aspect ratios */
+  flex-direction: column;
+  justify-content: center;
 }
 
-#artboard {
+.screen-35 #artboard {
   position: relative;
   width: 1920px;
   height: 1080px;
-  transform-origin: top left;
+  transform-origin: center center; /* Better scaling from center */
   background: var(--theme-background);
   overflow: hidden;
+  /* Enhanced scaling with CSS custom properties */
+  transform: scale(var(--scale-factor, 1));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* =============================================================================
    BACKGROUND LAYERS
    ============================================================================= */
 
-#layer-4077-14473 {
-  background-image: url("figmaimages/4077-14473.png");
+.screen-35 #layer-4077-14473 {
+  background: linear-gradient(135deg, var(--nord-polar-night-2), var(--nord-polar-night-0));
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  /* Fallback for when figma image is not available */
+  background-image: url("figmaimages/4077-14473.png");
 }
 
-#layer-I4077-14474-456-5182 {
+.screen-35 #layer-I4077-14474-456-5182 {
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.8) 100%
+    rgba(46, 52, 64, 0.9) 0%,
+    rgba(46, 52, 64, 0.5) 50%,
+    rgba(46, 52, 64, 0.9) 100%
   );
   pointer-events: none;
+  /* Enhanced backdrop for better text readability */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* =============================================================================
    METADATA INFO PANEL STRUCTURE
    ============================================================================= */
 
-#layer-4077-14475 {
-  /* Container positioning from Figma coordinates */
-  left: 96px;
-  top: 108px;
-  width: 1150px;
-  height: 590px;
-  background: rgba(46, 52, 64, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: var(--spacing-md);
-  border: 1px solid rgba(236, 239, 244, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+.screen-35 #layer-4077-14475 {
+  /* Container positioning from Figma coordinates - responsive */
+  left: calc(96px * var(--scale-factor, 1));
+  top: calc(108px * var(--scale-factor, 1));
+  width: calc(1150px * var(--scale-factor, 1));
+  height: auto; /* Allow content to determine height */
+  min-height: calc(590px * var(--scale-factor, 1));
+  background: rgba(46, 52, 64, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--spacing-lg);
+  border: 1px solid rgba(236, 239, 244, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(136, 192, 208, 0.1);
+  /* Enhanced visual depth */
+  position: relative;
+  z-index: 10;
 }
 
 /* Channel Information Section */
-#layer-I4077-14475-456-11821 {
+.screen-35 #layer-I4077-14475-456-11821 {
   /* Frame 29360 - Channel and Program Info */
-  padding: var(--spacing-lg);
+  padding: calc(var(--spacing-lg) * var(--spacing-scale, 1));
 }
 
-#layer-I4077-14475-456-11822 {
+.screen-35 #layer-I4077-14475-456-11822 {
   /* Frame 29354 - Channel row */
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  gap: calc(var(--spacing-md) * var(--spacing-scale, 1));
+  margin-bottom: calc(var(--spacing-lg) * var(--spacing-scale, 1));
+  flex-wrap: wrap;
 }
 
 /* Channel Number */
@@ -382,13 +401,15 @@ html, body {
    SYSTEM DATE COMPONENT
    ============================================================================= */
 
-#layer-4077-14476 {
-  /* SystemDate positioning */
-  right: 96px;
-  top: 55px;
-  width: 200px;
-  height: 90px;
+.screen-35 #layer-4077-14476 {
+  /* SystemDate positioning - responsive */
+  right: calc(96px * var(--scale-factor, 1));
+  top: calc(55px * var(--scale-factor, 1));
+  width: calc(200px * var(--scale-factor, 1));
+  height: auto;
+  min-height: calc(90px * var(--scale-factor, 1));
   text-align: right;
+  z-index: 20;
 }
 
 #layer-I4077-14476-456-15482-1-482 {
