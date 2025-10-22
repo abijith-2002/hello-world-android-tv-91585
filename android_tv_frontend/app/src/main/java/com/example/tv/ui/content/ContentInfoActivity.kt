@@ -158,18 +158,23 @@ class ContentInfoActivity : ComponentActivity() {
         val duration = 200L
         
         if (focused) {
-            // Focused state
+            // Focused state - reduced scale to 1.04 and increased elevation
             ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -4f).apply {
                 this.duration = duration
                 start()
             }
             
-            ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.05f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
             
-            ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.05f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.04f).apply {
+                this.duration = duration
+                start()
+            }
+            
+            ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 12f).apply {
                 this.duration = duration
                 start()
             }
@@ -191,6 +196,11 @@ class ContentInfoActivity : ComponentActivity() {
             }
             
             ObjectAnimator.ofFloat(iconContainer, "scaleY", iconContainer.scaleY, 1f).apply {
+                this.duration = duration
+                start()
+            }
+            
+            ObjectAnimator.ofFloat(iconContainer, "elevation", iconContainer.elevation, 0f).apply {
                 this.duration = duration
                 start()
             }

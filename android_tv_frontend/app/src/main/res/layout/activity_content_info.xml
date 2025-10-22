@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/contentInfoRoot"
-    android:layout_width="1920dp"
-    android:layout_height="1080dp"
-    android:background="#000000">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <!-- Background Image (Full screen 1920x1080) -->
+    <!-- Background Image (Full screen with adjustViewBounds) -->
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="1920dp"
-        android:layout_height="1080dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:src="@drawable/bg_content_info_gradient"
         android:contentDescription="Background" />
 
     <!-- Gradient Overlay -->
     <View
         android:id="@+id/gradientOverlay"
-        android:layout_width="1920dp"
-        android:layout_height="1080dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/gradient_horizontal_overlay" />
 
     <!-- Main Content Container - Fixed positioning at x:96, y:108 -->
@@ -29,7 +32,9 @@
         android:orientation="vertical"
         android:layout_marginStart="96dp"
         android:layout_marginTop="108dp"
-        android:layout_gravity="start|top">
+        android:layout_gravity="start|top"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <!-- Channel Information Row - Height: 40dp -->
         <LinearLayout
@@ -37,7 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <TextView
                 android:id="@+id/channelNumber"
@@ -93,7 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <TextView
                 android:id="@+id/metadataOriginal"
@@ -188,7 +197,9 @@
             android:layout_height="32dp"
             android:layout_marginTop="14dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <TextView
                 android:id="@+id/statusTag"
@@ -294,14 +305,16 @@
             android:ellipsize="end"
             android:includeFontPadding="false" />
 
-        <!-- Action Buttons Row - 43dp gap from description, 60dp bottom padding for safe zone -->
+        <!-- Action Buttons Row - 43dp gap from description, 96dp bottom padding for safe zone -->
         <LinearLayout
             android:id="@+id/actionButtonsRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="43dp"
-            android:paddingBottom="60dp"
-            android:orientation="horizontal">
+            android:paddingBottom="96dp"
+            android:orientation="horizontal"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <include
                 android:id="@+id/btnSchedule"
