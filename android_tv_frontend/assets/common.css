@@ -76,11 +76,11 @@
      TYPOGRAPHY DESIGN TOKENS - COMPLETE SET
      ============================================================================= */
   
-  /* Typography Family Variables - Reddit Sans Primary */
-  --typo-family-inter: 'Reddit Sans', 'Inter', system-ui, -apple-system, sans-serif;
-  --typo-family-roboto: 'Reddit Sans', 'Roboto', system-ui, -apple-system, sans-serif;
-  --typo-family-helvetica: 'Reddit Sans', 'Helvetica', system-ui, -apple-system, sans-serif;
-  --typo-family-reddit-sans: 'Reddit Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Typography Family Variables - Reddit Sans Primary with Robust Fallbacks */
+  --typo-family-inter: "Reddit Sans", "RedditSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --typo-family-roboto: "Reddit Sans", "RedditSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --typo-family-helvetica: "Reddit Sans", "RedditSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --typo-family-reddit-sans: "Reddit Sans", "RedditSans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* Typography Styles for Screen Elements - Reddit Sans + TV Optimized */
   --typo-142-family: var(--typo-family-reddit-sans);
@@ -131,13 +131,13 @@
   --typo-165-text-align: left;
   --typo-165-color: var(--nord-snow-storm-2);
 
-  --typo-166-family: var(--typo-family-reddit-sans);
-  --typo-166-size: 64px; /* Optimized for TV viewing distance */
-  --typo-166-weight: 400;
-  --typo-166-line-height: 74.3125px;
-  --typo-166-letter-spacing: -0.5px; /* Tighter spacing for larger text */
+  --typo-166-family: "Reddit Sans", "RedditSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --typo-166-size: 96px; /* Exact size for TV readability as specified */
+  --typo-166-weight: 700; /* Exact weight as specified */
+  --typo-166-line-height: 1.05; /* Exact line-height ~1.05 as specified */
+  --typo-166-letter-spacing: -0.5px; /* Exact letter-spacing 0 to -0.5px as specified */
   --typo-166-text-align: left;
-  --typo-166-color: var(--nord-snow-storm-2);
+  --typo-166-color: #ffffff; /* Exact white color for contrast */
 
   --typo-167-family: var(--typo-family-reddit-sans);
   --typo-167-size: 27px; /* Slightly larger for TV */
@@ -259,7 +259,7 @@
   /* Buttons */
   --button-background: rgba(255, 255, 255, 0.06);
   --button-border: 1px solid rgba(255, 255, 255, 0.12);
-  --button-border-radius: var(--spacing-md);
+  --button-border-radius: 12px; /* Updated to exact specification */
   --button-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   --button-focus-outline: 3px solid var(--color-60acff);
 
@@ -268,7 +268,7 @@
   --panel-backdrop: rgba(0, 0, 0, 0.7);
   --card-background: rgba(255, 255, 255, 0.1);
   --card-border: 1px solid rgba(255, 255, 255, 0.2);
-  --card-border-radius: var(--spacing-md);
+  --card-border-radius: 12px; /* Updated to exact specification */
 
   /* =============================================================================
      NORD DARK THEME ALIGNMENT
@@ -517,7 +517,7 @@
 .button.box {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 

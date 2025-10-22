@@ -50,6 +50,28 @@
     console.debug('Artboard scaled to:', snapped);
   }
 
+  /**
+   * PUBLIC_INTERFACE
+   * Ensures the hero title is visible and not hidden by any dynamic logic
+   */
+  function ensureTitleVisibility() {
+    var heroTitle = document.querySelector('.hero-title, #program-title');
+    if (heroTitle) {
+      // Ensure title is always visible
+      heroTitle.style.visibility = 'visible';
+      heroTitle.style.opacity = '1';
+      heroTitle.style.display = 'block';
+      
+      // Ensure z-index is high enough to be above overlays
+      heroTitle.style.position = 'relative';
+      heroTitle.style.zIndex = '15';
+      
+      console.debug('Hero title visibility ensured');
+    } else {
+      console.warn('Hero title element not found');
+    }
+  }
+
   // =============================================================================
   // TV REMOTE NAVIGATION SYSTEM
   // =============================================================================
@@ -711,7 +733,7 @@
           font-variant-ligatures: none;
         }
         
-        .typo-166, .typo-165, .typo-149 {
+        .typo-166, .typo-165, .typo-149, .hero-title {
           text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
         
@@ -734,6 +756,9 @@
   function initializeApp() {
     // Core scaling functionality
     scaleArtboard();
+    
+    // Ensure title is visible and not hidden
+    ensureTitleVisibility();
     
     // Initialize all modules
     TVNavigation.init();
@@ -758,6 +783,7 @@
   // Expose public interfaces for debugging and external access
   window.__TVApp = {
     scaleArtboard: scaleArtboard,
+    ensureTitleVisibility: ensureTitleVisibility,
     navigation: TVNavigation,
     actions: ProgramActions,
     accessibility: AccessibilityManager,

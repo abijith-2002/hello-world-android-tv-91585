@@ -62,8 +62,8 @@ html, body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  /* Fallback for when figma image is not available */
-  background-image: url("figmaimages/4077-14473.png");
+  /* Using the provided Gladiator II background image */
+  background-image: url("20251021_114313_gd2.jpg");
 }
 
 .screen-35 #layer-I4077-14474-456-5182 {
@@ -150,7 +150,23 @@ html, body {
   margin: 0;
 }
 
-/* Program Name */
+/* Program Name - Hero Title with Exact Specifications */
+.hero-title {
+  font-family: "Reddit Sans", "RedditSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+  font-size: 96px !important; /* Exact size for TV readability */
+  font-weight: 700 !important; /* Exact weight as specified */
+  line-height: 1.05 !important; /* Exact line-height ~1.05 as specified */
+  letter-spacing: -0.5px !important; /* Exact letter-spacing 0 to -0.5px as specified */
+  color: #ffffff !important; /* Exact white color for contrast */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8) !important; /* Strong shadow for readability */
+  margin: 0 0 var(--spacing-lg) 0;
+  position: relative;
+  z-index: 15; /* Ensure it's above overlays */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
 #layer-I4077-14475-456-11826-1-477 {
   font-family: var(--typo-family-reddit-sans);
   font-size: 60px;
@@ -280,7 +296,7 @@ html, body {
 .action-icon:focus-visible {
   outline: 3px solid var(--theme-accent);
   outline-offset: 3px;
-  border-radius: 8px;
+  border-radius: 12px !important;
 }
 
 /* =============================================================================
@@ -323,7 +339,7 @@ html, body {
 .panel-button-box {
   background: rgba(244, 244, 244, 0.1);
   border: 1px solid rgba(244, 244, 244, 0.2);
-  border-radius: 16px;
+  border-radius: 12px !important; /* Exact corner radius as specified */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   width: 104px;
   height: 80px;
@@ -332,6 +348,7 @@ html, body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding: 12px;
 }
 
 .panel-button-box:hover {
@@ -341,8 +358,9 @@ html, body {
 }
 
 .panel-button-box:focus-visible {
-  outline: 3px solid var(--theme-accent);
+  outline: 3px solid var(--nord-frost-1) !important;
   outline-offset: 3px;
+  border-radius: 12px !important;
 }
 
 .panel-button-icon {
@@ -514,7 +532,10 @@ body {
 
 /* Optimize for TV viewing distance */
 .typo-166 {
-  font-size: 64px; /* Slightly larger for TV viewing */
+  font-size: 96px; /* Updated to exact specification */
+  font-weight: 700; /* Updated to exact specification */
+  line-height: 1.05; /* Updated to exact specification */
+  letter-spacing: -0.5px; /* Updated to exact specification */
 }
 
 .typo-167 {
@@ -538,6 +559,7 @@ body {
 /* Improved text shadows for better readability over images */
 .metadata-text,
 .hour-text,
-#layer-I4077-14475-456-11826-1-477 {
+#layer-I4077-14475-456-11826-1-477,
+.hero-title {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
