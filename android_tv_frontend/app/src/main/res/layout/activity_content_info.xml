@@ -1,367 +1,424 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="1920dp"
+    android:layout_height="1080dp"
     android:background="#000000">
 
     <!-- Background Image (Full Bleed) -->
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="1920dp"
+        android:layout_height="1080dp"
         android:scaleType="centerCrop"
         android:src="@drawable/content_info_bg"
         android:contentDescription="Content background" />
 
     <!-- Gradient Overlay -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="1920dp"
+        android:layout_height="1080dp"
         android:background="@drawable/content_info_gradient" />
 
-    <!-- Main Content Container -->
+    <!-- System Date/Time (Top Right) - Absolute positioning as per Figma -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="1724dp"
+        android:layout_marginTop="55dp"
         android:orientation="vertical"
-        android:paddingStart="96dp"
-        android:paddingEnd="96dp"
-        android:paddingTop="108dp"
-        android:paddingBottom="48dp">
+        android:gravity="end">
 
-        <!-- System Date/Time (Top Right) -->
+        <TextView
+            android:id="@+id/currentTime"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:textSize="40sp"
+            android:lineHeight="48dp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:text="20:44"
+            android:gravity="end|center_vertical" />
+
+        <TextView
+            android:id="@+id/currentDate"
+            android:layout_width="81dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:lineHeight="32dp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif-medium"
+            android:text="7 abr."
+            android:gravity="end|center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Main Content Container positioned exactly as per Figma -->
+    <LinearLayout
+        android:layout_width="1150dp"
+        android:layout_height="590dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="318dp"
+        android:orientation="vertical">
+
+        <!-- Channel Info Row -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="529dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
-            android:gravity="end"
-            android:layout_marginBottom="55dp">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="67dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+            <TextView
+                android:id="@+id/channelNumber"
+                android:layout_width="56dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="1dp"
+                android:textSize="32sp"
+                android:lineHeight="38dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:text="242"
+                android:gravity="center" />
 
-                <TextView
-                    android:id="@+id/currentTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="40sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:text="20:44" />
-
-                <TextView
-                    android:id="@+id/currentDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="7 abr." />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/channelName"
+                android:layout_width="461dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="68dp"
+                android:textSize="32sp"
+                android:lineHeight="40dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="TNT"
+                android:gravity="start|center_vertical" />
 
         </LinearLayout>
 
-        <!-- Main Content Area -->
-        <LinearLayout
+        <!-- Program Title -->
+        <TextView
+            android:id="@+id/programTitle"
             android:layout_width="1150dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="70dp"
+            android:layout_marginBottom="6dp"
+            android:textSize="60sp"
+            android:lineHeight="70dp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:text="Gladiador II"
+            android:gravity="start|center_vertical" />
 
-            <!-- Channel Info Row -->
-            <LinearLayout
-                android:layout_width="529dp"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="67dp">
+        <!-- Metadata Row 1 - Exact positioning -->
+        <LinearLayout
+            android:layout_width="743dp"
+            android:layout_height="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="14dp">
 
-                <TextView
-                    android:id="@+id/channelNumber"
-                    android:layout_width="56dp"
-                    android:layout_height="38dp"
-                    android:textSize="32sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:text="242"
-                    android:gravity="center" />
-
-                <TextView
-                    android:id="@+id/channelName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
-                    android:textSize="32sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="TNT"
-                    android:gravity="center_vertical" />
-
-            </LinearLayout>
-
-            <!-- Program Title -->
             <TextView
-                android:id="@+id/programTitle"
-                android:layout_width="1150dp"
-                android:layout_height="70dp"
-                android:layout_marginBottom="6dp"
-                android:textSize="60sp"
+                android:id="@+id/programSubtitle"
+                android:layout_width="121dp"
+                android:layout_height="29dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="Gladiator II"
+                android:gravity="start|center_vertical" />
+
+            <TextView
+                android:layout_width="6dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="|"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/programDuration"
+                android:layout_width="117dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="2 h 28 min"
+                android:gravity="start|center_vertical" />
+
+            <TextView
+                android:layout_width="6dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="|"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/programGenre"
+                android:layout_width="267dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="Acción, aventura, drama"
+                android:gravity="start|center_vertical" />
+
+            <TextView
+                android:layout_width="6dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="|"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/ageRating"
+                android:layout_width="124dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"
+                android:lineHeight="32dp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:text="Gladiador II"
-                android:gravity="center_vertical" />
+                android:text="+ 16 Años"
+                android:background="@drawable/content_info_age_rating_bg"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:gravity="center" />
 
-            <!-- Metadata Row 1 -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="14dp">
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/programSubtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Gladiator II" />
+        <!-- Metadata Row 2 (Time info) - Exact positioning -->
+        <LinearLayout
+            android:layout_width="487dp"
+            android:layout_height="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="49dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="|" />
-
-                <TextView
-                    android:id="@+id/programDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="2 h 28 min" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="|" />
-
-                <TextView
-                    android:id="@+id/programGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Acción, aventura, drama" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="|" />
-
-                <TextView
-                    android:id="@+id/ageRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:textSize="20sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:text="+ 16 Años"
-                    android:background="@drawable/content_info_age_rating_bg"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
-            <!-- Metadata Row 2 (Time info) -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="41dp">
-
-                <TextView
-                    android:id="@+id/timeSlot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:text="MÁS TARDE"
-                    android:background="@drawable/content_info_time_slot_bg"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
-                    android:gravity="center" />
-
-                <TextView
-                    android:id="@+id/startTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="22dp"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="20:00" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="-" />
-
-                <TextView
-                    android:id="@+id/endTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="22:20" />
-
-                <!-- Add replay and info icons here if needed -->
-
-            </LinearLayout>
-
-            <!-- Description -->
             <TextView
-                android:id="@+id/programDescription"
-                android:layout_width="925dp"
-                android:layout_height="117dp"
-                android:layout_marginBottom="41dp"
-                android:textSize="22sp"
-                android:textColor="#E3E3E3"
+                android:id="@+id/timeSlot"
+                android:layout_width="156dp"
+                android:layout_height="32dp"
+                android:textSize="18sp"
+                android:lineHeight="32dp"
+                android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif"
-                android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
-                android:lineSpacingExtra="17dp" />
+                android:textStyle="bold"
+                android:text="MÁS TARDE"
+                android:background="@drawable/content_info_time_slot_bg"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:gravity="center" />
 
-            <!-- Action Buttons Row -->
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/startTime"
+                android:layout_width="62dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="22dp"
+                android:textSize="24sp"
+                android:lineHeight="32dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="20:00"
+                android:gravity="start|center_vertical" />
+
+            <TextView
+                android:layout_width="7dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="6dp"
+                android:textSize="24sp"
+                android:lineHeight="32dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="-"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/endTime"
+                android:layout_width="62dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="6dp"
+                android:textSize="24sp"
+                android:lineHeight="32dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="22:20"
+                android:gravity="start|center_vertical" />
+
+            <TextView
+                android:layout_width="7dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="1.5dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="|"
+                android:gravity="center" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/ic_content_info_replay"
+                android:contentDescription="Replay" />
+
+            <TextView
+                android:layout_width="7dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="1.5dp"
+                android:textSize="24sp"
+                android:lineHeight="29dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:text="|"
+                android:gravity="center" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/ic_content_info_info"
+                android:contentDescription="Info" />
+
+        </LinearLayout>
+
+        <!-- Description - Exact sizing -->
+        <TextView
+            android:id="@+id/programDescription"
+            android:layout_width="925dp"
+            android:layout_height="117dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginBottom="41dp"
+            android:textSize="22sp"
+            android:lineHeight="39dp"
+            android:textColor="#E3E3E3"
+            android:fontFamily="sans-serif"
+            android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
+            android:gravity="start|top" />
+
+        <!-- Action Buttons Row - Exact positioning -->
+        <LinearLayout
+            android:layout_width="862dp"
+            android:layout_height="156dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/programButton"
+                android:layout_width="142dp"
                 android:layout_height="156dp"
-                android:orientation="horizontal">
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_schedule"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:text="Programar"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
-                <Button
-                    android:id="@+id/programButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_schedule"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:text="Programar"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
+            <Button
+                android:id="@+id/replayButton"
+                android:layout_width="142dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_replay"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
-                <Button
-                    android:id="@+id/replayButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_replay"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
+            <Button
+                android:id="@+id/recordButton"
+                android:layout_width="142dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_record"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
-                <Button
-                    android:id="@+id/recordButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_record"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
+            <Button
+                android:id="@+id/playButton"
+                android:layout_width="142dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_play"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
-                <Button
-                    android:id="@+id/playButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_play"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
+            <Button
+                android:id="@+id/infoButton"
+                android:layout_width="142dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_info"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
-                <Button
-                    android:id="@+id/infoButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_info"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
-
-                <Button
-                    android:id="@+id/subtitlesButton"
-                    android:layout_width="142dp"
-                    android:layout_height="156dp"
-                    android:background="@drawable/content_info_button_bg"
-                    android:drawableTop="@drawable/ic_content_info_subtitles"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="#E3E3E3"
-                    android:textSize="20sp"
-                    android:textColor="#E3E3E3"
-                    android:fontFamily="sans-serif-medium"
-                    android:focusable="true"
-                    android:gravity="center" />
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/subtitlesButton"
+                android:layout_width="142dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/content_info_button_bg"
+                android:drawableTop="@drawable/ic_content_info_subtitles"
+                android:drawablePadding="12dp"
+                android:drawableTint="#E3E3E3"
+                android:textSize="20sp"
+                android:lineHeight="24dp"
+                android:textColor="#E3E3E3"
+                android:fontFamily="sans-serif-medium"
+                android:focusable="true"
+                android:gravity="center" />
 
         </LinearLayout>
 
