@@ -305,13 +305,13 @@
             android:ellipsize="end"
             android:includeFontPadding="false" />
 
-        <!-- Action Buttons Row - 43dp gap from description, 96dp bottom padding for safe zone -->
+        <!-- Action Buttons Row - 43dp gap from description, 120dp bottom padding for safe zone -->
         <LinearLayout
             android:id="@+id/actionButtonsRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="43dp"
-            android:paddingBottom="96dp"
+            android:paddingBottom="120dp"
             android:orientation="horizontal"
             android:clipChildren="false"
             android:clipToPadding="false">
@@ -371,8 +371,9 @@
 
         <TextView
             android:id="@+id/systemTime"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="120dp"
             android:text="20:44"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
@@ -381,7 +382,8 @@
             android:gravity="start"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/systemDate"

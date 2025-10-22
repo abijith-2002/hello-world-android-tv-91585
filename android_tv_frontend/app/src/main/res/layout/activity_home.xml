@@ -8,7 +8,9 @@
     android:background="@color/nord_bg"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:paddingTop="24dp">
+    android:paddingTop="24dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <!-- Top Menu -->
     <LinearLayout
@@ -18,7 +20,9 @@
         android:layout_height="wrap_content"
         android:paddingStart="48dp"
         android:paddingEnd="48dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <TextView
             android:id="@+id/menuHome"
@@ -106,7 +110,9 @@
             android:layout_height="wrap_content"
             android:paddingStart="48dp"
             android:paddingEnd="48dp"
-            android:paddingBottom="32dp" />
+            android:paddingBottom="32dp"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
 
     </ScrollView>
 

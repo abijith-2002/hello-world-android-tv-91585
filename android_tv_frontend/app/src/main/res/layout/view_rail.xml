@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="12dp">
+    android:layout_marginTop="12dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <TextView
         android:id="@+id/railTitle"
@@ -21,13 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:id="@+id/railRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
     </HorizontalScrollView>
 
 </LinearLayout>
