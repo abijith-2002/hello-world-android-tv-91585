@@ -3,6 +3,7 @@ package com.example.tv.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.util.Log
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -132,6 +133,8 @@ class HomeActivity : AppCompatActivity() {
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
                             // Load image with Coil using placeholder/error
+                            Log.d("CoilTest", "Loading image URL: ${item.poster}")
+
                             img.load(item.poster) {
                                 crossfade(true)
                                 memoryCachePolicy(CachePolicy.ENABLED)
