@@ -29,11 +29,19 @@ interface ApiService {
         /**
          * PUBLIC_INTERFACE
          * Create a singleton ApiService.
-         * Base URL is read from BuildConfig.API_BASE_URL or defaults to "http://10.0.2.2:8000/" for local testing.
+         * Base URL is taken from BuildConfig.API_BASE_URL when provided and valid (must start with http/https).
+         * If not provided or invalid, a safe default of "https://example.com/" is used so the app doesn't crash.
+         * A trailing '/' is enforced to satisfy Retrofit's requirement.
          */
         fun create(): ApiService {
-            val baseUrl = (BuildConfig.API_BASE_URL ?: "http://10.0.2.2:8000/").let {
-                if (it.endsWith("/")) it else "$it/"
+            // Sanitize and validate configured base URL
+            val configured = (BuildConfig.API_BASE_URL ?: "").trim()
+            val baseUrl = when {
+                configured.isBlank() -> "https://example.com/"
+                configured.startsWith("http://") || configured.startsWith("https://") -> {
+                    if (configured.endsWith("/")) configured else "$configured/"
+                }
+                else -> "https://example.com/"
             }
 
             val client = OkHttpClient.Builder()
