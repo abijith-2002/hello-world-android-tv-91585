@@ -16,6 +16,9 @@ allprojects {
     }
 }
 
+// Apply shared tasks (e.g., copyDebugApk) for convenience
+apply from: "${rootDir}/tasks.gradle"
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

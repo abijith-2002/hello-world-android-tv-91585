@@ -1,0 +1,19 @@
+import org.gradle.api.tasks.Copy
+
+// PUBLIC_INTERFACE
+tasks.register("copyDebugApk", Copy) {
+    /** Copies the app module's debug APK to the project root as app-debug.apk for easy access. */
+    def apkPath = layout.projectDirectory.file("app/build/outputs/apk/debug/app-debug.apk")
+    from(apkPath.asFile.parentFile) {
+        include("app-debug.apk")
+    }
+    into(layout.projectDirectory.asFile)
+    rename { fileName -> "app-debug.apk" }
+    dependsOn(":app:assembleDebug")
+    doFirst {
+        logger.lifecycle("Preparing to copy debug APK from ${apkPath.asFile.absolutePath}")
+    }
+    doLast {
+        logger.lifecycle("Copied debug APK to ${layout.projectDirectory.asFile.absolutePath}/app-debug.apk")
+    }
+}
