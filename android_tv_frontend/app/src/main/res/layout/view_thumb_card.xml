@@ -16,4 +16,27 @@
         android:contentDescription="@string/thumb_image_cd"
         android:scaleType="centerCrop" />
 
+    <!-- Optional overlay gradient and title (kept invisible by default) -->
+    <View
+        android:id="@+id/overlayGrad"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_horizontal_overlay"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/thumbTitle"
+        style="@style/TextAppearance.Card.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:text=""
+        android:visibility="gone"/>
+
 </FrameLayout>

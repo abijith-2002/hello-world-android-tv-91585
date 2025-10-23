@@ -1,27 +1,25 @@
-# declarative-samples-android-app
-A sample Android application written in the Declarative Gradle DSL, using the prototype Declarative Gradle `androidApplication` Software Type defined in the `org.gradle.experimental.android-ecosystem` ecosystem plugin.
+# Android TV Frontend - Home Categories API
 
-## Building and Running
+This app fetches home page categories from a backend defined by the provided API doc. Each endpoint returns an array of objects with:
+- name: String
+- poster: Absolute URL String to image
 
-This sample shows the definition of a multiproject Android application implemented using Kotlin 2.0.21 source code.
-The project is the result of reproducing the project produced by the `gradle init` command in Gradle 8.9 as an Android project.
+Configured categories:
+- /api/trending
+- /api/continue_watching
+- /api/action
+- /api/family
+- /api/comedy
+- /api/horror
+- /api/drama
 
-To build the project without running, use:
+Configuration:
+- BuildConfig field API_BASE_URL controls the Retrofit base URL.
+- To change endpoints or add categories, edit HomeCategory in `app/src/main/java/com/example/tv/data/api/ApiModels.kt`.
 
-```shell
-  ./gradlew build
-```
+Image loading:
+- Coil is used with placeholders and error images.
 
-To run the application, first install it on a connected Android device using:
+Theming:
+- Uses Nord dark theme and Reddit Sans fonts already present in the project.
 
-```shell
-  :app:installDebug
-```
-
-Then search for "Sample Declarative Gradle Android App" and launch app to see a hello world message.
-
-## Debugging visibility (temporary)
-- The card content has a temporary debug background overlay (semi-transparent red/green) to verify visibility on TV devices/emulators.
-- Once you confirm the text is visible with good contrast, you can remove the debug overlays:
-  - In `activity_main.xml`, remove `cardContentDebug` background and container or revert to the previous version.
-  - In `MainActivity.kt`, remove the block that sets the debug background color on `cardContentDebug`.

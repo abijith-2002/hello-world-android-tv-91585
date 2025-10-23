@@ -7,46 +7,34 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import coil.load
+import coil.request.CachePolicy
 import com.example.tv.MainActivity
 import com.example.tv.R
+import com.example.tv.data.api.HomeCategory
 import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
+import kotlinx.coroutines.launch
 
 /**
  * PUBLIC_INTERFACE
  * HomeActivity
  * The TV Home screen with a top menu (Home, Login, Setting, My Plan), a banner,
- * multiple horizontal rails of content thumbnails, and an Available subscriptions row.
- * D-pad focus is enabled across interactive elements. Clicking Login navigates to LoginActivity,
- * and My Plan navigates to MainActivity (Hello World page).
+ * and multiple horizontal rails of content loaded from the API.
+ * D-pad focus is enabled across interactive elements.
  *
  * - Accepts no parameters.
  * - Returns no value; displays UI.
  */
 class HomeActivity : AppCompatActivity() {
 
-    // Simple dataset for rails using local thumbnails
-    private val rails = listOf(
-        "Top trending",
-        "Continue watching",
-        "Action",
-        "Drama",
-        "Horror",
-        "Family",
-        "Comedy",
-        "Available subscriptions"
-    )
-
-    // Local placeholder thumbnails
-    private val thumbs = listOf(
-        R.drawable.thumb_1,
-        R.drawable.thumb_2,
-        R.drawable.thumb_3,
-        R.drawable.thumb_4,
-        R.drawable.thumb_5,
-        R.drawable.thumb_6
-    )
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +42,9 @@ class HomeActivity : AppCompatActivity() {
 
         setupTopMenu()
         setupRails()
+
+        // Trigger loads
+        viewModel.loadAll()
     }
 
     private fun setupTopMenu() {
@@ -75,69 +66,113 @@ class HomeActivity : AppCompatActivity() {
             it.onFocusChangeListener = focusScaler
         }
 
-        // Wire navigation
         menuLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         menuMyPlan.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-
-        // Initial focus on Home
         menuHome.requestFocus()
     }
 
     private fun setupRails() {
         val container = findViewById<LinearLayout>(R.id.railsContainer)
-        rails.forEachIndexed { index, title ->
+        val categories = listOf(
+            HomeCategory.TRENDING,
+            HomeCategory.CONTINUE_WATCHING,
+            HomeCategory.ACTION,
+            HomeCategory.DRAMA,
+            HomeCategory.HORROR,
+            HomeCategory.FAMILY,
+            HomeCategory.COMEDY
+        )
+
+        // Inflate static rail containers first
+        val railViews = categories.associateWith { category ->
             val railView = layoutInflater.inflate(R.layout.view_rail, container, false)
-
             val titleView = railView.findViewById<TextView>(R.id.railTitle)
-            titleView.text = title
-
-            val scroller = railView.findViewById<HorizontalScrollView>(R.id.railScroll)
-            val row = railView.findViewById<LinearLayout>(R.id.railRow)
-
-            // Subscriptions row can use different content; reuse thumbs for now
-            val items = if (title == "Available subscriptions") {
-                listOf(R.drawable.sub_net, R.drawable.sub_prime, R.drawable.sub_disney, R.drawable.sub_hbo)
-            } else {
-                thumbs
-            }
-
-            items.forEach { resId ->
-                val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
-                val img = card.findViewById<ImageView>(R.id.thumbImage)
-                img.setImageResource(resId)
-
-                // D-pad focus behavior
-                card.isFocusable = true
-                card.isFocusableInTouchMode = true
-                card.setOnFocusChangeListener { v, hasFocus ->
-                    v.animate().scaleX(if (hasFocus) 1.08f else 1.0f)
-                        .scaleY(if (hasFocus) 1.08f else 1.0f)
-                        .setDuration(120)
-                        .start()
-                    v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
-                        R.dimen.card_elevation
-                    )
-                }
-                
-                // Open ContentInfoActivity on DPAD_CENTER press
-                card.setOnClickListener {
-                    val intent = ContentInfoActivity.createIntent(
-                        context = this,
-                        programTitle = "Sample Content",
-                        description = "This is a sample content description that will be displayed on the content info screen.",
-                        genres = "Action, Adventure, Drama"
-                    )
-                    startActivity(intent)
-                }
-
-                row.addView(card)
-            }
-
+            titleView.text = category.title
             container.addView(railView)
+            railView
+        }
+
+        // Collect state and populate rows
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { stateMap ->
+                    categories.forEach { category ->
+                        val railState = stateMap[category] ?: return@forEach
+                        val railView = railViews[category] ?: return@forEach
+
+                        val row = railView.findViewById<LinearLayout>(R.id.railRow)
+                        val titleView = railView.findViewById<TextView>(R.id.railTitle)
+                        railView.findViewById<HorizontalScrollView>(R.id.railScroll)
+
+                        // Clear previous
+                        row.removeAllViews()
+
+                        when {
+                            railState.isLoading -> {
+                                titleView.text = "${category.title} • Loading…"
+                            }
+                            railState.error != null -> {
+                                titleView.text = "${category.title} • Error"
+                                Toast.makeText(this@HomeActivity, "Failed to load ${category.title}: ${railState.error}", Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                titleView.text = category.title
+                            }
+                        }
+
+                        // Populate items
+                        railState.items.forEach { item ->
+                            val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
+                            val img = card.findViewById<ImageView>(R.id.thumbImage)
+                            val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
+                            val overlay = card.findViewById<View>(R.id.overlayGrad)
+
+                            // Load image with Coil using placeholder/error
+                            img.load(item.poster) {
+                                crossfade(true)
+                                memoryCachePolicy(CachePolicy.ENABLED)
+                                placeholder(R.drawable.thumb_1)
+                                error(R.drawable.thumb_2)
+                            }
+
+                            // Show title overlay
+                            titleTv.text = item.name
+                            titleTv.visibility = View.VISIBLE
+                            overlay.visibility = View.VISIBLE
+
+                            // D-pad focus behavior
+                            card.isFocusable = true
+                            card.isFocusableInTouchMode = true
+                            card.setOnFocusChangeListener { v, hasFocus ->
+                                v.animate().scaleX(if (hasFocus) 1.08f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.08f else 1.0f)
+                                    .setDuration(120)
+                                    .start()
+                                v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
+                                    R.dimen.card_elevation
+                                )
+                            }
+
+                            // Open ContentInfoActivity on click with name
+                            card.setOnClickListener {
+                                val intent = ContentInfoActivity.createIntent(
+                                    context = this@HomeActivity,
+                                    programTitle = item.name,
+                                    description = "Details for ${item.name}",
+                                    genres = "TV Show"
+                                )
+                                startActivity(intent)
+                            }
+
+                            row.addView(card)
+                        }
+                    }
+                }
+            }
         }
     }
 }
