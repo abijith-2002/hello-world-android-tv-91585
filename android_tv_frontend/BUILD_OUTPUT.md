@@ -1,17 +1,15 @@
-# Android TV App Build Output
+# Android TV Debug APK Build Output
 
-This document records the output path for the debug APK built via Gradle.
+Build command:
+./gradlew assembleDebug --no-daemon --stacktrace
 
-- Build command:
-  - ./gradlew assembleDebug
+Status:
+BUILD SUCCESSFUL
 
-- Debug APK output:
-  - app/build/outputs/apk/debug/app-debug.apk
-
-- Optional convenience script:
-  - ./move_apk.sh
-    - Moves the APK to: app-debug.apk at the project root of the android_tv_frontend container.
+APK(s) location:
+- app/build/outputs/apk/debug/
 
 Notes:
-- Build was successful using the existing Gradle wrapper and configuration.
-- Gradle reported deprecations compatible up to Gradle 9; consider updating before Gradle 10.
+- Build used existing Gradle wrapper and project configuration.
+- Compile/target SDKs and plugins were sufficient; no changes required.
+- 87 actionable tasks (3 executed, 84 up-to-date).
