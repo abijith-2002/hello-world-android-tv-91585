@@ -19,7 +19,7 @@ Alternate (inside module folder):
 
 Config:
 - API base URL can be set via environment or Gradle property API_BASE_URL.
-- Default: https://kavia-alb-6bee460f-433381502.backend.kavia.app/
+- Default: https://kavia-alb-bb0aa933-966825511.backend.kavia.app/
 
 Environment example:
 - See android_tv_frontend/.env.example

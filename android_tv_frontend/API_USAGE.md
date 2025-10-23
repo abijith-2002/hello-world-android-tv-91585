@@ -1,7 +1,7 @@
 Android TV App - API Usage and Configuration
 
 Base URL
-- Default: https://kavia-alb-6bee460f-433381502.backend.kavia.app/
+- Default:https://kavia-alb-bb0aa933-966825511.backend.kavia.app/
 - Configurable via:
   - Environment variable: API_BASE_URL
   - Gradle property: -PAPI_BASE_URL=<url>
