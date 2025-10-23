@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "API_BASE_URL", "\"${System.getenv('API_BASE_URL') ?: (project.hasProperty('API_BASE_URL') ? project.getProperty('API_BASE_URL') : '')}\""
+        buildConfigField "String", "API_BASE_URL", "\"${System.getenv('API_BASE_URL') ?: (project.hasProperty('API_BASE_URL') ? project.getProperty('API_BASE_URL') : 'https://kavia-alb-6bee460f-433381502.backend.kavia.app/')}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

@@ -1,27 +1,21 @@
 package com.example.tv.data
 
-import com.example.tv.BuildConfig
 import com.example.tv.data.api.ApiService
 import com.example.tv.data.api.ContentItem
 import com.example.tv.data.api.HomeCategory
+import com.example.tv.data.api.dto.ShowDto
+import android.util.Log
 
 /**
  * PUBLIC_INTERFACE
  * Repository that wraps the ApiService and provides methods to fetch items per home category.
- * Exposes safeFetch that returns Result<List<ContentItem>> for graceful error handling.
- * Includes an offline fallback so the Hello World app functions without a backend.
+ * Fetches from the network and gracefully falls back to sample data if the request fails.
  */
 class CategoryRepository(
     private val api: ApiService = ApiService.create()
 ) {
 
-    // Determine if we should avoid network usage for this Hello World app
-    private val offlineMode: Boolean = run {
-        val base = (BuildConfig.API_BASE_URL ?: "").trim()
-        base.isBlank() || base.contains("example.com", ignoreCase = true)
-    }
-
-    // Simple sample content used when offlineMode is true or when network fails
+    // Simple sample content used when network fails
     private fun sampleItemsFor(category: HomeCategory): List<ContentItem> {
         val baseNames = listOf(
             "Hello World", "Sample Show", "Demo Title",
@@ -36,28 +30,26 @@ class CategoryRepository(
     /**
      * PUBLIC_INTERFACE
      * Fetch items for a specific HomeCategory.
-     * - If offline mode is enabled, returns local sample items.
-     * - Otherwise, fetches from the API and falls back to sample items on failure.
+     * Attempts a network call to the corresponding endpoint and falls back to samples upon any error.
      * @param category HomeCategory enum value
-     * @return Result<List<ContentItem>> either success with list or failure with exception
+     * @return Result<List<ContentItem>> success with list or success with samples on failure
      */
     suspend fun fetchCategory(category: HomeCategory): Result<List<ContentItem>> {
-        if (offlineMode) {
-            return Result.success(sampleItemsFor(category))
-        }
-        // Attempt network fetch, but fall back to samples on error
-        val result = safeFetch { api.getCategory(category.path) }
-        return result.fold(
-            onSuccess = { Result.success(it) },
-            onFailure = { Result.success(sampleItemsFor(category)) } // graceful fallback
-        )
-    }
-
-    private inline fun <T> safeFetch(block: () -> T): Result<T> {
         return try {
-            Result.success(block())
+            val dtos: List<ShowDto> = when (category) {
+                HomeCategory.TRENDING -> api.getTrending()
+                HomeCategory.CONTINUE_WATCHING -> api.getContinueWatching()
+                HomeCategory.ACTION -> api.getAction()
+                HomeCategory.FAMILY -> api.getFamily()
+                HomeCategory.COMEDY -> api.getComedy()
+                HomeCategory.HORROR -> api.getHorror()
+                HomeCategory.DRAMA -> api.getDrama()
+            }
+            Result.success(dtos.map { ContentItem(name = it.name, poster = it.poster) })
         } catch (t: Throwable) {
-            Result.failure(t)
+            // Log error and gracefully fall back to local samples so the UI remains functional
+            Log.e("CategoryRepository", "Failed to fetch ${category.name}: ${t.message}", t)
+            Result.success(sampleItemsFor(category))
         }
     }
 }

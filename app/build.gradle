@@ -1,0 +1,5 @@
+//
+// This file exists to help external analyzers detect an Android project at the workspace root.
+// The actual app module lives in android_tv_frontend/app; Gradle uses projectDir mapping in settings.gradle.
+//
+apply from: "../android_tv_frontend/app/build.gradle"

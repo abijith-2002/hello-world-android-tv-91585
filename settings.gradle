@@ -1,0 +1,9 @@
+rootProject.name = "android_tv_frontend_root"
+
+// Include the Android TV app modules from the subfolder
+include(":app", ":list", ":utilities")
+
+// Point each module to the actual directories inside android_tv_frontend
+project(":app").projectDir = file("android_tv_frontend/app")
+project(":list").projectDir = file("android_tv_frontend/list")
+project(":utilities").projectDir = file("android_tv_frontend/utilities")

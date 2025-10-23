@@ -1,47 +1,101 @@
 package com.example.tv.data.api
 
-import com.example.tv.BuildConfig
+import com.example.tv.data.api.dto.ShowDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
+import com.example.tv.BuildConfig
+import android.util.Log
 import java.util.concurrent.TimeUnit
 
 /**
  * PUBLIC_INTERFACE
- * Retrofit API interface for category endpoints.
- * Each category is accessible at /api/{categoryPath}
+ * Retrofit API interface for home content rails.
+ *
+ * Endpoints:
+ * - GET /api/trending
+ * - GET /api/continue_watching
+ * - GET /api/action
+ * - GET /api/family
+ * - GET /api/comedy
+ * - GET /api/horror
+ * - GET /api/drama
  */
 interface ApiService {
+
     /**
      * PUBLIC_INTERFACE
-     * Fetch items for a given category path.
-     * @param category The path segment such as "trending", "action", etc.
-     * @return List of ContentItem with name and poster fields.
+     * Fetch trending items.
+     * @return List of ShowDto with name and poster fields.
      */
-    @GET("api/{category}")
-    suspend fun getCategory(@Path("category") category: String): List<ContentItem>
+    @GET("api/trending")
+    suspend fun getTrending(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch continue watching items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/continue_watching")
+    suspend fun getContinueWatching(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch action items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/action")
+    suspend fun getAction(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch family items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/family")
+    suspend fun getFamily(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch comedy items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/comedy")
+    suspend fun getComedy(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch horror items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/horror")
+    suspend fun getHorror(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch drama items.
+     * @return List of ShowDto with name and poster fields.
+     */
+    @GET("api/drama")
+    suspend fun getDrama(): List<ShowDto>
 
     companion object {
+        private const val DEFAULT_BASE_URL = "https://kavia-alb-6bee460f-433381502.backend.kavia.app/"
+
         /**
          * PUBLIC_INTERFACE
          * Create a singleton ApiService.
-         * Base URL is taken from BuildConfig.API_BASE_URL when provided and valid (must start with http/https).
-         * If not provided or invalid, a safe default of "https://example.com/" is used so the app doesn't crash.
-         * A trailing '/' is enforced to satisfy Retrofit's requirement.
+         * Base URL is set to the provided backend, enforcing a trailing slash.
          */
         fun create(): ApiService {
-            // Sanitize and validate configured base URL
             val configured = (BuildConfig.API_BASE_URL ?: "").trim()
-            val baseUrl = when {
-                configured.isBlank() -> "https://example.com/"
-                configured.startsWith("http://") || configured.startsWith("https://") -> {
-                    if (configured.endsWith("/")) configured else "$configured/"
-                }
-                else -> "https://example.com/"
+            val baseUrl = if (configured.isNotEmpty()) {
+                if (configured.endsWith("/")) configured else "$configured/"
+            } else {
+                if (DEFAULT_BASE_URL.endsWith("/")) DEFAULT_BASE_URL else "$DEFAULT_BASE_URL/"
             }
 
             val client = OkHttpClient.Builder()
@@ -53,6 +107,7 @@ interface ApiService {
                 .add(KotlinJsonAdapterFactory())
                 .build()
 
+            Log.d("ApiService", "Using baseUrl=$baseUrl")
             val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(client)

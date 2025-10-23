@@ -1,15 +1,13 @@
 package com.example.tv.data.api
 
-import com.squareup.moshi.Json
-
 /**
  * PUBLIC_INTERFACE
- * Data model representing a content item returned by category endpoints.
- * Fields: name (title to show) and poster (absolute URL to the poster image).
+ * Domain model representing a content item displayed by the UI rails.
+ * Fields: name (title to show) and poster (absolute URL to the poster image or null if not available).
  */
 data class ContentItem(
-    @Json(name = "name") val name: String,
-    @Json(name = "poster") val poster: String?
+    val name: String,
+    val poster: String?
 )
 
 /**
