@@ -1,0 +1,9 @@
+ext {
+    actualAndroidProjectDir = "android_tv_frontend"
+}
+tasks.register("whereIsAndroidProject") {
+    doLast {
+        println "Actual Android project directory: ${actualAndroidProjectDir}"
+        println "Use: ./gradlew -p ${actualAndroidProjectDir} assembleDebug"
+    }
+}

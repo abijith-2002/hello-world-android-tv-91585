@@ -1,9 +1,20 @@
-rootProject.name = "android_tv_frontend_root"
+rootProject.name = "hello-world-android-tv-91585-root"
 
-// Include the Android TV app modules from the subfolder
-include(":app", ":list", ":utilities")
+def subRoot = file("android_tv_frontend")
+if (!subRoot.exists()) {
+    throw new GradleException("Expected Android project under android_tv_frontend but directory not found")
+}
 
-// Point each module to the actual directories inside android_tv_frontend
+/*
+ Create explicit module mappings at repository root that point to the real modules
+ inside android_tv_frontend. This helps analyzers and CI that rely on root-level
+ settings.gradle to discover Android modules.
+*/
+include(":app")
 project(":app").projectDir = file("android_tv_frontend/app")
+
+include(":list")
 project(":list").projectDir = file("android_tv_frontend/list")
+
+include(":utilities")
 project(":utilities").projectDir = file("android_tv_frontend/utilities")

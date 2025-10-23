@@ -1,0 +1,4 @@
+{
+  "androidProjectRoot": "android_tv_frontend",
+  "notes": "Some analyzers expect the project root at the container workspace root. This file points them to the actual Android Gradle project root containing gradlew and settings.gradle."
+}

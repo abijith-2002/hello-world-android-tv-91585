@@ -1,0 +1,18 @@
+{
+  "module": {
+    "name": "app",
+    "gradlePath": ":app",
+    "type": "application",
+    "root": ".."
+  },
+  "build": {
+    "variant": "debug",
+    "command": "../gradlew assembleDebug"
+  },
+  "artifacts": {
+    "debugApk": {
+      "relative": "build/outputs/apk/debug/app-debug.apk",
+      "absolute": "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
+    }
+  }
+}

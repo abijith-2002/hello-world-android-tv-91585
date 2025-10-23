@@ -1,0 +1,16 @@
+{
+  "projectType": "android-kotlin",
+  "root": ".",
+  "gradleWrapper": "./gradlew",
+  "settingsFiles": ["settings.gradle", "settings.gradle.kts"],
+  "modules": [
+    { "name": "app", "path": ":app", "type": "application" },
+    { "name": "list", "path": ":list", "type": "library" },
+    { "name": "utilities", "path": ":utilities", "type": "library" }
+  ],
+  "apkOutputDebug": "app/build/outputs/apk/debug/app-debug.apk",
+  "buildCommands": {
+    "debug": "./gradlew assembleDebug",
+    "release": "./gradlew assembleRelease"
+  }
+}

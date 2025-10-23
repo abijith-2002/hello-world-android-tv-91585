@@ -1,0 +1,24 @@
+{
+  "mobile": {
+    "android": {
+      "rootDir": "android_tv_frontend",
+      "wrapper": "android_tv_frontend/gradlew",
+      "settings": [
+        "android_tv_frontend/settings.gradle",
+        "android_tv_frontend/settings.gradle.kts"
+      ],
+      "modules": [
+        { "name": ":app", "path": "android_tv_frontend/app", "type": "application" },
+        { "name": ":list", "path": "android_tv_frontend/list", "type": "library" },
+        { "name": ":utilities", "path": "android_tv_frontend/utilities", "type": "library" }
+      ],
+      "artifacts": {
+        "debug": "android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
+      },
+      "commands": {
+        "assembleDebug": "cd android_tv_frontend && ./gradlew assembleDebug",
+        "assembleDebugFromRoot": "./gradlew -p android_tv_frontend :app:assembleDebug"
+      }
+    }
+  }
+}

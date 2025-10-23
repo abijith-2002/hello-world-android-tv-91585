@@ -1,0 +1,8 @@
+android
+kotlin
+gradle
+This file is a marker to indicate this directory is the root of the Android/Kotlin Gradle project.
+Expected wrapper: ./gradlew
+Expected settings: settings.gradle or settings.gradle.kts
+Primary module: app
+APK output: app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,49 @@
+{
+  "projectType": "android-gradle",
+  "root": ".",
+  "gradleWrapper": "./gradlew",
+  "settingsFiles": [
+    "settings.gradle",
+    "settings.gradle.kts"
+  ],
+  "buildFiles": [
+    "build.gradle",
+    "build.gradle.kts",
+    "app/build.gradle",
+    "list/build.gradle",
+    "utilities/build.gradle"
+  ],
+  "modules": [
+    {
+      "name": ":app",
+      "path": "app",
+      "type": "application",
+      "buildFile": "app/build.gradle",
+      "outputs": {
+        "apk": [
+          "app/build/outputs/apk/debug/app-debug.apk",
+          "app/build/outputs/apk/release/app-release.apk"
+        ]
+      }
+    },
+    {
+      "name": ":list",
+      "path": "list",
+      "type": "library",
+      "buildFile": "list/build.gradle"
+    },
+    {
+      "name": ":utilities",
+      "path": "utilities",
+      "type": "library",
+      "buildFile": "utilities/build.gradle"
+    }
+  ],
+  "defaultTasks": [
+    "assembleDebug"
+  ],
+  "help": {
+    "buildDebug": "./gradlew assembleDebug",
+    "buildWithProject": "gradle -p . :app:assembleDebug"
+  }
+}

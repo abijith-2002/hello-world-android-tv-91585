@@ -1,0 +1,5 @@
+project_root=.
+wrapper=./gradlew
+settings=./settings.gradle
+default_module=:app
+apk_debug=./app/build/outputs/apk/debug/app-debug.apk

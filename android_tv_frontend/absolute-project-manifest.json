@@ -1,0 +1,17 @@
+{
+  "projectType": "android-gradle-kotlin",
+  "rootAbsolute": "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend",
+  "wrapperAbsolute": "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/gradlew",
+  "settingsFiles": [
+    "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/settings.gradle",
+    "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/settings.gradle.kts"
+  ],
+  "modules": [
+    { "name": "app", "gradlePath": ":app" },
+    { "name": "list", "gradlePath": ":list" },
+    { "name": "utilities", "gradlePath": ":utilities" }
+  ],
+  "artifacts": {
+    "debugApkAbsolute": "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
+  }
+}

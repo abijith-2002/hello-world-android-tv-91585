@@ -1,0 +1,11 @@
+{
+  "root": ".",
+  "modules": [
+    { "name": "app", "path": ":app", "type": "application", "apk": "app/build/outputs/apk/debug/app-debug.apk" },
+    { "name": "list", "path": ":list", "type": "library" },
+    { "name": "utilities", "path": ":utilities", "type": "library" }
+  ],
+  "build": {
+    "debug": "./gradlew assembleDebug"
+  }
+}

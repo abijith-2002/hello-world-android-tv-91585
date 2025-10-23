@@ -1,5 +1,15 @@
-//
-// This file exists to help external analyzers detect an Android project at the workspace root.
-// The actual app module lives in android_tv_frontend/app; Gradle uses projectDir mapping in settings.gradle.
-//
-apply from: "../android_tv_frontend/app/build.gradle"
+import org.gradle.api.GradleException
+
+// Delegation stub for CI/tools. Actual module lives at android_tv_frontend/app
+tasks.register("assembleDebug") {
+    doFirst { println "Delegating :app:assembleDebug to android_tv_frontend/app" }
+    doLast {
+        def wrapper = file("${rootDir}/android_tv_frontend/gradlew")
+        if (!wrapper.exists()) throw new GradleException("Gradle wrapper not found at android_tv_frontend/gradlew")
+        def proc = ["bash", "-lc", "./android_tv_frontend/gradlew -p android_tv_frontend :app:assembleDebug"].execute(null, rootDir)
+        proc.in.eachLine { println it }
+        proc.err.eachLine { System.err.println it }
+        int code = proc.waitFor()
+        if (code != 0) throw new GradleException("Delegated :app build failed with exit code ${code}")
+    }
+}

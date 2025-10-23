@@ -1,14 +1,17 @@
-Android Gradle Project Root (Container)
-Modules:
-- :app
-- :list
-- :utilities
+This file indicates that this directory is the Android project root for build and analysis tools.
 
-Build:
-- ./gradlew :app:assembleDebug
+Primary Gradle wrapper location:
+- ./gradlew
+- settings.gradle(.kts)
+- build.gradle(.kts)
 
-Notes:
-- Retrofit base URL: https://kavia-alb-6bee460f-433381502.backend.kavia.app/
-- INTERNET permission is declared.
-- API endpoints implemented for {trending, continue_watching, action, family, comedy, horror, drama}.
-- Repository falls back to sample data on errors and logs failures.
+Primary Android app module path:
+- app/build.gradle
+
+Common commands (run from this directory):
+- ./gradlew tasks
+- ./gradlew assembleDebug
+- ./gradlew -p . :app:assembleDebug
+
+Expected APK output:
+- app/build/outputs/apk/debug/app-debug.apk

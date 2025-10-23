@@ -1,0 +1,16 @@
+{
+  "projectType": "android-kotlin",
+  "rootDir": ".",
+  "gradleProjectDir": "android_tv_frontend",
+  "gradleWrapper": "android_tv_frontend/gradlew",
+  "buildCommand": "./gradlew -p android_tv_frontend assembleDebug",
+  "modules": [
+    "android_tv_frontend/app",
+    "android_tv_frontend/list",
+    "android_tv_frontend/utilities"
+  ],
+  "artifacts": {
+    "apkDebug": "android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
+  },
+  "notes": "The Android project is located in android_tv_frontend; root-level files delegate to it."
+}

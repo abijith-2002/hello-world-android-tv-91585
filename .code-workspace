@@ -1,0 +1,16 @@
+{
+  "folders": [
+    { "path": "." },
+    { "path": "android_tv_frontend" }
+  ],
+  "settings": {
+    "android.projectRoot": "android_tv_frontend",
+    "gradle.nestedProjects": [
+      "android_tv_frontend"
+    ],
+    "kotlin.projectRoot": "android_tv_frontend",
+    "java.import.gradle.wrapper.enabled": true,
+    "java.import.gradle.projectRoot": "android_tv_frontend",
+    "terminal.integrated.cwd": "android_tv_frontend"
+  }
+}

@@ -1,0 +1,2 @@
+android_project_root=android_tv_frontend
+debug_apk_relative=android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk

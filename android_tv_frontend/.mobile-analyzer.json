@@ -1,0 +1,21 @@
+{
+  "project": {
+    "type": "android-kotlin",
+    "root": ".",
+    "wrapper": "./gradlew",
+    "settings": ["settings.gradle", "settings.gradle.kts"],
+    "modules": [
+      { "name": "app", "path": ":app", "kind": "application" },
+      { "name": "list", "path": ":list", "kind": "library" },
+      { "name": "utilities", "path": ":utilities", "kind": "library" }
+    ]
+  },
+  "build": {
+    "commands": {
+      "debug": "./gradlew assembleDebug --no-daemon --stacktrace"
+    },
+    "artifacts": {
+      "debugApk": "app/build/outputs/apk/debug/app-debug.apk"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "android",
+  "gradleRoot": ".",
+  "primaryModule": "app",
+  "tasks": {
+    "debug": ":app:assembleDebug"
+  },
+  "artifacts": {
+    "debugApk": "app/build/outputs/apk/debug/app-debug.apk"
+  }
+}
