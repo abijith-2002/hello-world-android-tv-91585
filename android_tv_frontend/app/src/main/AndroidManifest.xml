@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Network permissions for future remote image/API loading -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.software.leanback" android:required="true" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
@@ -10,7 +13,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.TV.NordDark"
         android:supportsRtl="true"
-        android:banner="@drawable/banner_tv">
+        android:banner="@drawable/banner_tv"
+        android:usesCleartextTraffic="true">
 
         <!-- Launcher: SplashActivity -->
         <activity

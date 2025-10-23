@@ -13,6 +13,8 @@
         android:id="@+id/thumbImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:src="@drawable/thumb_1"
         android:contentDescription="@string/thumb_image_cd"
         android:scaleType="centerCrop" />
 
