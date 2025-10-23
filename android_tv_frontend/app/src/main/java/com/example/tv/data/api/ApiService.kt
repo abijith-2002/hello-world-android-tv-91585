@@ -12,6 +12,9 @@ import android.util.Log
 import okhttp3.logging.HttpLoggingInterceptor
 import com.example.tv.data.api.NetworkConfig
 import java.util.concurrent.TimeUnit
+import okhttp3.Interceptor
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 /**
  * PUBLIC_INTERFACE
@@ -93,11 +96,32 @@ interface ApiService {
         fun create(): ApiService {
             val baseUrl = NetworkConfig.getBaseUrl()
 
+            // Build Host header from the base URL. If the port is the default for the scheme, omit it.
+            val parsed = baseUrl.toHttpUrlOrNull()
+            val hostHeader: String? = parsed?.let { url ->
+                val scheme = url.scheme
+                val host = url.host
+                val port = url.port
+                val isDefaultPort = (scheme == "http" && port == 80) || (scheme == "https" && port == 443)
+                if (isDefaultPort) host else "$host:$port"
+            }
+
+            val hostHeaderInterceptor = Interceptor { chain ->
+                val original = chain.request()
+                val reqBuilder = original.newBuilder()
+                if (!hostHeader.isNullOrBlank()) {
+                    // Set Host header explicitly for every request
+                    reqBuilder.header("Host", hostHeader)
+                }
+                chain.proceed(reqBuilder.build())
+            }
+
             val logging = HttpLoggingInterceptor().apply {
                 level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
             }
 
             val client = OkHttpClient.Builder()
+                .addInterceptor(hostHeaderInterceptor) // ensure Host header is set before logging
                 .addInterceptor(logging)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
