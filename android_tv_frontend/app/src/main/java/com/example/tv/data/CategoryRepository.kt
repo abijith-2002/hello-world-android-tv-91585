@@ -4,6 +4,7 @@ import com.example.tv.data.api.ApiService
 import com.example.tv.data.api.ContentItem
 import com.example.tv.data.api.HomeCategory
 import com.example.tv.data.api.dto.ShowDto
+import com.example.tv.data.api.dto.toContentItem
 import android.util.Log
 
 /**
@@ -45,7 +46,7 @@ class CategoryRepository(
                 HomeCategory.HORROR -> api.getHorror()
                 HomeCategory.DRAMA -> api.getDrama()
             }
-            Result.success(dtos.map { ContentItem(name = it.name, poster = it.poster) })
+            Result.success(dtos.map { it.toContentItem() })
         } catch (t: Throwable) {
             // Log error and gracefully fall back to local samples so the UI remains functional
             Log.e("CategoryRepository", "Failed to fetch ${category.name}: ${t.message}", t)

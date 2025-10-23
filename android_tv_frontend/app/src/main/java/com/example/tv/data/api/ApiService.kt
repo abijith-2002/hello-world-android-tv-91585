@@ -9,6 +9,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import com.example.tv.BuildConfig
 import android.util.Log
+import okhttp3.logging.HttpLoggingInterceptor
+import com.example.tv.data.api.NetworkConfig
 import java.util.concurrent.TimeUnit
 
 /**
@@ -83,22 +85,20 @@ interface ApiService {
     suspend fun getDrama(): List<ShowDto>
 
     companion object {
-        private const val DEFAULT_BASE_URL = "https://kavia-alb-6bee460f-433381502.backend.kavia.app/"
-
         /**
          * PUBLIC_INTERFACE
          * Create a singleton ApiService.
          * Base URL is set to the provided backend, enforcing a trailing slash.
          */
         fun create(): ApiService {
-            val configured = (BuildConfig.API_BASE_URL ?: "").trim()
-            val baseUrl = if (configured.isNotEmpty()) {
-                if (configured.endsWith("/")) configured else "$configured/"
-            } else {
-                if (DEFAULT_BASE_URL.endsWith("/")) DEFAULT_BASE_URL else "$DEFAULT_BASE_URL/"
+            val baseUrl = NetworkConfig.getBaseUrl()
+
+            val logging = HttpLoggingInterceptor().apply {
+                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
             }
 
             val client = OkHttpClient.Builder()
+                .addInterceptor(logging)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build()

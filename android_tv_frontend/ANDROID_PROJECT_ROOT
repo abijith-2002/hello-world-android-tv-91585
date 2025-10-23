@@ -1,0 +1,14 @@
+Android Gradle Project Root (Container)
+Modules:
+- :app
+- :list
+- :utilities
+
+Build:
+- ./gradlew :app:assembleDebug
+
+Notes:
+- Retrofit base URL: https://kavia-alb-6bee460f-433381502.backend.kavia.app/
+- INTERNET permission is declared.
+- API endpoints implemented for {trending, continue_watching, action, family, comedy, horror, drama}.
+- Repository falls back to sample data on errors and logs failures.
