@@ -112,6 +112,7 @@ interface ApiService {
                 if (!hostHeader.isNullOrBlank()) {
                     // Set Host header explicitly for every request
                     reqBuilder.header("Host", hostHeader)
+                    Log.d("HOST:::::::::::::", "$hostHeader")
                 }
                 chain.proceed(reqBuilder.build())
             }
