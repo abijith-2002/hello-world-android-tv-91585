@@ -296,21 +296,53 @@ class HomeActivity : AppCompatActivity() {
                             // overridden by our key listener mapping for rows > 0.
                             card.nextFocusUpId = R.id.topMenu
 
-                            // Intercept DPAD_UP across all rows:
-                            // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, do nothing special here (do not jump to menu).
+                            // Intercept DPAD navigation within the rail:
+                            // - DPAD_UP: map to item in row above (already implemented below).
+                            // - DPAD_LEFT/RIGHT: if on the first/last card in the row, consume and do nothing.
+                            //   This prevents focus from escaping the rail horizontally at edges.
                             card.setOnKeyListener { v, keyCode, event ->
-                                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                                    val remapped = handleDpadUpWithinRails(v, category)
-                                    if (remapped) {
-                                        true
-                                    } else {
-                                        // First row boundary: do not auto-jump to menu. Let default system focus rules apply.
-                                        if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
-                                        true
+                                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+
+                                when (keyCode) {
+                                    KeyEvent.KEYCODE_DPAD_UP -> {
+                                        val remapped = handleDpadUpWithinRails(v, category)
+                                        if (remapped) {
+                                            true
+                                        } else {
+                                            // First row boundary: do not auto-jump to menu. Consume to keep focus stable.
+                                            if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
+                                            true
+                                        }
                                     }
-                                } else {
-                                    false
+
+                                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                        val parentRow = v.parent as? LinearLayout
+                                        if (parentRow != null) {
+                                            val currentIndex = parentRow.indexOfChild(v).coerceAtLeast(0)
+                                            val isFirst = currentIndex <= 0
+                                            if (isFirst) {
+                                                if (focusDebug) Log.d("FocusNav", "DPAD_LEFT at first card: consumed, no-op.")
+                                                return@setOnKeyListener true
+                                            }
+                                        }
+                                        false
+                                    }
+
+                                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                        val parentRow = v.parent as? LinearLayout
+                                        if (parentRow != null) {
+                                            val currentIndex = parentRow.indexOfChild(v).coerceAtLeast(0)
+                                            val lastIndex = (parentRow.childCount - 1).coerceAtLeast(0)
+                                            val isLast = currentIndex >= lastIndex
+                                            if (isLast) {
+                                                if (focusDebug) Log.d("FocusNav", "DPAD_RIGHT at last card: consumed, no-op.")
+                                                return@setOnKeyListener true
+                                            }
+                                        }
+                                        false
+                                    }
+
+                                    else -> false
                                 }
                             }
 

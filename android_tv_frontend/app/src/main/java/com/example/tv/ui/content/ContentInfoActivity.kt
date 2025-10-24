@@ -244,14 +244,20 @@ class ContentInfoActivity : ComponentActivity() {
             KeyEvent.KEYCODE_DPAD_LEFT -> {
                 if (currentFocusIndex > 0) {
                     actionButtons[currentFocusIndex - 1].requestFocus()
+                    true
+                } else {
+                    // At left-most button: consume and do nothing
+                    true
                 }
-                true
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
                 if (currentFocusIndex < actionButtons.size - 1) {
                     actionButtons[currentFocusIndex + 1].requestFocus()
+                    true
+                } else {
+                    // At right-most button: consume and do nothing
+                    true
                 }
-                true
             }
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
                 handleButtonAction(currentFocusIndex)
