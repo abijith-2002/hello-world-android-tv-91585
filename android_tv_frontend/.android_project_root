@@ -1,0 +1,2 @@
+This hidden file marks this directory as the Android/Gradle project root for tooling discovery.
+Contains settings.gradle and gradlew. Modules: :app, :list, :utilities.

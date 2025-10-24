@@ -222,10 +222,10 @@ class HomeActivity : AppCompatActivity() {
                                 error(R.drawable.thumb_2)
                             }
 
-                            // Show title overlay
-                            titleTv.text = item.name
-                            titleTv.visibility = View.VISIBLE
-                            overlay.visibility = View.VISIBLE
+                            // Keep only the image visible: hide title and overlay scrim explicitly
+                            titleTv.text = ""
+                            titleTv.visibility = View.GONE
+                            overlay.visibility = View.GONE
 
                             // D-pad focus behavior
                             card.isFocusable = true

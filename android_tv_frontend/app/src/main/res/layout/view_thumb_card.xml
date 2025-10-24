@@ -11,18 +11,17 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:foreground="@drawable/tv_focus_ripple"
-    android:padding="0dp"
     android:clipToPadding="false"
     android:clipChildren="false"
     android:clipToOutline="true"
     android:outlineProvider="background"
     android:nextFocusUp="@id/topMenu"
-    app:cardUseCompatPadding="false"
     app:cardBackgroundColor="@color/nord_surface"
     app:strokeColor="@color/nord_unfocused_stroke"
     app:strokeWidth="1dp"
     app:shapeAppearance="@style/ShapeAppearance.Medium.Rounded"
-    app:contentPadding="0dp">
+    app:contentPadding="0dp"
+    app:cardUseCompatPadding="false">
 
     <!-- Full-bleed poster image; CENTER_CROP to fill, clipped to card's rounded outline -->
     <ImageView
@@ -44,7 +43,7 @@
         android:background="@drawable/gradient_horizontal_overlay"
         android:visibility="gone" />
 
-    <!-- Title text (no inner padding to keep full-bleed look) -->
+    <!-- Title text removed per requirement: keep only the image visible -->
     <TextView
         android:id="@+id/thumbTitle"
         style="@style/TextAppearance.Card.Title"
