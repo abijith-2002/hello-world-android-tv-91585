@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -32,22 +31,23 @@ import kotlinx.coroutines.launch
  * and multiple horizontal rails of content loaded from the API.
  * D-pad focus is enabled across interactive elements.
  *
+ * DPAD_UP behavior:
+ * - From any content row r > 0, DPAD_UP moves focus to the corresponding item in row r-1.
+ * - For the first content row (r == 0), DPAD_UP does not jump to the top menu unless explicitly handled elsewhere.
+ *
  * - Accepts no parameters.
  * - Returns no value; displays UI.
  */
 class HomeActivity : AppCompatActivity() {
-    /**
-     * PUBLIC_INTERFACE
-     * DPAD navigation note:
-     * While focus is on any content card in the rails, pressing DPAD_UP programmatically moves
-     * focus to the top menu (defaults to the "Home" menu item). Other directions remain unchanged.
-     */
 
     private val viewModel: HomeViewModel by viewModels()
 
     // Keep a stable reference to a focusable element in the top menu for requestFocus()
     private lateinit var topMenu: LinearLayout
     private lateinit var topMenuDefaultChild: View
+
+    // Debug flag for focus mapping logs
+    private val focusDebug = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,29 +124,48 @@ class HomeActivity : AppCompatActivity() {
             railScrolls[category] = railView.findViewById(R.id.railScroll)
         }
 
-        // Helper to find the row index among all rails
+        // Helpers to compute row index and remap focus up
         fun rowIndexOf(category: HomeCategory): Int = categories.indexOf(category).coerceAtLeast(0)
 
-        // PUBLIC_INTERFACE
-        // Map focus upward from the "second row" to the corresponding child in the "first row".
-        // This ensures pressing DPAD_UP on any item in the second rail focuses the item above it
-        // rather than the top menu.
-        fun handleSecondRowDpadUp(currentCard: View, currentCategory: HomeCategory): Boolean {
+        /**
+         * PUBLIC_INTERFACE
+         * handleDpadUpWithinRails
+         * General DPAD_UP mapping across rails: for any row r > 0, focus the corresponding
+         * item by index in the immediate row above (r-1). For the first row (r == 0), keep
+         * default behavior (no remap to top menu unless explicitly intended elsewhere).
+         *
+         * @param currentCard View currently focused within its row
+         * @param currentCategory Category of the row containing currentCard
+         * @return true if focus was remapped to the row above; false if boundary/no-op
+         */
+        fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
-            if (currentRowIdx != 1) return false // only remap for second row (index 1)
+            if (currentRowIdx <= 0) {
+                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: boundary; not jumping to top menu.")
+                return false
+            }
 
-            val firstRow = railRows[categories[0]] ?: return false
-            if (firstRow.childCount == 0) return false
+            val targetRowCategory = categories[currentRowIdx - 1]
+            val targetRow = railRows[targetRowCategory] ?: return false
+
+            // Guard: need at least one child to map to
+            if (targetRow.childCount == 0) return false
 
             // Find current card index within its row
             val parentRow = currentCard.parent as? LinearLayout ?: return false
             val currentIndex = parentRow.indexOfChild(currentCard).coerceAtLeast(0)
 
-            // Clamp to available children in first row
-            val targetIndex = currentIndex.coerceAtMost(firstRow.childCount - 1)
-            val target = firstRow.getChildAt(targetIndex)
+            // Clamp to available children in target row
+            val targetIndex = currentIndex.coerceAtMost(targetRow.childCount - 1)
+            val target = targetRow.getChildAt(targetIndex)
             target?.requestFocus()
-            Log.d("FocusNav", "DPAD_UP remap: row2[$currentIndex] -> row1[$targetIndex]")
+
+            if (focusDebug) {
+                Log.d(
+                    "FocusNav",
+                    "DPAD_UP remap: row${currentRowIdx}[$currentIndex] -> row${currentRowIdx - 1}[$targetIndex]"
+                )
+            }
             return true
         }
 
@@ -204,24 +223,21 @@ class HomeActivity : AppCompatActivity() {
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
 
-                            // Default hint upwards to topMenu, but we will override in key handler for second row
+                            // Hint upwards to menu via XML nextFocusUp, but actual behavior will be
+                            // overridden by our key listener mapping for rows > 0.
                             card.nextFocusUpId = R.id.topMenu
 
-                            // Intercept DPAD_UP:
-                            // - If card belongs to second row (index 1), focus corresponding index in first row.
-                            // - Else, keep existing behavior to move up to top menu.
+                            // Intercept DPAD_UP across all rows:
+                            // - If row index > 0, focus the corresponding index in row-1.
+                            // - If row index == 0, do nothing special here (do not jump to menu).
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                                    val remapped = handleSecondRowDpadUp(v, category)
+                                    val remapped = handleDpadUpWithinRails(v, category)
                                     if (remapped) {
                                         true
                                     } else {
-                                        // Fallback to menu focusing for other rows as before
-                                        if (::topMenuDefaultChild.isInitialized && topMenuDefaultChild.isFocusable) {
-                                            topMenuDefaultChild.requestFocus()
-                                        } else if (::topMenu.isInitialized) {
-                                            topMenu.requestFocus()
-                                        }
+                                        // First row boundary: do not auto-jump to menu. Let default system focus rules apply.
+                                        if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
                                         true
                                     }
                                 } else {
@@ -254,16 +270,15 @@ class HomeActivity : AppCompatActivity() {
                             row.addView(card)
                         }
 
-                        // For rows other than the second one, keep nextFocusUp = topMenu so behavior remains unchanged
+                        // Keep focusUp hints for container views (no change needed)
                         scrollView.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
                     }
 
-                    // Verification logs: when both first and second rows exist and have children, log mapping info
-                    val first = railRows[categories.getOrNull(0)]
-                    val second = railRows[categories.getOrNull(1)]
-                    if (first != null && second != null && first.childCount > 0 && second.childCount > 0) {
-                        Log.d("FocusNavVerify", "First row children: ${first.childCount}, Second row children: ${second.childCount}. DPAD_UP from any second-row item will map by index to first-row.")
+                    // Verification logs for multiple rows
+                    val counts = categories.mapIndexed { idx, c -> "row$idx=${railRows[c]?.childCount ?: 0}" }
+                    if (focusDebug) {
+                        Log.d("FocusNavVerify", "Rows children counts: ${counts.joinToString(", ")}. DPAD_UP maps r->r-1 by index with clamping.")
                     }
                 }
             }

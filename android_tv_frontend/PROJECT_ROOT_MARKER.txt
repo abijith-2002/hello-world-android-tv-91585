@@ -1,0 +1,5 @@
+Android TV frontend project root
+- Gradle wrapper present (./gradlew)
+- Settings files: settings.gradle, settings.gradle.kts
+- Modules: :app, :list, :utilities
+This file exists to aid automated analyzers in locating the project root directory.

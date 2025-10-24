@@ -450,34 +450,6 @@
     </incident>
 
     <incident
-        id="Autofill"
-        severity="warning"
-        message="Missing `autofillHints` attribute">
-        <fix-alternatives>
-            <fix-attribute
-                description="Set autofillHints"
-                namespace="http://schemas.android.com/apk/res/android"
-                attribute="autofillHints"
-                value=""
-                point="0"
-                mark="0"/>
-            <fix-attribute
-                description="Set importantForAutofill=&quot;no&quot;"
-                namespace="http://schemas.android.com/apk/res/android"
-                attribute="importantForAutofill"
-                value="no"/>
-        </fix-alternatives>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
-            line="77"
-            column="18"
-            startOffset="3298"
-            endLine="77"
-            endColumn="26"
-            endOffset="3306"/>
-    </incident>
-
-    <incident
         id="TextFields"
         severity="warning"
         message="This text field does not specify an `inputType`">
@@ -516,6 +488,27 @@
                 attribute="importantForAutofill"
                 value="no"/>
         </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="77"
+            column="18"
+            startOffset="3298"
+            endLine="77"
+            endColumn="26"
+            endOffset="3306"/>
+    </incident>
+
+    <incident
+        id="TextFields"
+        severity="warning"
+        message="This text field does not specify an `inputType`">
+        <fix-attribute
+            description="Set inputType"
+            namespace="http://schemas.android.com/apk/res/android"
+            attribute="inputType"
+            value="TODO"
+            point="4"
+            mark="0"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
             line="106"
@@ -527,16 +520,23 @@
     </incident>
 
     <incident
-        id="TextFields"
+        id="Autofill"
         severity="warning"
-        message="This text field does not specify an `inputType`">
-        <fix-attribute
-            description="Set inputType"
-            namespace="http://schemas.android.com/apk/res/android"
-            attribute="inputType"
-            value="TODO"
-            point="4"
-            mark="0"/>
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                point="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
             line="106"
@@ -581,12 +581,12 @@
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="170"
+            line="189"
             column="50"
-            startOffset="6709"
-            endLine="170"
+            startOffset="7439"
+            endLine="189"
             endColumn="80"
-            endOffset="6739"/>
+            endOffset="7469"/>
     </incident>
 
     <incident
@@ -595,12 +595,12 @@
         message="String literal in `setText` can not be translated. Use Android resources instead.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="170"
+            line="189"
             column="68"
-            startOffset="6727"
-            endLine="170"
+            startOffset="7457"
+            endLine="189"
             endColumn="79"
-            endOffset="6738"/>
+            endOffset="7468"/>
     </incident>
 
     <incident
@@ -609,12 +609,12 @@
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="173"
+            line="192"
             column="50"
-            startOffset="6876"
-            endLine="173"
+            startOffset="7606"
+            endLine="192"
             endColumn="77"
-            endOffset="6903"/>
+            endOffset="7633"/>
     </incident>
 
     <incident
@@ -623,12 +623,12 @@
         message="String literal in `setText` can not be translated. Use Android resources instead.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="173"
+            line="192"
             column="68"
-            startOffset="6894"
-            endLine="173"
+            startOffset="7624"
+            endLine="192"
             endColumn="76"
-            endOffset="6902"/>
+            endOffset="7632"/>
     </incident>
 
     <incident
@@ -832,14 +832,6 @@
     </incident>
 
     <incident
-        id="IconLocation"
-        severity="warning"
-        message="Found bitmap drawable `res/drawable/bg_content_info_20251021_114313_gd2.jpg` in densityless folder">
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/bg_content_info_20251021_114313_gd2.jpg"/>
-    </incident>
-
-    <incident
         id="Overdraw"
         severity="warning"
         message="Possible overdraw: Root element paints background `#000000` with a theme that also paints a background (inferred theme is `@android_style/Theme_NoTitleBar_Fullscreen`)">
@@ -907,6 +899,14 @@
             endLine="6"
             endColumn="40"
             endOffset="264"/>
+    </incident>
+
+    <incident
+        id="IconLocation"
+        severity="warning"
+        message="Found bitmap drawable `res/drawable/bg_content_info_20251021_114313_gd2.jpg` in densityless folder">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/bg_content_info_20251021_114313_gd2.jpg"/>
     </incident>
 
 </incidents>

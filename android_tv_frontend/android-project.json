@@ -1,0 +1,10 @@
+{
+  "root": ".",
+  "gradleWrapper": "./gradlew",
+  "settings": ["settings.gradle", "settings.gradle.kts"],
+  "modules": [":app", ":list", ":utilities"],
+  "build": {
+    "defaultTask": "assembleDebug",
+    "apkDebugPath": "app/build/outputs/apk/debug/app-debug.apk"
+  }
+}
