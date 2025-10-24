@@ -147,29 +147,29 @@ class ContentInfoActivity : ComponentActivity() {
             button.setOnKeyListener { v, keyCode, event ->
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_LEFT -> {
-                        val isFirst = index == 0
-                        if (isFirst) return@setOnKeyListener true
+                        // Consume at left-most edge regardless of action
+                        if (index == 0) return@setOnKeyListener true
+                        // Non-edge: on ACTION_DOWN move left; consume event to prevent default handling
                         if (event.action == KeyEvent.ACTION_DOWN) {
                             actionButtons[index - 1].requestFocus()
                         }
                         true
                     }
                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                        val isLast = index == actionButtons.lastIndex
-                        if (isLast) return@setOnKeyListener true
+                        // Consume at right-most edge regardless of action
+                        if (index == actionButtons.lastIndex) return@setOnKeyListener true
+                        // Non-edge: on ACTION_DOWN move right; consume event to prevent default handling
                         if (event.action == KeyEvent.ACTION_DOWN) {
                             actionButtons[index + 1].requestFocus()
                         }
                         true
                     }
                     KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN -> {
-                        // Horizontal rail: consume vertical keys
+                        // Horizontal rail: consume vertical keys to keep focus within the rail
                         true
                     }
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                        if (event.action == KeyEvent.ACTION_DOWN) {
-                            v.performClick()
-                        }
+                        if (event.action == KeyEvent.ACTION_DOWN) v.performClick()
                         true
                     }
                     else -> false
