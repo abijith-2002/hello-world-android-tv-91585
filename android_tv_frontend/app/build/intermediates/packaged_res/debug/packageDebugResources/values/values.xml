@@ -16,6 +16,10 @@
     <color name="nord_unfocused_stroke">@color/nord_grey_500</color>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_elevation_focused">18dp</dimen>
+    <dimen name="rail_title_bottom_spacing">16dp</dimen>
+    <dimen name="thumb_card_height">180dp</dimen>
+    <dimen name="thumb_card_spacing">16dp</dimen>
+    <dimen name="thumb_card_width">320dp</dimen>
     <string name="action_sign_in">Submit</string>
     <string name="app_name">Hello World TV</string>
     <string name="back">Back</string>

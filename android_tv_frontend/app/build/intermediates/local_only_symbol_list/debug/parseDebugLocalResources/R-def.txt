@@ -16,6 +16,10 @@ color nord_text
 color nord_unfocused_stroke
 dimen card_elevation
 dimen card_elevation_focused
+dimen rail_title_bottom_spacing
+dimen thumb_card_height
+dimen thumb_card_spacing
+dimen thumb_card_width
 drawable banner_tv
 drawable bg_content_info_20251021_114313_gd2
 drawable bg_content_info_gradient

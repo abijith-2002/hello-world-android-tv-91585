@@ -216,6 +216,18 @@ class SplashActivity : AppCompatActivity() {
 /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/colors.xml:25: Warning: The resource R.color.nord_shadow appears to be unused [UnusedResources]
     <color name="nord_shadow">#1A000000</color>
            ~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/dimens.xml:7: Warning: The resource R.dimen.thumb_card_width appears to be unused [UnusedResources]
+    <dimen name="thumb_card_width">320dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/dimens.xml:8: Warning: The resource R.dimen.thumb_card_height appears to be unused [UnusedResources]
+    <dimen name="thumb_card_height">180dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/dimens.xml:9: Warning: The resource R.dimen.thumb_card_spacing appears to be unused [UnusedResources]
+    <dimen name="thumb_card_spacing">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/dimens.xml:12: Warning: The resource R.dimen.rail_title_bottom_spacing appears to be unused [UnusedResources]
+    <dimen name="rail_title_bottom_spacing">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
@@ -491,4 +503,4 @@ class SplashActivity : AppCompatActivity() {
    probably also specify padding on the right side (and vice versa) for
    right-to-left layout symmetry.
 
-0 errors, 107 warnings
+0 errors, 111 warnings

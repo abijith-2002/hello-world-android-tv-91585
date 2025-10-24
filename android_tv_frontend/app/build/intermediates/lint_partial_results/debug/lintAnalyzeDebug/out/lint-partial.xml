@@ -11,6 +11,22 @@
             </map>
     </map>
     <map id="UnusedResources">
+        <location id="R.dimen.rail_title_bottom_spacing"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/dimens.xml"
+            line="12"
+            column="12"
+            startOffset="405"
+            endLine="12"
+            endColumn="44"
+            endOffset="437"/>
+        <location id="R.dimen.thumb_card_spacing"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/dimens.xml"
+            line="9"
+            column="12"
+            startOffset="306"
+            endLine="9"
+            endColumn="37"
+            endOffset="331"/>
         <location id="R.string.button_replay"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
             line="38"
@@ -27,6 +43,14 @@
             endLine="8"
             endColumn="10"
             endOffset="461"/>
+        <location id="R.dimen.thumb_card_width"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/dimens.xml"
+            line="7"
+            column="12"
+            startOffset="207"
+            endLine="7"
+            endColumn="35"
+            endOffset="230"/>
         <location id="R.drawable.thumb_6"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/thumb_6.xml"
             line="2"
@@ -61,7 +85,7 @@
             endOffset="688"/>
         <entry
             name="model"
-            string="attr[colorOnSurface(R)],color[nord_surface(U),nord_focus_stroke(U),nord_unfocused_stroke(U),nord_accent(U),nord_ripple_mask(U),nord_bg(U),nord_on_surface(U),nord_grey_500(U),nord_grey_300(U),nord_grey_400(U),ic_launcher_background(U),nord_text(D),nord_secondary(D),nord_shadow(D)],dimen[card_elevation(U),card_elevation_focused(U)],drawable[banner_tv(U),bg_content_info_20251021_114313_gd2(U),bg_content_info_gradient(U),bg_focus_state(D),bg_unfocused_state(D),button_icon_background(U),card_bg(U),gradient_horizontal_overlay(U),ic_audio_subtitle(U),ic_audio_subtitle_button(U),ic_bell(U),ic_block(U),ic_favorite(U),ic_launcher_foreground(U),ic_record(U),ic_replay(U),sub_disney(D),sub_hbo(D),sub_net(D),sub_prime(D),tag_age_rating(U),tag_status(U),thumb_1(U),thumb_2(U),thumb_3(D),thumb_4(D),thumb_5(D),thumb_6(D),tv_focus_ripple(U)],font[reddit_sans(U),reddit_sans_regular(R)],id[contentInfoRoot(D),backgroundImage(D),gradientOverlay(D),metadataPanel(D),channelInfoRow(D),channelNumber(U),channelName(U),programTitle(U),metadataRow(D),metadataOriginal(U),metadataDuration(U),metadataGenres(U),ageRating(U),timeStatusRow(D),statusTag(D),timeStart(U),timeEnd(U),description(U),actionButtonsRow(D),btnSchedule(U),btnReplay(U),btnRecord(U),btnFavorite(U),btnBlock(U),btnAudioSubtitles(U),systemDateTime(D),systemTime(U),systemDate(U),homeRoot(D),topMenu(D),menuHome(U),menuLogin(U),menuSetting(U),menuMyPlan(U),banner(D),railsContainer(U),loginRoot(D),loginCard(D),btnBack(U),loginTitle(D),usernameLabel(D),inputUsername(U),inputPassword(U),passwordLabel(D),btnSubmit(U),errorText(U),root(U),helloCard(U),titleText(U),splashRoot(U),splashTitle(D),actionButtonRoot(D),iconContainer(U),buttonIcon(U),buttonLabel(U),railRoot(D),railTitle(U),railScroll(U),railRow(U),thumbCard(D),thumbImage(U),overlayGrad(U),thumbTitle(U)],layout[activity_content_info(U),view_action_button(U),activity_home(U),activity_login(U),activity_main(U),activity_splash(U),view_rail(U),view_thumb_card(U)],mipmap[ic_launcher(U),ic_launcher_round(D)],string[app_name(U),menu_home(U),menu_login(U),menu_setting(U),menu_my_plan(U),back(U),login_title(U),label_username_email(U),hint_username_email(U),label_password(U),hint_password(U),action_sign_in(U),hello_world(U),splash_brand(U),thumb_image_cd(U),error_username_required(U),error_username_invalid(U),error_password_required(U),error_password_length(U),sign_in_success(U),content_background_description(D),button_schedule(D),button_replay(D),button_record(D),button_favorite(D),button_block(D),button_audio_subtitles(D),icon_replay_desc(D),icon_audio_subtitle_desc(D),icon_button_desc(D)],style[Theme_TV_NordDark(U),TextAppearance_Card_Title(U),Widget_Card_Nord(U),Theme_Material3_Dark_NoActionBar(R),ShapeAppearance_Medium_Rounded(U),Widget_Material3_CardView_Elevated(R),ShapeAppearance_Material3_MediumComponent(R),TextAppearance_Material3_TitleLarge(R)],xml[leanback_launcher(D)];2^9,3^8,4^a,c^7,d^9,13^12,14^1^2,15^1^3,17^1^2^3,2d^4^5,2e^2f,6f^13^18^25^26^20^19^70,70^16,71^6^17^2d^7a^98^7b^7c^7d^11^79,72^6^2d^99^17^7e^1e^7f^98^80^7^81^5a^56^8^82^83^5c^59^9^a^84,73^6^17^2d^99^85^98,74^6^2f^86^7,75^7,76^17^2d^87^18^98,77^b^1e,78^b^1e,97^9a^6^1^7^a^9^2e^99^9b,98^9e^0^2f,99^9c^1^3^9b,9b^9d;;;"/>
+            string="attr[colorOnSurface(R)],color[nord_surface(U),nord_focus_stroke(U),nord_unfocused_stroke(U),nord_accent(U),nord_ripple_mask(U),nord_bg(U),nord_on_surface(U),nord_grey_500(U),nord_grey_300(U),nord_grey_400(U),ic_launcher_background(U),nord_text(D),nord_secondary(D),nord_shadow(D)],dimen[card_elevation(U),card_elevation_focused(U),thumb_card_width(D),thumb_card_height(D),thumb_card_spacing(D),rail_title_bottom_spacing(D)],drawable[banner_tv(U),bg_content_info_20251021_114313_gd2(U),bg_content_info_gradient(U),bg_focus_state(D),bg_unfocused_state(D),button_icon_background(U),card_bg(U),gradient_horizontal_overlay(U),ic_audio_subtitle(U),ic_audio_subtitle_button(U),ic_bell(U),ic_block(U),ic_favorite(U),ic_launcher_foreground(U),ic_record(U),ic_replay(U),sub_disney(D),sub_hbo(D),sub_net(D),sub_prime(D),tag_age_rating(U),tag_status(U),thumb_1(U),thumb_2(U),thumb_3(D),thumb_4(D),thumb_5(D),thumb_6(D),tv_focus_ripple(U)],font[reddit_sans(U),reddit_sans_regular(R)],id[contentInfoRoot(D),backgroundImage(D),gradientOverlay(D),metadataPanel(D),channelInfoRow(D),channelNumber(U),channelName(U),programTitle(U),metadataRow(D),metadataOriginal(U),metadataDuration(U),metadataGenres(U),ageRating(U),timeStatusRow(D),statusTag(D),timeStart(U),timeEnd(U),description(U),actionButtonsRow(D),btnSchedule(U),btnReplay(U),btnRecord(U),btnFavorite(U),btnBlock(U),btnAudioSubtitles(U),systemDateTime(D),systemTime(U),systemDate(U),homeRoot(D),topMenu(D),menuHome(U),menuLogin(U),menuSetting(U),menuMyPlan(U),banner(D),railsContainer(U),loginRoot(D),loginCard(D),btnBack(U),loginTitle(D),usernameLabel(D),inputUsername(U),inputPassword(U),passwordLabel(D),btnSubmit(U),errorText(U),root(U),helloCard(U),titleText(U),splashRoot(U),splashTitle(D),actionButtonRoot(D),iconContainer(U),buttonIcon(U),buttonLabel(U),railRoot(D),railTitle(U),railScroll(U),railRow(U),thumbCard(D),thumbImage(U),overlayGrad(U),thumbTitle(U)],layout[activity_content_info(U),view_action_button(U),activity_home(U),activity_login(U),activity_main(U),activity_splash(U),view_rail(U),view_thumb_card(U)],mipmap[ic_launcher(U),ic_launcher_round(D)],string[app_name(U),menu_home(U),menu_login(U),menu_setting(U),menu_my_plan(U),back(U),login_title(U),label_username_email(U),hint_username_email(U),label_password(U),hint_password(U),action_sign_in(U),hello_world(U),splash_brand(U),thumb_image_cd(U),error_username_required(U),error_username_invalid(U),error_password_required(U),error_password_length(U),sign_in_success(U),content_background_description(D),button_schedule(D),button_replay(D),button_record(D),button_favorite(D),button_block(D),button_audio_subtitles(D),icon_replay_desc(D),icon_audio_subtitle_desc(D),icon_button_desc(D)],style[Theme_TV_NordDark(U),TextAppearance_Card_Title(U),Widget_Card_Nord(U),Theme_Material3_Dark_NoActionBar(R),ShapeAppearance_Medium_Rounded(U),Widget_Material3_CardView_Elevated(R),ShapeAppearance_Material3_MediumComponent(R),TextAppearance_Material3_TitleLarge(R)],xml[leanback_launcher(D)];2^9,3^8,4^a,c^7,d^9,17^16,18^1^2,19^1^3,1b^1^2^3,31^4^5,32^33,73^17^1c^29^2a^24^1d^74,74^1a,75^6^1b^31^7e^9c^7f^80^81^15^7d,76^6^31^9d^1b^82^22^83^9c^84^7^85^5e^5a^8^86^87^60^5d^9^a^88,77^6^1b^31^9d^89^9c,78^6^33^8a^7,79^7,7a^1b^31^8b^1c^9c,7b^b^22,7c^b^22,9b^9e^6^1^7^a^9^32^9d^9f,9c^a2^0^33,9d^a0^1^3^9f,9f^a1;;;"/>
         <location id="R.color.nord_secondary"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
             line="17"
@@ -150,6 +174,14 @@
             endLine="15"
             endColumn="28"
             endOffset="647"/>
+        <location id="R.dimen.thumb_card_height"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/dimens.xml"
+            line="8"
+            column="12"
+            startOffset="256"
+            endLine="8"
+            endColumn="36"
+            endOffset="280"/>
         <location id="R.drawable.bg_focus_state"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/bg_focus_state.xml"
             line="3"

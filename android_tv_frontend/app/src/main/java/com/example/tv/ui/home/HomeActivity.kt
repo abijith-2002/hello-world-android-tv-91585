@@ -55,8 +55,8 @@ class HomeActivity : AppCompatActivity() {
         val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
 
         val focusScaler = View.OnFocusChangeListener { v, hasFocus ->
-            v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
-                .scaleY(if (hasFocus) 1.06f else 1.0f)
+            v.animate().scaleX(if (hasFocus) 1.05f else 1.0f)
+                .scaleY(if (hasFocus) 1.05f else 1.0f)
                 .setDuration(120)
                 .start()
         }
@@ -147,12 +147,12 @@ class HomeActivity : AppCompatActivity() {
                             titleTv.visibility = View.VISIBLE
                             overlay.visibility = View.VISIBLE
 
-                            // D-pad focus behavior: smaller scale to avoid clipping in tighter portrait cards
+                            // D-pad focus behavior: limit scale to 1.05 to prevent overlap, matches row padding headroom
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
                             card.setOnFocusChangeListener { v, hasFocus ->
-                                v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
-                                    .scaleY(if (hasFocus) 1.06f else 1.0f)
+                                v.animate().scaleX(if (hasFocus) 1.05f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.05f else 1.0f)
                                     .setDuration(120)
                                     .start()
                                 v.elevation = if (hasFocus)
@@ -172,7 +172,13 @@ class HomeActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
 
-                            // Add the portrait card to the row
+                            // Add the card to the row with uniform end spacing to keep straight alignment
+                            val params = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT
+                            )
+                            params.marginEnd = (16 * resources.displayMetrics.density).toInt()
+                            card.layoutParams = params
                             row.addView(card)
                         }
                     }

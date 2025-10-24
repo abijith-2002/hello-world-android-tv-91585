@@ -3422,10 +3422,14 @@ dimen picker_item_height
 dimen picker_item_spacing
 dimen picker_separator_horizontal_padding
 dimen pinpicker_text_size
+dimen rail_title_bottom_spacing
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
+dimen thumb_card_height
+dimen thumb_card_spacing
+dimen thumb_card_width
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
