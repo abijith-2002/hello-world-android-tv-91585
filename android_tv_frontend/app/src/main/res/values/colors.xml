@@ -2,7 +2,8 @@
 <resources>
     <!-- Nord palette tokens -->
     <!-- Core -->
-    <color name="nord_bg">#2E3440</color>          <!-- Background -->
+    <!-- Update background to the requested Nord dark tone #21242A and keep other tokens the same -->
+    <color name="nord_bg">#21242A</color>          <!-- Global Background -->
     <color name="nord_surface">#3B4252</color>     <!-- Surface -->
     <color name="nord_on_surface">#ECEFF4</color>  <!-- On-surface text/icons -->
 

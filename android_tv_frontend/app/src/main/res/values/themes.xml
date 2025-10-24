@@ -3,8 +3,8 @@
     <!-- App theme using Material 3 dark with Nord colors -->
     <style name="Theme.TV.NordDark" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Colors -->
+        <!-- Set default window background to global background -->
         <item name="android:windowBackground">@color/nord_bg</item>
-
 
         <item name="colorSurface">@color/nord_surface</item>
         <item name="colorSurfaceVariant">@color/nord_surface</item>
