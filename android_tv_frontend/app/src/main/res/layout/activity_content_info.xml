@@ -22,7 +22,7 @@
         android:id="@+id/gradientOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80000000" />
+        android:background="@drawable/gradient_horizontal_overlay" />
 
     <!-- Main Content Container - Fixed positioning at x:96, y:108 -->
     <LinearLayout
