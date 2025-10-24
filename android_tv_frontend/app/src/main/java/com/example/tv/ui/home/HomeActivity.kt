@@ -215,11 +215,45 @@ class HomeActivity : AppCompatActivity() {
                             // Load image with Coil using placeholder/error
                             Log.d("CoilTest", "Loading image URL: ${item.poster}")
 
-                            img.load(item.poster) {
-                                crossfade(true)
-                                memoryCachePolicy(CachePolicy.ENABLED)
-                                placeholder(R.drawable.thumb_1)
-                                error(R.drawable.thumb_2)
+                            // PUBLIC_INTERFACE
+                            // Image loading behavior:
+                            // - Use Scale.FIT to preserve aspect ratio and avoid initial crop/zoom on first decode.
+                            // - Disable crossfade to keep size/scale consistent between placeholder and final bitmap.
+                            // - Provide an explicit SizeResolver based on the ImageView's measured bounds to avoid 0x0 target size on first layout pass.
+                            // If width/height are not measured yet, attach a one-shot listener to load after layout
+                            if (img.width == 0 || img.height == 0) {
+                                img.viewTreeObserver.addOnGlobalLayoutListener(object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+                                    override fun onGlobalLayout() {
+                                        img.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                                        img.load(item.poster) {
+                                            crossfade(false)
+                                            memoryCachePolicy(CachePolicy.ENABLED)
+                                            // Provide a SizeResolver tied to this ImageView's measured size.
+                                            size(coil.size.SizeResolver {
+                                                val w = img.width
+                                                val h = img.height
+                                                if (w > 0 && h > 0) coil.size.Size(w, h) else coil.size.Size.ORIGINAL
+                                            })
+                                            scale(coil.size.Scale.FIT)
+                                            placeholder(R.drawable.thumb_1)
+                                            error(R.drawable.thumb_2)
+                                        }
+                                    }
+                                })
+                            } else {
+                                img.load(item.poster) {
+                                    crossfade(false)
+                                    memoryCachePolicy(CachePolicy.ENABLED)
+                                    // Provide a SizeResolver tied to this ImageView's measured size.
+                                    size(coil.size.SizeResolver {
+                                        val w = img.width
+                                        val h = img.height
+                                        if (w > 0 && h > 0) coil.size.Size(w, h) else coil.size.Size.ORIGINAL
+                                    })
+                                    scale(coil.size.Scale.FIT)
+                                    placeholder(R.drawable.thumb_1)
+                                    error(R.drawable.thumb_2)
+                                }
                             }
 
                             // Keep only the image visible: hide title and overlay scrim explicitly
