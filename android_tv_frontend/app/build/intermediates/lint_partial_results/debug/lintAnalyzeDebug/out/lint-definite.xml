@@ -581,12 +581,12 @@
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="117"
+            line="137"
             column="50"
-            startOffset="4145"
-            endLine="117"
+            startOffset="4956"
+            endLine="137"
             endColumn="80"
-            endOffset="4175"/>
+            endOffset="4986"/>
     </incident>
 
     <incident
@@ -595,12 +595,12 @@
         message="String literal in `setText` can not be translated. Use Android resources instead.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="117"
+            line="137"
             column="68"
-            startOffset="4163"
-            endLine="117"
+            startOffset="4974"
+            endLine="137"
             endColumn="79"
-            endOffset="4174"/>
+            endOffset="4985"/>
     </incident>
 
     <incident
@@ -609,12 +609,12 @@
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="120"
+            line="140"
             column="50"
-            startOffset="4312"
-            endLine="120"
+            startOffset="5123"
+            endLine="140"
             endColumn="77"
-            endOffset="4339"/>
+            endOffset="5150"/>
     </incident>
 
     <incident
@@ -623,12 +623,12 @@
         message="String literal in `setText` can not be translated. Use Android resources instead.">
         <location
             file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/tv/ui/home/HomeActivity.kt"
-            line="120"
+            line="140"
             column="68"
-            startOffset="4330"
-            endLine="120"
+            startOffset="5141"
+            endLine="140"
             endColumn="76"
-            endOffset="4338"/>
+            endOffset="5149"/>
     </incident>
 
     <incident

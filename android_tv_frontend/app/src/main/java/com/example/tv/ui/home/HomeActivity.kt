@@ -2,6 +2,7 @@ package com.example.tv.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.util.Log
 import android.widget.HorizontalScrollView
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -34,8 +36,18 @@ import kotlinx.coroutines.launch
  * - Returns no value; displays UI.
  */
 class HomeActivity : AppCompatActivity() {
+    /**
+     * PUBLIC_INTERFACE
+     * DPAD navigation note:
+     * While focus is on any content card in the rails, pressing DPAD_UP programmatically moves
+     * focus to the top menu (defaults to the "Home" menu item). Other directions remain unchanged.
+     */
 
     private val viewModel: HomeViewModel by viewModels()
+
+    // Keep a stable reference to a focusable element in the top menu for requestFocus()
+    private lateinit var topMenu: LinearLayout
+    private lateinit var topMenuDefaultChild: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +60,19 @@ class HomeActivity : AppCompatActivity() {
         viewModel.loadAll()
     }
 
+    /**
+     * PUBLIC_INTERFACE
+     * Ensures the top menu has a stable focus target and basic interactions.
+     */
     private fun setupTopMenu() {
+        topMenu = findViewById(R.id.topMenu)
         val menuHome = findViewById<TextView>(R.id.menuHome)
         val menuLogin = findViewById<TextView>(R.id.menuLogin)
         val menuSetting = findViewById<TextView>(R.id.menuSetting)
         val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+
+        // Default child to receive focus when navigating up from rails
+        topMenuDefaultChild = menuHome
 
         val focusScaler = View.OnFocusChangeListener { v, hasFocus ->
             v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
@@ -107,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
 
                         val row = railView.findViewById<LinearLayout>(R.id.railRow)
                         val titleView = railView.findViewById<TextView>(R.id.railTitle)
-                        railView.findViewById<HorizontalScrollView>(R.id.railScroll)
+                        val scrollView = railView.findViewById<HorizontalScrollView>(R.id.railScroll)
 
                         // Clear previous
                         row.removeAllViews()
@@ -150,6 +170,26 @@ class HomeActivity : AppCompatActivity() {
                             // D-pad focus behavior
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
+
+                            // Hint Android focus system to search up towards topMenu
+                            card.nextFocusUpId = R.id.topMenu
+
+                            // Intercept DPAD_UP to move focus to the top menu when in top rails.
+                            // This applies to any rail; behavior is safe for all.
+                            card.setOnKeyListener { _, keyCode, event ->
+                                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                                    // Try focusing the menu's default child; if not available, focus menu container
+                                    if (::topMenuDefaultChild.isInitialized && topMenuDefaultChild.isFocusable) {
+                                        topMenuDefaultChild.requestFocus()
+                                    } else if (::topMenu.isInitialized) {
+                                        topMenu.requestFocus()
+                                    }
+                                    true
+                                } else {
+                                    false
+                                }
+                            }
+
                             card.setOnFocusChangeListener { v, hasFocus ->
                                 v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
                                     .scaleY(if (hasFocus) 1.06f else 1.0f)
@@ -174,6 +214,10 @@ class HomeActivity : AppCompatActivity() {
 
                             row.addView(card)
                         }
+
+                        // Also set nextFocusUp for the row container and scroll view for robustness
+                        scrollView.nextFocusUpId = R.id.topMenu
+                        row.nextFocusUpId = R.id.topMenu
                     }
                 }
             }

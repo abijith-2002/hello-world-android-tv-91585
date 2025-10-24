@@ -34,16 +34,16 @@
 /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:396: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
             android:lineHeight="32sp"
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:40: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:42: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
             android:foreground="@drawable/tv_focus_ripple" />
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:55: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:57: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
             android:foreground="@drawable/tv_focus_ripple" />
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:70: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:72: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
             android:foreground="@drawable/tv_focus_ripple" />
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:84: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:86: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
             android:foreground="@drawable/tv_focus_ripple" />
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:146: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
@@ -360,16 +360,16 @@ class SplashActivity : AppCompatActivity() {
 
    https://developer.android.com/guide/topics/text/autofill.html
 
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:117: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:137: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
                                 titleView.text = "${category.title} • Loading…"
                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:117: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:137: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
                                 titleView.text = "${category.title} • Loading…"
                                                                    ~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:120: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:140: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
                                 titleView.text = "${category.title} • Error"
                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:120: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:140: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
                                 titleView.text = "${category.title} • Error"
                                                                    ~~~~~~~~
 

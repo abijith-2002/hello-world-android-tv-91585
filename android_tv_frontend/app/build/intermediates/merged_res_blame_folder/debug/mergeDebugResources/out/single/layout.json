@@ -36,10 +36,6 @@
         "source": "com.example.tv.app-main-41:/layout/view_rail.xml"
     },
     {
-        "merged": "com.example.tv.app-mergeDebugResources-38:/layout/activity_home.xml",
-        "source": "com.example.tv.app-main-41:/layout/activity_home.xml"
-    },
-    {
         "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-mergeDebugResources-38:/layout/activity_splash.xml",
         "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_splash.xml"
     }

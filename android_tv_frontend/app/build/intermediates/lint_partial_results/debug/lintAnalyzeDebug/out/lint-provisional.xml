@@ -296,12 +296,12 @@
         <fix-data minSdk="fffffffffff00000" requiresApi="ffffffffffc00000"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_home.xml"
-            line="40"
+            line="42"
             column="13"
-            startOffset="1418"
-            endLine="40"
+            startOffset="1495"
+            endLine="42"
             endColumn="59"
-            endOffset="1464"/>
+            endOffset="1541"/>
         <map>
             <api-levels id="minSdk"
                 value="fffffffffff00000"/>
@@ -320,12 +320,12 @@
         <fix-data minSdk="fffffffffff00000" requiresApi="ffffffffffc00000"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_home.xml"
-            line="55"
+            line="57"
             column="13"
-            startOffset="2025"
-            endLine="55"
+            startOffset="2102"
+            endLine="57"
             endColumn="59"
-            endOffset="2071"/>
+            endOffset="2148"/>
         <map>
             <api-levels id="minSdk"
                 value="fffffffffff00000"/>
@@ -344,12 +344,12 @@
         <fix-data minSdk="fffffffffff00000" requiresApi="ffffffffffc00000"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_home.xml"
-            line="70"
+            line="72"
             column="13"
-            startOffset="2636"
-            endLine="70"
+            startOffset="2713"
+            endLine="72"
             endColumn="59"
-            endOffset="2682"/>
+            endOffset="2759"/>
         <map>
             <api-levels id="minSdk"
                 value="fffffffffff00000"/>
@@ -368,12 +368,12 @@
         <fix-data minSdk="fffffffffff00000" requiresApi="ffffffffffc00000"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_home.xml"
-            line="84"
+            line="86"
             column="13"
-            startOffset="3202"
-            endLine="84"
+            startOffset="3279"
+            endLine="86"
             endColumn="59"
-            endOffset="3248"/>
+            endOffset="3325"/>
         <map>
             <api-levels id="minSdk"
                 value="fffffffffff00000"/>

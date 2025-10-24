@@ -22,7 +22,9 @@
         android:paddingEnd="48dp"
         android:gravity="center_vertical"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/menuHome"
