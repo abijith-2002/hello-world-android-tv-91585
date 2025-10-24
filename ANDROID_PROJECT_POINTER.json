@@ -1,8 +1,0 @@
-{
-  "androidGradleProjectRoot": "android_tv_frontend",
-  "gradleWrapper": "android_tv_frontend/gradlew",
-  "modules": [":app", ":list", ":utilities"],
-  "apkPaths": {
-    "debug": "android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk"
-  }
-}

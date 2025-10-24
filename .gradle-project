@@ -1,7 +1,0 @@
-android_tv_frontend
-app: android_tv_frontend/app
-list: android_tv_frontend/list
-utilities: android_tv_frontend/utilities
-wrapper: android_tv_frontend/gradlew
-defaultTask: assembleDebug
-artifact.debug: android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk

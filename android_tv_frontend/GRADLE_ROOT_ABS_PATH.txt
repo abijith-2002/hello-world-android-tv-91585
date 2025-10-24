@@ -1,1 +1,0 @@
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend

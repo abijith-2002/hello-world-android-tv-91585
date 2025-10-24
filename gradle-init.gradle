@@ -1,6 +1,0 @@
-gradle.beforeProject { p ->
-    if (p == rootProject) {
-        println "[gradle-init] Repository root detected. Actual Android project is in: android_tv_frontend"
-        println "[gradle-init] You can run: ./gradlew -p android_tv_frontend assembleDebug"
-    }
-}

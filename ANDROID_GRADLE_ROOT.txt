@@ -1,3 +1,0 @@
-android_gradle_project_root=android_tv_frontend
-default_module=:app
-debug_apk=android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk

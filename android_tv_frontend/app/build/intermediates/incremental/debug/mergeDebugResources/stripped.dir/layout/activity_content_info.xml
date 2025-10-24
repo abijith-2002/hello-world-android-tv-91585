@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contentInfoRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Background Image (Full screen with adjustViewBounds) -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_content_info_gradient"
+        android:contentDescription="Background" />
+
+    <!-- Gradient Overlay -->
+    <View
+        android:id="@+id/gradientOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_horizontal_overlay" />
+
+    <!-- Main Content Container - Fixed positioning at x:96, y:108 -->
+    <LinearLayout
+        android:id="@+id/metadataPanel"
+        android:layout_width="1150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="108dp"
+        android:layout_gravity="start|top"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <!-- Channel Information Row - Height: 40dp -->
+        <LinearLayout
+            android:id="@+id/channelInfoRow"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <TextView
+                android:id="@+id/channelNumber"
+                android:layout_width="56dp"
+                android:layout_height="40dp"
+                android:text="242"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:lineHeight="38sp"
+                android:fontFamily="sans-serif-black"
+                android:textAlignment="viewEnd"
+                android:gravity="end|center_vertical"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/channelName"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
+                android:text="TNT"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:lineHeight="38sp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Program Title - 27dp gap from channel, height: 70dp -->
+        <TextView
+            android:id="@+id/programTitle"
+            android:layout_width="1150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="Gladiador II"
+            android:textColor="#FFFFFF"
+            android:textSize="60sp"
+            android:lineHeight="70sp"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:includeFontPadding="false" />
+
+        <!-- Metadata Row - 6dp gap from title -->
+        <LinearLayout
+            android:id="@+id/metadataRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <TextView
+                android:id="@+id/metadataOriginal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gladiator II"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:lineHeight="29sp"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="|"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/metadataDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="2 h 28 min"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:lineHeight="29sp"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="|"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/metadataGenres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Acción, aventura, drama"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:lineHeight="29sp"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="|"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/ageRating"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:text="+ 16 Años"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:background="@drawable/tag_age_rating"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Time and Status Row - 14dp gap from metadata -->
+        <LinearLayout
+            android:id="@+id/timeStatusRow"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <TextView
+                android:id="@+id/statusTag"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="MÁS TARDE"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:lineHeight="32sp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:background="@drawable/tag_status"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/timeStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:text="20:00"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:lineHeight="29sp"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="-"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:fontFamily="sans-serif"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/timeEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="22:20"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:lineHeight="29sp"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:text="|"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="29dp"
+                android:src="@drawable/ic_replay"
+                android:contentDescription="Replay" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:text="|"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="29dp"
+                android:src="@drawable/ic_audio_subtitle"
+                android:contentDescription="Audio and subtitles" />
+        </LinearLayout>
+
+        <!-- Description - 49dp gap from time row, width: 925dp, maxLines: 3 -->
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="925dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:lineHeight="39sp"
+            android:fontFamily="sans-serif"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:includeFontPadding="false" />
+
+        <!-- Action Buttons Row - 43dp gap from description, 120dp bottom padding for safe zone -->
+        <LinearLayout
+            android:id="@+id/actionButtonsRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:paddingBottom="120dp"
+            android:orientation="horizontal"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <include
+                android:id="@+id/btnSchedule"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp" />
+
+            <include
+                android:id="@+id/btnReplay"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="2dp" />
+
+            <include
+                android:id="@+id/btnRecord"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="2dp" />
+
+            <include
+                android:id="@+id/btnFavorite"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="2dp" />
+
+            <include
+                android:id="@+id/btnBlock"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="2dp" />
+
+            <include
+                android:id="@+id/btnAudioSubtitles"
+                layout="@layout/view_action_button"
+                android:layout_width="142dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- System Date/Time (Top Right) - Position: x:1724, y:55 -->
+    <LinearLayout
+        android:id="@+id/systemDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="96dp"
+        android:layout_gravity="top|end">
+
+        <TextView
+            android:id="@+id/systemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="20:44"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:lineHeight="48sp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/systemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="7 abr"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:lineHeight="32sp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </LinearLayout>
+
+</FrameLayout>

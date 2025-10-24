@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Safe placeholder TV banner using Nord dark scheme.
+
+  Why change:
+  - Previous version used a <bitmap> layer pointing to a vector drawable. On some devices/versions,
+    <bitmap> requires a raster (png/nine-patch) and may throw an InflateException or
+    "XmlPullParserException: <bitmap> requires a valid 'src' attribute".
+  - To ensure reliability at runtime, we use only a shape/gradient as a background.
+
+  Usage:
+  - Works when referenced as a background or as the android:banner in AndroidManifest.
+  - Matches TV UI with rounded corners and subtle gradient.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background surface with rounded corners and subtle gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <gradient
+                android:startColor="#3B4252"
+                android:centerColor="#343B4A"
+                android:endColor="#2E3440"
+                android:angle="0" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/thumbCard"
+    android:layout_width="220dp"
+    android:layout_height="140dp"
+    android:foreground="@drawable/tv_focus_ripple"
+    android:background="@drawable/card_bg"
+    android:layout_marginEnd="12dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/thumbImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/thumb_image_cd"
+        android:scaleType="centerCrop" />
+
+    <!-- Optional overlay gradient and title (kept invisible by default) -->
+    <View
+        android:id="@+id/overlayGrad"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_horizontal_overlay"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/thumbTitle"
+        style="@style/TextAppearance.Card.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:text=""
+        android:visibility="gone"/>
+
+</FrameLayout>

@@ -1,5 +1,0 @@
-root=.
-gradleWrapper=./gradlew
-settings=settings.gradle
-defaultModule=:app
-outputs.debug=app/build/outputs/apk/debug

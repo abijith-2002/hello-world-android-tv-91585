@@ -1,9 +1,0 @@
-{
-  "variant": "debug",
-  "apk": {
-    "relative": "app/build/outputs/apk/debug/app-debug.apk",
-    "absolute": "/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk",
-    "sha256": "<to-be-computed>"
-  },
-  "notes": "The APK was built via ./gradlew assembleDebug from this project root."
-}

@@ -1,4 +1,0 @@
-root=.
-module=app
-task=:app:assembleDebug
-apk=app/build/outputs/apk/debug/app-debug.apk
