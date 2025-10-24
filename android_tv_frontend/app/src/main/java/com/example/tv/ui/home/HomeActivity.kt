@@ -204,6 +204,14 @@ class HomeActivity : AppCompatActivity() {
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
+                            // Ensure images are clipped to rounded corners (card_bg sets rounded outline)
+                            (card.parent as? View)?.let { container ->
+                                // For the inner FrameLayout we set outline to background; enable clip
+                                container.clipToOutline = true
+                            }
+                            // Also ensure the card itself honors outline clipping and uses compatibility padding
+                            card.clipToOutline = true
+
                             // Load image with Coil using placeholder/error
                             Log.d("CoilTest", "Loading image URL: ${item.poster}")
 

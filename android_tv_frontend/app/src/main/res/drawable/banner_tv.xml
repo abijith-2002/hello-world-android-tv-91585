@@ -16,7 +16,7 @@
     <!-- Background surface with rounded corners and subtle gradient -->
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="16dp" />
+            <corners android:radius="@dimen/card_corner_radius" />
             <gradient
                 android:startColor="#3B4252"
                 android:centerColor="#343B4A"

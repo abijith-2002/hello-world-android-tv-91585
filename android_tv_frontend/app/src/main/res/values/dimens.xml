@@ -2,4 +2,6 @@
 <resources>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_elevation_focused">16dp</dimen>
+    <!-- Shared corner radius for all rail cards -->
+    <dimen name="card_corner_radius">12dp</dimen>
 </resources>

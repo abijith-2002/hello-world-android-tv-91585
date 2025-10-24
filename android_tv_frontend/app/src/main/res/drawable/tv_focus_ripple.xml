@@ -3,7 +3,8 @@
     android:color="@color/nord_accent">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
-            <corners android:radius="16dp" />
+            <!-- Rounded ripple mask using theme radius -->
+            <corners android:radius="@dimen/card_corner_radius" />
             <solid android:color="@color/nord_ripple_mask" />
         </shape>
     </item>

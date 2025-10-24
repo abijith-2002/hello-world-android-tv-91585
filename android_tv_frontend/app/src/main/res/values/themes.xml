@@ -47,7 +47,8 @@
     <!-- ShapeAppearance helper -->
     <style name="ShapeAppearance.Medium.Rounded" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <!-- Use a theme dimension for easy tweaks -->
+        <item name="cornerSize">@dimen/card_corner_radius</item>
     </style>
 
     <!-- Card title text appearance using high-contrast onSurface -->
