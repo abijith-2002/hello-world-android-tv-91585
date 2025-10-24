@@ -1,0 +1,494 @@
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:56: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="38sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:72: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="38sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:89: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+            android:lineHeight="70sp"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:114: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="29sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:137: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="29sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:160: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="29sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:211: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="32sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:229: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="29sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:254: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+                android:lineHeight="29sp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:302: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+            android:lineHeight="39sp"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:380: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+            android:lineHeight="48sp"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:396: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+            android:lineHeight="32sp"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:40: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+            android:foreground="@drawable/tv_focus_ripple" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:55: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+            android:foreground="@drawable/tv_focus_ripple" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:70: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+            android:foreground="@drawable/tv_focus_ripple" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:84: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+            android:foreground="@drawable/tv_focus_ripple" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:146: Warning: Attribute android:foreground has no effect on API levels lower than 23 (current min is 21) [UnusedAttribute]
+                    android:foreground="@drawable/tv_focus_ripple"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/view_action_button.xml:43: Warning: Attribute lineHeight is only used in API level 28 and higher (current min is 21) [UnusedAttribute]
+        android:lineHeight="24sp"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/SplashActivity.kt:21: Warning: The application should not provide its own launch screen [CustomSplashScreen]
+class SplashActivity : AppCompatActivity() {
+      ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "CustomSplashScreen":
+   Starting in Android 12 (API 31+), the application's Launch Screen is
+   provided by the system and the application should not create its own,
+   otherwise the user will see two splashscreens. Please check the
+   SplashScreen class to check how the Splash Screen can be controlled and
+   customized.
+
+   https://developer.android.com/guide/topics/ui/splash-screen
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_disney.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_hbo.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_net.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_prime.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_1.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_2.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_3.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_4.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_5.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_6.xml:3: Warning: Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more [VectorRaster]
+    android:width="220dp" android:height="140dp"
+                   ~~~~~
+
+   Explanation for issues of type "VectorRaster":
+   Vector icons require API 21 or API 24 depending on used features, but when
+   minSdkVersion is less than 21 or 24 and Android Gradle plugin 1.4 or higher
+   is used, a vector drawable placed in the drawable folder is automatically
+   moved to drawable-anydpi-v21 or drawable-anydpi-v24 and bitmap images are
+   generated for different screen resolutions for backwards compatibility.
+
+   However, there are some limitations to this raster image generation, and
+   this lint check flags elements and attributes that are not fully supported.
+   You should manually check whether the generated output is acceptable for
+   those older devices.
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:60: Warning: A newer version of androidx.core:core-ktx than 1.13.1 is available: 1.17.0 [GradleDependency]
+    implementation "androidx.core:core-ktx:1.13.1"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:61: Warning: A newer version of androidx.appcompat:appcompat than 1.7.0 is available: 1.7.1 [GradleDependency]
+    implementation "androidx.appcompat:appcompat:1.7.0"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:62: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1 [GradleDependency]
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:63: Warning: A newer version of androidx.activity:activity-ktx than 1.9.3 is available: 1.11.0 [GradleDependency]
+    implementation "androidx.activity:activity-ktx:1.9.3"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:66: Warning: A newer version of com.google.android.material:material than 1.12.0 is available: 1.13.0 [GradleDependency]
+    implementation "com.google.android.material:material:1.12.0"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:69: Warning: A newer version of androidx.leanback:leanback than 1.1.0-rc02 is available: 1.2.0 [GradleDependency]
+    implementation "androidx.leanback:leanback:1.1.0-rc02"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:83: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.8.6 is available: 2.9.4 [GradleDependency]
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:84: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.8.6 is available: 2.9.4 [GradleDependency]
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.6"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:94: Warning: A newer version of androidx.test.ext:junit than 1.2.1 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation "androidx.test.ext:junit:1.2.1"
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/build.gradle:95: Warning: A newer version of androidx.test.espresso:espresso-core than 3.6.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.6.1"
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:6: Warning: Possible overdraw: Root element paints background #000000 with a theme that also paints a background (inferred theme is @android_style/Theme_NoTitleBar_Fullscreen) [Overdraw]
+    android:background="#000000"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_home.xml:8: Warning: Possible overdraw: Root element paints background @color/nord_bg with a theme that also paints a background (inferred theme is @style/Theme.TV.NordDark) [Overdraw]
+    android:background="@color/nord_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:7: Warning: Possible overdraw: Root element paints background @color/nord_bg with a theme that also paints a background (inferred theme is @style/Theme.TV.NordDark) [Overdraw]
+    android:background="@color/nord_bg">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_main.xml:8: Warning: Possible overdraw: Root element paints background @color/nord_bg with a theme that also paints a background (inferred theme is @style/Theme.TV.NordDark) [Overdraw]
+    android:background="@color/nord_bg">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_splash.xml:6: Warning: Possible overdraw: Root element paints background @color/nord_bg with a theme that also paints a background (inferred theme is @style/Theme.TV.NordDark) [Overdraw]
+    android:background="@color/nord_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/bg_focus_state.xml:3: Warning: The resource R.drawable.bg_focus_state appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/bg_unfocused_state.xml:3: Warning: The resource R.drawable.bg_unfocused_state appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/colors.xml:15: Warning: The resource R.color.nord_text appears to be unused [UnusedResources]
+    <color name="nord_text">@color/nord_on_surface</color>
+           ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/colors.xml:17: Warning: The resource R.color.nord_secondary appears to be unused [UnusedResources]
+    <color name="nord_secondary">@color/nord_grey_300</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/colors.xml:25: Warning: The resource R.color.nord_shadow appears to be unused [UnusedResources]
+    <color name="nord_shadow">#1A000000</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/xml/leanback_launcher.xml:2: Warning: The resource R.xml.leanback_launcher appears to be unused [UnusedResources]
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:36: Warning: The resource R.string.content_background_description appears to be unused [UnusedResources]
+    <string name="content_background_description">Content background</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:37: Warning: The resource R.string.button_schedule appears to be unused [UnusedResources]
+    <string name="button_schedule">Programar</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:38: Warning: The resource R.string.button_replay appears to be unused [UnusedResources]
+    <string name="button_replay">Reiniciar</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:39: Warning: The resource R.string.button_record appears to be unused [UnusedResources]
+    <string name="button_record">Grabar</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:40: Warning: The resource R.string.button_favorite appears to be unused [UnusedResources]
+    <string name="button_favorite">Favorito</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:41: Warning: The resource R.string.button_block appears to be unused [UnusedResources]
+    <string name="button_block">Bloquear</string>
+            ~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:42: Warning: The resource R.string.button_audio_subtitles appears to be unused [UnusedResources]
+    <string name="button_audio_subtitles">Audio y subtítulos</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:43: Warning: The resource R.string.icon_replay_desc appears to be unused [UnusedResources]
+    <string name="icon_replay_desc">Replay icon</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:44: Warning: The resource R.string.icon_audio_subtitle_desc appears to be unused [UnusedResources]
+    <string name="icon_audio_subtitle_desc">Audio and subtitles icon</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/values/strings.xml:45: Warning: The resource R.string.icon_button_desc appears to be unused [UnusedResources]
+    <string name="icon_button_desc">Button icon</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_disney.xml:2: Warning: The resource R.drawable.sub_disney appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_hbo.xml:2: Warning: The resource R.drawable.sub_hbo appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_net.xml:2: Warning: The resource R.drawable.sub_net appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/sub_prime.xml:2: Warning: The resource R.drawable.sub_prime appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_3.xml:2: Warning: The resource R.drawable.thumb_3 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_4.xml:2: Warning: The resource R.drawable.thumb_4 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_5.xml:2: Warning: The resource R.drawable.thumb_5 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/thumb_6.xml:2: Warning: The resource R.drawable.thumb_6 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/drawable/bg_content_info_20251021_114313_gd2.jpg: Warning: Found bitmap drawable res/drawable/bg_content_info_20251021_114313_gd2.jpg in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/AndroidManifest.xml:8: Warning: Should explicitly set android:icon, there is no default [MissingApplicationIcon]
+    <application
+     ~~~~~~~~~~~
+
+   Explanation for issues of type "MissingApplicationIcon":
+   You should set an icon for the application as whole because there is no
+   default. This attribute must be set as a reference to a drawable resource
+   containing the image (for example @drawable/icon).
+
+   https://developer.android.com/studio/publish/preparing#publishing-configure
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:77: Warning: This text field does not specify an inputType [TextFields]
+                <EditText
+                 ~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:106: Warning: This text field does not specify an inputType [TextFields]
+                <EditText
+                 ~~~~~~~~
+
+   Explanation for issues of type "TextFields":
+   Providing an inputType attribute on a text field improves usability because
+   depending on the data to be input, optimized keyboards can be shown to the
+   user (such as just digits and parentheses for a phone number). 
+
+   The lint detector also looks at the id of the view, and if the id offers a
+   hint of the purpose of the field (for example, the id contains the phrase
+   phone or email), then lint will also ensure that the inputType contains the
+   corresponding type attributes.
+
+   If you really want to keep the text field generic, you can suppress this
+   warning by setting inputType="text".
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:77: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:106: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:117: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                                titleView.text = "${category.title} • Loading…"
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:117: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                titleView.text = "${category.title} • Loading…"
+                                                                   ~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:120: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                                titleView.text = "${category.title} • Error"
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:120: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                titleView.text = "${category.title} • Error"
+                                                                   ~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:18: Warning: Hardcoded string "Background", should use @string resource [HardcodedText]
+        android:contentDescription="Background" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:53: Warning: Hardcoded string "242", should use @string resource [HardcodedText]
+                android:text="242"
+                ~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:69: Warning: Hardcoded string "TNT", should use @string resource [HardcodedText]
+                android:text="TNT"
+                ~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:86: Warning: Hardcoded string "Gladiador II", should use @string resource [HardcodedText]
+            android:text="Gladiador II"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:111: Warning: Hardcoded string "Gladiator II", should use @string resource [HardcodedText]
+                android:text="Gladiator II"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:124: Warning: Hardcoded string "|", should use @string resource [HardcodedText]
+                android:text="|"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:134: Warning: Hardcoded string "2 h 28 min", should use @string resource [HardcodedText]
+                android:text="2 h 28 min"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:147: Warning: Hardcoded string "|", should use @string resource [HardcodedText]
+                android:text="|"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:157: Warning: Hardcoded string "Acción, aventura, drama", should use @string resource [HardcodedText]
+                android:text="Acción, aventura, drama"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:170: Warning: Hardcoded string "|", should use @string resource [HardcodedText]
+                android:text="|"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:180: Warning: Hardcoded string "+ 16 Años", should use @string resource [HardcodedText]
+                android:text="+ 16 Años"
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:208: Warning: Hardcoded string "MÁS TARDE", should use @string resource [HardcodedText]
+                android:text="MÁS TARDE"
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:226: Warning: Hardcoded string "20:00", should use @string resource [HardcodedText]
+                android:text="20:00"
+                ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:239: Warning: Hardcoded string "-", should use @string resource [HardcodedText]
+                android:text="-"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:251: Warning: Hardcoded string "22:20", should use @string resource [HardcodedText]
+                android:text="22:20"
+                ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:264: Warning: Hardcoded string "|", should use @string resource [HardcodedText]
+                android:text="|"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:274: Warning: Hardcoded string "Replay", should use @string resource [HardcodedText]
+                android:contentDescription="Replay" />
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:280: Warning: Hardcoded string "|", should use @string resource [HardcodedText]
+                android:text="|"
+                ~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:290: Warning: Hardcoded string "Audio and subtitles", should use @string resource [HardcodedText]
+                android:contentDescription="Audio and subtitles" />
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:299: Warning: Hardcoded string "Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo.", should use @string resource [HardcodedText]
+            android:text="Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:377: Warning: Hardcoded string "20:44", should use @string resource [HardcodedText]
+            android:text="20:44"
+            ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_content_info.xml:393: Warning: Hardcoded string "7 abr", should use @string resource [HardcodedText]
+            android:text="7 abr"
+            ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/view_action_button.xml:30: Warning: Hardcoded string "Button icon", should use @string resource [HardcodedText]
+            android:contentDescription="Button icon" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/view_action_button.xml:40: Warning: Hardcoded string "Programar", should use @string resource [HardcodedText]
+        android:text="Programar"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:74: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="4dp"
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:103: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="4dp"
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/activity_login.xml:132: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="4dp" />
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/res/layout/view_rail.xml:20: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+        android:paddingStart="8dp"
+        ~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "RtlSymmetry":
+   If you specify padding or margin on the left side of a layout, you should
+   probably also specify padding on the right side (and vice versa) for
+   right-to-left layout symmetry.
+
+0 errors, 107 warnings

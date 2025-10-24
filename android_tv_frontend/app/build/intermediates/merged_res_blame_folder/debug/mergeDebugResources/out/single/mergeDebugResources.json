@@ -1,170 +1,182 @@
 [
     {
-        "merged": "com.example.tv.app-debug-39:/layout_activity_login.xml.flat",
-        "source": "com.example.tv.app-main-41:/layout/activity_login.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_tv_focus_ripple.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/tv_focus_ripple.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_tag_age_rating.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/tag_age_rating.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_activity_main.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_audio_subtitle_button.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_audio_subtitle_button.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_4.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_4.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_record.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_record.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_bg_content_info_gradient.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/bg_content_info_gradient.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_tag_age_rating.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/tag_age_rating.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/xml_leanback_launcher.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/xml/leanback_launcher.xml"
     },
     {
         "merged": "com.example.tv.app-debug-39:/layout_view_rail.xml.flat",
         "source": "com.example.tv.app-main-41:/layout/view_rail.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_block.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_block.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_6.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_6.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.tv.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_1.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_1.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_2.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_2.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_bg_content_info_gradient.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/bg_content_info_gradient.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/font_reddit_sans.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/font/reddit_sans.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_bg_focus_state.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/bg_focus_state.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_tag_status.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/tag_status.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_tag_status.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/tag_status.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_gradient_horizontal_overlay.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/gradient_horizontal_overlay.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_bg_content_info_20251021_114313_gd2.jpg.flat",
-        "source": "com.example.tv.app-main-41:/drawable/bg_content_info_20251021_114313_gd2.jpg"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_view_rail.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/view_rail.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_bell.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_bell.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_sub_hbo.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/sub_hbo.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_6.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_6.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_activity_login.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_login.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_3.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_3.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_sub_prime.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/sub_prime.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_sub_net.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/sub_net.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_5.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_5.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/layout_activity_splash.xml.flat",
-        "source": "com.example.tv.app-main-41:/layout/activity_splash.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_banner_tv.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/banner_tv.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_tv_focus_ripple.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/tv_focus_ripple.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_sub_net.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/sub_net.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.tv.app-main-41:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_activity_splash.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_splash.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_banner_tv.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/banner_tv.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_replay.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_replay.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_record.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_record.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_view_action_button.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/view_action_button.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_replay.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_replay.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_bg_content_info_20251021_114313_gd2.jpg.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/bg_content_info_20251021_114313_gd2.jpg"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_launcher_foreground.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_block.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_block.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/layout_activity_main.xml.flat",
-        "source": "com.example.tv.app-main-41:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/drawable_sub_hbo.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/sub_hbo.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/drawable_button_icon_background.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/button_icon_background.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/drawable_bg_unfocused_state.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/bg_unfocused_state.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_audio_subtitle.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_audio_subtitle.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/layout_view_action_button.xml.flat",
-        "source": "com.example.tv.app-main-41:/layout/view_action_button.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/xml_leanback_launcher.xml.flat",
-        "source": "com.example.tv.app-main-41:/xml/leanback_launcher.xml"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/font_reddit_sans_regular.ttf.flat",
-        "source": "com.example.tv.app-main-41:/font/reddit_sans_regular.ttf"
-    },
-    {
-        "merged": "com.example.tv.app-debug-39:/drawable_sub_prime.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/sub_prime.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_launcher_foreground.xml"
     },
     {
         "merged": "com.example.tv.app-debug-39:/layout_activity_home.xml.flat",
         "source": "com.example.tv.app-main-41:/layout/activity_home.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_card_bg.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/card_bg.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_3.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_3.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_5.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_5.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_activity_content_info.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_content_info.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/layout_activity_content_info.xml.flat",
-        "source": "com.example.tv.app-main-41:/layout/activity_content_info.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_bg_unfocused_state.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/bg_unfocused_state.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_sub_disney.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/sub_disney.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_thumb_1.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/thumb_1.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_gradient_horizontal_overlay.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/gradient_horizontal_overlay.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_ic_favorite.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/ic_favorite.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_audio_subtitle.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_audio_subtitle.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/font_reddit_sans.xml.flat",
-        "source": "com.example.tv.app-main-41:/font/reddit_sans.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/font_reddit_sans_regular.ttf.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/font/reddit_sans_regular.ttf"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_2.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_2.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_activity_home.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/activity_home.xml"
     },
     {
-        "merged": "com.example.tv.app-debug-39:/drawable_thumb_4.xml.flat",
-        "source": "com.example.tv.app-main-41:/drawable/thumb_4.xml"
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_bg_focus_state.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/bg_focus_state.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_button_icon_background.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/button_icon_background.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_bell.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_bell.xml"
     },
     {
         "merged": "com.example.tv.app-debug-39:/layout_view_thumb_card.xml.flat",
         "source": "com.example.tv.app-main-41:/layout/view_thumb_card.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_sub_disney.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/sub_disney.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_favorite.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_favorite.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/layout_view_thumb_card.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/layout/view_thumb_card.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_ic_audio_subtitle_button.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/ic_audio_subtitle_button.xml"
+    },
+    {
+        "merged": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-debug-39:/drawable_card_bg.xml.flat",
+        "source": "/home/kavia/.gradle/daemon/9.0.0/com.example.tv.app-main-41:/drawable/card_bg.xml"
     }
 ]

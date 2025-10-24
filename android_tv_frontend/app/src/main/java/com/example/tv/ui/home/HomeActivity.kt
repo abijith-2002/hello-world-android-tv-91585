@@ -151,13 +151,14 @@ class HomeActivity : AppCompatActivity() {
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
                             card.setOnFocusChangeListener { v, hasFocus ->
-                                v.animate().scaleX(if (hasFocus) 1.08f else 1.0f)
-                                    .scaleY(if (hasFocus) 1.08f else 1.0f)
+                                v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.06f else 1.0f)
                                     .setDuration(120)
                                     .start()
-                                v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
-                                    R.dimen.card_elevation
-                                )
+                                v.elevation = if (hasFocus)
+                                    resources.getDimension(R.dimen.card_elevation_focused)
+                                else
+                                    resources.getDimension(R.dimen.card_elevation)
                             }
 
                             // Open ContentInfoActivity on click with name
