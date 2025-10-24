@@ -201,15 +201,13 @@ class HomeActivity : AppCompatActivity() {
                         railState.items.forEach { item ->
                             val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
                             val img = card.findViewById<ImageView>(R.id.thumbImage)
-                            val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
-                            val overlay = card.findViewById<View>(R.id.overlayGrad)
 
                             // Ensure images are clipped to rounded corners (card_bg sets rounded outline)
                             (card.parent as? View)?.let { container ->
-                                // For the inner FrameLayout we set outline to background; enable clip
+                                // For the inner container ensure outline clipping is on if outline is provided
                                 container.clipToOutline = true
                             }
-                            // Also ensure the card itself honors outline clipping and uses compatibility padding
+                            // Also ensure the card itself honors outline clipping
                             card.clipToOutline = true
 
                             // Load image with Coil using placeholder/error
@@ -222,11 +220,7 @@ class HomeActivity : AppCompatActivity() {
                                 error(R.drawable.thumb_2)
                             }
 
-                            // Show title overlay
-                            titleTv.text = item.name
-                            titleTv.visibility = View.VISIBLE
-                            overlay.visibility = View.VISIBLE
-
+                            // Card shows image only; no title or overlay
                             // D-pad focus behavior
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
