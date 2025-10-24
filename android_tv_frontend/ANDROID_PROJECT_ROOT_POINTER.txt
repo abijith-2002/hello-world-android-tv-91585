@@ -1,0 +1,5 @@
+android_project_root=.
+contains=settings.gradle,settings.gradle.kts,build.gradle,build.gradle.kts,gradlew
+modules=:app,:list,:utilities
+apk.debug.path=app/build/outputs/apk/debug/app-debug.apk
+note=This pointer helps automated tools reliably detect the Android Gradle project root.

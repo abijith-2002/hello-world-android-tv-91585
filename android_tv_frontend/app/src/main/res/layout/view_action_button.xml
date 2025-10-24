@@ -8,7 +8,9 @@
     android:clickable="true"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:nextFocusLeft="@id/actionButtonRoot"
+    android:nextFocusRight="@id/actionButtonRoot">
 
     <!-- Icon Container (Circular Background) - 104x80dp oval/circular shape -->
     <FrameLayout

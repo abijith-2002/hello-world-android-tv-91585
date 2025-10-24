@@ -1,3 +1,5 @@
+# PROJECT_ROOT_MARKER: ANDROID_GRADLE_ROOT
+
 Android Project Root
 
 This directory (android_tv_frontend) is the Gradle root for the Android TV app.

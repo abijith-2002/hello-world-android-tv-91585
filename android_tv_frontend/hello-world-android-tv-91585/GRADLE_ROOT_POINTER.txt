@@ -1,5 +1,7 @@
+# PROJECT_ROOT_MARKER: ANDROID_GRADLE_ROOT
 root=android_tv_frontend
 modules=:app,:list,:utilities
 wrapper=android_tv_frontend/gradlew
 settings=android_tv_frontend/settings.gradle
+apk.debug.path=android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk
 note=This file helps tooling detect the Android project root directory from the workspace root.

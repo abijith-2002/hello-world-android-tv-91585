@@ -43,7 +43,8 @@
             android:focusable="true"
             android:layout_marginEnd="10dp"
             android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
+            android:clipToOutline="true"
+            android:nextFocusLeft="@id/menuHome" />
 
         <TextView
             android:id="@+id/menuLogin"
@@ -99,7 +100,8 @@
             android:paddingBottom="10dp"
             android:focusable="true"
             android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
+            android:clipToOutline="true"
+            android:nextFocusRight="@id/menuMyPlan" />
     </LinearLayout>
 
     <!-- Banner -->
@@ -115,7 +117,11 @@
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         android:padding="0dp"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:nextFocusLeft="@id/banner"
+        android:nextFocusRight="@id/banner" />
 
     <!-- Rails list -->
     <ScrollView

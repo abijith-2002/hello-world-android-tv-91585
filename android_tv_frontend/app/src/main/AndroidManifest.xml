@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- PROJECT_ROOT_MARKER:ANDROID_GRADLE_ROOT (modules=:app,:list,:utilities, wrapper=../../gradlew) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.software.leanback" android:required="true" />

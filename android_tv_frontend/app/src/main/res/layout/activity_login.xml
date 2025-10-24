@@ -144,7 +144,9 @@
                     android:textColor="@color/nord_bg"
                     android:focusable="true"
                     android:foreground="@drawable/tv_focus_ripple"
-                    android:nextFocusUp="@id/inputPassword" />
+                    android:nextFocusUp="@id/inputPassword"
+                    android:nextFocusLeft="@id/btnSubmit"
+                    android:nextFocusRight="@id/btnSubmit" />
 
             </LinearLayout>
 

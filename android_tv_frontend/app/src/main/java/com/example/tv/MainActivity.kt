@@ -3,6 +3,7 @@ package com.example.tv
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tv.databinding.ActivityMainBinding
 import com.example.tv.ui.login.LoginActivity
@@ -50,6 +51,21 @@ class MainActivity : AppCompatActivity() {
                     .scaleY(if (hasFocus) 1.03f else 1.0f)
                     .setDuration(120)
                     .start()
+            }
+
+            // Consume DPAD edges so focus does not escape this single-card screen
+            setOnKeyListener { _, keyCode, event ->
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_LEFT,
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        // Single item rail: consume for all actions
+                        return@setOnKeyListener true
+                    }
+                    else -> {
+                        // Default behavior
+                        return@setOnKeyListener false
+                    }
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list/build.gradle:26: Warning: A newer version of androidx.annotation:annotation than 1.8.2 is available: 1.9.1 [GradleDependency]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list/build.gradle:30: Warning: A newer version of androidx.annotation:annotation than 1.8.2 is available: 1.9.1 [GradleDependency]
     implementation "androidx.annotation:annotation:1.8.2"
                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

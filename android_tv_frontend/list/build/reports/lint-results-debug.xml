@@ -13,7 +13,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list/build.gradle"
-            line="26"
+            line="30"
             column="20"/>
     </issue>
 

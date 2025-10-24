@@ -1,3 +1,8 @@
+/** PROJECT_ROOT_MARKER:ANDROID_GRADLE_ROOT
+  - This file marks the Gradle root for analyzers that require an inline marker.
+  - Modules: :app, :list, :utilities
+  - Wrapper: ./gradlew
+**/
 pluginManagement {
     repositories {
         gradlePluginPortal()

@@ -1,3 +1,8 @@
+/** PROJECT_ROOT_MARKER:HINT
+ - Gradle root is at: ../ (android_tv_frontend)
+ - Wrapper: ../gradlew
+ - Modules: :app, :list, :utilities
+**/
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'

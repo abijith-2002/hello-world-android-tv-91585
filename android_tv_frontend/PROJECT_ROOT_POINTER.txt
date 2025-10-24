@@ -1,4 +1,7 @@
+# PROJECT_ROOT_MARKER: ANDROID_GRADLE_ROOT
 android_project_root=.
 contains=settings.gradle
 modules=:app,:list,:utilities
+wrapper=./gradlew
+apk.debug.path=app/build/outputs/apk/debug/app-debug.apk
 note=This file helps tooling detect the Android project root directory.

@@ -94,10 +94,36 @@ class HomeActivity : AppCompatActivity() {
                 .start()
         }
 
-        arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan).forEach {
-            it.isFocusable = true
-            it.isFocusableInTouchMode = true
-            it.onFocusChangeListener = focusScaler
+        val topMenuItems = arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan)
+        topMenuItems.forEachIndexed { idx, v ->
+            v.isFocusable = true
+            v.isFocusableInTouchMode = true
+            v.onFocusChangeListener = focusScaler
+
+            // Consume DPAD at edges for the top menu rail as well
+            v.setOnKeyListener { _, keyCode, event ->
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                        val isFirst = idx == 0
+                        if (isFirst) return@setOnKeyListener true
+                        if (event.action == KeyEvent.ACTION_DOWN) {
+                            topMenuItems[idx - 1].requestFocus()
+                            return@setOnKeyListener true
+                        }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        val isLast = idx == topMenuItems.lastIndex
+                        if (isLast) return@setOnKeyListener true
+                        if (event.action == KeyEvent.ACTION_DOWN) {
+                            topMenuItems[idx + 1].requestFocus()
+                            return@setOnKeyListener true
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
 
         menuLogin.setOnClickListener {
@@ -301,48 +327,70 @@ class HomeActivity : AppCompatActivity() {
                             // - DPAD_LEFT/RIGHT: if on the first/last card in the row, consume and do nothing.
                             //   This prevents focus from escaping the rail horizontally at edges.
                             card.setOnKeyListener { v, keyCode, event ->
-                                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
-
+                                // Always handle on ACTION_DOWN; also guard against other actions by consuming at edges
+                                val parentRow = v.parent as? LinearLayout
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_UP -> {
-                                        val remapped = handleDpadUpWithinRails(v, category)
-                                        if (remapped) {
-                                            true
-                                        } else {
-                                            // First row boundary: do not auto-jump to menu. Consume to keep focus stable.
-                                            if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
-                                            true
+                                        // Consume UP on all actions at first row; otherwise remap to row above on DOWN
+                                        val currentRowIdx = categories.indexOf(category).coerceAtLeast(0)
+                                        if (currentRowIdx <= 0) {
+                                            if (focusDebug) Log.d("FocusNav", "DPAD_UP at top-most row: consumed, no-op.")
+                                            return@setOnKeyListener true
                                         }
+                                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener true
+                                        val remapped = handleDpadUpWithinRails(v, category)
+                                        if (remapped) true else true
                                     }
 
                                     KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                        val parentRow = v.parent as? LinearLayout
                                         if (parentRow != null) {
                                             val currentIndex = parentRow.indexOfChild(v).coerceAtLeast(0)
                                             val isFirst = currentIndex <= 0
                                             if (isFirst) {
-                                                if (focusDebug) Log.d("FocusNav", "DPAD_LEFT at first card: consumed, no-op.")
+                                                if (focusDebug) Log.d("FocusNav", "DPAD_LEFT at first card: consumed (all actions), no-op.")
                                                 return@setOnKeyListener true
                                             }
                                         }
+                                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                         false
                                     }
 
                                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                        val parentRow = v.parent as? LinearLayout
                                         if (parentRow != null) {
                                             val currentIndex = parentRow.indexOfChild(v).coerceAtLeast(0)
                                             val lastIndex = (parentRow.childCount - 1).coerceAtLeast(0)
                                             val isLast = currentIndex >= lastIndex
                                             if (isLast) {
-                                                if (focusDebug) Log.d("FocusNav", "DPAD_RIGHT at last card: consumed, no-op.")
+                                                if (focusDebug) Log.d("FocusNav", "DPAD_RIGHT at last card: consumed (all actions), no-op.")
                                                 return@setOnKeyListener true
                                             }
                                         }
+                                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                         false
                                     }
 
-                                    else -> false
+                                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                        // If at last row, consume; otherwise allow default to move into next row
+                                        val currentRowIdx = categories.indexOf(category).coerceAtLeast(0)
+                                        val isLastRow = currentRowIdx >= categories.lastIndex
+                                        if (isLastRow) {
+                                            if (focusDebug) Log.d("FocusNav", "DPAD_DOWN at bottom-most row: consumed, no-op.")
+                                            return@setOnKeyListener true
+                                        }
+                                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                                        false
+                                    }
+                                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                                        // Allow click on ACTION_DOWN only; consume ACTION_UP to avoid duplicate triggers on some OEMs
+                                        if (event.action == KeyEvent.ACTION_DOWN) {
+                                            v.performClick()
+                                        }
+                                        return@setOnKeyListener true
+                                    }
+                                    else -> {
+                                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                                        false
+                                    }
                                 }
                             }
 
@@ -374,6 +422,50 @@ class HomeActivity : AppCompatActivity() {
                         // Keep focusUp hints for container views (no change needed)
                         scrollView.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
+
+                        // Also guard at the row level: if focus is on first/last child, consume horizontal DPAD
+                        row.setOnKeyListener { _, keyCode, event ->
+                            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                            when (keyCode) {
+                                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                    val focused = row.findFocus()
+                                    val idx = if (focused != null) row.indexOfChild(focused) else -1
+                                    val isFirst = idx <= 0
+                                    if (isFirst) return@setOnKeyListener true
+                                    false
+                                }
+                                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                    val focused = row.findFocus()
+                                    val idx = if (focused != null) row.indexOfChild(focused) else -1
+                                    val isLast = idx >= (row.childCount - 1).coerceAtLeast(0)
+                                    if (isLast) return@setOnKeyListener true
+                                    false
+                                }
+                                else -> false
+                            }
+                        }
+
+                        // Final safeguard: consume LEFT/RIGHT on the HorizontalScrollView at edges too
+                        scrollView.setOnKeyListener { _, keyCode, event ->
+                            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                            when (keyCode) {
+                                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                    val focused = row.findFocus()
+                                    val idx = if (focused != null) row.indexOfChild(focused) else -1
+                                    val isFirst = idx <= 0
+                                    if (isFirst) return@setOnKeyListener true
+                                    false
+                                }
+                                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                    val focused = row.findFocus()
+                                    val idx = if (focused != null) row.indexOfChild(focused) else -1
+                                    val isLast = idx >= (row.childCount - 1).coerceAtLeast(0)
+                                    if (isLast) return@setOnKeyListener true
+                                    false
+                                }
+                                else -> false
+                            }
+                        }
                     }
 
                     // Verification logs for multiple rows

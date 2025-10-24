@@ -17,11 +17,11 @@ import java.util.*
 /**
  * PUBLIC_INTERFACE
  * ContentInfoActivity
- * 
+ *
  * Displays detailed content information screen matching Figma design screen 35 (4077:14472).
  * Uses Roboto fonts, exact pixel values, and native Android TV components.
  * Background image from attachments with gradient overlay for text readability.
- * 
+ *
  * Features:
  * - Full-screen background with horizontal gradient overlay
  * - Channel info, program title, metadata with age rating
@@ -29,8 +29,8 @@ import java.util.*
  * - 3-line description with ellipsis
  * - 6 focusable action buttons with focus states
  * - System date/time in top-right corner
- * - D-PAD navigation (left/right) across buttons
- * 
+ * - D-PAD navigation (left/right) across buttons with edge no-op consumption
+ *
  * Intent extras:
  * - EXTRA_CHANNEL_NUMBER: String - Channel number (default "242")
  * - EXTRA_CHANNEL_NAME: String - Channel name (default "TNT")
@@ -41,14 +41,13 @@ import java.util.*
  * - EXTRA_AGE_RATING: String - Age rating (default "+ 16 Años")
  * - EXTRA_TIME_START: String - Start time (default "20:00")
  * - EXTRA_TIME_END: String - End time (default "22:20")
- * 
+ *
  * @param None
  * @return Displays UI and handles user interaction
  */
 class ContentInfoActivity : ComponentActivity() {
 
     private lateinit var actionButtons: List<FrameLayout>
-    private var currentFocusIndex = 0
 
     private val buttonConfigs = listOf(
         ButtonConfig("Programar", R.drawable.ic_bell),
@@ -66,7 +65,7 @@ class ContentInfoActivity : ComponentActivity() {
         setupSystemDateTime()
         populateContentData()
         setupActionButtons()
-        
+
         // Focus first button by default
         actionButtons.firstOrNull()?.requestFocus()
     }
@@ -74,46 +73,46 @@ class ContentInfoActivity : ComponentActivity() {
     private fun setupSystemDateTime() {
         val timeView = findViewById<TextView>(R.id.systemTime)
         val dateView = findViewById<TextView>(R.id.systemDate)
-        
+
         val currentTime = Calendar.getInstance()
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val dateFormat = SimpleDateFormat("d MMM", Locale("es", "ES"))
-        
+
         timeView.text = timeFormat.format(currentTime.time)
         dateView.text = dateFormat.format(currentTime.time).replace(".", "")
     }
 
     private fun populateContentData() {
         // Get data from intent or use defaults
-        findViewById<TextView>(R.id.channelNumber).text = 
+        findViewById<TextView>(R.id.channelNumber).text =
             intent.getStringExtra(EXTRA_CHANNEL_NUMBER) ?: "242"
-        
-        findViewById<TextView>(R.id.channelName).text = 
+
+        findViewById<TextView>(R.id.channelName).text =
             intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: "TNT"
-        
-        findViewById<TextView>(R.id.programTitle).text = 
+
+        findViewById<TextView>(R.id.programTitle).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiador II"
-        
-        findViewById<TextView>(R.id.metadataOriginal).text = 
+
+        findViewById<TextView>(R.id.metadataOriginal).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiator II"
-        
-        findViewById<TextView>(R.id.metadataGenres).text = 
+
+        findViewById<TextView>(R.id.metadataGenres).text =
             intent.getStringExtra(EXTRA_GENRES) ?: "Acción, aventura, drama"
-        
-        findViewById<TextView>(R.id.metadataDuration).text = 
+
+        findViewById<TextView>(R.id.metadataDuration).text =
             intent.getStringExtra(EXTRA_DURATION) ?: "2 h 28 min"
-        
-        findViewById<TextView>(R.id.ageRating).text = 
+
+        findViewById<TextView>(R.id.ageRating).text =
             intent.getStringExtra(EXTRA_AGE_RATING) ?: "+ 16 Años"
-        
-        findViewById<TextView>(R.id.timeStart).text = 
+
+        findViewById<TextView>(R.id.timeStart).text =
             intent.getStringExtra(EXTRA_TIME_START) ?: "20:00"
-        
-        findViewById<TextView>(R.id.timeEnd).text = 
+
+        findViewById<TextView>(R.id.timeEnd).text =
             intent.getStringExtra(EXTRA_TIME_END) ?: "22:20"
-        
-        findViewById<TextView>(R.id.description).text = 
-            intent.getStringExtra(EXTRA_DESCRIPTION) ?: 
+
+        findViewById<TextView>(R.id.description).text =
+            intent.getStringExtra(EXTRA_DESCRIPTION) ?:
             "Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
     }
 
@@ -129,21 +128,54 @@ class ContentInfoActivity : ComponentActivity() {
 
         actionButtons.forEachIndexed { index, button ->
             val config = buttonConfigs[index]
-            
+
             // Set icon and label
             button.findViewById<ImageView>(R.id.buttonIcon).setImageResource(config.iconRes)
             button.findViewById<TextView>(R.id.buttonLabel).text = config.label
-            
+
             // Setup focus handling
             button.isFocusable = true
             button.isFocusableInTouchMode = true
             button.setOnFocusChangeListener { view, hasFocus ->
                 animateButtonFocus(view as FrameLayout, hasFocus)
-                if (hasFocus) {
-                    currentFocusIndex = index
+            }
+
+            // Unified DPAD handling for action buttons:
+            // - LEFT/RIGHT: move focus within the rail; consume at edges (no-op).
+            // - UP/DOWN: consume to prevent vertical escapes from this horizontal rail.
+            // - CENTER/ENTER: trigger on ACTION_DOWN; consume ACTION_UP to prevent duplicates.
+            button.setOnKeyListener { v, keyCode, event ->
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                        val isFirst = index == 0
+                        if (isFirst) return@setOnKeyListener true
+                        if (event.action == KeyEvent.ACTION_DOWN) {
+                            actionButtons[index - 1].requestFocus()
+                        }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        val isLast = index == actionButtons.lastIndex
+                        if (isLast) return@setOnKeyListener true
+                        if (event.action == KeyEvent.ACTION_DOWN) {
+                            actionButtons[index + 1].requestFocus()
+                        }
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        // Horizontal rail: consume vertical keys
+                        true
+                    }
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        if (event.action == KeyEvent.ACTION_DOWN) {
+                            v.performClick()
+                        }
+                        true
+                    }
+                    else -> false
                 }
             }
-            
+
             // Setup click handling
             button.setOnClickListener {
                 handleButtonAction(index)
@@ -154,31 +186,31 @@ class ContentInfoActivity : ComponentActivity() {
     private fun animateButtonFocus(button: FrameLayout, focused: Boolean) {
         val iconContainer = button.findViewById<FrameLayout>(R.id.iconContainer)
         val label = button.findViewById<TextView>(R.id.buttonLabel)
-        
+
         val duration = 200L
-        
+
         if (focused) {
             // Focused state - reduced scale to 1.04 and increased elevation
             ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -4f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 12f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(label, "alpha", 0f, 1f).apply {
                 this.duration = duration
                 start()
@@ -189,26 +221,36 @@ class ContentInfoActivity : ComponentActivity() {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "scaleX", iconContainer.scaleX, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "scaleY", iconContainer.scaleY, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(iconContainer, "elevation", iconContainer.elevation, 0f).apply {
                 this.duration = duration
                 start()
             }
-            
+
             ObjectAnimator.ofFloat(label, "alpha", label.alpha, 0f).apply {
                 this.duration = duration
                 start()
             }
+        }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return when (keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                finish()
+                true
+            }
+            else -> super.onKeyDown(keyCode, event)
         }
     }
 
@@ -227,7 +269,7 @@ class ContentInfoActivity : ComponentActivity() {
                     .start()
             }
             .start()
-        
+
         // Handle specific button actions (placeholder logic)
         when (index) {
             0 -> handleSchedule()
@@ -236,38 +278,6 @@ class ContentInfoActivity : ComponentActivity() {
             3 -> handleFavorite()
             4 -> handleBlock()
             5 -> handleAudioSubtitles()
-        }
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        return when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_LEFT -> {
-                if (currentFocusIndex > 0) {
-                    actionButtons[currentFocusIndex - 1].requestFocus()
-                    true
-                } else {
-                    // At left-most button: consume and do nothing
-                    true
-                }
-            }
-            KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                if (currentFocusIndex < actionButtons.size - 1) {
-                    actionButtons[currentFocusIndex + 1].requestFocus()
-                    true
-                } else {
-                    // At right-most button: consume and do nothing
-                    true
-                }
-            }
-            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                handleButtonAction(currentFocusIndex)
-                true
-            }
-            KeyEvent.KEYCODE_BACK -> {
-                finish()
-                true
-            }
-            else -> super.onKeyDown(keyCode, event)
         }
     }
 
@@ -315,9 +325,9 @@ class ContentInfoActivity : ComponentActivity() {
         /**
          * PUBLIC_INTERFACE
          * createIntent
-         * 
+         *
          * Factory method to create an Intent to launch ContentInfoActivity with content metadata.
-         * 
+         *
          * @param context The context from which to launch the activity
          * @param channelNumber Channel number to display
          * @param channelName Channel name to display

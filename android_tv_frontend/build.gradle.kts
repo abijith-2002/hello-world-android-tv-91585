@@ -1,3 +1,8 @@
+/** PROJECT_ROOT_MARKER:HINT
+ - This is the Gradle root build file (KTS) for the Android TV app.
+ - Wrapper: ./gradlew
+ - Modules: :app, :list, :utilities
+**/
 buildscript {
     repositories {
         google()

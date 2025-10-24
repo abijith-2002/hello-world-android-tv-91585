@@ -13,12 +13,12 @@
             priority="0"/>
         <location
             file="${:utilities*projectDir}/build.gradle"
-            line="27"
+            line="31"
             column="20"
-            startOffset="506"
-            endLine="27"
+            startOffset="596"
+            endLine="31"
             endColumn="58"
-            endOffset="544"/>
+            endOffset="634"/>
     </incident>
 
 </incidents>

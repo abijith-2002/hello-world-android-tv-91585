@@ -324,42 +324,54 @@
                 android:id="@+id/btnSchedule"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
-                android:layout_height="160dp" />
+                android:layout_height="160dp"
+                android:nextFocusLeft="@id/btnSchedule"
+                android:nextFocusRight="@id/btnSchedule" />
 
             <include
                 android:id="@+id/btnReplay"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="2dp" />
+                android:layout_marginStart="2dp"
+                android:nextFocusLeft="@id/btnReplay"
+                android:nextFocusRight="@id/btnReplay" />
 
             <include
                 android:id="@+id/btnRecord"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="2dp" />
+                android:layout_marginStart="2dp"
+                android:nextFocusLeft="@id/btnRecord"
+                android:nextFocusRight="@id/btnRecord" />
 
             <include
                 android:id="@+id/btnFavorite"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="2dp" />
+                android:layout_marginStart="2dp"
+                android:nextFocusLeft="@id/btnFavorite"
+                android:nextFocusRight="@id/btnFavorite" />
 
             <include
                 android:id="@+id/btnBlock"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="2dp" />
+                android:layout_marginStart="2dp"
+                android:nextFocusLeft="@id/btnBlock"
+                android:nextFocusRight="@id/btnBlock" />
 
             <include
                 android:id="@+id/btnAudioSubtitles"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"
-                android:layout_marginStart="2dp" />
+                android:layout_marginStart="2dp"
+                android:nextFocusLeft="@id/btnAudioSubtitles"
+                android:nextFocusRight="@id/btnAudioSubtitles" />
         </LinearLayout>
     </LinearLayout>
 

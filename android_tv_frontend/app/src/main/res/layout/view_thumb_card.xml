@@ -16,6 +16,8 @@
     android:clipToOutline="true"
     android:outlineProvider="background"
     android:nextFocusUp="@id/topMenu"
+    android:nextFocusLeft="@id/thumbCard"
+    android:nextFocusRight="@id/thumbCard"
     app:cardBackgroundColor="@color/nord_surface"
     app:strokeColor="@color/nord_unfocused_stroke"
     app:strokeWidth="1dp"

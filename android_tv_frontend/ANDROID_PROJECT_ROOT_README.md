@@ -1,3 +1,5 @@
+# PROJECT_ROOT_MARKER: ANDROID_GRADLE_ROOT
+
 Android Project Root Marker
 
 This file exists to help automated analyzers determine the Gradle project root.

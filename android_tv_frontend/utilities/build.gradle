@@ -1,3 +1,7 @@
+/** PROJECT_ROOT_MARKER:MODULE_HINT
+ - Parent Gradle root: ../
+ - Wrapper: ../gradlew
+**/
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
