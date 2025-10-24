@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/thumbCard"
-    android:layout_width="220dp"
-    android:layout_height="140dp"
+    android:layout_width="180dp"
+    android:layout_height="270dp"
     android:foreground="@drawable/tv_focus_ripple"
     android:background="@drawable/card_bg"
-    android:layout_marginEnd="12dp"
+    android:layout_marginEnd="14dp"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:padding="0dp">
 
+    <!-- Poster image with centerCrop to preserve aspect and avoid stretching -->
     <ImageView
         android:id="@+id/thumbImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/thumb_image_cd"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
 
-    <!-- Optional overlay gradient and title (kept invisible by default) -->
+    <!-- Bottom gradient overlay to improve title readability on posters -->
     <View
         android:id="@+id/overlayGrad"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="72dp"
         android:layout_gravity="bottom"
         android:background="@drawable/gradient_horizontal_overlay"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
+    <!-- Title shown over gradient; keep hidden by default (enabled programmatically when needed) -->
     <TextView
         android:id="@+id/thumbTitle"
         style="@style/TextAppearance.Card.Title"
@@ -33,10 +39,10 @@
         android:layout_gravity="bottom"
         android:maxLines="1"
         android:ellipsize="end"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         android:text=""
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

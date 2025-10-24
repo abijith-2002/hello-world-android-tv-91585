@@ -132,9 +132,9 @@ class HomeActivity : AppCompatActivity() {
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
-                            // Load image with Coil using placeholder/error
+                            // Load image as center-cropped portrait poster
                             Log.d("CoilTest", "Loading image URL: ${item.poster}")
-
+                            img.scaleType = ImageView.ScaleType.CENTER_CROP
                             img.load(item.poster) {
                                 crossfade(true)
                                 memoryCachePolicy(CachePolicy.ENABLED)
@@ -142,22 +142,23 @@ class HomeActivity : AppCompatActivity() {
                                 error(R.drawable.thumb_2)
                             }
 
-                            // Show title overlay
+                            // Show title overlay for readability on portrait posters
                             titleTv.text = item.name
                             titleTv.visibility = View.VISIBLE
                             overlay.visibility = View.VISIBLE
 
-                            // D-pad focus behavior
+                            // D-pad focus behavior: smaller scale to avoid clipping in tighter portrait cards
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
                             card.setOnFocusChangeListener { v, hasFocus ->
-                                v.animate().scaleX(if (hasFocus) 1.08f else 1.0f)
-                                    .scaleY(if (hasFocus) 1.08f else 1.0f)
+                                v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.06f else 1.0f)
                                     .setDuration(120)
                                     .start()
-                                v.elevation = if (hasFocus) resources.getDimension(R.dimen.card_elevation_focused) else resources.getDimension(
-                                    R.dimen.card_elevation
-                                )
+                                v.elevation = if (hasFocus)
+                                    resources.getDimension(R.dimen.card_elevation_focused)
+                                else
+                                    resources.getDimension(R.dimen.card_elevation)
                             }
 
                             // Open ContentInfoActivity on click with name
@@ -171,6 +172,7 @@ class HomeActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
 
+                            // Add the portrait card to the row
                             row.addView(card)
                         }
                     }

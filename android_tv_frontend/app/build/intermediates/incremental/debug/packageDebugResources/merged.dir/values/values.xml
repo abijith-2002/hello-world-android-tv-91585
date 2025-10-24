@@ -15,7 +15,7 @@
     <color name="nord_text">@color/nord_on_surface</color>
     <color name="nord_unfocused_stroke">@color/nord_grey_500</color>
     <dimen name="card_elevation">8dp</dimen>
-    <dimen name="card_elevation_focused">16dp</dimen>
+    <dimen name="card_elevation_focused">18dp</dimen>
     <string name="action_sign_in">Submit</string>
     <string name="app_name">Hello World TV</string>
     <string name="back">Back</string>
