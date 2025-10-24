@@ -17,6 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import coil.request.CachePolicy
+import coil.size.Scale
+import coil.size.Size
 import com.example.tv.MainActivity
 import com.example.tv.R
 import com.example.tv.data.api.HomeCategory
@@ -212,48 +214,63 @@ class HomeActivity : AppCompatActivity() {
                             // Also ensure the card itself honors outline clipping and uses compatibility padding
                             card.clipToOutline = true
 
+                            // Ensure safe ImageView attributes to avoid implicit crops due to theme/defaults
+                            img.adjustViewBounds = true
+                            img.scaleType = ImageView.ScaleType.FIT_CENTER
+                            img.cropToPadding = false
+
                             // Load image with Coil using placeholder/error
-                            Log.d("CoilTest", "Loading image URL: ${item.poster}")
+                            Log.d("CoilFirstLoad", "Loading image URL: ${item.poster}")
 
                             // PUBLIC_INTERFACE
                             // Image loading behavior:
-                            // - Use Scale.FIT to preserve aspect ratio and avoid initial crop/zoom on first decode.
-                            // - Disable crossfade to keep size/scale consistent between placeholder and final bitmap.
-                            // - Provide an explicit SizeResolver based on the ImageView's measured bounds to avoid 0x0 target size on first layout pass.
-                            // If width/height are not measured yet, attach a one-shot listener to load after layout
-                            if (img.width == 0 || img.height == 0) {
-                                img.viewTreeObserver.addOnGlobalLayoutListener(object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
-                                    override fun onGlobalLayout() {
-                                        img.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                                        img.load(item.poster) {
-                                            crossfade(false)
-                                            memoryCachePolicy(CachePolicy.ENABLED)
-                                            // Provide a SizeResolver tied to this ImageView's measured size.
-                                            size(coil.size.SizeResolver {
-                                                val w = img.width
-                                                val h = img.height
-                                                if (w > 0 && h > 0) coil.size.Size(w, h) else coil.size.Size.ORIGINAL
-                                            })
-                                            scale(coil.size.Scale.FIT)
-                                            placeholder(R.drawable.thumb_1)
-                                            error(R.drawable.thumb_2)
-                                        }
-                                    }
-                                })
-                            } else {
+                            // - Wait until the ImageView is laid out to avoid 0x0 target size.
+                            // - Provide an explicit SizeResolver tied to the ImageView.
+                            // - Use Scale.FIT and disable crossfade to prevent visual size jumps/crops.
+                            // - No transformations are applied on first load.
+                            fun startLoadWithMeasuredSize() {
+                                // Compute exact measured bounds; guard against zero
+                                val w = img.width
+                                val h = img.height
+                                if (w <= 0 || h <= 0) return
+
+                                // Cancel any previous pending request tied to this ImageView (safety in dynamic UIs)
+                                try {
+                                    ImageCacheUtils.cancelOngoingRequest(img)
+                                } catch (_: Throwable) {
+                                    // best-effort; ignore if not supported
+                                }
+
                                 img.load(item.poster) {
+                                    // Critical flags for first-load correctness
                                     crossfade(false)
-                                    memoryCachePolicy(CachePolicy.ENABLED)
-                                    // Provide a SizeResolver tied to this ImageView's measured size.
-                                    size(coil.size.SizeResolver {
-                                        val w = img.width
-                                        val h = img.height
-                                        if (w > 0 && h > 0) coil.size.Size(w, h) else coil.size.Size.ORIGINAL
-                                    })
+                                    // Avoid deferring due to hardware bitmap + unknown size paths
+                                    allowHardware(false)
                                     scale(coil.size.Scale.FIT)
+                                    // Provide exact view-bound size in pixels
+                                    size(w, h)
+                                    // Keep caches enabled but avoid transformations
+                                    memoryCachePolicy(CachePolicy.ENABLED)
+                                    // No transformations on first load
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
                                 }
+                            }
+
+                            if (img.width == 0 || img.height == 0) {
+                                // Defer until pre-draw/layout completes
+                                img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
+                                    override fun onPreDraw(): Boolean {
+                                        if (img.width > 0 && img.height > 0) {
+                                            img.viewTreeObserver.removeOnPreDrawListener(this)
+                                            startLoadWithMeasuredSize()
+                                        }
+                                        // Return true to continue drawing
+                                        return true
+                                    }
+                                })
+                            } else {
+                                startLoadWithMeasuredSize()
                             }
 
                             // Keep only the image visible: hide title and overlay scrim explicitly
