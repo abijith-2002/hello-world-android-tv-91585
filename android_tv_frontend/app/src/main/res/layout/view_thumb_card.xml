@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/thumb_image_cd"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="false"
         android:cropToPadding="false"
         android:layout_margin="0dp" />
 

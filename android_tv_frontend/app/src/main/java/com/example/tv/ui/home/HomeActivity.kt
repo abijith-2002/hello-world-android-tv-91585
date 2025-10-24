@@ -214,9 +214,9 @@ class HomeActivity : AppCompatActivity() {
                             // Also ensure the card itself honors outline clipping and uses compatibility padding
                             card.clipToOutline = true
 
-                            // Ensure safe ImageView attributes to avoid implicit crops due to theme/defaults
-                            img.adjustViewBounds = true
-                            img.scaleType = ImageView.ScaleType.FIT_CENTER
+                            // Ensure ImageView fills card with no empty borders
+                            img.adjustViewBounds = false
+                            img.scaleType = ImageView.ScaleType.CENTER_CROP
                             img.cropToPadding = false
 
                             // Load image with Coil using placeholder/error
@@ -225,9 +225,8 @@ class HomeActivity : AppCompatActivity() {
                             // PUBLIC_INTERFACE
                             // Image loading behavior:
                             // - Wait until the ImageView is laid out to avoid 0x0 target size.
-                            // - Provide an explicit SizeResolver tied to the ImageView.
-                            // - Use Scale.FIT and disable crossfade to prevent visual size jumps/crops.
-                            // - No transformations are applied on first load.
+                            // - Provide exact size(img.width, img.height) and use Scale.FILL to match CENTER_CROP.
+                            // - Disable crossfade/transformations to prevent visual zoom shifts.
                             fun startLoadWithMeasuredSize() {
                                 // Compute exact measured bounds; guard against zero
                                 val w = img.width
@@ -242,30 +241,28 @@ class HomeActivity : AppCompatActivity() {
                                 }
 
                                 img.load(item.poster) {
-                                    // Critical flags for first-load correctness
                                     crossfade(false)
-                                    // Avoid deferring due to hardware bitmap + unknown size paths
                                     allowHardware(false)
-                                    scale(coil.size.Scale.FIT)
-                                    // Provide exact view-bound size in pixels
+                                    // Match CENTER_CROP semantics to avoid source-side mismatch crops
+                                    scale(Scale.FILL)
+                                    // Provide exact view-bound size in pixels for decode
                                     size(w, h)
-                                    // Keep caches enabled but avoid transformations
+                                    // Keep caches enabled; no transformations on first load
                                     memoryCachePolicy(CachePolicy.ENABLED)
-                                    // No transformations on first load
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
+                                    // Avoid transformations to prevent size shifts
                                 }
                             }
 
                             if (img.width == 0 || img.height == 0) {
-                                // Defer until pre-draw/layout completes
+                                // Defer until pre-draw/layout completes (one-time)
                                 img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
                                     override fun onPreDraw(): Boolean {
                                         if (img.width > 0 && img.height > 0) {
                                             img.viewTreeObserver.removeOnPreDrawListener(this)
                                             startLoadWithMeasuredSize()
                                         }
-                                        // Return true to continue drawing
                                         return true
                                     }
                                 })
