@@ -11,11 +11,12 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:foreground="@drawable/tv_focus_ripple"
+    android:padding="0dp"
     android:clipToPadding="false"
     android:clipChildren="false"
-    android:nextFocusUp="@id/topMenu"
     android:clipToOutline="true"
     android:outlineProvider="background"
+    android:nextFocusUp="@id/topMenu"
     app:cardUseCompatPadding="false"
     app:cardBackgroundColor="@color/nord_surface"
     app:strokeColor="@color/nord_unfocused_stroke"
@@ -31,17 +32,19 @@
         android:contentDescription="@string/thumb_image_cd"
         android:scaleType="centerCrop"
         android:adjustViewBounds="false"
-        android:cropToPadding="false" />
+        android:cropToPadding="false"
+        android:layout_margin="0dp" />
 
-    <!-- Bottom overlay gradient and title for readability -->
+    <!-- Bottom overlay gradient for readability -->
     <View
         android:id="@+id/overlayGrad"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_gravity="bottom"
         android:background="@drawable/gradient_horizontal_overlay"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
+    <!-- Title text (no inner padding to keep full-bleed look) -->
     <TextView
         android:id="@+id/thumbTitle"
         style="@style/TextAppearance.Card.Title"
@@ -50,9 +53,7 @@
         android:layout_gravity="bottom"
         android:maxLines="1"
         android:ellipsize="end"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
+        android:padding="0dp"
         android:text=""
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </com.google.android.material.card.MaterialCardView>

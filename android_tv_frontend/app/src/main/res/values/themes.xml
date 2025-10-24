@@ -23,6 +23,8 @@
 
         <!-- Material components defaults -->
         <item name="materialCardViewStyle">@style/Widget.Card.Nord</item>
+        <!-- Ensure default cards don't add compat/content padding -->
+        <item name="cardViewStyle">@style/Widget.Card.Nord</item>
 
         <!-- Rounded shapes across components -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Medium.Rounded</item>
@@ -36,13 +38,16 @@
     <!-- Card widget styled for TV with subtle elevation and strokes -->
     <style name="Widget.Card.Nord" parent="Widget.Material3.CardView.Elevated">
         <item name="cardBackgroundColor">@color/nord_surface</item>
-        <!-- Remove default inner padding so children (e.g., images) can touch rounded edges -->
+        <!-- Ensure no inner padding so child ImageView can be full-bleed -->
         <item name="contentPadding">0dp</item>
-        <item name="cardUseCompatPadding">true</item>
+        <!-- Do not add compat padding that can create inner insets -->
+        <item name="cardUseCompatPadding">false</item>
         <item name="cardElevation">8dp</item>
         <item name="strokeColor">@color/nord_unfocused_stroke</item>
         <item name="strokeWidth">1dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Medium.Rounded</item>
+        <!-- Keep foreground within rounded outline -->
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <!-- ShapeAppearance helper -->
