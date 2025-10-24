@@ -12,8 +12,10 @@
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:padding="0dp"
         android:src="@drawable/bg_content_info_gradient"
         android:contentDescription="Background" />
 
@@ -271,6 +273,8 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="29dp"
                 android:src="@drawable/ic_replay"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="false"
                 android:contentDescription="Replay" />
 
             <TextView

@@ -14,6 +14,10 @@ import coil.dispose
  * - cancelOngoingRequest: cancel any in-flight request tied to a given ImageView to avoid
  *   content flash or wrong-size reuse when views are rebound.
  *
+ * Implementation notes:
+ * - Uses Coil 2's ImageView.dispose() under the hood to cancel and detach any current request.
+ * - Prefer this utility over calling dispose() directly to keep a single integration point.
+ *
  * Note:
  * - Not invoked automatically in production flows.
  * - Call from a debug menu or test harness if you need to validate "fresh load" behavior.

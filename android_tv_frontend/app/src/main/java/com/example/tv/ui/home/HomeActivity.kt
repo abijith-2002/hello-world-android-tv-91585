@@ -18,13 +18,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import coil.request.CachePolicy
 import coil.size.Scale
-import coil.size.Size
+import coil.dispose
 import com.example.tv.MainActivity
+import com.example.tv.BuildConfig
 import com.example.tv.R
 import com.example.tv.data.api.HomeCategory
 import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 import kotlinx.coroutines.launch
+import coil.Coil
 
 /**
  * PUBLIC_INTERFACE
@@ -57,6 +59,15 @@ class HomeActivity : AppCompatActivity() {
 
         setupTopMenu()
         setupRails()
+
+        // Optional: clear Coil memory cache in debug builds to better simulate first-run verification
+        if (BuildConfig.DEBUG) {
+            try {
+                Coil.imageLoader(this).memoryCache?.clear()
+            } catch (_: Throwable) {
+                // ignore
+            }
+        }
 
         // Trigger loads
         viewModel.loadAll()
@@ -228,35 +239,37 @@ class HomeActivity : AppCompatActivity() {
                             // - Provide exact size(img.width, img.height) and use Scale.FILL to match CENTER_CROP.
                             // - Disable crossfade/transformations to prevent visual zoom shifts.
                             fun startLoadWithMeasuredSize() {
-                                // Compute exact measured bounds; guard against zero
                                 val w = img.width
                                 val h = img.height
                                 if (w <= 0 || h <= 0) return
 
-                                // Cancel any previous pending request tied to this ImageView (safety in dynamic UIs)
+                                // Cancel any previous pending request tied to this ImageView to prevent reuse artifacts
                                 try {
                                     ImageCacheUtils.cancelOngoingRequest(img)
                                 } catch (_: Throwable) {
-                                    // best-effort; ignore if not supported
+                                    // ignore
                                 }
 
-                                img.load(item.poster) {
-                                    crossfade(false)
-                                    allowHardware(false)
-                                    // Match CENTER_CROP semantics to avoid source-side mismatch crops
+                                val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
+                                img.load(data) {
+                                    // Fill to avoid empty borders; minimal crop as needed
                                     scale(Scale.FILL)
-                                    // Provide exact view-bound size in pixels for decode
+                                    // Use exact target size for decode
                                     size(w, h)
-                                    // Keep caches enabled; no transformations on first load
+                                    // Disable crossfade and transformations to avoid initial zoom/shift
+                                    crossfade(false)
+                                    // Prefer hardware when available, Coil will fallback if needed
+                                    allowHardware(true)
                                     memoryCachePolicy(CachePolicy.ENABLED)
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
-                                    // Avoid transformations to prevent size shifts
+                                    // Ensure no transformations are applied (stays empty)
+                                    transformations(listOf())
                                 }
                             }
 
                             if (img.width == 0 || img.height == 0) {
-                                // Defer until pre-draw/layout completes (one-time)
+                                // Defer until first pre-draw (one-time listener)
                                 img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
                                     override fun onPreDraw(): Boolean {
                                         if (img.width > 0 && img.height > 0) {
