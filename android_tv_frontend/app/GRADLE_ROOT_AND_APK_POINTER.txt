@@ -1,2 +1,0 @@
-project_root=..
-apk=build/outputs/apk/debug/app-debug.apk
