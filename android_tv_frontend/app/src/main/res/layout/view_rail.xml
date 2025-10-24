@@ -16,9 +16,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/nord_on_surface"
         android:textStyle="bold"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:paddingStart="8dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="8dp" />
 
     <HorizontalScrollView
         android:id="@+id/railScroll"
