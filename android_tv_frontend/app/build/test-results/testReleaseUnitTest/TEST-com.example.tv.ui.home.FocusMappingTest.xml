@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.tv.ui.home.FocusMappingTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-10-24T11:38:21.269Z" hostname="8622c9b54542" time="0.005">
+  <properties/>
+  <testcase name="maps within bounds when first row count equals or exceeds" classname="com.example.tv.ui.home.FocusMappingTest" time="0.003"/>
+  <testcase name="returns -1 when first row empty" classname="com.example.tv.ui.home.FocusMappingTest" time="0.0"/>
+  <testcase name="clamps to last index when second row index exceeds first row size" classname="com.example.tv.ui.home.FocusMappingTest" time="0.0"/>
+  <testcase name="negative current index coerces to zero" classname="com.example.tv.ui.home.FocusMappingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

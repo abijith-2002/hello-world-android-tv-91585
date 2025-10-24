@@ -360,16 +360,16 @@ class SplashActivity : AppCompatActivity() {
 
    https://developer.android.com/guide/topics/text/autofill.html
 
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:137: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:170: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
                                 titleView.text = "${category.title} • Loading…"
                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:137: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:170: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
                                 titleView.text = "${category.title} • Loading…"
                                                                    ~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:140: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:173: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
                                 titleView.text = "${category.title} • Error"
                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:140: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt:173: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
                                 titleView.text = "${category.title} • Error"
                                                                    ~~~~~~~~
 

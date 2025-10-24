@@ -1221,7 +1221,7 @@
         errorLine2="                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt"
-            line="137"
+            line="170"
             column="50"/>
     </issue>
 
@@ -1239,7 +1239,7 @@
         errorLine2="                                                                   ~~~~~~~~~~~">
         <location
             file="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt"
-            line="137"
+            line="170"
             column="68"/>
     </issue>
 
@@ -1257,7 +1257,7 @@
         errorLine2="                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt"
-            line="140"
+            line="173"
             column="50"/>
     </issue>
 
@@ -1275,7 +1275,7 @@
         errorLine2="                                                                   ~~~~~~~~">
         <location
             file="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/app/src/main/java/com/example/tv/ui/home/HomeActivity.kt"
-            line="140"
+            line="173"
             column="68"/>
     </issue>
 

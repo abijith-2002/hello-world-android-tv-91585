@@ -179,7 +179,7 @@ document.getElementById(id).style.display = 'none';
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">Lint Report: 107 warnings</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Fri Oct 24 10:29:31 UTC 2025 by AGP (8.6.0)</nav>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Fri Oct 24 11:37:27 UTC 2025 by AGP (8.6.0)</nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -1347,42 +1347,42 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:137</span>: <span class="message">Do not concatenate text displayed with <code>setText</code>. Use resource string with placeholders.</span><br /><pre class="errorlines">
-<span class="lineno"> 134 </span>
-<span class="lineno"> 135 </span>                   <span class="keyword">when</span> {
-<span class="lineno"> 136 </span>                       railState.isLoading -> {
-<span class="caretline"><span class="lineno"> 137 </span>                           titleView.text = <span class="warning"><span class="string">"${</span>category.title<span class="string">} • Loading…"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 138 </span>                       }
-<span class="lineno"> 139 </span>                       railState.error != <span class="keyword">null</span> -> {
-<span class="lineno"> 140 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">} • Error"</span></pre>
+<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:170</span>: <span class="message">Do not concatenate text displayed with <code>setText</code>. Use resource string with placeholders.</span><br /><pre class="errorlines">
+<span class="lineno"> 167 </span>
+<span class="lineno"> 168 </span>                   <span class="keyword">when</span> {
+<span class="lineno"> 169 </span>                       railState.isLoading -> {
+<span class="caretline"><span class="lineno"> 170 </span>                           titleView.text = <span class="warning"><span class="string">"${</span>category.title<span class="string">} • Loading…"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 171 </span>                       }
+<span class="lineno"> 172 </span>                       railState.error != <span class="keyword">null</span> -> {
+<span class="lineno"> 173 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">} • Error"</span></pre>
 
-<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:137</span>: <span class="message">String literal in <code>setText</code> can not be translated. Use Android resources instead.</span><br /><pre class="errorlines">
-<span class="lineno"> 134 </span>
-<span class="lineno"> 135 </span>                   <span class="keyword">when</span> {
-<span class="lineno"> 136 </span>                       railState.isLoading -> {
-<span class="caretline"><span class="lineno"> 137 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">}</span><span class="warning"><span class="string"> • Loading…</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 138 </span>                       }
-<span class="lineno"> 139 </span>                       railState.error != <span class="keyword">null</span> -> {
-<span class="lineno"> 140 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">} • Error"</span></pre>
+<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:170</span>: <span class="message">String literal in <code>setText</code> can not be translated. Use Android resources instead.</span><br /><pre class="errorlines">
+<span class="lineno"> 167 </span>
+<span class="lineno"> 168 </span>                   <span class="keyword">when</span> {
+<span class="lineno"> 169 </span>                       railState.isLoading -> {
+<span class="caretline"><span class="lineno"> 170 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">}</span><span class="warning"><span class="string"> • Loading…</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 171 </span>                       }
+<span class="lineno"> 172 </span>                       railState.error != <span class="keyword">null</span> -> {
+<span class="lineno"> 173 </span>                           titleView.text = <span class="string">"${</span>category.title<span class="string">} • Error"</span></pre>
 
-<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:140</span>: <span class="message">Do not concatenate text displayed with <code>setText</code>. Use resource string with placeholders.</span><br /><pre class="errorlines">
-<span class="lineno"> 137 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">} • Loading…"</span>
-<span class="lineno"> 138 </span>  }
-<span class="lineno"> 139 </span>  railState.error != <span class="keyword">null</span> -> {
-<span class="caretline"><span class="lineno"> 140 </span>      titleView.text = <span class="warning"><span class="string">"${</span>category.title<span class="string">} • Error"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 141 </span>      Toast.makeText(<span class="keyword">this</span><span class="annotation">@HomeActivity</span>, <span class="string">"Failed to load ${</span>category.title<span class="string">}: ${</span>railState.error<span class="string">}"</span>, Toast.LENGTH_SHORT).show()
-<span class="lineno"> 142 </span>  }
-<span class="lineno"> 143 </span>  <span class="keyword">else</span> -> {
+<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:173</span>: <span class="message">Do not concatenate text displayed with <code>setText</code>. Use resource string with placeholders.</span><br /><pre class="errorlines">
+<span class="lineno"> 170 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">} • Loading…"</span>
+<span class="lineno"> 171 </span>  }
+<span class="lineno"> 172 </span>  railState.error != <span class="keyword">null</span> -> {
+<span class="caretline"><span class="lineno"> 173 </span>      titleView.text = <span class="warning"><span class="string">"${</span>category.title<span class="string">} • Error"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 174 </span>      Toast.makeText(<span class="keyword">this</span><span class="annotation">@HomeActivity</span>, <span class="string">"Failed to load ${</span>category.title<span class="string">}: ${</span>railState.error<span class="string">}"</span>, Toast.LENGTH_SHORT).show()
+<span class="lineno"> 175 </span>  }
+<span class="lineno"> 176 </span>  <span class="keyword">else</span> -> {
 </pre>
 
-<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:140</span>: <span class="message">String literal in <code>setText</code> can not be translated. Use Android resources instead.</span><br /><pre class="errorlines">
-<span class="lineno"> 137 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">} • Loading…"</span>
-<span class="lineno"> 138 </span>  }
-<span class="lineno"> 139 </span>  railState.error != <span class="keyword">null</span> -> {
-<span class="caretline"><span class="lineno"> 140 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">}</span><span class="warning"><span class="string"> • Error</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 141 </span>      Toast.makeText(<span class="keyword">this</span><span class="annotation">@HomeActivity</span>, <span class="string">"Failed to load ${</span>category.title<span class="string">}: ${</span>railState.error<span class="string">}"</span>, Toast.LENGTH_SHORT).show()
-<span class="lineno"> 142 </span>  }
-<span class="lineno"> 143 </span>  <span class="keyword">else</span> -> {
+<span class="location"><a href="../../src/main/java/com/example/tv/ui/home/HomeActivity.kt">../../src/main/java/com/example/tv/ui/home/HomeActivity.kt</a>:173</span>: <span class="message">String literal in <code>setText</code> can not be translated. Use Android resources instead.</span><br /><pre class="errorlines">
+<span class="lineno"> 170 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">} • Loading…"</span>
+<span class="lineno"> 171 </span>  }
+<span class="lineno"> 172 </span>  railState.error != <span class="keyword">null</span> -> {
+<span class="caretline"><span class="lineno"> 173 </span>      titleView.text = <span class="string">"${</span>category.title<span class="string">}</span><span class="warning"><span class="string"> • Error</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 174 </span>      Toast.makeText(<span class="keyword">this</span><span class="annotation">@HomeActivity</span>, <span class="string">"Failed to load ${</span>category.title<span class="string">}: ${</span>railState.error<span class="string">}"</span>, Toast.LENGTH_SHORT).show()
+<span class="lineno"> 175 </span>  }
+<span class="lineno"> 176 </span>  <span class="keyword">else</span> -> {
 </pre>
 
 </div>
