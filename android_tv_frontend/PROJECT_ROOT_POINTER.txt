@@ -1,0 +1,4 @@
+android_project_root=.
+contains=settings.gradle
+modules=:app,:list,:utilities
+note=This file helps tooling detect the Android project root directory.
