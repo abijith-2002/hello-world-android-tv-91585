@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base nord colors already expected; adding explicit loader colors if not present -->
-    <!-- Renamed to avoid conflict with existing color resource defined in res/color/loader_blue_color.xml -->
-    <color name="loader_blue">#5C9AEC</color>
-    <color name="nord_bg">#21242A</color>
-    <color name="nord_surface">#2A2E36</color>
-
-    <!-- Common colors -->
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

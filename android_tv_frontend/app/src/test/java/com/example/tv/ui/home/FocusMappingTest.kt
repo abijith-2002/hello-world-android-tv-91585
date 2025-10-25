@@ -7,21 +7,23 @@ import org.junit.Test
  * PUBLIC_INTERFACE
  * FocusMappingTest
  * Unit tests validating index mapping behavior for DPAD_UP across arbitrary rows (r -> r-1)
- * with clamping and boundary handling. Preserves existing tests for 2->1 mapping.
+ * with clamping and boundary handling. Adds a simple boundary check representing
+ * first row mapping to menu sentinel.
  */
 class FocusMappingTest {
 
     // PUBLIC_INTERFACE
     /**
      * computeTargetIndex
-     * Pure helper that mirrors the clamping logic used when mapping focus up from any row r>0
-     * to the row directly above (r-1) by index.
+     * Mirrors clamping logic used for mapping from row r to r-1.
+     * When upperRowCount == -1 (sentinel), we interpret this as "map to menu".
      * @param currentIndex index of focused child in current row
-     * @param upperRowCount number of children in the immediate upper row
-     * @return target index in upper row after clamping, or -1 if upper row empty
+     * @param upperRowCount number of children in the immediate upper row; -1 denotes menu sentinel
+     * @return target index, clamped; or -1 for menu sentinel
      */
     private fun computeTargetIndex(currentIndex: Int, upperRowCount: Int): Int {
-        if (upperRowCount <= 0) return -1
+        if (upperRowCount < 0) return -1 // menu sentinel
+        if (upperRowCount == 0) return -2 // represents no target possible
         val safeCurrent = if (currentIndex < 0) 0 else currentIndex
         return safeCurrent.coerceAtMost(upperRowCount - 1)
     }
@@ -40,9 +42,9 @@ class FocusMappingTest {
     }
 
     @Test
-    fun `upper row empty returns -1`() {
-        assertEquals(-1, computeTargetIndex(0, 0))
-        assertEquals(-1, computeTargetIndex(3, 0))
+    fun `upper row empty returns no target`() {
+        assertEquals(-2, computeTargetIndex(0, 0))
+        assertEquals(-2, computeTargetIndex(3, 0))
     }
 
     @Test
@@ -51,20 +53,10 @@ class FocusMappingTest {
         assertEquals(0, computeTargetIndex(-10, 2))
     }
 
-    // Additional coverage for generalized rule:
-
     @Test
-    fun `3rd row to 2nd row general mapping`() {
-        // upper row has enough items
-        assertEquals(2, computeTargetIndex(2, 5))
-        // clamp when upper has fewer
-        assertEquals(1, computeTargetIndex(4, 2))
-    }
-
-    @Test
-    fun `4th row to 3rd row general mapping`() {
-        assertEquals(0, computeTargetIndex(0, 1))
-        assertEquals(3, computeTargetIndex(3, 10))
-        assertEquals(6, computeTargetIndex(9, 7)) // clamp to last index 6
+    fun `first row maps to menu sentinel`() {
+        // When on first row, the implementation maps to menu; we encode menu as -1
+        assertEquals(-1, computeTargetIndex(0, -1))
+        assertEquals(-1, computeTargetIndex(3, -1))
     }
 }

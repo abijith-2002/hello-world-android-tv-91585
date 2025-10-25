@@ -1,0 +1,17 @@
+project:
+  name: hello-world-android-tv-91585
+  root: android_tv_frontend
+  modules:
+    - path: android_tv_frontend/app
+      type: application
+      namespace: com.example.tv
+      entry_activity: com.example.tv.ui.SplashActivity
+    - path: android_tv_frontend/list
+      type: library
+      namespace: org.example.list
+    - path: android_tv_frontend/utilities
+      type: library
+      namespace: org.example.utilities
+notes:
+  - DPAD_UP from the first content row moves focus to top menu's first button (menuHome), implemented in HomeActivity.
+  - Stable IDs set in layouts: topMenu, menuHome, railsContainer, railRow, railScroll, railTitle, thumbImage, overlayGrad, thumbTitle.

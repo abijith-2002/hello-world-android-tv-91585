@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Extracted include to keep activity_home.xml cleaner; IDs must match HomeActivity expectations -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="12dp">
+
+    <TextView
+        android:id="@+id/menuHome"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:nextFocusDown="@id/railsContainer"
+        android:background="@drawable/menu_item_background"
+        android:text="@string/app_name" />
+
+    <Space
+        android:layout_width="24dp"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/menuLogin"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:nextFocusDown="@id/railsContainer"
+        android:background="@drawable/menu_item_background"
+        android:text="@string/login" />
+
+    <Space
+        android:layout_width="24dp"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/menuSetting"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:nextFocusDown="@id/railsContainer"
+        android:background="@drawable/menu_item_background"
+        android:text="@string/settings" />
+
+    <Space
+        android:layout_width="24dp"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:id="@+id/menuMyPlan"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:nextFocusDown="@id/railsContainer"
+        android:background="@drawable/menu_item_background"
+        android:text="@string/app_name" />
+</LinearLayout>

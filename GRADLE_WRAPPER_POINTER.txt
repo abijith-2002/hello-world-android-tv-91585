@@ -1,0 +1,2 @@
+Gradle wrapper scripts are located under android_tv_frontend/.
+Use ./gradlew at repository root to delegate to android_tv_frontend/gradlew.

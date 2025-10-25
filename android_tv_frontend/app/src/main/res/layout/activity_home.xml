@@ -1,192 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/homeRoot"
+    android:id="@+id/home_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#21242A"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:layout_height="match_parent">
 
-    <!-- Content host -->
+    <include
+        android:id="@+id/topMenuInclude"
+        layout="@layout/include_top_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
-        android:id="@+id/homeContent"
+        android:id="@+id/railsContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="24dp"
-        android:clipChildren="false"
-        android:clipToPadding="false">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:layout_constraintTop_toBottomOf="@id/topMenuInclude"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Top Menu -->
-        <LinearLayout
-            android:id="@+id/topMenu"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:gravity="center_vertical"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
-
-            <TextView
-                android:id="@+id/menuHome"
-                style="@style/TextAppearance.Pill.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="80dp"
-                android:minHeight="36dp"
-                android:text="@string/menu_home"
-                android:textSize="18sp"
-                android:singleLine="true"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:background="@drawable/pill_button_background"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_marginEnd="6dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:foregroundGravity="center"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:includeFontPadding="false"/>
-
-            <TextView
-                android:id="@+id/menuLogin"
-                style="@style/TextAppearance.Pill.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="80dp"
-                android:minHeight="36dp"
-                android:text="@string/menu_login"
-                android:textSize="18sp"
-                android:singleLine="true"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:background="@drawable/pill_button_background"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_marginEnd="6dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:foregroundGravity="center"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:includeFontPadding="false"/>
-
-            <TextView
-                android:id="@+id/menuSetting"
-                style="@style/TextAppearance.Pill.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="80dp"
-                android:minHeight="36dp"
-                android:text="@string/menu_setting"
-                android:textSize="18sp"
-                android:singleLine="true"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:background="@drawable/pill_button_background"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_marginEnd="6dp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:foregroundGravity="center"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:includeFontPadding="false"/>
-
-            <TextView
-                android:id="@+id/menuMyPlan"
-                style="@style/TextAppearance.Pill.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="80dp"
-                android:minHeight="36dp"
-                android:text="@string/menu_my_plan"
-                android:textSize="18sp"
-                android:singleLine="true"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:background="@drawable/pill_button_background"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:foregroundGravity="center"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:includeFontPadding="false"/>
-        </LinearLayout>
-
-        <!-- Banner -->
-        <ImageView
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/banner_tv"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:padding="0dp"
-            android:contentDescription="@string/app_name" />
-
-        <!-- Rails list -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:id="@+id/railsContainer"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                android:paddingEnd="48dp"
-                android:paddingBottom="32dp"
-                android:clipChildren="false"
-                android:clipToPadding="false" />
-
-        </ScrollView>
-    </LinearLayout>
-
-    <!-- Global loading indicator centered above content -->
     <FrameLayout
         android:id="@+id/loading_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#21242A"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
         android:visibility="gone"
-        android:focusable="false"
-        android:clickable="false">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Standard indeterminate circular progress indicator -->
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <ProgressBar
             android:id="@+id/circular_progress_indicator"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:indeterminate="true" />
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center" />
     </FrameLayout>
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/homeContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/topMenuInclude"
+        app:layout_constraintBottom_toBottomOf="@id/railsContainer"
+        app:layout_constraintStart_toStartOf="@id/railsContainer"
+        app:layout_constraintEnd_toEndOf="@id/railsContainer" />
+</androidx.constraintlayout.widget.ConstraintLayout>

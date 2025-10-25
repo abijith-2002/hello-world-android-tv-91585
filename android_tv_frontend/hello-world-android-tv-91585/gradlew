@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# Delegate to the repository root wrapper for building
+DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT_DIR="$(cd "$DIR/../.." && pwd)"
+exec "$ROOT_DIR/gradlew" "$@"

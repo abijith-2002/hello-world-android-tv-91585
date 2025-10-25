@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources/>
+<resources>
+    <item name="topMenu" type="id"/>
+    <item name="menuHome" type="id"/>
+    <item name="menuLogin" type="id"/>
+    <item name="menuSetting" type="id"/>
+    <item name="menuMyPlan" type="id"/>
+    <item name="railsContainer" type="id"/>
+    <item name="railRoot" type="id"/>
+    <item name="railTitle" type="id"/>
+    <item name="railScroll" type="id"/>
+    <item name="railRow" type="id"/>
+    <item name="thumbCardRoot" type="id"/>
+    <item name="thumbImage" type="id"/>
+    <item name="overlayGrad" type="id"/>
+    <item name="thumbTitle" type="id"/>
+    <item name="loading_overlay" type="id"/>
+    <item name="circular_progress_indicator" type="id"/>
+    <item name="homeContent" type="id"/>
+</resources>

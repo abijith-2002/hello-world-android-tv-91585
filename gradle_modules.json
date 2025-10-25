@@ -1,0 +1,20 @@
+{
+  "root": ".",
+  "modules": [
+    {
+      "path": "android_tv_frontend/app",
+      "buildFile": "build.gradle",
+      "type": "application"
+    },
+    {
+      "path": "android_tv_frontend/list",
+      "buildFile": "build.gradle",
+      "type": "library"
+    },
+    {
+      "path": "android_tv_frontend/utilities",
+      "buildFile": "build.gradle",
+      "type": "library"
+    }
+  ]
+}

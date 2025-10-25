@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Validation error messages for LoginActivity -->
+    <string name="error_username_required">Username or email is required</string>
+    <string name="error_username_invalid">Please enter a valid email or username</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+
+    <!-- Positive feedback -->
+    <string name="sign_in_success">Signed in successfully</string>
+</resources>

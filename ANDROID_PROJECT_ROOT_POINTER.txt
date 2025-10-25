@@ -1,0 +1,2 @@
+android_project_root=android_tv_frontend
+app_module=android_tv_frontend/app

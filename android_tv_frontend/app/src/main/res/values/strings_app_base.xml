@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and general labels -->
+    <string name="app_name">Hello TV</string>
+    <string name="hello_world">Hello world</string>
+    <string name="login">Login</string>
+    <string name="settings">Settings</string>
+    <string name="splash_brand">Hello TV</string>
+
+    <!-- Login copy -->
+    <string name="login_title">Sign in</string>
+    <string name="label_username_email">Email or username</string>
+    <string name="hint_username_email">your@email.com</string>
+    <string name="label_password">Password</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="action_sign_in">Sign in</string>
+
+    <!-- Validation -->
+    <string name="error_username_required">Username or email is required</string>
+    <string name="error_username_invalid">Please enter a valid email or username</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+    <string name="sign_in_success">Signed in successfully</string>
+</resources>

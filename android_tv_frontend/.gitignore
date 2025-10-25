@@ -1,1 +1,13 @@
-.env
+# Gradle and build artifacts
+.gradle/
+**/build/
+captures/
+.externalNativeBuild/
+local.properties
+
+# IDE files
+.idea/
+*.iml
+
+# Misc
+.DS_Store

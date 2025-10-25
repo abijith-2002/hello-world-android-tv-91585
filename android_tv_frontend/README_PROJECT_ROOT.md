@@ -1,14 +1,18 @@
-Android Project Root
+# Android TV Frontend - Focus Navigation Update
 
-This directory (android_tv_frontend) is the Gradle root for the Android TV app.
+PUBLIC_INTERFACE
+When focus is on the first content rail row, pressing DPAD_UP moves focus to the top menu's first button.
 
-Key files:
-- settings.gradle / settings.gradle.kts
-- build.gradle / build.gradle.kts
-- gradlew (Gradle wrapper)
-- Modules: :app, :list, :utilities
+Key details:
+- Entry point: HomeActivity (com.example.tv.ui.home.HomeActivity)
+- Stable IDs used:
+  - Top menu container: topMenu (in include_top_menu.xml)
+  - Default top menu button: menuHome
+  - Rails container host: railsContainer
+  - Rail layout: view_rail.xml (railTitle, railScroll, railRow)
+  - Card layout: view_thumb_card.xml (thumbImage, overlayGrad, thumbTitle)
+- Behavior:
+  - For rows r > 0: DPAD_UP moves focus to corresponding index in row r-1 (clamped).
+  - For the first row (r == 0): DPAD_UP requests focus on menuHome.
 
-Tooling notes:
-- Some analyzers require a simple text marker to resolve the project root. This file serves that purpose in addition to the existing PROJECT_ROOT_POINTER.txt and ANDROID_PROJECT_ROOT.md.
-- Use this directory as the working directory when running Gradle tasks, e.g.:
-  ./gradlew :app:assembleDebug
+Styling remains consistent with the Nord dark theme and Reddit Sans font as configured in existing resources.

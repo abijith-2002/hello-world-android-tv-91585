@@ -1,16 +1,20 @@
-Android Project Root Marker
+# Android TV Frontend - DPAD_UP Focus Behavior
 
-This file exists to help automated analyzers determine the Gradle project root.
+PUBLIC_INTERFACE
+When focus is on the first content rail row and the user presses DPAD_UP, focus is programmatically moved to the top menu's first button.
 
-Use this directory (android_tv_frontend) as the Android project root:
-- settings.gradle / settings.gradle.kts
-- build.gradle / build.gradle.kts
-- Modules: :app, :list, :utilities
-- Wrapper: ./gradlew
+Implementation details:
+- Activity: HomeActivity
+- Behavior:
+  - Rows r > 0: DPAD_UP maps to the corresponding index on row r-1 (with clamping).
+  - First row r == 0: DPAD_UP requests focus on the top menu’s default button (menuHome).
+- Stable IDs:
+  - Top menu container: topMenu
+  - Default button: menuHome
+  - Rails container: railsContainer
+- Layouts:
+  - activity_home.xml uses an include for the top menu (include_top_menu.xml)
+  - view_rail.xml defines railTitle, railScroll, railRow with nextFocusUp hints to topMenu
+  - view_thumb_card.xml contains thumbImage, overlayGrad, thumbTitle
 
-Example commands:
-./gradlew :app:assembleDebug
-./gradlew clean
-
-Note:
-Other marker files are also present (ANDROID_PROJECT_ROOT.md, PROJECT_ROOT_POINTER.txt, README_PROJECT_ROOT.md). Some tooling requires a simple README marker named ANDROID_PROJECT_ROOT_README.md to resolve the root correctly.
+No meta/config files were changed. The Nord dark theme and Reddit Sans font are preserved via existing styles.

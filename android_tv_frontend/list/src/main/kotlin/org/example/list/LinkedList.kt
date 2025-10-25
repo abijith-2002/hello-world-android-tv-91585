@@ -1,86 +1,63 @@
 package org.example.list
 
-class LinkedList {
-    private var head: Node? = null
+/**
+ * PUBLIC_INTERFACE
+ * A minimal generic singly linked list used as a placeholder for the list module.
+ */
+class LinkedList<T> {
+    private data class Node<T>(val value: T, var next: Node<T>? = null)
 
-    fun add(element: String?) {
-        val newNode = Node(element)
+    private var head: Node<T>? = null
+    private var tail: Node<T>? = null
+    private var _size: Int = 0
 
-        val it = tail(head)
-        if (it == null) {
-            head = newNode
+    /**
+     * PUBLIC_INTERFACE
+     * Adds an element to the end of the list.
+     */
+    fun add(value: T) {
+        val node = Node(value)
+        if (head == null) {
+            head = node
+            tail = node
         } else {
-            it.next = newNode
+            tail?.next = node
+            tail = node
         }
+        _size++
     }
 
-    fun remove(element: String): Boolean {
-        var result = false
-        var previousIt: Node? = null
-        var it: Node?
-        it = head
-        while (!result && it != null) {
-            if (0 == element.compareTo(it.data!!)) {
-                result = true
-                unlink(previousIt, it)
-                break
-            }
-            previousIt = it
-            it = it.next
+    /**
+     * PUBLIC_INTERFACE
+     * Returns the element at the specified index or throws IndexOutOfBoundsException.
+     */
+    fun get(index: Int): T {
+        if (index < 0 || index >= _size) throw IndexOutOfBoundsException("index=$index size=$_size")
+        var cur = head
+        var i = 0
+        while (i < index) {
+            cur = cur?.next
+            i++
         }
-
-        return result
+        return cur!!.value
     }
 
-    private fun unlink(previousIt: Node?, currentIt: Node) {
-        if (currentIt === head) {
-            head = currentIt.next
-        } else {
-            previousIt!!.next = currentIt.next
+    /**
+     * PUBLIC_INTERFACE
+     * Returns the number of elements in the list.
+     */
+    fun size(): Int = _size
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        sb.append("[")
+        var cur = head
+        while (cur != null) {
+            sb.append(cur.value)
+            cur = cur.next
+            if (cur != null) sb.append(", ")
         }
-    }
-
-    fun size(): Int {
-        var size = 0
-
-        var it = head
-        while (it != null) {
-            ++size
-            it = it.next
-        }
-
-        return size
-    }
-
-    fun get(index: Int): String? {
-        var currIdx = index
-        var it = head
-        while (currIdx > 0 && it != null) {
-            it = it.next
-            currIdx--
-        }
-
-        if (it == null) {
-            throw java.lang.IndexOutOfBoundsException("Index is out of range")
-        }
-
-        return it.data
-    }
-
-    private class Node(val data: String?) {
-        var next: Node? = null
-    }
-
-    companion object {
-        private fun tail(head: Node?): Node? {
-            var it: Node?
-
-            it = head
-            while (it?.next != null) {
-                it = it.next
-            }
-
-            return it
-        }
+        sb.append("]")
+        return sb.toString()
     }
 }

@@ -4,9 +4,7 @@ import android.app.Application
 
 /**
  * PUBLIC_INTERFACE
- * TVApp
- * Application class for potential future initialization for the Android TV app.
- * Initializes app-wide configuration if needed in future.
- * No parameters and no return value.
+ * TVApp is the Application class for global initialization if needed.
+ * Currently it performs no special setup.
  */
 class TVApp : Application()
