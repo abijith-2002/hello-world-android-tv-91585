@@ -74,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Observe combined loading state to toggle global spinner AND hide other UI
         val loadingOverlay: View = findViewById(R.id.loading_overlay)
-        val spinner: View = findViewById(R.id.circular_progress_indicator)
+        val spinner: View = findViewById(R.id.circular_progress_indicator) // Uses custom @drawable/wavy_circular_loader for distinct wavy motion
         val homeContent: View = findViewById(R.id.homeContent)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

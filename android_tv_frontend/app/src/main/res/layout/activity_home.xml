@@ -193,6 +193,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/wavy_circular_loader"
             app:indicatorSize="60dp"
             app:indicatorColor="#5C9AEC"
             app:trackColor="#21242A"

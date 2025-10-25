@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PUBLIC_INTERFACE -->
+<!--
+  Wavy circular loader using animated vector paths. This creates a subtle sine-like "wobble"
+  by morphing path segments around a ring while rotating, resulting in a distinct wavy motion.
+
+  Performance notes:
+  - Uses vector path morphing and rotation — efficient on Android TV GPUs.
+  - Kept to 60dp canvas to match indicatorSize; stroke width matches 6dp trackThickness.
+  - Colors align with loader_blue_color or inline hex used in layout.
+
+  Usage:
+    <ProgressBar
+      android:indeterminateDrawable="@drawable/wavy_circular_loader" />
+-->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <!-- Base vector defines ring + wavy segment as a morphable path -->
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="wavyRing"
+            android:width="60dp"
+            android:height="60dp"
+            android:viewportWidth="60"
+            android:viewportHeight="60">
+            <!-- Background track is not drawn here; ProgressIndicator draws track. -->
+            <!-- Foreground path: start as an arc segment; it will morph to a wavy arc. -->
+            <path
+                android:name="wavePath"
+                android:fillColor="@android:color/transparent"
+                android:strokeColor="#5C9AEC"
+                android:strokeWidth="6"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:pathData="M30,6
+                                  A24,24 0 0,1 54,30" />
+        </vector>
+    </aapt:attr>
+
+    <!-- Rotation animator to keep the segment rotating around center -->
+    <target android:name="wavyRing">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="rotation"
+                android:duration="1400"
+                android:valueFrom="0"
+                android:valueTo="360"
+                android:repeatCount="infinite"
+                android:interpolator="@android:interpolator/linear" />
+        </aapt:attr>
+    </target>
+
+    <!-- Path morph animator to create the “wavy” feel by alternating control points -->
+    <target android:name="wavePath">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <!-- Morph between three key shapes to achieve a wavy motion while rotating -->
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="1400"
+                    android:repeatCount="infinite"
+                    android:valueFrom="M30,6
+                                       A24,24 0 0,1 54,30"
+                    android:valueTo="M30,6
+                                     C42,6 54,14 54,30"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/accelerate_decelerate" />
+                <objectAnimator
+                    android:startOffset="700"
+                    android:propertyName="pathData"
+                    android:duration="1400"
+                    android:repeatCount="infinite"
+                    android:valueFrom="M30,6
+                                       C42,6 54,14 54,30"
+                    android:valueTo="M30,6
+                                     C38,10 50,18 54,30"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/accelerate_decelerate" />
+                <!-- Slight alpha pulsing for subtle expressiveness -->
+                <objectAnimator
+                    android:propertyName="alpha"
+                    android:duration="700"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.75"
+                    android:valueTo="1.0"
+                    android:interpolator="@android:interpolator/accelerate_decelerate" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

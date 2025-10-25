@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!--
+      Documentation-only resource container to clarify loader usage.
+
+      Note:
+      - Do not set android:indeterminate or android:indeterminateDrawable via style in this project,
+        because those attrs are not exposed via our theme/styleable set for Material3 indicator styles
+        in this configuration. Set them directly in layout XML instead.
+
+      Apply in layout:
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/wavy_circular_loader"
+    -->
+</resources>
