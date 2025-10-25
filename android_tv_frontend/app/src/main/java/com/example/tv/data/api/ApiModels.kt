@@ -3,9 +3,13 @@ package com.example.tv.data.api
 /**
  * PUBLIC_INTERFACE
  * Domain model representing a content item displayed by the UI rails.
- * Fields: name (title to show) and poster (absolute URL to the poster image or null if not available).
+ * Fields:
+ * - id: unique identifier used to fetch details via /api/info/{id}
+ * - name: title to show
+ * - poster: absolute URL to the poster image or null if not available
  */
 data class ContentItem(
+    val id: Int,
     val name: String,
     val poster: String?
 )

@@ -33,6 +33,27 @@ interface ApiService {
 
     /**
      * PUBLIC_INTERFACE
+     * DTO for content info response: { id, title, description, seasons, total_episodes }
+     */
+    data class InfoDto(
+        val id: Int,
+        val title: String,
+        val description: String,
+        val seasons: Int,
+        val total_episodes: Int
+    )
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch content info by id.
+     * @param id content identifier
+     * @return InfoDto
+     */
+    @GET("api/info/{id}")
+    suspend fun getInfo(@retrofit2.http.Path("id") id: Int): InfoDto
+
+    /**
+     * PUBLIC_INTERFACE
      * Fetch trending items.
      * @return List of ShowDto with name and poster fields.
      */

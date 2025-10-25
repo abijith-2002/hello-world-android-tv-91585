@@ -312,24 +312,28 @@ class HomeActivity : AppCompatActivity() {
                             // overridden by our key listener mapping for rows > 0.
                             card.nextFocusUpId = R.id.topMenu
 
-                            // Intercept DPAD_UP across all rows:
-                            // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, do nothing special here (do not jump to menu).
+                            // Intercept DPAD keys and open ContentInfo on CENTER/ENTER
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
+                                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                                        val intent = ContentInfoActivity.createIntent(
+                                            context = this@HomeActivity,
+                                            itemId = item.id
+                                        )
+                                        startActivity(intent)
+                                        true
+                                    }
                                     KeyEvent.KEYCODE_DPAD_UP -> {
                                         val remapped = handleDpadUpWithinRails(v, category)
                                         if (remapped) {
                                             true
                                         } else {
-                                            // First row boundary: do not auto-jump to menu. Consume to keep focus in place.
                                             if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
                                             true
                                         }
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                        // Prevent moving past horizontal bounds in the current rail row.
                                         val parentRow = v.parent as? LinearLayout
                                         if (parentRow != null) {
                                             val index = parentRow.indexOfChild(v).coerceAtLeast(0)
@@ -345,10 +349,10 @@ class HomeActivity : AppCompatActivity() {
                                                         "DPAD_${if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) "LEFT" else "RIGHT"} at boundary (index=$index, last=$lastIndex) — consuming."
                                                     )
                                                 }
-                                                return@setOnKeyListener true // consume to do nothing at bounds
+                                                return@setOnKeyListener true
                                             }
                                         }
-                                        false // let normal navigation proceed between intermediate items
+                                        false
                                     }
                                     else -> false
                                 }
@@ -365,13 +369,11 @@ class HomeActivity : AppCompatActivity() {
                                     resources.getDimension(R.dimen.card_elevation)
                             }
 
-                            // Open ContentInfoActivity on click with name
+                            // Open ContentInfoActivity on click or center
                             card.setOnClickListener {
                                 val intent = ContentInfoActivity.createIntent(
                                     context = this@HomeActivity,
-                                    programTitle = item.name,
-                                    description = "Details for ${item.name}",
-                                    genres = "TV Show"
+                                    itemId = item.id
                                 )
                                 startActivity(intent)
                             }

@@ -8,6 +8,7 @@ import com.example.tv.data.api.ContentItem
  */
 // PUBLIC_INTERFACE
 fun ShowDto.toContentItem(): ContentItem = ContentItem(
+    id = this.id,
     name = this.name,
     poster = this.poster
 )

@@ -95,6 +95,20 @@
             android:ellipsize="end"
             android:includeFontPadding="false" />
 
+        <!-- Details line Row - shows: Seasons | Episodes | TV Show -->
+        <TextView
+            android:id="@+id/detailsLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:lineHeight="29sp"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:visibility="gone" />
+
         <!-- Metadata Row - 6dp gap from title -->
         <LinearLayout
             android:id="@+id/metadataRow"

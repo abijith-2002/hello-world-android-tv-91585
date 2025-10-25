@@ -24,7 +24,11 @@ class CategoryRepository(
         )
         return baseNames.mapIndexed { idx, name ->
             // Use null for poster so Coil shows our placeholder/error drawables
-            ContentItem(name = "$name • ${category.title} #${idx + 1}", poster = null)
+            ContentItem(
+                id = (category.ordinal + 1) * 1000 + idx, // deterministic fake id
+                name = "$name • ${category.title} #${idx + 1}",
+                poster = null
+            )
         }
     }
 

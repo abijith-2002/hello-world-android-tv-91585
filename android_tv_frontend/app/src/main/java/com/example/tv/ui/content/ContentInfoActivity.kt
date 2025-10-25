@@ -10,40 +10,25 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.tv.R
+import com.example.tv.data.api.ApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * PUBLIC_INTERFACE
  * ContentInfoActivity
- * 
- * Displays detailed content information screen matching Figma design screen 35 (4077:14472).
- * Uses Roboto fonts, exact pixel values, and native Android TV components.
- * Background image from attachments with gradient overlay for text readability.
- * 
- * Features:
- * - Full-screen background with horizontal gradient overlay
- * - Channel info, program title, metadata with age rating
- * - Time display with status tag
- * - 3-line description with ellipsis
- * - 6 focusable action buttons with focus states
- * - System date/time in top-right corner
- * - D-PAD navigation (left/right) across buttons
- * 
- * Intent extras:
- * - EXTRA_CHANNEL_NUMBER: String - Channel number (default "242")
- * - EXTRA_CHANNEL_NAME: String - Channel name (default "TNT")
- * - EXTRA_PROGRAM_TITLE: String - Program title (default "Gladiador II")
- * - EXTRA_DESCRIPTION: String - Program description
- * - EXTRA_GENRES: String - Genres (default "Acción, aventura, drama")
- * - EXTRA_DURATION: String - Duration (default "2 h 28 min")
- * - EXTRA_AGE_RATING: String - Age rating (default "+ 16 Años")
- * - EXTRA_TIME_START: String - Start time (default "20:00")
- * - EXTRA_TIME_END: String - End time (default "22:20")
- * 
- * @param None
- * @return Displays UI and handles user interaction
+ *
+ * Displays detailed content information following the TV design.
+ * When launched with EXTRA_ITEM_ID it fetches /api/info/{id} and binds:
+ * - Title
+ * - Description
+ * - A details line: "Seasons | Episodes | TV Show"
  */
 class ContentInfoActivity : ComponentActivity() {
 
@@ -64,9 +49,16 @@ class ContentInfoActivity : ComponentActivity() {
         setContentView(R.layout.activity_content_info)
 
         setupSystemDateTime()
-        populateContentData()
         setupActionButtons()
-        
+
+        // If launched with an item id, fetch info; otherwise keep static placeholders
+        val itemId = intent.getIntExtra(EXTRA_ITEM_ID, -1)
+        if (itemId != -1) {
+            fetchAndBindInfo(itemId)
+        } else {
+            populateContentData()
+        }
+
         // Focus first button by default
         actionButtons.firstOrNull()?.requestFocus()
     }
@@ -74,47 +66,72 @@ class ContentInfoActivity : ComponentActivity() {
     private fun setupSystemDateTime() {
         val timeView = findViewById<TextView>(R.id.systemTime)
         val dateView = findViewById<TextView>(R.id.systemDate)
-        
+
         val currentTime = Calendar.getInstance()
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val dateFormat = SimpleDateFormat("d MMM", Locale("es", "ES"))
-        
+
         timeView.text = timeFormat.format(currentTime.time)
         dateView.text = dateFormat.format(currentTime.time).replace(".", "")
     }
 
     private fun populateContentData() {
         // Get data from intent or use defaults
-        findViewById<TextView>(R.id.channelNumber).text = 
+        findViewById<TextView>(R.id.channelNumber).text =
             intent.getStringExtra(EXTRA_CHANNEL_NUMBER) ?: "242"
-        
-        findViewById<TextView>(R.id.channelName).text = 
+
+        findViewById<TextView>(R.id.channelName).text =
             intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: "TNT"
-        
-        findViewById<TextView>(R.id.programTitle).text = 
+
+        findViewById<TextView>(R.id.programTitle).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiador II"
-        
-        findViewById<TextView>(R.id.metadataOriginal).text = 
+
+        findViewById<TextView>(R.id.metadataOriginal).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiator II"
-        
-        findViewById<TextView>(R.id.metadataGenres).text = 
+
+        findViewById<TextView>(R.id.metadataGenres).text =
             intent.getStringExtra(EXTRA_GENRES) ?: "Acción, aventura, drama"
-        
-        findViewById<TextView>(R.id.metadataDuration).text = 
+
+        findViewById<TextView>(R.id.metadataDuration).text =
             intent.getStringExtra(EXTRA_DURATION) ?: "2 h 28 min"
-        
-        findViewById<TextView>(R.id.ageRating).text = 
+
+        findViewById<TextView>(R.id.ageRating).text =
             intent.getStringExtra(EXTRA_AGE_RATING) ?: "+ 16 Años"
-        
-        findViewById<TextView>(R.id.timeStart).text = 
+
+        findViewById<TextView>(R.id.timeStart).text =
             intent.getStringExtra(EXTRA_TIME_START) ?: "20:00"
-        
-        findViewById<TextView>(R.id.timeEnd).text = 
+
+        findViewById<TextView>(R.id.timeEnd).text =
             intent.getStringExtra(EXTRA_TIME_END) ?: "22:20"
-        
-        findViewById<TextView>(R.id.description).text = 
-            intent.getStringExtra(EXTRA_DESCRIPTION) ?: 
+
+        findViewById<TextView>(R.id.description).text =
+            intent.getStringExtra(EXTRA_DESCRIPTION) ?:
             "Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
+    }
+
+    // PUBLIC_INTERFACE
+    /**
+     * Fetches content info from /api/info/{id} and binds the title, description, and details line.
+     * Details line format: "Seasons count | Episodes count | TV Show"
+     */
+    private fun fetchAndBindInfo(itemId: Int) {
+        val titleView = findViewById<TextView>(R.id.programTitle)
+        val descriptionView = findViewById<TextView>(R.id.description)
+        val detailsView = findViewById<TextView>(R.id.detailsLine)
+
+        lifecycleScope.launch {
+            try {
+                val api = ApiService.create()
+                val info = withContext(Dispatchers.IO) { api.getInfo(itemId) }
+                titleView.text = info.title
+                descriptionView.text = info.description
+                detailsView.text = "${info.seasons} | ${info.total_episodes} | TV Show"
+                detailsView.visibility = View.VISIBLE
+            } catch (_: Throwable) {
+                detailsView.text = ""
+                detailsView.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupActionButtons() {
@@ -129,12 +146,12 @@ class ContentInfoActivity : ComponentActivity() {
 
         actionButtons.forEachIndexed { index, button ->
             val config = buttonConfigs[index]
-            
+
             // Set icon and label
             button.findViewById<ImageView>(R.id.buttonIcon).setImageResource(config.iconRes)
             button.findViewById<TextView>(R.id.buttonLabel).text = config.label
-            
-            // Setup focus handling
+
+            // Focus handling
             button.isFocusable = true
             button.isFocusableInTouchMode = true
             button.setOnFocusChangeListener { view, hasFocus ->
@@ -143,8 +160,8 @@ class ContentInfoActivity : ComponentActivity() {
                     currentFocusIndex = index
                 }
             }
-            
-            // Setup click handling
+
+            // Click handling
             button.setOnClickListener {
                 handleButtonAction(index)
             }
@@ -154,57 +171,47 @@ class ContentInfoActivity : ComponentActivity() {
     private fun animateButtonFocus(button: FrameLayout, focused: Boolean) {
         val iconContainer = button.findViewById<FrameLayout>(R.id.iconContainer)
         val label = button.findViewById<TextView>(R.id.buttonLabel)
-        
+
         val duration = 200L
-        
+
         if (focused) {
-            // Focused state - reduced scale to 1.04 and increased elevation
             ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -4f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 12f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(label, "alpha", 0f, 1f).apply {
                 this.duration = duration
                 start()
             }
         } else {
-            // Unfocused state
             ObjectAnimator.ofFloat(iconContainer, "translationY", iconContainer.translationY, 0f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleX", iconContainer.scaleX, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleY", iconContainer.scaleY, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "elevation", iconContainer.elevation, 0f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(label, "alpha", label.alpha, 0f).apply {
                 this.duration = duration
                 start()
@@ -227,8 +234,8 @@ class ContentInfoActivity : ComponentActivity() {
                     .start()
             }
             .start()
-        
-        // Handle specific button actions (placeholder logic)
+
+        // Placeholder actions
         when (index) {
             0 -> handleSchedule()
             1 -> handleReplay()
@@ -266,29 +273,12 @@ class ContentInfoActivity : ComponentActivity() {
     }
 
     // Placeholder action methods
-    private fun handleSchedule() {
-        // TODO: Implement schedule/reminder functionality
-    }
-
-    private fun handleReplay() {
-        // TODO: Implement replay functionality
-    }
-
-    private fun handleRecord() {
-        // TODO: Implement record functionality
-    }
-
-    private fun handleFavorite() {
-        // TODO: Implement favorite/like functionality
-    }
-
-    private fun handleBlock() {
-        // TODO: Implement block/parental control functionality
-    }
-
-    private fun handleAudioSubtitles() {
-        // TODO: Implement audio/subtitle selection
-    }
+    private fun handleSchedule() {}
+    private fun handleReplay() {}
+    private fun handleRecord() {}
+    private fun handleFavorite() {}
+    private fun handleBlock() {}
+    private fun handleAudioSubtitles() {}
 
     private data class ButtonConfig(
         val label: String,
@@ -305,24 +295,24 @@ class ContentInfoActivity : ComponentActivity() {
         const val EXTRA_AGE_RATING = "age_rating"
         const val EXTRA_TIME_START = "time_start"
         const val EXTRA_TIME_END = "time_end"
+        const val EXTRA_ITEM_ID = "item_id"
+
+        // PUBLIC_INTERFACE
+        /**
+         * Create intent using item id to fetch and display info.
+         */
+        fun createIntent(
+            context: Context,
+            itemId: Int
+        ): Intent {
+            return Intent(context, ContentInfoActivity::class.java).apply {
+                putExtra(EXTRA_ITEM_ID, itemId)
+            }
+        }
 
         /**
          * PUBLIC_INTERFACE
-         * createIntent
-         * 
-         * Factory method to create an Intent to launch ContentInfoActivity with content metadata.
-         * 
-         * @param context The context from which to launch the activity
-         * @param channelNumber Channel number to display
-         * @param channelName Channel name to display
-         * @param programTitle Program/movie title
-         * @param description Program description (max 3 lines)
-         * @param genres Comma-separated genres
-         * @param duration Duration string (e.g., "2 h 28 min")
-         * @param ageRating Age rating (e.g., "+ 16 Años")
-         * @param timeStart Start time (e.g., "20:00")
-         * @param timeEnd End time (e.g., "22:20")
-         * @return Intent configured to launch ContentInfoActivity
+         * Legacy intent factory for prefilled UI without fetch.
          */
         fun createIntent(
             context: Context,
