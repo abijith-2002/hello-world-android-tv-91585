@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Additional Nord palette entries that may be referenced by drawables -->
+    <color name="nord_surface_variant">#30343C</color>
+</resources>

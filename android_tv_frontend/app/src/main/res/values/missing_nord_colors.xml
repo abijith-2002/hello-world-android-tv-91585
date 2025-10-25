@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Missing Nord palette entries used across drawables/layouts -->
+
+    <!-- Focus and ripple -->
+    <color name="nord_focus_stroke">#5C9AEC</color>       <!-- matches accent blue for focused outline -->
+    <color name="nord_accent">#5C9AEC</color>             <!-- primary accent -->
+    <color name="nord_ripple_mask">#14FFFFFF</color>      <!-- ~8% white for ripple mask on dark bg -->
+
+    <!-- Grays used in login and other screens -->
+    <color name="nord_grey_500">#6B7280</color>
+    <color name="nord_grey_400">#9CA3AF</color>
+</resources>

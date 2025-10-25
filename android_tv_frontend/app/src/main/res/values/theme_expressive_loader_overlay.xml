@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Optional ThemeOverlay to apply expressive wavy CircularProgressIndicator defaults.
+         Not used by default; kept for future reuse without editing meta files. -->
+    <style name="ThemeOverlay.TV.ExpressiveWavyLoader" parent="">
+        <item name="circularProgressIndicatorStyle">@style/Widget.Material3.CircularProgressIndicator.Expressive</item>
+    </style>
+</resources>

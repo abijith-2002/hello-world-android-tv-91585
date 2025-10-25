@@ -1,29 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nord palette tokens -->
-    <!-- Core -->
-    <color name="nord_bg">#21242A</color>          <!-- Background -->
-    <color name="nord_surface">#3B4252</color>     <!-- Surface -->
-    <color name="nord_on_surface">#ECEFF4</color>  <!-- On-surface text/icons -->
-
-    <!-- Greys (accents/highlight strokes) -->
-    <color name="nord_grey_300">#D1D5DB</color>    <!-- Light grey -->
-    <color name="nord_grey_400">#9CA3AF</color>    <!-- Medium grey -->
-    <color name="nord_grey_500">#6B7280</color>    <!-- Darker grey -->
-
-    <!-- Aliases for clarity -->
-    <color name="nord_text">@color/nord_on_surface</color>
-    <color name="nord_accent">@color/nord_grey_400</color>
-    <color name="nord_secondary">@color/nord_grey_300</color>
-
-    <!-- Focus/press visual states -->
-    <color name="nord_focus_stroke">@color/nord_grey_300</color>
-    <color name="nord_unfocused_stroke">@color/nord_grey_500</color>
-    <color name="nord_ripple_mask">#40D1D5DB</color> <!-- ~25% alpha of light grey -->
-
-    <!-- Shadow with low alpha for subtle TV elevation -->
-    <color name="nord_shadow">#1A000000</color>
-
-    <!-- Loader color as requested -->
+    <!-- Base nord colors already expected; adding explicit loader colors if not present -->
+    <!-- Renamed to avoid conflict with existing color resource defined in res/color/loader_blue_color.xml -->
     <color name="loader_blue">#5C9AEC</color>
+    <color name="nord_bg">#21242A</color>
+    <color name="nord_surface">#2A2E36</color>
 </resources>

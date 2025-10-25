@@ -5,7 +5,7 @@
     android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/nord_bg"
+    android:background="#21242A"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:clipChildren="false"
@@ -177,18 +177,28 @@
     </LinearLayout>
 
     <!-- Global loading indicator centered above content -->
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/circular_progress_indicator"
-        style="@style/Widget.TV.CircularProgress.Wavy"
-        android:layout_width="@dimen/loader_touch_target"
-        android:layout_height="@dimen/loader_touch_target"
-        android:layout_gravity="center"
+    <FrameLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#21242A"
         android:visibility="gone"
-        android:indeterminate="true"
-        app:indicatorColor="@color/loader_blue_color"
-        app:trackColor="@color/nord_surface"
-        app:trackCornerRadius="32dp"
-        android:background="@color/nord_bg"
-        app:indicatorInset="16dp"/>
+        android:focusable="false"
+        android:clickable="false">
+
+        <!-- Expressive circular wavy indicator from Material 1.14.0-alpha04 -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/circular_progress_indicator"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="60dp"
+            app:indicatorColor="#5C9AEC"
+            app:trackColor="#21242A"
+            app:trackThickness="6dp"
+            app:showAnimationBehavior="inward"
+            app:hideAnimationBehavior="outward" />
+    </FrameLayout>
 
 </FrameLayout>

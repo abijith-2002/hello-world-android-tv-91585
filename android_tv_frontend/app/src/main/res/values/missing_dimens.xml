@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Elevation values for focused/unfocused cards used in HomeActivity -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation_focused">8dp</dimen>
+</resources>

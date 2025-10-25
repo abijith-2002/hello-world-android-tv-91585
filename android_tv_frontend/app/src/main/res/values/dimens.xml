@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_elevation">8dp</dimen>
-    <dimen name="card_elevation_focused">16dp</dimen>
-    <!-- Shared corner radius for all rail cards -->
-    <dimen name="card_corner_radius">12dp</dimen>
-
-    <!-- Loader sizes for TV -->
-    <dimen name="loader_touch_target">96dp</dimen>
-    <dimen name="loader_visual_size">64dp</dimen>
-    <dimen name="loader_track_corner_radius">32dp</dimen>
+    <!-- Dimensions for loader visuals and touch target footprint on TV -->
+    <dimen name="loader_visual_size">60dp</dimen>
+    <dimen name="loader_touch_target">72dp</dimen>
 </resources>

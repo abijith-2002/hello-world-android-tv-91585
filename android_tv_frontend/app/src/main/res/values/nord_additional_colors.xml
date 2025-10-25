@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Additional Nord color often used for subtle outlines or captions -->
+    <color name="nord_outline">#3B4048</color>
+</resources>
