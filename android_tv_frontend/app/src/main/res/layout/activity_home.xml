@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,76 +39,68 @@
                 android:id="@+id/menuHome"
                 style="@style/TextAppearance.Card.Title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="48dp"
-                android:minHeight="40dp"
+                android:layout_height="48dp"
+                android:minWidth="96dp"
+                android:minHeight="48dp"
                 android:text="@string/menu_home"
                 android:textSize="24sp"
-                android:background="@drawable/card_bg"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/pill_button_background"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_marginEnd="10dp"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:clipToOutline="true" />
+                android:foreground="@drawable/tv_focus_ripple" />
 
             <TextView
                 android:id="@+id/menuLogin"
                 style="@style/TextAppearance.Card.Title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="48dp"
-                android:minHeight="40dp"
+                android:layout_height="48dp"
+                android:minWidth="96dp"
+                android:minHeight="48dp"
                 android:text="@string/menu_login"
                 android:textSize="24sp"
-                android:background="@drawable/card_bg"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/pill_button_background"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_marginEnd="10dp"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:clipToOutline="true" />
+                android:foreground="@drawable/tv_focus_ripple" />
 
             <TextView
                 android:id="@+id/menuSetting"
                 style="@style/TextAppearance.Card.Title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="48dp"
-                android:minHeight="40dp"
+                android:layout_height="48dp"
+                android:minWidth="96dp"
+                android:minHeight="48dp"
                 android:text="@string/menu_setting"
                 android:textSize="24sp"
-                android:background="@drawable/card_bg"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/pill_button_background"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_marginEnd="10dp"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:clipToOutline="true" />
+                android:foreground="@drawable/tv_focus_ripple" />
 
             <TextView
                 android:id="@+id/menuMyPlan"
                 style="@style/TextAppearance.Card.Title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="48dp"
-                android:minHeight="40dp"
+                android:layout_height="48dp"
+                android:minWidth="96dp"
+                android:minHeight="48dp"
                 android:text="@string/menu_my_plan"
                 android:textSize="24sp"
-                android:background="@drawable/card_bg"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/pill_button_background"
                 android:focusable="true"
-                android:foreground="@drawable/tv_focus_ripple"
-                android:clipToOutline="true" />
+                android:focusableInTouchMode="true"
+                android:foreground="@drawable/tv_focus_ripple" />
         </LinearLayout>
 
         <!-- Banner -->
@@ -151,10 +144,12 @@
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/circular_progress_indicator"
         style="@style/Widget.Material3Expressive.CircularProgressIndicator.Wavy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        app:indicatorColor="@color/loader_blue"
+        app:trackCornerRadius="32dp"/>
 
 </FrameLayout>

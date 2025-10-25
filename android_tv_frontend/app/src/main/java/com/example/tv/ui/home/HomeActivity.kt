@@ -72,14 +72,16 @@ class HomeActivity : AppCompatActivity() {
         // Trigger loads
         viewModel.loadAll()
 
-        // Observe combined loading state to toggle global spinner
+        // Observe combined loading state to toggle global spinner AND hide other UI
         val spinner: View = findViewById(R.id.circular_progress_indicator)
+        val homeContent: View = findViewById(R.id.homeContent)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { stateMap ->
-                    // If any rail is still loading, show spinner; otherwise hide
+                    // If any rail is still loading, show only the loader
                     val anyLoading = stateMap.values.any { it.isLoading }
                     spinner.visibility = if (anyLoading) View.VISIBLE else View.GONE
+                    homeContent.visibility = if (anyLoading) View.INVISIBLE else View.VISIBLE
                 }
             }
         }

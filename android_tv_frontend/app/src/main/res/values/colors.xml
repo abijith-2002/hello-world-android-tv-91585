@@ -2,7 +2,7 @@
 <resources>
     <!-- Nord palette tokens -->
     <!-- Core -->
-    <color name="nord_bg">#2E3440</color>          <!-- Background -->
+    <color name="nord_bg">#21242A</color>          <!-- Background -->
     <color name="nord_surface">#3B4252</color>     <!-- Surface -->
     <color name="nord_on_surface">#ECEFF4</color>  <!-- On-surface text/icons -->
 
@@ -23,4 +23,7 @@
 
     <!-- Shadow with low alpha for subtle TV elevation -->
     <color name="nord_shadow">#1A000000</color>
+
+    <!-- Loader color as requested -->
+    <color name="loader_blue">#5C9AEC</color>
 </resources>

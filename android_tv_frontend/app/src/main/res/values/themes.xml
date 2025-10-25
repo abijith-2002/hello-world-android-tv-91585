@@ -13,7 +13,8 @@
         <item name="colorOnSurface">@color/nord_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/nord_on_surface</item>
 
-        <item name="colorPrimary">@color/nord_grey_400</item>
+        <!-- Set primary to loader color to tint progress indicators -->
+        <item name="colorPrimary">@color/loader_blue</item>
         <item name="colorOnPrimary">@color/nord_bg</item>
         <item name="colorSecondary">@color/nord_grey_300</item>
 
