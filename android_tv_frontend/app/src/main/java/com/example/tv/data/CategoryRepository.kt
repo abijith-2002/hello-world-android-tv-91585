@@ -22,12 +22,18 @@ class CategoryRepository(
             "Hello World", "Sample Show", "Demo Title",
             "Pilot Episode", "Featurette", "Spotlight"
         )
+
+        // Use deterministic but real image URLs so that posters are visible during fallback flows.
+        // picsum.photos provides placeholder images suitable for demos.
+        // We vary the image id by category and index to reduce repetition.
+        val categorySeed = (category.ordinal + 1) * 100
         return baseNames.mapIndexed { idx, name ->
-            // Use null for poster so Coil shows our placeholder/error drawables
+            val imgId = categorySeed + idx
+            val posterUrl = "https://picsum.photos/id/$imgId/438/657" // maintain 146x219 @3x aspect ratio
             ContentItem(
                 id = (category.ordinal + 1) * 1000 + idx, // deterministic fake id
                 name = "$name • ${category.title} #${idx + 1}",
-                poster = null
+                poster = posterUrl
             )
         }
     }
