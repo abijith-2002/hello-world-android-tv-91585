@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- PUBLIC_INTERFACE -->
-    <!-- Alias style kept minimal; layout explicitly sets colors and sizes as needed. -->
-    <style name="Widget.Material3.CircularProgressIndicator.Expressive" parent="Widget.Material3.CircularProgressIndicator">
-        <item name="indicatorSize">60dp</item>
-        <item name="trackThickness">6dp</item>
-    </style>
-</resources>

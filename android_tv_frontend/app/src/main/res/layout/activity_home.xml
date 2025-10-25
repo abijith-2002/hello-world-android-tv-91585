@@ -186,19 +186,13 @@
         android:focusable="false"
         android:clickable="false">
 
-        <!-- Expressive circular wavy indicator from Material 1.14.0-alpha04 -->
+        <!-- Standard indeterminate circular progress indicator -->
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/circular_progress_indicator"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            app:indicatorSize="60dp"
-            app:indicatorColor="#5C9AEC"
-            app:trackColor="#21242A"
-            app:trackThickness="6dp"
-            app:showAnimationBehavior="inward"
-            app:hideAnimationBehavior="outward" />
+            android:indeterminate="true" />
     </FrameLayout>
 
 </FrameLayout>
