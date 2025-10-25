@@ -300,17 +300,41 @@ class HomeActivity : AppCompatActivity() {
                             // - If row index > 0, focus the corresponding index in row-1.
                             // - If row index == 0, do nothing special here (do not jump to menu).
                             card.setOnKeyListener { v, keyCode, event ->
-                                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                                    val remapped = handleDpadUpWithinRails(v, category)
-                                    if (remapped) {
-                                        true
-                                    } else {
-                                        // First row boundary: do not auto-jump to menu. Let default system focus rules apply.
-                                        if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
-                                        true
+                                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                                when (keyCode) {
+                                    KeyEvent.KEYCODE_DPAD_UP -> {
+                                        val remapped = handleDpadUpWithinRails(v, category)
+                                        if (remapped) {
+                                            true
+                                        } else {
+                                            // First row boundary: do not auto-jump to menu. Consume to keep focus in place.
+                                            if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
+                                            true
+                                        }
                                     }
-                                } else {
-                                    false
+                                    KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                        // Prevent moving past horizontal bounds in the current rail row.
+                                        val parentRow = v.parent as? LinearLayout
+                                        if (parentRow != null) {
+                                            val index = parentRow.indexOfChild(v).coerceAtLeast(0)
+                                            val lastIndex = (parentRow.childCount - 1).coerceAtLeast(0)
+                                            val atStart = index <= 0
+                                            val atEnd = index >= lastIndex
+                                            if ((keyCode == KeyEvent.KEYCODE_DPAD_LEFT && atStart) ||
+                                                (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && atEnd)
+                                            ) {
+                                                if (focusDebug) {
+                                                    Log.d(
+                                                        "FocusNav",
+                                                        "DPAD_${if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) "LEFT" else "RIGHT"} at boundary (index=$index, last=$lastIndex) — consuming."
+                                                    )
+                                                }
+                                                return@setOnKeyListener true // consume to do nothing at bounds
+                                            }
+                                        }
+                                        false // let normal navigation proceed between intermediate items
+                                    }
+                                    else -> false
                                 }
                             }
 
