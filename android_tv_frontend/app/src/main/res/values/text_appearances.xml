@@ -3,10 +3,11 @@
     <!-- PUBLIC_INTERFACE -->
     <!-- Smaller pill button text appearance to ensure consistent centering and baseline across devices -->
     <style name="TextAppearance.Pill.Small" parent="TextAppearance.Material3.TitleSmall">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">0dp</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/reddit_sans_regular</item>
         <item name="fontFamily">@font/reddit_sans_regular</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
