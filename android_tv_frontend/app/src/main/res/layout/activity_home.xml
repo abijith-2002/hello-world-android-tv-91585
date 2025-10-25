@@ -1,141 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/homeRoot"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/nord_bg"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:paddingTop="24dp"
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <!-- Top Menu -->
+    <!-- Content host -->
     <LinearLayout
-        android:id="@+id/topMenu"
-        android:orientation="horizontal"
+        android:id="@+id/homeContent"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="48dp"
-        android:paddingEnd="48dp"
-        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:paddingTop="24dp"
         android:clipChildren="false"
-        android:clipToPadding="false"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:clipToPadding="false">
 
-        <TextView
-            android:id="@+id/menuHome"
-            style="@style/TextAppearance.Card.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="40dp"
-            android:text="@string/menu_home"
-            android:textSize="24sp"
-            android:background="@drawable/card_bg"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:focusable="true"
-            android:layout_marginEnd="10dp"
-            android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
-
-        <TextView
-            android:id="@+id/menuLogin"
-            style="@style/TextAppearance.Card.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="40dp"
-            android:text="@string/menu_login"
-            android:textSize="24sp"
-            android:background="@drawable/card_bg"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:focusable="true"
-            android:layout_marginEnd="10dp"
-            android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
-
-        <TextView
-            android:id="@+id/menuSetting"
-            style="@style/TextAppearance.Card.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="40dp"
-            android:text="@string/menu_setting"
-            android:textSize="24sp"
-            android:background="@drawable/card_bg"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:focusable="true"
-            android:layout_marginEnd="10dp"
-            android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
-
-        <TextView
-            android:id="@+id/menuMyPlan"
-            style="@style/TextAppearance.Card.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="40dp"
-            android:text="@string/menu_my_plan"
-            android:textSize="24sp"
-            android:background="@drawable/card_bg"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:focusable="true"
-            android:foreground="@drawable/tv_focus_ripple"
-            android:clipToOutline="true" />
-    </LinearLayout>
-
-    <!-- Banner -->
-    <ImageView
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/banner_tv"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:padding="0dp"
-        android:contentDescription="@string/app_name" />
-
-    <!-- Rails list -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
+        <!-- Top Menu -->
         <LinearLayout
-            android:id="@+id/railsContainer"
-            android:orientation="vertical"
+            android:id="@+id/topMenu"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="48dp"
             android:paddingEnd="48dp"
-            android:paddingBottom="32dp"
+            android:gravity="center_vertical"
             android:clipChildren="false"
-            android:clipToPadding="false" />
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/menuHome"
+                style="@style/TextAppearance.Card.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="40dp"
+                android:text="@string/menu_home"
+                android:textSize="24sp"
+                android:background="@drawable/card_bg"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:foreground="@drawable/tv_focus_ripple"
+                android:clipToOutline="true" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/menuLogin"
+                style="@style/TextAppearance.Card.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="40dp"
+                android:text="@string/menu_login"
+                android:textSize="24sp"
+                android:background="@drawable/card_bg"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:foreground="@drawable/tv_focus_ripple"
+                android:clipToOutline="true" />
+
+            <TextView
+                android:id="@+id/menuSetting"
+                style="@style/TextAppearance.Card.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="40dp"
+                android:text="@string/menu_setting"
+                android:textSize="24sp"
+                android:background="@drawable/card_bg"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:foreground="@drawable/tv_focus_ripple"
+                android:clipToOutline="true" />
+
+            <TextView
+                android:id="@+id/menuMyPlan"
+                style="@style/TextAppearance.Card.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="40dp"
+                android:text="@string/menu_my_plan"
+                android:textSize="24sp"
+                android:background="@drawable/card_bg"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:focusable="true"
+                android:foreground="@drawable/tv_focus_ripple"
+                android:clipToOutline="true" />
+        </LinearLayout>
+
+        <!-- Banner -->
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/banner_tv"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            android:contentDescription="@string/app_name" />
+
+        <!-- Rails list -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/railsContainer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="48dp"
+                android:paddingEnd="48dp"
+                android:paddingBottom="32dp"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
+
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Global loading indicator centered above content -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/circular_progress_indicator"
+        style="@style/Widget.Material3Expressive.CircularProgressIndicator.Wavy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"/>
+
+</FrameLayout>
