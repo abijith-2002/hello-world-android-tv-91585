@@ -277,6 +277,7 @@ class HomeActivity : AppCompatActivity() {
                                     // Prefer hardware when available, Coil will fallback if needed
                                     allowHardware(true)
                                     memoryCachePolicy(CachePolicy.ENABLED)
+                                    // Use static placeholders only; never swap to any sample URLs here.
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
                                     // Ensure no transformations are applied (stays empty)

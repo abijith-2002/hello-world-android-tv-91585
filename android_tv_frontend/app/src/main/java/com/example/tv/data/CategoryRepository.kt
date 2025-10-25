@@ -10,40 +10,19 @@ import android.util.Log
 /**
  * PUBLIC_INTERFACE
  * Repository that wraps the ApiService and provides methods to fetch items per home category.
- * Fetches from the network and gracefully falls back to sample data if the request fails.
+ * Fetches from the network and returns an empty list on failure. No poster overrides are injected.
  */
 class CategoryRepository(
     private val api: ApiService = ApiService.create()
 ) {
 
-    // Simple sample content used when network fails
-    private fun sampleItemsFor(category: HomeCategory): List<ContentItem> {
-        val baseNames = listOf(
-            "Hello World", "Sample Show", "Demo Title",
-            "Pilot Episode", "Featurette", "Spotlight"
-        )
-
-        // Use deterministic but real image URLs so that posters are visible during fallback flows.
-        // picsum.photos provides placeholder images suitable for demos.
-        // We vary the image id by category and index to reduce repetition.
-        val categorySeed = (category.ordinal + 1) * 100
-        return baseNames.mapIndexed { idx, name ->
-            val imgId = categorySeed + idx
-            val posterUrl = "https://picsum.photos/id/$imgId/438/657" // maintain 146x219 @3x aspect ratio
-            ContentItem(
-                id = (category.ordinal + 1) * 1000 + idx, // deterministic fake id
-                name = "$name • ${category.title} #${idx + 1}",
-                poster = posterUrl
-            )
-        }
-    }
-
     /**
      * PUBLIC_INTERFACE
      * Fetch items for a specific HomeCategory.
-     * Attempts a network call to the corresponding endpoint and falls back to samples upon any error.
+     * Attempts a network call to the corresponding endpoint; on failure returns an empty list.
+     * Posters are taken strictly from the API's poster field (may be null/blank).
      * @param category HomeCategory enum value
-     * @return Result<List<ContentItem>> success with list or success with samples on failure
+     * @return Result<List<ContentItem>> success with list or success with empty list on failure
      */
     suspend fun fetchCategory(category: HomeCategory): Result<List<ContentItem>> {
         return try {
@@ -58,9 +37,9 @@ class CategoryRepository(
             }
             Result.success(dtos.map { it.toContentItem() })
         } catch (t: Throwable) {
-            // Log error and gracefully fall back to local samples so the UI remains functional
+            // Log error and gracefully return empty list; UI will handle placeholders for null/blank posters.
             Log.e("CategoryRepository", "Failed to fetch ${category.name}: ${t.message}", t)
-            Result.success(sampleItemsFor(category))
+            Result.success(emptyList())
         }
     }
 }

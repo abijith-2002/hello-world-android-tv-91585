@@ -8,5 +8,5 @@ package com.example.tv.data.api.dto
 data class ShowDto(
     val id: Int,
     val name: String,
-    val poster: String
+    val poster: String?
 )
