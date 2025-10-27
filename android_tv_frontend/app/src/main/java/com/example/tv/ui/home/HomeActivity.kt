@@ -170,8 +170,19 @@ class HomeActivity : AppCompatActivity() {
         fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
             if (currentRowIdx <= 0) {
-                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: boundary; not jumping to top menu.")
-                return false
+                // First row: route to top menu default item
+                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: moving focus to top menu default.")
+                try {
+                    topMenuDefaultChild.requestFocus()
+                } catch (_: Throwable) {
+                    // Fallback to the container itself
+                    try {
+                        topMenu.requestFocus()
+                    } catch (_: Throwable) {
+                        // ignore if even that fails
+                    }
+                }
+                return true
             }
 
             val targetRowCategory = categories[currentRowIdx - 1]
@@ -314,7 +325,7 @@ class HomeActivity : AppCompatActivity() {
 
                             // Intercept DPAD_UP across all rows:
                             // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, do nothing special here (do not jump to menu).
+                            // - If row index == 0, jump to top menu default item.
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
