@@ -1,0 +1,13 @@
+{
+  "root": "android_tv_frontend",
+  "wrapper": "android_tv_frontend/gradlew",
+  "settings": [
+    "android_tv_frontend/settings.gradle",
+    "android_tv_frontend/settings.gradle.kts"
+  ],
+  "modules": [
+    ":app",
+    ":list",
+    ":utilities"
+  ]
+}
