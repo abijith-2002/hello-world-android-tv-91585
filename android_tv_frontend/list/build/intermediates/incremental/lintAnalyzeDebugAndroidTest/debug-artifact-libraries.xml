@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:list::debug"
-      jars="/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out/jars/classes.jar:/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out/jars/libs/R.jar"
-      resolved="android-tv-hello-world:list:unspecified"
-      folder="/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out"
+      jars="/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out/jars/classes.jar:/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out/jars/libs/R.jar"
+      resolved="android_tv_frontend:list:unspecified"
+      folder="/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

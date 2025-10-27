@@ -1,4 +1,8 @@
-android_project_root=.
-contains=settings.gradle
-modules=:app,:list,:utilities
-note=This file helps tooling detect the Android project root directory.
+This is the project root for the Android/Kotlin project.
+
+Module(s):
+- app
+- list
+- utilities
+
+Gradle wrapper and settings files are present here.

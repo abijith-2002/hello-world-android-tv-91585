@@ -3,7 +3,7 @@
       roots=":@@:list::debug,androidx.annotation:annotation-jvm:1.8.2@jar,org.jetbrains.kotlin:kotlin-stdlib:1.9.24@jar,org.jetbrains:annotations:13.0@jar">
     <dependency
         name=":@@:list::debug"
-        simpleName="android-tv-hello-world:list"/>
+        simpleName="android_tv_frontend:list"/>
     <dependency
         name="androidx.annotation:annotation-jvm:1.8.2@jar"
         simpleName="androidx.annotation:annotation-jvm"/>
@@ -18,7 +18,7 @@
       roots=":@@:list::debug,androidx.annotation:annotation-jvm:1.8.2@jar,org.jetbrains.kotlin:kotlin-stdlib:1.9.24@jar,org.jetbrains:annotations:13.0@jar">
     <dependency
         name=":@@:list::debug"
-        simpleName="android-tv-hello-world:list"/>
+        simpleName="android_tv_frontend:list"/>
     <dependency
         name="androidx.annotation:annotation-jvm:1.8.2@jar"
         simpleName="androidx.annotation:annotation-jvm"/>

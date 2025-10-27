@@ -1,0 +1,2 @@
+Gradle module root: app
+Parent Gradle root is one level up.

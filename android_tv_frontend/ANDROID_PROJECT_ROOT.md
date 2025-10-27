@@ -1,8 +1,10 @@
-Android Project Root Pointer
+# Android Project Root Pointer
 
-This repository’s Android project root is this directory:
-- Root Gradle settings: settings.gradle
-- Modules: :app, :list, :utilities
-- Wrapper: ./gradlew
+This file exists to help automated tooling identify the project root for the Android/Kotlin project.
 
-Tools that auto-detect the project root should use this folder (android_tv_frontend) as the root for Gradle tasks.
+Project root: This directory (android_tv_frontend)
+
+Notes:
+- Gradle wrapper is present in this folder.
+- settings.gradle(.kts) and app module live under this root.
+- Do not remove; used by CI/project analyzers.

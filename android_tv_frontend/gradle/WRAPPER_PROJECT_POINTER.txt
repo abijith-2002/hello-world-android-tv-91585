@@ -1,2 +1,2 @@
-root=..
-apk=../app/build/outputs/apk/debug/app-debug.apk
+Gradle Wrapper detected here.
+Project root is this directory's parent: android_tv_frontend

@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:8.6.0"
+        classpath "com.android.tools.build:gradle:8.6.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24"
     }
 }
@@ -14,11 +14,4 @@ allprojects {
         google()
         mavenCentral()
     }
-}
-
-// Apply shared tasks (e.g., copyDebugApk) for convenience
-apply from: "${rootDir}/tasks.gradle"
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
