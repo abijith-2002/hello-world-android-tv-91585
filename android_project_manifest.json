@@ -1,0 +1,17 @@
+{
+  "projectType": "android-gradle",
+  "gradleRoot": "android_tv_frontend",
+  "wrapper": "android_tv_frontend/gradlew",
+  "settingsFiles": [
+    "android_tv_frontend/settings.gradle",
+    "android_tv_frontend/settings.gradle.kts"
+  ],
+  "modules": [
+    ":app",
+    ":list",
+    ":utilities"
+  ],
+  "sdkDir": "/opt/android-sdk-linux",
+  "apkDebugPath": "android_tv_frontend/app/build/outputs/apk/debug/app-debug.apk",
+  "notes": "This manifest helps external analyzers identify the Android Gradle project root and modules."
+}
