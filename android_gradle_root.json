@@ -1,0 +1,6 @@
+{
+  "gradleRootDir": "android_tv_frontend",
+  "wrapper": "android_tv_frontend/gradlew",
+  "settingsFiles": ["android_tv_frontend/settings.gradle", "android_tv_frontend/settings.gradle.kts"],
+  "modules": [":app", ":list", ":utilities"]
+}
