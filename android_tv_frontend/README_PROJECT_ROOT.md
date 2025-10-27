@@ -1,14 +1,14 @@
-Android Project Root
+This is the Android project root.
 
-This directory (android_tv_frontend) is the Gradle root for the Android TV app.
+Primary Gradle entry files present here:
+- settings.gradle (Groovy)
+- build.gradle or build.gradle.kts (root)
+- gradle/ wrapper files
+- app/build.gradle (Android application module)
+- utilities/build.gradle (library module)
+- list/build.gradle (library module)
 
-Key files:
-- settings.gradle / settings.gradle.kts
-- build.gradle / build.gradle.kts
-- gradlew (Gradle wrapper)
-- Modules: :app, :list, :utilities
+AndroidManifest for the app module:
+- app/src/main/AndroidManifest.xml
 
-Tooling notes:
-- Some analyzers require a simple text marker to resolve the project root. This file serves that purpose in addition to the existing PROJECT_ROOT_POINTER.txt and ANDROID_PROJECT_ROOT.md.
-- Use this directory as the working directory when running Gradle tasks, e.g.:
-  ./gradlew :app:assembleDebug
+If a tool requires a single definitive root file, point it to this directory.

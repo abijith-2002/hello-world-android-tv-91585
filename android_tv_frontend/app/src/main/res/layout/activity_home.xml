@@ -171,23 +171,6 @@
         </ScrollView>
     </LinearLayout>
 
-    <!-- Global loading indicator centered above content -->
-    <FrameLayout
-        android:id="@+id/loading_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#21242A"
-        android:visibility="gone"
-        android:focusable="false"
-        android:clickable="false">
 
-        <!-- Standard indeterminate circular progress indicator -->
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/circular_progress_indicator"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:indeterminate="true" />
-    </FrameLayout>
 
 </FrameLayout>

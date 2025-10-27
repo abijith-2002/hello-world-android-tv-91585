@@ -1,10 +1,10 @@
 <libraries>
   <library
       name=":@@:list::debug"
-      jars="/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out/jars/classes.jar:/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out/jars/libs/R.jar"
-      resolved="android-tv-hello-world:list:unspecified"
+      jars="/home/kavia/.gradle/caches/9.0.0/transforms/288486a4502541bd35d705f8b61bfe55/transformed/out/jars/classes.jar:/home/kavia/.gradle/caches/9.0.0/transforms/288486a4502541bd35d705f8b61bfe55/transformed/out/jars/libs/R.jar"
+      resolved="android_tv_frontend:list:unspecified"
       partialResultsDir="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list/build/intermediates/lint_partial_results/debug/lintAnalyzeDebug/out"
-      folder="/home/kavia/.gradle/caches/9.0.0/transforms/3ea6b5876e300a26a4344081b17bdab1/transformed/out"
+      folder="/home/kavia/.gradle/caches/9.0.0/transforms/288486a4502541bd35d705f8b61bfe55/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

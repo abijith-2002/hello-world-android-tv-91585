@@ -10,15 +10,55 @@
     android:clipToPadding="false"
     android:paddingTop="4dp">
 
-    <TextView
-        android:id="@+id/railTitle"
+    <!-- Title row with optional small loading chip on the right -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/nord_on_surface"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:paddingStart="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/railTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/nord_on_surface"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="@font/reddit_sans_regular"
+            android:paddingStart="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Small inline loader chip; visible while this rail is loading -->
+        <LinearLayout
+            android:id="@+id/railLoadingChip"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/pill_button_background"
+            android:visibility="gone">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/railTinyProgress"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:indeterminate="true"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/railLoadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading…"
+                android:textColor="@color/nord_on_surface"
+                android:textSize="14sp"
+                android:fontFamily="@font/reddit_sans_regular"/>
+        </LinearLayout>
+    </RelativeLayout>
 
     <HorizontalScrollView
         android:id="@+id/railScroll"

@@ -1,8 +1,9 @@
-Android Project Root Pointer
+Android project root for this container is the current directory.
 
-This repository’s Android project root is this directory:
-- Root Gradle settings: settings.gradle
-- Modules: :app, :list, :utilities
-- Wrapper: ./gradlew
+Key files:
+- settings.gradle(.kts)
+- build.gradle(.kts)
+- app/build.gradle
+- app/src/main/AndroidManifest.xml
 
-Tools that auto-detect the project root should use this folder (android_tv_frontend) as the root for Gradle tasks.
+App module path: app

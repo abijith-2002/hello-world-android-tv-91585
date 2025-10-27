@@ -69,24 +69,8 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Trigger loads
+        // Trigger loads for all sections; UI remains visible and renders progressively
         viewModel.loadAll()
-
-        // Observe combined loading state to toggle global spinner AND hide other UI
-        val loadingOverlay: View = findViewById(R.id.loading_overlay)
-        val spinner: View = findViewById(R.id.circular_progress_indicator)
-        val homeContent: View = findViewById(R.id.homeContent)
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { stateMap ->
-                    // If any rail is still loading, show only the loader
-                    val anyLoading = stateMap.values.any { it.isLoading }
-                    loadingOverlay.visibility = if (anyLoading) View.VISIBLE else View.GONE
-                    spinner.visibility = if (anyLoading) View.VISIBLE else View.GONE
-                    homeContent.visibility = if (anyLoading) View.INVISIBLE else View.VISIBLE
-                }
-            }
-        }
     }
 
     /**
@@ -219,25 +203,50 @@ class HomeActivity : AppCompatActivity() {
 
                         val row = railRows[category] ?: return@forEach
                         val titleView = railView.findViewById<TextView>(R.id.railTitle)
+                        val loadingChip = railView.findViewById<View>(R.id.railLoadingChip)
                         val scrollView = railScrolls[category] ?: return@forEach
 
                         // Clear previous
                         row.removeAllViews()
 
-                        when {
-                            railState.isLoading -> {
-                                titleView.text = "${category.title} • Loading…"
-                            }
-                            railState.error != null -> {
+                        // Title and inline chip state
+                        if (railState.isLoading) {
+                            titleView.text = category.title
+                            loadingChip.visibility = View.VISIBLE
+                        } else {
+                            loadingChip.visibility = View.GONE
+                            if (railState.error != null) {
                                 titleView.text = "${category.title} • Error"
-                                Toast.makeText(this@HomeActivity, "Failed to load ${category.title}: ${railState.error}", Toast.LENGTH_SHORT).show()
-                            }
-                            else -> {
+                                Toast.makeText(
+                                    this@HomeActivity,
+                                    "Failed to load ${category.title}: ${railState.error}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
                                 titleView.text = category.title
                             }
                         }
 
-                        // Populate items
+                        // If loading and no items yet, show skeleton placeholders
+                        if (railState.isLoading && railState.items.isEmpty()) {
+                            repeat(6) {
+                                val skeleton = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
+                                val img = skeleton.findViewById<ImageView>(R.id.thumbImage)
+                                val titleTv = skeleton.findViewById<TextView>(R.id.thumbTitle)
+                                val overlay = skeleton.findViewById<View>(R.id.overlayGrad)
+
+                                // Nord dark skeleton placeholder
+                                img.setImageResource(R.drawable.bg_skeleton_placeholder)
+                                img.alpha = 0.8f
+                                titleTv.visibility = View.GONE
+                                overlay.visibility = View.GONE
+
+                                skeleton.isFocusable = false
+                                row.addView(skeleton)
+                            }
+                        }
+
+                        // Populate real items as they arrive
                         railState.items.forEach { item ->
                             val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
                             val img = card.findViewById<ImageView>(R.id.thumbImage)
