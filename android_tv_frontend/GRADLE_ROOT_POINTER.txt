@@ -1,0 +1,9 @@
+Gradle project root detected here.
+
+Properties:
+- wrapper=./gradlew
+- settings=settings.gradle
+- modules=:app,:list,:utilities
+
+Notes:
+This file assists automated analyzers in locating the Gradle project root directory.
