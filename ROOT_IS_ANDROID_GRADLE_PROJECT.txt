@@ -1,0 +1,10 @@
+This workspace contains an Android/Kotlin Gradle project.
+
+Gradle root directory: android_tv_frontend
+
+Indicators:
+- gradlew present under android_tv_frontend/
+- settings.gradle and/or settings.gradle.kts present
+- modules: :app, :list, :utilities
+
+Tools can treat android_tv_frontend as the Gradle root for builds.
