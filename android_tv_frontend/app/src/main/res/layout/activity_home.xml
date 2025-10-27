@@ -186,7 +186,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:indeterminate="true" />
+            android:indeterminate="true"
+            app:indicatorColor="@color/loader_red"
+            app:trackColor="@color/loader_red_track" />
     </FrameLayout>
 
 </FrameLayout>

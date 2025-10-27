@@ -13,10 +13,12 @@
         <item name="colorOnSurface">@color/nord_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/nord_on_surface</item>
 
-        <!-- Set primary to loader color to tint progress indicators -->
-        <item name="colorPrimary">@color/loader_blue</item>
+        <!-- Set primary to red for loader tinting where components use colorPrimary by default -->
+        <item name="colorPrimary">@color/loader_red</item>
         <item name="colorOnPrimary">@color/nord_bg</item>
         <item name="colorSecondary">@color/nord_grey_300</item>
+        <!-- Explicit Material indicator defaults, in case widgets reference style attributes -->
+        <item name="circularProgressIndicatorStyle">@style/Widget.Material3.CircularProgressIndicator</item>
 
         <!-- Typography: Reddit Sans with fallback to system sans -->
         <item name="android:fontFamily">@font/reddit_sans</item>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Loader colors for indeterminate progress indicators -->
+    <color name="loader_red">#EF4444</color> <!-- Red 500 -->
+    <color name="loader_red_track">#26EF4444</color> <!-- 15% alpha red for track -->
+</resources>
