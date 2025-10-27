@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- PUBLIC_INTERFACE
-         Accessibility label for content thumbnail image used in view_thumb_card -->
-    <string name="thumb_image_cd">Program poster</string>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Content card strings are centralized in values/strings.xml to prevent duplication. -->
 </resources>

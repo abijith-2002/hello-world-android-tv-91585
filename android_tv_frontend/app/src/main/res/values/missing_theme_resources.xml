@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- PUBLIC_INTERFACE -->
-    <!-- Provide fallback resources referenced by styles/themes to resolve build:
-         - dimen/card_corner_radius
-         - color/nord_on_surface
-         - color/nord_grey_300
-         - color/nord_unfocused_stroke -->
-
+    <!-- Keep only unique fallback resources that do not exist in other values files to avoid duplicates. -->
     <!-- Dimensions -->
     <dimen name="card_corner_radius">12dp</dimen>
 
-    <!-- Colors aligned with Nord dark palette intent -->
-    <color name="nord_on_surface">#E5E7EB</color> <!-- light text on dark surfaces -->
-    <color name="nord_grey_300">#9CA3AF</color>   <!-- neutral gray -->
-    <color name="nord_unfocused_stroke">#3B4048</color> <!-- subtle border for unfocused state -->
+    <!-- Do not redefine colors that already exist in colors.xml -->
+    <!-- If additional unique placeholders are needed in the future, add them here ensuring no duplication. -->
 </resources>

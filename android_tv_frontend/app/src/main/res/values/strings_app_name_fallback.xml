@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- PUBLIC_INTERFACE
-         Fallback app name used when referencing getString(R.string.app_name) in title defaults -->
-    <string name="app_name">Hello TV</string>
+    <!-- PUBLIC_INTERFACE -->
+    <!-- Intentionally empty to avoid duplicating app_name from values/strings.xml -->
 </resources>

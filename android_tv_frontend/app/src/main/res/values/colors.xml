@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- PUBLIC_INTERFACE
-         Colors used by the app. Ensure presence of nord_on_surface used by rail title/labels. -->
+         Core color palette for Nord-dark themed TV app. -->
+    <!-- Existing -->
     <color name="nord_on_surface">#ECEFF4</color>
+
+    <!-- Added to resolve missing references from themes/styles/drawables -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="nord_bg">#21242A</color>
+    <color name="nord_surface">#2A2F36</color>
+    <color name="nord_grey_300">#9CA3AF</color>
+    <color name="nord_unfocused_stroke">#3B4048</color>
+
+    <!-- Loader accent used for indeterminate tinted progress -->
+    <color name="loader_blue">#3B82F6</color>
 </resources>

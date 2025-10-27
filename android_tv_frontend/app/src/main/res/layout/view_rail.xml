@@ -23,7 +23,10 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/rail_horizontal_padding"
         android:paddingEnd="@dimen/rail_horizontal_padding"
-        android:paddingBottom="@dimen/rail_title_bottom_padding">
+        android:paddingBottom="@dimen/rail_title_bottom_padding"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:paddingRight="8dp">
 
         <TextView
             android:id="@+id/railTitle"
@@ -37,11 +40,13 @@
             android:paddingEnd="12dp"
             android:maxLines="1"
             android:ellipsize="end"
+            android:includeFontPadding="false"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:layout_toStartOf="@id/railHeaderEnd"/>
+            android:layout_toStartOf="@id/railHeaderEnd"
+            android:layout_marginEnd="6dp"/>
 
         <!-- End container for loader UI to prevent overlap with title -->
         <LinearLayout
@@ -52,18 +57,22 @@
             android:layout_centerVertical="true"
             android:minWidth="64dp"
             android:orientation="horizontal"
+            android:baselineAligned="true"
             android:focusable="false"
-            android:focusableInTouchMode="false">
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:longClickable="false"
+            android:importantForAutofill="no">
 
             <!-- Small inline loader chip; visible while this rail is loading (per-section loader) -->
             <LinearLayout
                 android:id="@+id/railLoadingChip"
                 android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
                 android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:background="@drawable/pill_button_background"
@@ -79,13 +88,14 @@
                 <ProgressBar
                     android:id="@+id/railTinyProgress"
                     style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:minWidth="18dp"
-                    android:minHeight="18dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:minWidth="14dp"
+                    android:minHeight="14dp"
                     android:indeterminate="true"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/app_name"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="@string/loading"
                     android:indeterminateTint="@color/loader_blue_color"/>
 
                 <TextView
@@ -93,21 +103,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/loading"
-                    style="@style/TextAppearance.Rail.LoaderChip"
+                    style="@style/TextAppearance.Rail.Title"
                     android:textAllCaps="false"
-                    android:letterSpacing="0.02"/>
+                    android:letterSpacing="0.02"
+                    android:includeFontPadding="false"/>
             </LinearLayout>
 
             <!-- Fallback tiny loader (platform ProgressBar) in case Material component is not available -->
             <ProgressBar
                 android:id="@+id/railTinyProgressFallback"
                 style="?android:attr/progressBarStyleSmall"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:minWidth="14dp"
+                android:minHeight="14dp"
                 android:layout_marginStart="8dp"
                 android:indeterminate="true"
                 android:visibility="gone"
-                android:contentDescription="@string/app_name"
+                android:contentDescription="@string/loading"
                 android:indeterminateTint="@color/nord_on_surface" />
 
             <!-- Optional empty-state hint; controlled in code when needed -->
@@ -143,6 +156,8 @@
         android:requiresFadingEdge="horizontal"
         android:paddingStart="@dimen/rail_horizontal_padding"
         android:paddingEnd="@dimen/rail_horizontal_padding"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         android:nextFocusUp="@id/topMenu">
 
         <LinearLayout
