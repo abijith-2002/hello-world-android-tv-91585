@@ -17,6 +17,12 @@ class CategoryRepository(
 ) {
 
     // Simple sample content used when network fails
+    /**
+     * Returns a small set of placeholder items when the network request fails.
+     * UI behavior:
+     * - Rails still render immediately with per-section inline loaders.
+     * - If network fails, the loader hides and the rail shows these sample items (or empty-state if desired).
+     */
     private fun sampleItemsFor(category: HomeCategory): List<ContentItem> {
         val baseNames = listOf(
             "Hello World", "Sample Show", "Demo Title",
@@ -46,6 +52,7 @@ class CategoryRepository(
                 HomeCategory.HORROR -> api.getHorror()
                 HomeCategory.DRAMA -> api.getDrama()
             }
+            // Note: The API may return an empty list; the Home UI shows a non-blocking per-section empty-state in that case.
             Result.success(dtos.map { it.toContentItem() })
         } catch (t: Throwable) {
             // Log error and gracefully fall back to local samples so the UI remains functional

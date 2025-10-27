@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home rail layout:
+  - Displays a section title, an end-aligned inline loader chip during loading, and a horizontal row of cards.
+  - No global/full-screen loader is used; each rail controls its own loading visuals (chip + skeleton cards).
+  - Keep views non-focusable where appropriate so DPAD navigation stays on cards and top menu.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/railRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,49 +21,112 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/railTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/nord_on_surface"
             android:textStyle="bold"
             android:textSize="20sp"
             android:fontFamily="@font/reddit_sans_regular"
             android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_toStartOf="@id/railHeaderEnd"/>
 
-        <!-- Small inline loader chip; visible while this rail is loading -->
+        <!-- End container for loader UI to prevent overlap with title -->
         <LinearLayout
-            android:id="@+id/railLoadingChip"
+            android:id="@+id/railHeaderEnd"
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:gravity="center_vertical"
+            android:minWidth="64dp"
             android:orientation="horizontal"
-            android:background="@drawable/pill_button_background"
-            android:visibility="gone">
+            android:focusable="false"
+            android:focusableInTouchMode="false">
 
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/railTinyProgress"
+            <!-- Small inline loader chip; visible while this rail is loading (per-section loader) -->
+            <LinearLayout
+                android:id="@+id/railLoadingChip"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="@drawable/pill_button_background"
+                android:visibility="gone"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:accessibilityLiveRegion="polite"
+                android:contentDescription="@string/loading_section">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/railTinyProgress"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:minWidth="18dp"
+                    android:minHeight="18dp"
+                    android:indeterminate="true"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/app_name"
+                    android:backgroundTintMode="src_in"
+                    app:indicatorColor="@color/loader_blue_color"
+                    app:trackColor="@drawable/loader_track_transparent"/>
+
+                <TextView
+                    android:id="@+id/railLoadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loading"
+                    android:textColor="@color/nord_on_surface"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/reddit_sans_regular"
+                    android:textAllCaps="false"
+                    android:letterSpacing="0.02"/>
+            </LinearLayout>
+
+            <!-- Fallback tiny loader (platform ProgressBar) in case Material component is not available -->
+            <ProgressBar
+                android:id="@+id/railTinyProgressFallback"
+                style="?android:attr/progressBarStyleSmall"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
+                android:layout_marginStart="8dp"
                 android:indeterminate="true"
-                android:layout_marginEnd="8dp"/>
+                android:visibility="gone"
+                android:contentDescription="@string/app_name"
+                android:indeterminateTint="@color/loader_blue_color" />
 
+            <!-- Optional empty-state hint; controlled in code when needed -->
             <TextView
-                android:id="@+id/railLoadingText"
+                android:id="@+id/railEmptyState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loading…"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="4dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:alpha="0.75"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="@string/empty_state_no_items"
                 android:textColor="@color/nord_on_surface"
                 android:textSize="14sp"
-                android:fontFamily="@font/reddit_sans_regular"/>
+                android:fontFamily="@font/reddit_sans_regular"
+                android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -68,6 +138,8 @@
         android:scrollbars="none"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:fadingEdgeLength="12dp"
+        android:requiresFadingEdge="horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:nextFocusUp="@id/topMenu">
@@ -76,9 +148,13 @@
             android:id="@+id/railRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="219dp"
             android:orientation="horizontal"
             android:clipChildren="false"
-            android:clipToPadding="false" />
+            android:clipToPadding="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:paddingEnd="8dp" />
     </HorizontalScrollView>
 
 </LinearLayout>

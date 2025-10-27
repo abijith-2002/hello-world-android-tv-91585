@@ -14,7 +14,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tv.R
+import com.example.tv.R // Uses string resources defined in values/strings.xml (login labels, errors, actions)
 
 /**
  * PUBLIC_INTERFACE

@@ -23,7 +23,8 @@
     app:contentPadding="0dp"
     app:cardUseCompatPadding="false">
 
-    <!-- Full-bleed poster image; CENTER_CROP to fill, clipped to card's rounded outline -->
+    <!-- Full-bleed poster image; CENTER_CROP to fill, clipped to card's rounded outline.
+         During rail loading, HomeActivity sets bg_skeleton_placeholder on this ImageView. -->
     <ImageView
         android:id="@+id/thumbImage"
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
         android:padding="0dp"
         android:layout_margin="0dp" />
 
-    <!-- Bottom overlay gradient for readability -->
+    <!-- Bottom overlay gradient for readability (kept hidden: image-only design) -->
     <View
         android:id="@+id/overlayGrad"
         android:layout_width="match_parent"
@@ -44,7 +45,7 @@
         android:background="@drawable/gradient_horizontal_overlay"
         android:visibility="gone" />
 
-    <!-- Title text removed per requirement: keep only the image visible -->
+    <!-- Title intentionally hidden to keep poster-only aesthetic -->
     <TextView
         android:id="@+id/thumbTitle"
         style="@style/TextAppearance.Card.Title"

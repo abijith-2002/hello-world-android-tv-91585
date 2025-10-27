@@ -33,6 +33,7 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
+                <!-- Uses localized strings for title and labels (back, login_title, labels, hints) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +130,8 @@
                     android:textColor="@color/nord_grey_300"
                     android:visibility="gone"
                     android:textSize="14sp"
-                    android:paddingStart="4dp" />
+                    android:paddingStart="4dp"
+                    android:contentDescription="@string/label_error" />
 
                 <Space
                     android:layout_width="1dp"

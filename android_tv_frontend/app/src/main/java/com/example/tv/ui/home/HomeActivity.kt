@@ -27,6 +27,9 @@ import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import coil.Coil
+import com.example.tv.ui.home.hide
+import com.example.tv.ui.home.show
+import com.example.tv.ui.home.DimenParseUtils
 
 /**
  * PUBLIC_INTERFACE
@@ -37,7 +40,7 @@ import coil.Coil
  *
  * DPAD_UP behavior:
  * - From any content row r > 0, DPAD_UP moves focus to the corresponding item in row r-1.
- * - For the first content row (r == 0), DPAD_UP does not jump to the top menu unless explicitly handled elsewhere.
+ * - For the first content row (r == 0), DPAD_UP jumps to the default top menu item.
  *
  * - Accepts no parameters.
  * - Returns no value; displays UI.
@@ -51,11 +54,12 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var topMenuDefaultChild: View
 
     // Debug flag for focus mapping logs
-    private val focusDebug = true
+    private val focusDebug = BuildConfig.DEBUG
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        // No global overlay loader is present in activity_home.xml; ensure we never reference such IDs.
 
         setupTopMenu()
         setupRails()
@@ -70,6 +74,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Trigger loads for all sections; UI remains visible and renders progressively
+        // No full-screen/global overlay loader is used. Each section renders its own inline loader.
         viewModel.loadAll()
     }
 
@@ -128,13 +133,17 @@ class HomeActivity : AppCompatActivity() {
 
         // Inflate static rail containers first
         categories.forEach { category ->
-            val railView = layoutInflater.inflate(R.layout.view_rail, container, false)
-            val titleView = railView.findViewById<TextView>(R.id.railTitle)
-            titleView.text = category.title
-            container.addView(railView)
-            railViews[category] = railView
-            railRows[category] = railView.findViewById(R.id.railRow)
-            railScrolls[category] = railView.findViewById(R.id.railScroll)
+            try {
+                val railView = layoutInflater.inflate(R.layout.view_rail, container, false)
+                val titleView = railView.findViewById<TextView>(R.id.railTitle)
+                titleView.text = category.title
+                container.addView(railView)
+                railViews[category] = railView
+                railRows[category] = railView.findViewById(R.id.railRow)
+                railScrolls[category] = railView.findViewById(R.id.railScroll)
+            } catch (t: Throwable) {
+                Log.e("HomeActivity", "Failed to inflate rail for ${category.title}: ${t.message}", t)
+            }
         }
 
         // Helpers to compute row index and remap focus up
@@ -144,8 +153,7 @@ class HomeActivity : AppCompatActivity() {
          * PUBLIC_INTERFACE
          * handleDpadUpWithinRails
          * General DPAD_UP mapping across rails: for any row r > 0, focus the corresponding
-         * item by index in the immediate row above (r-1). For the first row (r == 0), keep
-         * default behavior (no remap to top menu unless explicitly intended elsewhere).
+         * item by index in the immediate row above (r-1). For the first row (r == 0), jump to top menu.
          *
          * @param currentCard View currently focused within its row
          * @param currentCategory Category of the row containing currentCard
@@ -159,11 +167,10 @@ class HomeActivity : AppCompatActivity() {
                 try {
                     topMenuDefaultChild.requestFocus()
                 } catch (_: Throwable) {
-                    // Fallback to the container itself
                     try {
                         topMenu.requestFocus()
                     } catch (_: Throwable) {
-                        // ignore if even that fails
+                        // ignore
                     }
                 }
                 return true
@@ -194,40 +201,61 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Collect state and populate rows
+        // Note: Do NOT introduce a global/full-screen loader here. Each rail has its own loading chip and skeletons.
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { stateMap ->
                     categories.forEach { category ->
                         val railState = stateMap[category] ?: return@forEach
-                        val railView = railViews[category] ?: return@forEach
+                        val railView = railViews[category] ?: run {
+                            Log.w("HomeActivity", "Rail view missing for ${category.title}, skipping update.")
+                            return@forEach
+                        }
 
                         val row = railRows[category] ?: return@forEach
-                        val titleView = railView.findViewById<TextView>(R.id.railTitle)
+                        val titleView = railView.findViewById<TextView>(R.id.railTitle) ?: return@forEach
                         val loadingChip = railView.findViewById<View>(R.id.railLoadingChip)
-                        val scrollView = railScrolls[category] ?: return@forEach
+                        val emptyState = railView.findViewById<View>(R.id.railEmptyState)
+                        val scrollView = railScrolls[category]
 
-                        // Clear previous
+                        if (loadingChip == null) {
+                            Log.w("HomeActivity", "railLoadingChip not found for ${category.title}")
+                        }
+                        if (emptyState == null) {
+                            Log.w("HomeActivity", "railEmptyState not found for ${category.title}")
+                        }
+
+                        // Clear previous content
                         row.removeAllViews()
 
                         // Title and inline chip state
+                        val safeTitle = category.title.ifBlank { getString(R.string.app_name) }
                         if (railState.isLoading) {
-                            titleView.text = category.title
-                            loadingChip.visibility = View.VISIBLE
+                            titleView.text = safeTitle
+                            loadingChip?.show()
+                            emptyState?.hide()
                         } else {
-                            loadingChip.visibility = View.GONE
+                            loadingChip?.hide()
                             if (railState.error != null) {
-                                titleView.text = "${category.title} • Error"
+                                titleView.text = "$safeTitle • ${getString(R.string.label_error)}"
                                 Toast.makeText(
                                     this@HomeActivity,
-                                    "Failed to load ${category.title}: ${railState.error}",
+                                    getString(R.string.label_error) + ": " + railState.error,
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                emptyState?.hide()
                             } else {
-                                titleView.text = category.title
+                                titleView.text = safeTitle
+                                // Show empty state only when loaded successfully with no items
+                                if (railState.items.isEmpty()) {
+                                    emptyState?.show()
+                                } else {
+                                    emptyState?.hide()
+                                }
                             }
                         }
 
-                        // If loading and no items yet, show skeleton placeholders
+                        // If loading and no items yet, show skeleton placeholders using bg_skeleton_placeholder
                         if (railState.isLoading && railState.items.isEmpty()) {
                             repeat(6) {
                                 val skeleton = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
@@ -253,12 +281,10 @@ class HomeActivity : AppCompatActivity() {
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
-                            // Ensure images are clipped to rounded corners (card_bg sets rounded outline)
+                            // Ensure images are clipped to rounded corners
                             (card.parent as? View)?.let { container ->
-                                // For the inner FrameLayout we set outline to background; enable clip
                                 container.clipToOutline = true
                             }
-                            // Also ensure the card itself honors outline clipping and uses compatibility padding
                             card.clipToOutline = true
 
                             // Ensure ImageView fills card with no empty borders
@@ -270,16 +296,12 @@ class HomeActivity : AppCompatActivity() {
                             Log.d("CoilFirstLoad", "Loading image URL: ${item.poster}")
 
                             // PUBLIC_INTERFACE
-                            // Image loading behavior:
-                            // - Wait until the ImageView is laid out to avoid 0x0 target size.
-                            // - Provide exact size(img.width, img.height) and use Scale.FILL to match CENTER_CROP.
-                            // - Disable crossfade/transformations to prevent visual zoom shifts.
+                            // Image loading behavior with measured size and no crossfade/transformations
                             fun startLoadWithMeasuredSize() {
                                 val w = img.width
                                 val h = img.height
                                 if (w <= 0 || h <= 0) return
 
-                                // Cancel any previous pending request tied to this ImageView to prevent reuse artifacts
                                 try {
                                     ImageCacheUtils.cancelOngoingRequest(img)
                                 } catch (_: Throwable) {
@@ -288,24 +310,18 @@ class HomeActivity : AppCompatActivity() {
 
                                 val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
                                 img.load(data) {
-                                    // Fill to avoid empty borders; minimal crop as needed
                                     scale(Scale.FILL)
-                                    // Use exact target size for decode
                                     size(w, h)
-                                    // Disable crossfade and transformations to avoid initial zoom/shift
                                     crossfade(false)
-                                    // Prefer hardware when available, Coil will fallback if needed
                                     allowHardware(true)
                                     memoryCachePolicy(CachePolicy.ENABLED)
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
-                                    // Ensure no transformations are applied (stays empty)
                                     transformations(listOf())
                                 }
                             }
 
                             if (img.width == 0 || img.height == 0) {
-                                // Defer until first pre-draw (one-time listener)
                                 img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
                                     override fun onPreDraw(): Boolean {
                                         if (img.width > 0 && img.height > 0) {
@@ -319,22 +335,19 @@ class HomeActivity : AppCompatActivity() {
                                 startLoadWithMeasuredSize()
                             }
 
-                            // Keep only the image visible: hide title and overlay scrim explicitly
-                            titleTv.text = ""
-                            titleTv.visibility = View.GONE
-                            overlay.visibility = View.GONE
+                            // Keep only the image visible
+                            titleTv?.text = ""
+                            titleTv?.visibility = View.GONE
+                            overlay?.visibility = View.GONE
 
                             // D-pad focus behavior
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
 
-                            // Hint upwards to menu via XML nextFocusUp, but actual behavior will be
-                            // overridden by our key listener mapping for rows > 0.
+                            // Hint upwards to menu via XML nextFocusUp, but mapping handled in key listener
                             card.nextFocusUpId = R.id.topMenu
 
-                            // Intercept DPAD_UP across all rows:
-                            // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, jump to top menu default item.
+                            // Intercept key events for row navigation behavior
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
@@ -343,13 +356,11 @@ class HomeActivity : AppCompatActivity() {
                                         if (remapped) {
                                             true
                                         } else {
-                                            // First row boundary: do not auto-jump to menu. Consume to keep focus in place.
                                             if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
                                             true
                                         }
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                        // Prevent moving past horizontal bounds in the current rail row.
                                         val parentRow = v.parent as? LinearLayout
                                         if (parentRow != null) {
                                             val index = parentRow.indexOfChild(v).coerceAtLeast(0)
@@ -365,10 +376,10 @@ class HomeActivity : AppCompatActivity() {
                                                         "DPAD_${if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) "LEFT" else "RIGHT"} at boundary (index=$index, last=$lastIndex) — consuming."
                                                     )
                                                 }
-                                                return@setOnKeyListener true // consume to do nothing at bounds
+                                                return@setOnKeyListener true
                                             }
                                         }
-                                        false // let normal navigation proceed between intermediate items
+                                        false
                                     }
                                     else -> false
                                 }
@@ -400,16 +411,28 @@ class HomeActivity : AppCompatActivity() {
                         }
 
                         // Keep focusUp hints for container views (no change needed)
-                        scrollView.nextFocusUpId = R.id.topMenu
+                        scrollView?.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
                     }
 
-                    // Verification logs for multiple rows
+                    // Verification logs for multiple rows: helps validate progressive loading across rails
                     val counts = categories.mapIndexed { idx, c -> "row$idx=${railRows[c]?.childCount ?: 0}" }
                     if (focusDebug) {
                         Log.d("FocusNavVerify", "Rows children counts: ${counts.joinToString(", ")}. DPAD_UP maps r->r-1 by index with clamping.")
                     }
                 }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Best-effort cleanup: clear Coil memory cache in debug and allow GC to reclaim bitmaps.
+        if (BuildConfig.DEBUG) {
+            try {
+                Coil.imageLoader(this).memoryCache?.clear()
+            } catch (_: Throwable) {
+                // ignore
             }
         }
     }
