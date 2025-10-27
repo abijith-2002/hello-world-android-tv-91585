@@ -1,0 +1,6 @@
+/*
+  Workspace-level settings file to aid analyzers that assume the Gradle root is the workspace root.
+  It forwards to the actual project under android_tv_frontend.
+*/
+rootProject.name = "workspace-root-forwarder"
+apply(from = "android_tv_frontend/settings.gradle")
