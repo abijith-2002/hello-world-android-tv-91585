@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE
+         Strings for per-section inline loader UI used by view_rail.xml -->
+    <string name="loading">Loading…</string>
+    <string name="loading_section">Loading section</string>
+    <string name="label_error">Error</string>
+    <string name="empty_state_no_items">No items</string>
+</resources>

@@ -1,0 +1,14 @@
+# Analyzer Gradle Root Hint
+# This file assists automated tools in locating the Gradle root of the Android project.
+# It has no impact on builds or runtime.
+
+# Container-relative absolute-like path to Gradle root:
+hello-world-android-tv-91585/android_tv_frontend
+
+# Expected Gradle settings files:
+hello-world-android-tv-91585/android_tv_frontend/settings.gradle.kts
+hello-world-android-tv-91585/android_tv_frontend/settings.gradle
+
+# App module path and directory:
+module.gradle.path=:app
+module.dir=hello-world-android-tv-91585/android_tv_frontend/app

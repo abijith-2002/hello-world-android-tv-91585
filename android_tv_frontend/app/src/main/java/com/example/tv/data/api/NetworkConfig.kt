@@ -1,19 +1,14 @@
 package com.example.tv.data.api
 
-import com.example.tv.BuildConfig
-
 /**
  * PUBLIC_INTERFACE
- * NetworkConfig centralizes resolution of the backend base URL.
- * It ensures a trailing slash and defaults to the provided backend URL when not configured.
+ * Minimal network configuration placeholder.
+ *
+ * This app uses a stub ApiService by default. If a real base URL is required,
+ * set BASE_URL via a build-time field or environment-driven constant.
  */
 object NetworkConfig {
-    private const val DEFAULT_BASE_URL = "https://vscode-internal-27195-beta.beta01.cloud.kavia.ai/proxy/3001/"
-
     // PUBLIC_INTERFACE
-    fun getBaseUrl(): String {
-        val configured = (BuildConfig.API_BASE_URL ?: "").trim()
-        val base = if (configured.isNotEmpty()) configured else DEFAULT_BASE_URL
-        return if (base.endsWith("/")) base else "$base/"
-    }
+    /** Optional base URL for a future real API; unused by StubApiService. */
+    const val BASE_URL: String = "https://example.invalid"
 }

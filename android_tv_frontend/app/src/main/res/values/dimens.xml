@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Dimensions for loader visuals and touch target footprint on TV -->
-    <dimen name="loader_visual_size">60dp</dimen>
-    <dimen name="loader_touch_target">72dp</dimen>
-</resources>

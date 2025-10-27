@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE
+         Spacing dimens for rail layouts -->
+    <dimen name="rail_title_top_padding">4dp</dimen>
+    <dimen name="rail_title_bottom_padding">8dp</dimen>
+    <dimen name="rail_horizontal_padding">8dp</dimen>
+    <dimen name="rail_item_min_height">219dp</dimen>
+</resources>

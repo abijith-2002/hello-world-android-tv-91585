@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE
+         App title used as a safe fallback in HomeActivity section headers -->
+    <string name="app_title">Hello TV</string>
+</resources>

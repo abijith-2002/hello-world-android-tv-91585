@@ -3,20 +3,16 @@
     android:id="@+id/splashRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/nord_bg"
+    android:background="@color/black"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <!-- Uses @string/splash_brand for localized brand label -->
     <TextView
-        android:id="@+id/splashTitle"
+        android:id="@+id/splashBrand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/splash_brand"
-        android:textColor="@color/nord_on_surface"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/reddit_sans_regular"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
         android:layout_gravity="center" />
-
 </FrameLayout>

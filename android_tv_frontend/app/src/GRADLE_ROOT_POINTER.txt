@@ -1,0 +1,9 @@
+# Analyzer hint for Gradle root detection
+# No effect on runtime or build.
+# Relative path to Gradle root from this file:
+../../
+# Expected settings files:
+../../settings.gradle
+../../settings.gradle.kts
+# Expected app module path:
+../../app

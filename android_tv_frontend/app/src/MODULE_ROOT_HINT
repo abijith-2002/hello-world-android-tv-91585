@@ -1,0 +1,7 @@
+# Module root hint for analyzers
+# This file does not affect runtime or builds.
+module.name=app
+module.gradle.path=:app
+module.root=..
+gradle.settings.file=../settings.gradle.kts|../settings.gradle
+project.root.candidate=..

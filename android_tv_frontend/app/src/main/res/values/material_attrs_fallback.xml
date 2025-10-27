@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE
+         Fallbacks for Material attributes used by CircularProgressIndicator to prevent aapt issues
+         when MaterialComponents theme is not fully configured. These are benign overrides. -->
+    <item name="colorPrimary">@color/nord_on_surface</item>
+    <item name="colorOnPrimary">@android:color/black</item>
+</resources>

@@ -57,16 +57,6 @@ class HomeViewModel(
     // - items: List<ContentItem> loaded so far
     val state: StateFlow<Map<HomeCategory, RailState>> = _state
 
-    // PUBLIC_INTERFACE
-    /** Convenience flags for per-section loading states. */
-    val isLoadingTrending: Boolean get() = _state.value[HomeCategory.TRENDING]?.isLoading == true
-    val isLoadingContinueWatching: Boolean get() = _state.value[HomeCategory.CONTINUE_WATCHING]?.isLoading == true
-    val isLoadingAction: Boolean get() = _state.value[HomeCategory.ACTION]?.isLoading == true
-    val isLoadingDrama: Boolean get() = _state.value[HomeCategory.DRAMA]?.isLoading == true
-    val isLoadingHorror: Boolean get() = _state.value[HomeCategory.HORROR]?.isLoading == true
-    val isLoadingFamily: Boolean get() = _state.value[HomeCategory.FAMILY]?.isLoading == true
-    val isLoadingComedy: Boolean get() = _state.value[HomeCategory.COMEDY]?.isLoading == true
-
     /**
      * PUBLIC_INTERFACE
      * Start loading all categories in parallel.

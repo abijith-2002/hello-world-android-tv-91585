@@ -2,24 +2,24 @@ package com.example.tv.data.api
 
 /**
  * PUBLIC_INTERFACE
- * Domain model representing a content item displayed by the UI rails.
- * Fields: name (title to show) and poster (absolute URL to the poster image or null if not available).
+ * Simple UI-facing content model used by Home rails.
  */
 data class ContentItem(
     val name: String,
-    val poster: String?
+    val poster: String? = null
 )
 
 /**
  * PUBLIC_INTERFACE
- * Enum of supported home categories with their API path and user-facing title.
+ * Home categories shown as rails on the Home screen.
+ * Each category exposes a 'title' for display.
  */
-enum class HomeCategory(val path: String, val title: String) {
-    TRENDING("trending", "Top trending"),
-    CONTINUE_WATCHING("continue_watching", "Continue watching"),
-    ACTION("action", "Action"),
-    DRAMA("drama", "Drama"),
-    HORROR("horror", "Horror"),
-    FAMILY("family", "Family"),
-    COMEDY("comedy", "Comedy");
+enum class HomeCategory(val title: String) {
+    TRENDING("Trending"),
+    CONTINUE_WATCHING("Continue Watching"),
+    ACTION("Action"),
+    DRAMA("Drama"),
+    HORROR("Horror"),
+    FAMILY("Family"),
+    COMEDY("Comedy")
 }

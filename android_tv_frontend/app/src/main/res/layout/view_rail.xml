@@ -15,15 +15,15 @@
     android:layout_marginBottom="8dp"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:paddingTop="4dp">
+    android:paddingTop="@dimen/rail_title_top_padding">
 
     <!-- Title row with optional small loading chip on the right -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="8dp">
+        android:paddingStart="@dimen/rail_horizontal_padding"
+        android:paddingEnd="@dimen/rail_horizontal_padding"
+        android:paddingBottom="@dimen/rail_title_bottom_padding">
 
         <TextView
             android:id="@+id/railTitle"
@@ -70,11 +70,15 @@
                 android:visibility="gone"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:longClickable="false"
                 android:accessibilityLiveRegion="polite"
+                android:importantForAccessibility="yes"
                 android:contentDescription="@string/loading_section">
 
-                <com.google.android.material.progressindicator.CircularProgressIndicator
+                <ProgressBar
                     android:id="@+id/railTinyProgress"
+                    style="?android:attr/progressBarStyleSmall"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:minWidth="18dp"
@@ -82,18 +86,14 @@
                     android:indeterminate="true"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="@string/app_name"
-                    android:backgroundTintMode="src_in"
-                    app:indicatorColor="@color/loader_blue_color"
-                    app:trackColor="@drawable/loader_track_transparent"/>
+                    android:indeterminateTint="@color/loader_blue_color"/>
 
                 <TextView
                     android:id="@+id/railLoadingText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/loading"
-                    android:textColor="@color/nord_on_surface"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/reddit_sans_regular"
+                    style="@style/TextAppearance.Rail.LoaderChip"
                     android:textAllCaps="false"
                     android:letterSpacing="0.02"/>
             </LinearLayout>
@@ -108,7 +108,7 @@
                 android:indeterminate="true"
                 android:visibility="gone"
                 android:contentDescription="@string/app_name"
-                android:indeterminateTint="@color/loader_blue_color" />
+                android:indeterminateTint="@color/nord_on_surface" />
 
             <!-- Optional empty-state hint; controlled in code when needed -->
             <TextView
@@ -122,6 +122,7 @@
                 android:alpha="0.75"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:importantForAccessibility="yes"
                 android:text="@string/empty_state_no_items"
                 android:textColor="@color/nord_on_surface"
                 android:textSize="14sp"
@@ -140,15 +141,15 @@
         android:clipToPadding="false"
         android:fadingEdgeLength="12dp"
         android:requiresFadingEdge="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingStart="@dimen/rail_horizontal_padding"
+        android:paddingEnd="@dimen/rail_horizontal_padding"
         android:nextFocusUp="@id/topMenu">
 
         <LinearLayout
             android:id="@+id/railRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="219dp"
+            android:minHeight="@dimen/rail_item_min_height"
             android:orientation="horizontal"
             android:clipChildren="false"
             android:clipToPadding="false"

@@ -1,0 +1,5 @@
+# Analyzer hint file to locate Gradle root for this module
+# No impact on Gradle or runtime
+gradle.root=..
+settings.files=../settings.gradle.kts,../settings.gradle
+module.path=:app

@@ -4,10 +4,11 @@ import com.example.tv.data.api.ContentItem
 
 /**
  * PUBLIC_INTERFACE
- * Extension mappers for converting API DTOs to domain models used by the UI.
+ * Map ShowDto into UI model ContentItem.
  */
-// PUBLIC_INTERFACE
-fun ShowDto.toContentItem(): ContentItem = ContentItem(
-    name = this.name,
-    poster = this.poster
-)
+fun ShowDto.toContentItem(): ContentItem {
+    return ContentItem(
+        name = this.name ?: "Unknown",
+        poster = this.poster
+    )
+}

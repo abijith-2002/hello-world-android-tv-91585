@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Single color state list to pin the loader tint -->
-    <item android:color="@color/loader_blue" />
+    <!-- PUBLIC_INTERFACE
+         Blue tint used by tiny loader indicators for visibility on dark backgrounds -->
+    <item android:color="#62A0EA"/>
 </selector>

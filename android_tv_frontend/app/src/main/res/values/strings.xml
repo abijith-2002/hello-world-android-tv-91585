@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">Hello TV</string>
 
     <!-- Top menu -->
@@ -8,33 +9,32 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_my_plan">My Plan</string>
 
-    <!-- Accessibility -->
-    <string name="thumb_image_cd">Poster image</string>
-
-    <!-- Screens -->
-    <string name="hello_world">Hello world</string>
-
-    <!-- Home screen / Per-section loader strings -->
+    <!-- Per-section loader and empty state -->
     <string name="loading">Loading…</string>
     <string name="loading_section">Loading section</string>
     <string name="label_error">Error</string>
+    <string name="empty_state_no_items">No items</string>
 
-    <!-- Login/Splash strings required by layouts -->
+    <!-- Login screen -->
     <string name="back">Back</string>
-    <string name="login_title">Sign in</string>
-    <string name="label_username_email">Email or Username</string>
+    <string name="login_title">Sign in to continue</string>
+    <string name="label_username_email">Email or username</string>
     <string name="hint_username_email">you@example.com</string>
     <string name="label_password">Password</string>
     <string name="hint_password">Enter your password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="splash_brand">@string/app_name</string>
-
-    <!-- Login validation and status messages -->
-    <string name="error_username_required">Email/Username is required</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="error_username_required">Username or email is required</string>
     <string name="error_username_invalid">Please enter a valid email or username</string>
     <string name="error_password_required">Password is required</string>
     <string name="error_password_length">Password must be at least 6 characters</string>
-    <string name="sign_in_success">Signed in successfully</string>
-    <string name="label_error">Error</string>
-    <string name="empty_state_no_items">No items</string>
+    <string name="sign_in_success">Signed in successfully as %1$s</string>
+
+    <!-- Main Activity -->
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Splash -->
+    <string name="splash_brand">Hello TV</string>
+
+    <!-- Accessibility -->
+    <string name="thumb_image_cd">Program poster</string>
 </resources>

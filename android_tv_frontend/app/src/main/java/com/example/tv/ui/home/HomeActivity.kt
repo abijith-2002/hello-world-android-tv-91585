@@ -18,7 +18,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import coil.request.CachePolicy
 import coil.size.Scale
-import coil.dispose
 import com.example.tv.MainActivity
 import com.example.tv.BuildConfig
 import com.example.tv.R
@@ -26,24 +25,16 @@ import com.example.tv.data.api.HomeCategory
 import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import coil.Coil
 import com.example.tv.ui.home.hide
 import com.example.tv.ui.home.show
-import com.example.tv.ui.home.DimenParseUtils
 
 /**
  * PUBLIC_INTERFACE
  * HomeActivity
- * The TV Home screen with a top menu (Home, Login, Setting, My Plan), a banner,
- * and multiple horizontal rails of content loaded from the API.
- * D-pad focus is enabled across interactive elements.
- *
- * DPAD_UP behavior:
- * - From any content row r > 0, DPAD_UP moves focus to the corresponding item in row r-1.
- * - For the first content row (r == 0), DPAD_UP jumps to the default top menu item.
- *
- * - Accepts no parameters.
- * - Returns no value; displays UI.
+ * The TV Home screen with a top menu, banner, and multiple horizontal rails.
+ * Per-section inline loader chips are used for each rail; there is no full-screen overlay loader.
  */
 class HomeActivity : AppCompatActivity() {
 
@@ -215,15 +206,9 @@ class HomeActivity : AppCompatActivity() {
                         val row = railRows[category] ?: return@forEach
                         val titleView = railView.findViewById<TextView>(R.id.railTitle) ?: return@forEach
                         val loadingChip = railView.findViewById<View>(R.id.railLoadingChip)
+                        val loadingFallback = railView.findViewById<View>(R.id.railTinyProgressFallback)
                         val emptyState = railView.findViewById<View>(R.id.railEmptyState)
                         val scrollView = railScrolls[category]
-
-                        if (loadingChip == null) {
-                            Log.w("HomeActivity", "railLoadingChip not found for ${category.title}")
-                        }
-                        if (emptyState == null) {
-                            Log.w("HomeActivity", "railEmptyState not found for ${category.title}")
-                        }
 
                         // Clear previous content
                         row.removeAllViews()
@@ -232,10 +217,11 @@ class HomeActivity : AppCompatActivity() {
                         val safeTitle = category.title.ifBlank { getString(R.string.app_name) }
                         if (railState.isLoading) {
                             titleView.text = safeTitle
-                            loadingChip?.show()
+                            loadingChip?.show() ?: loadingFallback?.show()
                             emptyState?.hide()
                         } else {
                             loadingChip?.hide()
+                            loadingFallback?.hide()
                             if (railState.error != null) {
                                 titleView.text = "$safeTitle • ${getString(R.string.label_error)}"
                                 Toast.makeText(
@@ -266,6 +252,7 @@ class HomeActivity : AppCompatActivity() {
                                 // Nord dark skeleton placeholder
                                 img.setImageResource(R.drawable.bg_skeleton_placeholder)
                                 img.alpha = 0.8f
+                                img.contentDescription = getString(R.string.loading)
                                 titleTv.visibility = View.GONE
                                 overlay.visibility = View.GONE
 
@@ -281,61 +268,24 @@ class HomeActivity : AppCompatActivity() {
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
-                            // Ensure images are clipped to rounded corners
-                            (card.parent as? View)?.let { container ->
-                                container.clipToOutline = true
-                            }
-                            card.clipToOutline = true
-
                             // Ensure ImageView fills card with no empty borders
                             img.adjustViewBounds = false
                             img.scaleType = ImageView.ScaleType.CENTER_CROP
                             img.cropToPadding = false
 
                             // Load image with Coil using placeholder/error
-                            Log.d("CoilFirstLoad", "Loading image URL: ${item.poster}")
-
-                            // PUBLIC_INTERFACE
-                            // Image loading behavior with measured size and no crossfade/transformations
-                            fun startLoadWithMeasuredSize() {
-                                val w = img.width
-                                val h = img.height
-                                if (w <= 0 || h <= 0) return
-
-                                try {
-                                    ImageCacheUtils.cancelOngoingRequest(img)
-                                } catch (_: Throwable) {
-                                    // ignore
-                                }
-
-                                val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
-                                img.load(data) {
-                                    scale(Scale.FILL)
-                                    size(w, h)
-                                    crossfade(false)
-                                    allowHardware(true)
-                                    memoryCachePolicy(CachePolicy.ENABLED)
-                                    placeholder(R.drawable.thumb_1)
-                                    error(R.drawable.thumb_2)
-                                    transformations(listOf())
-                                }
+                            val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
+                            img.load(data) {
+                                scale(Scale.FILL)
+                                crossfade(false)
+                                allowHardware(true)
+                                memoryCachePolicy(CachePolicy.ENABLED)
+                                placeholder(R.drawable.thumb_1)
+                                error(R.drawable.thumb_2)
+                                transformations(listOf())
                             }
 
-                            if (img.width == 0 || img.height == 0) {
-                                img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
-                                    override fun onPreDraw(): Boolean {
-                                        if (img.width > 0 && img.height > 0) {
-                                            img.viewTreeObserver.removeOnPreDrawListener(this)
-                                            startLoadWithMeasuredSize()
-                                        }
-                                        return true
-                                    }
-                                })
-                            } else {
-                                startLoadWithMeasuredSize()
-                            }
-
-                            // Keep only the image visible
+                            // Hide text overlay in this design
                             titleTv?.text = ""
                             titleTv?.visibility = View.GONE
                             overlay?.visibility = View.GONE
@@ -343,9 +293,6 @@ class HomeActivity : AppCompatActivity() {
                             // D-pad focus behavior
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
-
-                            // Hint upwards to menu via XML nextFocusUp, but mapping handled in key listener
-                            card.nextFocusUpId = R.id.topMenu
 
                             // Intercept key events for row navigation behavior
                             card.setOnKeyListener { v, keyCode, event ->
@@ -410,7 +357,7 @@ class HomeActivity : AppCompatActivity() {
                             row.addView(card)
                         }
 
-                        // Keep focusUp hints for container views (no change needed)
+                        // Keep focusUp hints for container views
                         scrollView?.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
                     }

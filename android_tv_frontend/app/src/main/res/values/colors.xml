@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base nord colors already expected; adding explicit loader colors if not present -->
-    <!-- Renamed to avoid conflict with existing color resource defined in res/color/loader_blue_color.xml -->
-    <color name="loader_blue">#5C9AEC</color>
-    <color name="nord_bg">#21242A</color>
-    <color name="nord_surface">#2A2E36</color>
-
-    <!-- Common colors -->
-    <color name="white">#FFFFFF</color>
+    <!-- PUBLIC_INTERFACE
+         Colors used by the app. Ensure presence of nord_on_surface used by rail title/labels. -->
+    <color name="nord_on_surface">#ECEFF4</color>
 </resources>

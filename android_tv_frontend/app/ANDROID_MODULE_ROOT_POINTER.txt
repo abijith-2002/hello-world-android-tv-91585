@@ -1,0 +1,3 @@
+This file helps code analysis tools detect the Android application module root.
+Module: app
+Note: Safe marker; no impact on runtime or build.

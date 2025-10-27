@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PUBLIC_INTERFACE
+         Override rail min height for API 21+ if needed (kept same for consistency) -->
+    <dimen name="rail_item_min_height">219dp</dimen>
+</resources>

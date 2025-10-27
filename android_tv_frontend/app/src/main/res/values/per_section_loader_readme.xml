@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    PUBLIC_INTERFACE
+    Per-section loaders are implemented via:
+      - HomeViewModel: StateFlow<Map<HomeCategory, RailState>>
+      - HomeActivity: binds each RailState to view_rail instances (title, loading chip, empty state, skeletons)
+      - view_rail.xml: inline loader chip (railLoadingChip) and optional fallback progress/empty-state
+    There is no global/full-screen loader overlay in activity_home.xml.
+    -->
+</resources>
