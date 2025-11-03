@@ -71,22 +71,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Trigger loads
         viewModel.loadAll()
-
-        // Observe combined loading state to toggle global spinner AND hide other UI
-        val loadingOverlay: View = findViewById(R.id.loading_overlay)
-        val spinner: View = findViewById(R.id.circular_progress_indicator)
-        val homeContent: View = findViewById(R.id.homeContent)
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { stateMap ->
-                    // If any rail is still loading, show only the loader
-                    val anyLoading = stateMap.values.any { it.isLoading }
-                    loadingOverlay.visibility = if (anyLoading) View.VISIBLE else View.GONE
-                    spinner.visibility = if (anyLoading) View.VISIBLE else View.GONE
-                    homeContent.visibility = if (anyLoading) View.INVISIBLE else View.VISIBLE
-                }
-            }
-        }
+        // Global loader removed: content remains visible while individual rails load independently.
     }
 
     /**
@@ -211,25 +196,45 @@ class HomeActivity : AppCompatActivity() {
                         val row = railRows[category] ?: return@forEach
                         val titleView = railView.findViewById<TextView>(R.id.railTitle)
                         val scrollView = railScrolls[category] ?: return@forEach
+                        val loaderView = railView.findViewById<View>(R.id.railLoader)
 
-                        // Clear previous
+                        // Reset row content every update
                         row.removeAllViews()
 
                         when {
                             railState.isLoading -> {
-                                titleView.text = "${category.title} • Loading…"
+                                // Show section loader, hide/disable row content until loaded
+                                loaderView.visibility = View.VISIBLE
+                                titleView.text = category.title
+                                scrollView.isEnabled = false
+                                row.isEnabled = false
+                                row.isFocusable = false
+                                row.isFocusableInTouchMode = false
                             }
                             railState.error != null -> {
+                                // Hide loader; show subtle error state (empty row)
+                                loaderView.visibility = View.GONE
                                 titleView.text = "${category.title} • Error"
+                                scrollView.isEnabled = false
+                                row.isEnabled = false
+                                row.isFocusable = false
+                                row.isFocusableInTouchMode = false
                                 Toast.makeText(this@HomeActivity, "Failed to load ${category.title}: ${railState.error}", Toast.LENGTH_SHORT).show()
                             }
                             else -> {
+                                // Hide loader and populate items
+                                loaderView.visibility = View.GONE
                                 titleView.text = category.title
+                                scrollView.isEnabled = true
+                                row.isEnabled = true
+                                row.isFocusable = false
+                                row.isFocusableInTouchMode = false
                             }
                         }
 
-                        // Populate items
-                        railState.items.forEach { item ->
+                        // Populate items when not loading and no error
+                        if (!railState.isLoading && railState.error == null) {
+                            railState.items.forEach { item ->
                             val card = layoutInflater.inflate(R.layout.view_thumb_card, row, false)
                             val img = card.findViewById<ImageView>(R.id.thumbImage)
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
@@ -405,6 +410,7 @@ class HomeActivity : AppCompatActivity() {
                             }
 
                             row.addView(card)
+                        }
                         }
 
                         // Keep focusUp hints for container views (no change needed)

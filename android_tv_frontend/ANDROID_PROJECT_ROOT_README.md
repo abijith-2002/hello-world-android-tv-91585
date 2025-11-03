@@ -1,7 +1,4 @@
-This directory is the Android project root.
+android_tv_frontend is the Gradle root for this Android TV project.
 
-Indicators:
-- settings.gradle / settings.gradle.kts present
-- build.gradle / build.gradle.kts present
-- gradlew and gradle wrapper present
-- Modules: app, list, utilities
+If a tool cannot resolve the root automatically, set the project root to:
+hello-world-android-tv-91585/android_tv_frontend

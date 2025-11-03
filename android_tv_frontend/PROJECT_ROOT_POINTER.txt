@@ -1,8 +1,4 @@
-This is the project root for the Android/Kotlin project.
+This directory is the Gradle project root for the Android TV app.
 
-Module(s):
-- app
-- list
-- utilities
-
-Gradle wrapper and settings files are present here.
+Use this path as project root:
+hello-world-android-tv-91585/android_tv_frontend

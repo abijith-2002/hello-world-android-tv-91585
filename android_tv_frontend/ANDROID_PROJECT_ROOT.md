@@ -1,10 +1,10 @@
-# Android Project Root Pointer
+This is the Android project root. Tooling should treat this directory as the Gradle root for the android_tv_frontend container.
 
-This file exists to help automated tooling identify the project root for the Android/Kotlin project.
+Gradle entry files:
+- settings.gradle / settings.gradle.kts
+- build.gradle / build.gradle.kts
 
-Project root: This directory (android_tv_frontend)
-
-Notes:
-- Gradle wrapper is present in this folder.
-- settings.gradle(.kts) and app module live under this root.
-- Do not remove; used by CI/project analyzers.
+Modules included:
+- app
+- list
+- utilities

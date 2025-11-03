@@ -20,6 +20,32 @@
         android:paddingStart="8dp"
         android:paddingBottom="8dp" />
 
+    <!-- Section-scoped loader shown while this rail's data is loading -->
+    <LinearLayout
+        android:id="@+id/railLoader"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:importantForAccessibility="no"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/railProgress"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_weight="1"
+            android:indeterminate="true"
+            android:progressTint="@color/loader_blue"
+            android:backgroundTint="@color/nord_surface" />
+    </LinearLayout>
+
     <HorizontalScrollView
         android:id="@+id/railScroll"
         android:layout_width="match_parent"

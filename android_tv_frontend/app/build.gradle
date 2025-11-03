@@ -56,6 +56,8 @@ android {
 }
 
 dependencies {
+    // Ensure Material Components for Android is available for progress indicators
+    implementation 'com.google.android.material:material:1.11.0'
     // AndroidX
     implementation "androidx.core:core-ktx:1.13.1"
     implementation "androidx.appcompat:appcompat:1.7.0"

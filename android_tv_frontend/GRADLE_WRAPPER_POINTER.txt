@@ -1,0 +1,10 @@
+This directory contains the Gradle Wrapper and is the Gradle project root for the Android TV app.
+
+Wrapper:
+- ./gradlew
+- ./gradlew.bat
+- ./gradle/wrapper/gradle-wrapper.properties
+- ./gradle/wrapper/gradle-wrapper.jar
+
+Use this directory as the project root:
+hello-world-android-tv-91585/android_tv_frontend

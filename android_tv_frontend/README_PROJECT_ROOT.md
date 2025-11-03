@@ -1,11 +1,10 @@
-Android TV Frontend - Project Root
+This directory is the root of the Android TV app's Gradle project.
 
-This directory is the Gradle project root for the Android TV app.
+Key files present here:
+- settings.gradle(.kts)
+- build.gradle(.kts)
+- gradlew, gradlew.bat
+- app/, list/, utilities/
 
-Key files:
-- settings.gradle / settings.gradle.kts
-- build.gradle / build.gradle.kts
-- gradlew / gradlew.bat
-- app/ (application module)
-
-This file assists automated mobile code analysis tools in locating the project root.
+If a tool cannot determine the project root, configure it to use this directory:
+hello-world-android-tv-91585/android_tv_frontend
