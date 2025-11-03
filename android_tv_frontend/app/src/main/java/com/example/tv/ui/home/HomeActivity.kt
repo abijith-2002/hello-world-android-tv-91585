@@ -92,6 +92,8 @@ class HomeActivity : AppCompatActivity() {
     /**
      * PUBLIC_INTERFACE
      * Ensures the top menu has a stable focus target and basic interactions.
+     * Also wires a default child (menuHome) so DPAD_UP from the first content row
+     * can programmatically request focus on the top menu using topMenuDefaultChild.
      */
     private fun setupTopMenu() {
         topMenu = findViewById(R.id.topMenu)
@@ -321,11 +323,37 @@ class HomeActivity : AppCompatActivity() {
                                     KeyEvent.KEYCODE_DPAD_UP -> {
                                         val remapped = handleDpadUpWithinRails(v, category)
                                         if (remapped) {
+                                            // moved to row above
                                             true
                                         } else {
-                                            // First row boundary: do not auto-jump to menu. Consume to keep focus in place.
-                                            if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
-                                            true
+                                            // First row: move focus to top menu
+                                            val isFirstRow = categories.indexOf(category) == 0
+                                            if (isFirstRow) {
+                                                // Prefer focused child within topMenu if any; else default to menuHome
+                                                val menuTarget: View? = when {
+                                                    this@HomeActivity::topMenu.isInitialized -> {
+                                                        // Try currently focused child under topMenu
+                                                        val currentFocusedChild = topMenu.focusedChild
+                                                        currentFocusedChild ?: if (this@HomeActivity::topMenuDefaultChild.isInitialized) {
+                                                            topMenuDefaultChild
+                                                        } else {
+                                                            topMenu
+                                                        }
+                                                    }
+                                                    else -> null
+                                                }
+                                                if (menuTarget != null) {
+                                                    if (focusDebug) Log.d("FocusNav", "DPAD_UP from first row -> requesting focus on top menu target: ${menuTarget.id}")
+                                                    menuTarget.requestFocus()
+                                                    return@setOnKeyListener true
+                                                } else {
+                                                    // Fallback: allow system to handle if no menu wired
+                                                    if (focusDebug) Log.d("FocusNav", "DPAD_UP from first row but top menu not initialized; falling back.")
+                                                    return@setOnKeyListener false
+                                                }
+                                            }
+                                            // Not first row and not remapped: let system handle (shouldn't occur)
+                                            false
                                         }
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
