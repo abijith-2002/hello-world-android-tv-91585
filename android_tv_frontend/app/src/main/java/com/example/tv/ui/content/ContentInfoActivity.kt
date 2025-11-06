@@ -278,9 +278,8 @@ class ContentInfoActivity : ComponentActivity() {
 
     // PUBLIC_INTERFACE
     private fun handlePlay() {
-        /** Posts to /api/play with {"url":"videourl.mp4"} then starts PlayerActivity with the returned or submitted URL. */
-        // Sample MP4 to test if backend echoes or returns a URL
-        val sampleUrl = "https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4"
+        /** Performs GET /api/play, expects JSON {"url": "<mediaUrl>"}. Validates and launches PlayerActivity with that URL. */
+        val fallbackUrl = "https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4"
 
         // Build absolute endpoint from NetworkConfig base
         val base = com.example.tv.data.api.NetworkConfig.getBaseUrl().trimEnd('/')
@@ -296,42 +295,52 @@ class ContentInfoActivity : ComponentActivity() {
             })
             .build()
 
-        val mediaType = "application/json; charset=utf-8".toMediaType()
-        val body = """{"url":"$sampleUrl"}""".toRequestBody(mediaType)
         val request = okhttp3.Request.Builder()
             .url(endpoint)
-            .post(body)
+            .get()
             .build()
 
         // Execute async to avoid blocking UI
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
                 runOnUiThread {
+                    android.util.Log.e("ContentInfoActivity", "GET /api/play failed", e)
                     android.widget.Toast.makeText(
                         this@ContentInfoActivity,
-                        "Failed to start playback: ${e.message}",
+                        "Network error starting playback",
                         android.widget.Toast.LENGTH_LONG
                     ).show()
-                    // fallback to starting player with sample URL anyway
-                    startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, sampleUrl))
+                    // Optional fallback: try known demo URL so UX isn't a dead end
+                    startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, fallbackUrl))
                 }
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 val bodyStr = response.body?.string()?.trim().orEmpty()
-                // Try to extract URL from response if it contains one; otherwise use submitted URL
-                val urlFromResponse = extractUrlFromResponse(bodyStr) ?: sampleUrl
+                var parsedUrl: String? = null
+                if (response.isSuccessful) {
+                    parsedUrl = extractUrlFromResponse(bodyStr)
+                }
+                val validUrl = parsedUrl?.takeIf { isValidHttpUrl(it) }
                 runOnUiThread {
-                    if (response.isSuccessful) {
-                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, urlFromResponse))
-                    } else {
+                    if (!response.isSuccessful) {
+                        android.util.Log.w("ContentInfoActivity", "GET /api/play HTTP ${response.code}: $bodyStr")
                         android.widget.Toast.makeText(
                             this@ContentInfoActivity,
                             "Server error: ${response.code}",
                             android.widget.Toast.LENGTH_SHORT
                         ).show()
-                        // Fallback: still try to play the sample URL
-                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, sampleUrl))
+                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, fallbackUrl))
+                    } else if (validUrl.isNullOrBlank()) {
+                        android.util.Log.w("ContentInfoActivity", "Missing or invalid 'url' in response: $bodyStr")
+                        android.widget.Toast.makeText(
+                            this@ContentInfoActivity,
+                            "Invalid media URL from server",
+                            android.widget.Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, fallbackUrl))
+                    } else {
+                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, validUrl))
                     }
                 }
                 response.close()
@@ -340,7 +349,7 @@ class ContentInfoActivity : ComponentActivity() {
     }
 
     private fun extractUrlFromResponse(resp: String): String? {
-        // Very lenient parser: try to find a URL-like substring; if JSON with "url", extract it
+        // Parse JSON: {"url":"..."} using Moshi, else if body is a plain URL return it.
         try {
             if (resp.startsWith("{")) {
                 val moshi = com.squareup.moshi.Moshi.Builder()
@@ -349,12 +358,19 @@ class ContentInfoActivity : ComponentActivity() {
                 data class PlayResp(val url: String?)
                 val adapter = moshi.adapter(PlayResp::class.java)
                 val parsed = adapter.fromJson(resp)
-                if (!parsed?.url.isNullOrBlank()) return parsed?.url
+                parsed?.url?.let { urlVal ->
+                    if (urlVal.isNotBlank()) return urlVal
+                }
             }
-        } catch (_: Throwable) {
+        } catch (t: Throwable) {
+            android.util.Log.w("ContentInfoActivity", "Failed to parse /api/play JSON", t)
         }
-        // Fallback: if response itself looks like a URL
-        return resp.takeIf { it.startsWith("http://") || it.startsWith("https://") }
+        return resp.takeIf { isValidHttpUrl(it) }
+    }
+
+    private fun isValidHttpUrl(url: String?): Boolean {
+        if (url.isNullOrBlank()) return false
+        return url.startsWith("http://") || url.startsWith("https://")
     }
 
     private fun handleRecord() {

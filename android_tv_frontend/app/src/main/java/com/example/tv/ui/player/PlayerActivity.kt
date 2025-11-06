@@ -124,7 +124,7 @@ class PlayerActivity : AppCompatActivity() {
 
         // PUBLIC_INTERFACE
         fun createIntent(context: Context, url: String): Intent {
-            /** Create intent to start PlayerActivity with the provided media URL. */
+            /** This is a public function. Create an Intent carrying EXTRA_MEDIA_URL for PlayerActivity playback. */
             return Intent(context, PlayerActivity::class.java).apply {
                 putExtra(EXTRA_MEDIA_URL, url)
             }
