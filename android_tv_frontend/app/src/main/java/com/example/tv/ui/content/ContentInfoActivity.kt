@@ -61,7 +61,7 @@ class ContentInfoActivity : ComponentActivity() {
 
         // Initialize button configurations now that resources are available
         buttonConfigs = listOf(
-            ButtonConfig(getString(R.string.button_play), R.drawable.ic_replay),
+            ButtonConfig(getString(R.string.button_play), R.drawable.ic_play),
             ButtonConfig(getString(R.string.button_schedule), R.drawable.ic_bell),
             ButtonConfig(getString(R.string.button_record), R.drawable.ic_record),
             ButtonConfig(getString(R.string.button_favorite), R.drawable.ic_favorite),

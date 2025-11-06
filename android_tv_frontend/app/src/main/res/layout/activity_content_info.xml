@@ -17,7 +17,7 @@
         android:cropToPadding="false"
         android:padding="0dp"
         android:src="@drawable/bg_content_info_gradient"
-        android:contentDescription="Background" />
+        android:contentDescription="@string/content_background_description" />
 
     <!-- Gradient Overlay -->
     <View
@@ -268,14 +268,7 @@
                 android:textSize="28sp"
                 android:fontFamily="sans-serif" />
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="29dp"
-                android:src="@drawable/ic_replay"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="false"
-                android:contentDescription="Replay" />
+            <!-- Replaced replay icon section with non-interactive separator only (no replay icon) -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -291,7 +284,7 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="29dp"
                 android:src="@drawable/ic_audio_subtitle"
-                android:contentDescription="Audio and subtitles" />
+                android:contentDescription="@string/icon_audio_subtitle_desc" />
         </LinearLayout>
 
         <!-- Description - 49dp gap from time row, width: 925dp, maxLines: 3 -->

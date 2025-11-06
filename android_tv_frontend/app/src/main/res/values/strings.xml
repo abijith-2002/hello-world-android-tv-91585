@@ -35,14 +35,12 @@
     <!-- Content Info Screen -->
     <string name="content_background_description">Content background</string>
     <string name="button_schedule">Programar</string>
-    <string name="button_replay">Reiniciar</string>
+    <string name="button_play">Play</string>
     <string name="button_record">Grabar</string>
     <string name="button_favorite">Favorito</string>
     <string name="button_block">Bloquear</string>
     <string name="button_audio_subtitles">Audio y subtítulos</string>
-    <string name="icon_replay_desc">Replay icon</string>
     <string name="icon_audio_subtitle_desc">Audio and subtitles icon</string>
     <string name="icon_button_desc">Button icon</string>
-    <string name="button_play">Play</string>
     <string name="error_no_media_url">No media URL to play</string>
 </resources>
