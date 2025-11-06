@@ -344,43 +344,43 @@
         <include
             android:id="@+id/btnPlay"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp" />
 
         <include
             android:id="@+id/btnSchedule"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="2dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="@dimen/content_actions_button_spacing" />
 
         <include
             android:id="@+id/btnRecord"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="2dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="@dimen/content_actions_button_spacing" />
 
         <include
             android:id="@+id/btnFavorite"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="2dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="@dimen/content_actions_button_spacing" />
 
         <include
             android:id="@+id/btnBlock"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="2dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="@dimen/content_actions_button_spacing" />
 
         <include
             android:id="@+id/btnAudioSubtitles"
             layout="@layout/view_action_button"
-            android:layout_width="142dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="2dp" />
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="@dimen/content_actions_button_spacing" />
     </LinearLayout>
 
     <!-- System Date/Time top-right -->

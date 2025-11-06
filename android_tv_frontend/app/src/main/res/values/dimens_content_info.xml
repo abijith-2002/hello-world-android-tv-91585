@@ -17,8 +17,11 @@
     <dimen name="action_button_inner_padding_xsmall">6dp</dimen>
     <dimen name="action_button_icon_size_xsmall">26dp</dimen>
     <dimen name="action_button_label_margin_top_xsmall">4dp</dimen>
-    <dimen name="action_button_label_text_xsmall">13sp</dimen>
+    <dimen name="action_button_label_text_xsmall">14sp</dimen>
 
-    <!-- Spacing between action buttons row, if referenced -->
-    <dimen name="content_actions_button_spacing">2dp</dimen>
+    <!-- Spacing between action buttons row to avoid accidental focus jumps -->
+    <dimen name="content_actions_button_spacing">6dp</dimen>
+
+    <!-- Focus scale factor for TV action buttons (documented for code-behind animations) -->
+    <dimen name="content_action_button_focus_scale_pct">4</dimen>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionButtonRoot"
-    android:layout_width="142dp"
-    android:layout_height="160dp"
-    android:minHeight="160dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="110dp"
     android:foreground="@drawable/tv_focus_ripple"
     android:focusable="true"
     android:clickable="true">
@@ -31,9 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/action_button_label_margin_top_xsmall"
             android:text="@string/button_play"
-            android:textSize="@dimen/action_button_label_text_xsmall"
             android:textColor="#FFFFFF"
             android:alpha="0.9"
-            android:fontFamily="sans-serif-medium" />
+            android:fontFamily="@font/reddit_sans_regular"
+            style="@style/TextAppearance.Pill.Small" />
     </LinearLayout>
 </FrameLayout>
