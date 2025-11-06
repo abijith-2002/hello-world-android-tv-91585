@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Core Nord palette needed for focus inversion on action buttons -->
+    <!-- nord0: darkest background -->
+    <color name="nord0">#2E3440</color>
+    <!-- nord1: slightly lighter background/surface -->
+    <color name="nord1">#3B4252</color>
+    <!-- nord9: accent blue used for focus -->
+    <color name="nord9">#81A1C1</color>
+</resources>

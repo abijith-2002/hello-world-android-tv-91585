@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ColorStateList for action button text/icon tint.
+  Focused state: adopt background (dark) color to ensure inverted contrast when background becomes accent.
+  Unfocused state: use accent/foreground color to sit on dark pill background.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed (clicked) retains focused appearance -->
+    <item android:color="@color/nord0" android:state_pressed="true"/>
+    <!-- Focused state: text/icon become dark to contrast with accent background -->
+    <item android:color="@color/nord0" android:state_focused="true"/>
+    <!-- Default/unfocused: text/icon accent color on dark background -->
+    <item android:color="@color/nord9"/>
+</selector>

@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reusable action button view for Content Info actions (Play, Programar, Grabar, etc.)
+  Focus behavior:
+    - Invert colors on focus (accent background, dark text/icon)
+    - No rectangular background/elevation focus halos
+    - Maintain large TV focus target and ripple
+  Theme: Nord dark, Reddit Sans
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/actionButtonRoot"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minHeight="110dp"
-    android:foreground="@drawable/tv_focus_ripple"
     android:focusable="true"
     android:clickable="true">
 
-    <!-- Outer container keeps focus/touch target size; inner visuals reduced via *_xsmall dimens -->
+    <!-- Visual container uses pill background that inverts on focus -->
     <LinearLayout
         android:id="@+id/iconContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical"
-        android:background="@drawable/pill_button_background"
+        android:background="@drawable/action_button_background_selector"
         android:padding="@dimen/action_button_inner_padding_xsmall">
 
         <ImageView
@@ -23,6 +31,7 @@
             android:layout_width="@dimen/action_button_icon_size_xsmall"
             android:layout_height="@dimen/action_button_icon_size_xsmall"
             android:src="@drawable/ic_play"
+            app:tint="@color/action_button_icon_tint"
             android:contentDescription="@string/icon_button_desc" />
 
         <TextView
@@ -31,8 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/action_button_label_margin_top_xsmall"
             android:text="@string/button_play"
-            android:textColor="#FFFFFF"
-            android:alpha="0.9"
+            android:textColor="@color/action_button_text_color"
+            android:alpha="1.0"
             android:fontFamily="@font/reddit_sans_regular"
             style="@style/TextAppearance.Pill.Small" />
     </LinearLayout>

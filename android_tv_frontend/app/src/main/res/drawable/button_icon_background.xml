@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Neutral circular background for generic icons (not used by action buttons).
+     No rectangular focus/elevation. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#f4f4f4" />
+    <solid android:color="@color/nord1" />
 </shape>
