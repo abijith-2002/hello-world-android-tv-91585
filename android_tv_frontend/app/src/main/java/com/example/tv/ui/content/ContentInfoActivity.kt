@@ -349,22 +349,22 @@ class ContentInfoActivity : ComponentActivity() {
     }
 
     private fun extractUrlFromResponse(resp: String): String? {
-        // Parse JSON: {"url":"..."} using Moshi, else if body is a plain URL return it.
+        // Parse JSON: {"url":"..."} using Moshi top-level model, else if body is a plain URL return it.
         try {
             if (resp.startsWith("{")) {
                 val moshi = com.squareup.moshi.Moshi.Builder()
                     .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
                     .build()
-                data class PlayResp(val url: String?)
-                val adapter = moshi.adapter(PlayResp::class.java)
+                val adapter = moshi.adapter(com.example.tv.network.PlayResp::class.java)
                 val parsed = adapter.fromJson(resp)
                 parsed?.url?.let { urlVal ->
-                    if (urlVal.isNotBlank()) return urlVal
+                    if (!urlVal.isNullOrBlank()) return urlVal
                 }
             }
         } catch (t: Throwable) {
             android.util.Log.w("ContentInfoActivity", "Failed to parse /api/play JSON", t)
         }
+        // If JSON parse didn't yield url, treat body as a possible direct URL string
         return resp.takeIf { isValidHttpUrl(it) }
     }
 
