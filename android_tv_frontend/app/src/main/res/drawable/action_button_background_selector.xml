@@ -1,55 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Background that inverts on TV focus/hover/selected.
-  - Use focus/hover/selected to trigger accent fill (Nord9).
-  - Do NOT rely on state_pressed for inversion (press shows ripple only).
-  - Maintain rounded pill, no elevation rectangles.
+  Selector driving the pill background purely by state.
+  No ripple or mask to avoid circular/oval overlays.
+  Focus/hover/selected -> Nord accent fill; default -> dark surface.
 -->
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/nord9">
-
-    <!-- Rounded mask to constrain ripple within pill -->
-    <item android:id="@android:id/mask">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focused -> accent background -->
+    <item android:state_focused="true">
         <shape android:shape="rectangle">
             <corners android:radius="28dp"/>
-            <solid android:color="#FFFFFFFF"/>
+            <solid android:color="@color/nord9"/>
         </shape>
     </item>
 
-    <!-- Actual background driven by state list -->
-    <item>
-        <selector>
-            <!-- Focused -> accent background -->
-            <item android:state_focused="true">
-                <shape android:shape="rectangle">
-                    <corners android:radius="28dp"/>
-                    <solid android:color="@color/nord9"/>
-                </shape>
-            </item>
-
-            <!-- Hovered (pointer/mouse) -> accent background -->
-            <item android:state_hovered="true">
-                <shape android:shape="rectangle">
-                    <corners android:radius="28dp"/>
-                    <solid android:color="@color/nord9"/>
-                </shape>
-            </item>
-
-            <!-- Selected (Leanback/row selection) -> accent background -->
-            <item android:state_selected="true">
-                <shape android:shape="rectangle">
-                    <corners android:radius="28dp"/>
-                    <solid android:color="@color/nord9"/>
-                </shape>
-            </item>
-
-            <!-- Default -> dark background -->
-            <item>
-                <shape android:shape="rectangle">
-                    <corners android:radius="28dp"/>
-                    <solid android:color="@color/nord1"/>
-                </shape>
-            </item>
-        </selector>
+    <!-- Hovered (pointer/mouse) -> accent background -->
+    <item android:state_hovered="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp"/>
+            <solid android:color="@color/nord9"/>
+        </shape>
     </item>
-</ripple>
+
+    <!-- Selected (Leanback/row selection) -> accent background -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp"/>
+            <solid android:color="@color/nord9"/>
+        </shape>
+    </item>
+
+    <!-- Pressed (do not introduce a circular shape; keep same as focused/selected if applicable) -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp"/>
+            <solid android:color="@color/nord9"/>
+        </shape>
+    </item>
+
+    <!-- Default -> dark background -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp"/>
+            <solid android:color="@color/nord1"/>
+        </shape>
+    </item>
+</selector>

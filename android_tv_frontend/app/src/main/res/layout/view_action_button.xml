@@ -14,8 +14,7 @@
     android:layout_height="wrap_content"
     android:minHeight="110dp"
     android:focusable="true"
-    android:clickable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless">
+    android:clickable="true">
 
     <!-- Visual container uses pill background that inverts on focus -->
     <LinearLayout
