@@ -52,23 +52,27 @@ class ContentInfoActivity : ComponentActivity() {
     private lateinit var actionButtons: List<FrameLayout>
     private var currentFocusIndex = 0
 
-    private val buttonConfigs = listOf(
-        ButtonConfig(getString(R.string.button_play), R.drawable.ic_replay),
-        ButtonConfig(getString(R.string.button_schedule), R.drawable.ic_bell),
-        ButtonConfig(getString(R.string.button_record), R.drawable.ic_record),
-        ButtonConfig(getString(R.string.button_favorite), R.drawable.ic_favorite),
-        ButtonConfig(getString(R.string.button_block), R.drawable.ic_block),
-        ButtonConfig(getString(R.string.button_audio_subtitles), R.drawable.ic_audio_subtitle_button)
-    )
+    // Defer resource access until onCreate() to avoid NPE before context is ready
+    private lateinit var buttonConfigs: List<ButtonConfig>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content_info)
 
+        // Initialize button configurations now that resources are available
+        buttonConfigs = listOf(
+            ButtonConfig(getString(R.string.button_play), R.drawable.ic_replay),
+            ButtonConfig(getString(R.string.button_schedule), R.drawable.ic_bell),
+            ButtonConfig(getString(R.string.button_record), R.drawable.ic_record),
+            ButtonConfig(getString(R.string.button_favorite), R.drawable.ic_favorite),
+            ButtonConfig(getString(R.string.button_block), R.drawable.ic_block),
+            ButtonConfig(getString(R.string.button_audio_subtitles), R.drawable.ic_audio_subtitle_button)
+        )
+
         setupSystemDateTime()
         populateContentData()
         setupActionButtons()
-        
+
         // Focus first button by default
         actionButtons.firstOrNull()?.requestFocus()
     }
