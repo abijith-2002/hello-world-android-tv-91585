@@ -37,7 +37,7 @@ import coil.Coil
  *
  * DPAD_UP behavior:
  * - From any content row r > 0, DPAD_UP moves focus to the corresponding item in row r-1.
- * - For the first content row (r == 0), DPAD_UP does not jump to the top menu unless explicitly handled elsewhere.
+ * - For the first content row (r == 0), DPAD_UP moves focus to the top menu default item.
  *
  * - Accepts no parameters.
  * - Returns no value; displays UI.
@@ -114,6 +114,8 @@ class HomeActivity : AppCompatActivity() {
             it.isFocusable = true
             it.isFocusableInTouchMode = true
             it.onFocusChangeListener = focusScaler
+            // Allow DPAD_DOWN from any menu item to return focus to the first rail's first item
+            it.nextFocusDownId = R.id.railsContainer
         }
 
         menuLogin.setOnClickListener {
@@ -170,7 +172,13 @@ class HomeActivity : AppCompatActivity() {
         fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
             if (currentRowIdx <= 0) {
-                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: boundary; not jumping to top menu.")
+                // First/top row: jump to the top menu default item
+                if (::topMenuDefaultChild.isInitialized) {
+                    topMenuDefaultChild.requestFocus()
+                    if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: moving focus to top menu default")
+                    return true
+                }
+                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: top menu default not initialized")
                 return false
             }
 
@@ -319,13 +327,11 @@ class HomeActivity : AppCompatActivity() {
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_UP -> {
-                                        val remapped = handleDpadUpWithinRails(v, category)
-                                        if (remapped) {
+                                        val handled = handleDpadUpWithinRails(v, category)
+                                        if (handled) {
                                             true
                                         } else {
-                                            // First row boundary: do not auto-jump to menu. Consume to keep focus in place.
-                                            if (focusDebug) Log.d("FocusNav", "First row DPAD_UP: staying within row/top boundary.")
-                                            true
+                                            false
                                         }
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
@@ -382,6 +388,25 @@ class HomeActivity : AppCompatActivity() {
                         // Keep focusUp hints for container views (no change needed)
                         scrollView.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
+
+                        // If this is the first row, set it as the nextFocusDown for the entire topMenu
+                        if (categories.indexOf(category) == 0) {
+                            // Assign nextFocusDown of each menu item to the first card if present
+                            val firstCard = if (row.childCount > 0) row.getChildAt(0) else null
+                            if (firstCard != null) {
+                                val menuHome = findViewById<TextView>(R.id.menuHome)
+                                val menuLogin = findViewById<TextView>(R.id.menuLogin)
+                                val menuSetting = findViewById<TextView>(R.id.menuSetting)
+                                val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+
+                                arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan).forEach { menuItem ->
+                                    menuItem?.nextFocusDownId = firstCard.id
+                                }
+
+                                // Also set container-level fallback
+                                topMenu.nextFocusDownId = firstCard.id
+                            }
+                        }
                     }
 
                     // Verification logs for multiple rows
