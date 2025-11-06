@@ -8,7 +8,7 @@
     android:focusable="true"
     android:clickable="true">
 
-    <!-- Keep a consistent child structure and IDs; iconContainer is a generic container -->
+    <!-- Outer container keeps focus/touch target size; inner visuals reduced via *_small dimens -->
     <LinearLayout
         android:id="@+id/iconContainer"
         android:layout_width="match_parent"
@@ -16,12 +16,12 @@
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical"
         android:background="@drawable/pill_button_background"
-        android:padding="@dimen/action_button_inner_padding">
+        android:padding="@dimen/action_button_inner_padding_small">
 
         <ImageView
             android:id="@+id/buttonIcon"
-            android:layout_width="@dimen/action_button_icon_size"
-            android:layout_height="@dimen/action_button_icon_size"
+            android:layout_width="@dimen/action_button_icon_size_small"
+            android:layout_height="@dimen/action_button_icon_size_small"
             android:src="@drawable/ic_play"
             android:contentDescription="@string/icon_button_desc" />
 
@@ -29,9 +29,9 @@
             android:id="@+id/buttonLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/action_button_label_margin_top"
+            android:layout_marginTop="@dimen/action_button_label_margin_top_small"
             android:text="@string/button_play"
-            android:textSize="@dimen/action_button_label_text"
+            android:textSize="@dimen/action_button_label_text_small"
             android:textColor="#FFFFFF"
             android:alpha="0.9"
             android:fontFamily="sans-serif-medium" />

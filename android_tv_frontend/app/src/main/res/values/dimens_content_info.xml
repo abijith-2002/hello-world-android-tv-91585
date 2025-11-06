@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Visual scale factor to reduce footprint of metadata panel -->
-    <item name="scale_factor" type="fraction">70%</item>
+    <!-- Existing/fallback dimens (if used elsewhere) -->
+    <dimen name="action_button_min_height">160dp</dimen>
+    <dimen name="action_button_inner_padding">16dp</dimen>
+    <dimen name="action_button_icon_size">48dp</dimen>
+    <dimen name="action_button_label_margin_top">8dp</dimen>
+    <dimen name="action_button_label_text">18sp</dimen>
 
-    <!-- Action button visuals smaller while preserving TV-friendly touch target via minHeight in layout -->
-    <dimen name="action_button_icon_size">36dp</dimen>
-    <dimen name="action_button_label_text">12sp</dimen>
-    <dimen name="action_button_inner_padding">8dp</dimen>
-    <dimen name="action_button_label_margin_top">6dp</dimen>
+    <!-- Smaller inner visuals for the Content Info action buttons -->
+    <dimen name="action_button_inner_padding_small">8dp</dimen>
+    <dimen name="action_button_icon_size_small">30dp</dimen>
+    <dimen name="action_button_label_margin_top_small">6dp</dimen>
+    <dimen name="action_button_label_text_small">14sp</dimen>
 
-    <!-- Optional scaled spacings if needed -->
-    <dimen name="ci_spacing_small">4dp</dimen>
-    <dimen name="ci_spacing_medium">10dp</dimen>
-    <dimen name="ci_spacing_large">34dp</dimen>
+    <!-- Spacing between action buttons row, if referenced -->
+    <dimen name="content_actions_button_spacing">2dp</dimen>
 </resources>
