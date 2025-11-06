@@ -13,6 +13,8 @@ import androidx.activity.ComponentActivity
 import com.example.tv.R
 import java.text.SimpleDateFormat
 import java.util.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
 /**
  * PUBLIC_INTERFACE
@@ -51,12 +53,12 @@ class ContentInfoActivity : ComponentActivity() {
     private var currentFocusIndex = 0
 
     private val buttonConfigs = listOf(
-        ButtonConfig("Programar", R.drawable.ic_bell),
-        ButtonConfig("Reiniciar", R.drawable.ic_replay),
-        ButtonConfig("Grabar", R.drawable.ic_record),
-        ButtonConfig("Favorito", R.drawable.ic_favorite),
-        ButtonConfig("Bloquear", R.drawable.ic_block),
-        ButtonConfig("Audio y subtítulos", R.drawable.ic_audio_subtitle_button)
+        ButtonConfig(getString(R.string.button_play), R.drawable.ic_replay),
+        ButtonConfig(getString(R.string.button_schedule), R.drawable.ic_bell),
+        ButtonConfig(getString(R.string.button_record), R.drawable.ic_record),
+        ButtonConfig(getString(R.string.button_favorite), R.drawable.ic_favorite),
+        ButtonConfig(getString(R.string.button_block), R.drawable.ic_block),
+        ButtonConfig(getString(R.string.button_audio_subtitles), R.drawable.ic_audio_subtitle_button)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,8 +121,8 @@ class ContentInfoActivity : ComponentActivity() {
 
     private fun setupActionButtons() {
         actionButtons = listOf(
+            findViewById(R.id.btnPlay),
             findViewById(R.id.btnSchedule),
-            findViewById(R.id.btnReplay),
             findViewById(R.id.btnRecord),
             findViewById(R.id.btnFavorite),
             findViewById(R.id.btnBlock),
@@ -228,10 +230,10 @@ class ContentInfoActivity : ComponentActivity() {
             }
             .start()
         
-        // Handle specific button actions (placeholder logic)
+        // Handle specific button actions
         when (index) {
-            0 -> handleSchedule()
-            1 -> handleReplay()
+            0 -> handlePlay()        // Play
+            1 -> handleSchedule()
             2 -> handleRecord()
             3 -> handleFavorite()
             4 -> handleBlock()
@@ -270,8 +272,85 @@ class ContentInfoActivity : ComponentActivity() {
         // TODO: Implement schedule/reminder functionality
     }
 
-    private fun handleReplay() {
-        // TODO: Implement replay functionality
+    // PUBLIC_INTERFACE
+    private fun handlePlay() {
+        /** Posts to /api/play with {"url":"videourl.mp4"} then starts PlayerActivity with the returned or submitted URL. */
+        // Sample MP4 to test if backend echoes or returns a URL
+        val sampleUrl = "https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4"
+
+        // Build absolute endpoint from NetworkConfig base
+        val base = com.example.tv.data.api.NetworkConfig.getBaseUrl().trimEnd('/')
+        val endpoint = "$base/api/play"
+
+        // Prepare OkHttp request
+        val client = okhttp3.OkHttpClient.Builder()
+            .addInterceptor(okhttp3.logging.HttpLoggingInterceptor().apply {
+                level = if (com.example.tv.BuildConfig.DEBUG)
+                    okhttp3.logging.HttpLoggingInterceptor.Level.BODY
+                else
+                    okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
+            })
+            .build()
+
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val body = """{"url":"$sampleUrl"}""".toRequestBody(mediaType)
+        val request = okhttp3.Request.Builder()
+            .url(endpoint)
+            .post(body)
+            .build()
+
+        // Execute async to avoid blocking UI
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
+                runOnUiThread {
+                    android.widget.Toast.makeText(
+                        this@ContentInfoActivity,
+                        "Failed to start playback: ${e.message}",
+                        android.widget.Toast.LENGTH_LONG
+                    ).show()
+                    // fallback to starting player with sample URL anyway
+                    startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, sampleUrl))
+                }
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                val bodyStr = response.body?.string()?.trim().orEmpty()
+                // Try to extract URL from response if it contains one; otherwise use submitted URL
+                val urlFromResponse = extractUrlFromResponse(bodyStr) ?: sampleUrl
+                runOnUiThread {
+                    if (response.isSuccessful) {
+                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, urlFromResponse))
+                    } else {
+                        android.widget.Toast.makeText(
+                            this@ContentInfoActivity,
+                            "Server error: ${response.code}",
+                            android.widget.Toast.LENGTH_SHORT
+                        ).show()
+                        // Fallback: still try to play the sample URL
+                        startActivity(com.example.tv.ui.player.PlayerActivity.createIntent(this@ContentInfoActivity, sampleUrl))
+                    }
+                }
+                response.close()
+            }
+        })
+    }
+
+    private fun extractUrlFromResponse(resp: String): String? {
+        // Very lenient parser: try to find a URL-like substring; if JSON with "url", extract it
+        try {
+            if (resp.startsWith("{")) {
+                val moshi = com.squareup.moshi.Moshi.Builder()
+                    .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
+                    .build()
+                data class PlayResp(val url: String?)
+                val adapter = moshi.adapter(PlayResp::class.java)
+                val parsed = adapter.fromJson(resp)
+                if (!parsed?.url.isNullOrBlank()) return parsed?.url
+            }
+        } catch (_: Throwable) {
+        }
+        // Fallback: if response itself looks like a URL
+        return resp.takeIf { it.startsWith("http://") || it.startsWith("https://") }
     }
 
     private fun handleRecord() {

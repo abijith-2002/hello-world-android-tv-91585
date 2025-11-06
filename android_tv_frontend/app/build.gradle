@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "API_BASE_URL", "\"${System.getenv('API_BASE_URL') ?: (project.hasProperty('API_BASE_URL') ? project.getProperty('API_BASE_URL') : 'https://d57f0cc7.api.kavia.app/')}\""
+        buildConfigField "String", "API_BASE_URL", "\"${System.getenv('API_BASE_URL') ?: (project.hasProperty('API_BASE_URL') ? project.getProperty('API_BASE_URL') : 'https://5bc9cfc0.api.kavia.app/')}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -88,6 +88,10 @@ dependencies {
 
     // Image loading
     implementation "io.coil-kt:coil:2.6.0"
+
+    // ExoPlayer for video playback (2.x latest stable series)
+    implementation "com.google.android.exoplayer:exoplayer:2.19.1"
+    implementation "com.google.android.exoplayer:exoplayer-ui:2.19.1"
 
     // Unit testing
     testImplementation "junit:junit:4.13.2"

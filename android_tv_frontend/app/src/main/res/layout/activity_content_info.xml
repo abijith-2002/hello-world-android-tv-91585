@@ -320,14 +320,15 @@
             android:clipChildren="false"
             android:clipToPadding="false">
 
+            <!-- Play button comes first for DPAD_LEFT/RIGHT order -->
             <include
-                android:id="@+id/btnSchedule"
+                android:id="@+id/btnPlay"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp" />
 
             <include
-                android:id="@+id/btnReplay"
+                android:id="@+id/btnSchedule"
                 layout="@layout/view_action_button"
                 android:layout_width="142dp"
                 android:layout_height="160dp"

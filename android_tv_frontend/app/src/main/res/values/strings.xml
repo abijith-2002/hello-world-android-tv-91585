@@ -43,4 +43,6 @@
     <string name="icon_replay_desc">Replay icon</string>
     <string name="icon_audio_subtitle_desc">Audio and subtitles icon</string>
     <string name="icon_button_desc">Button icon</string>
+    <string name="button_play">Play</string>
+    <string name="error_no_media_url">No media URL to play</string>
 </resources>

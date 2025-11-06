@@ -52,5 +52,13 @@
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
+        <!-- Player Activity for ExoPlayer playback -->
+        <activity
+            android:name="com.example.tv.ui.player.PlayerActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
     </application>
 </manifest>
