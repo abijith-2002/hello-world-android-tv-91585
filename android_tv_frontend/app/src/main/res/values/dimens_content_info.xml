@@ -13,6 +13,12 @@
     <dimen name="action_button_label_margin_top_small">6dp</dimen>
     <dimen name="action_button_label_text_small">14sp</dimen>
 
+    <!-- Extra-small inner visuals for tighter layout -->
+    <dimen name="action_button_inner_padding_xsmall">6dp</dimen>
+    <dimen name="action_button_icon_size_xsmall">26dp</dimen>
+    <dimen name="action_button_label_margin_top_xsmall">4dp</dimen>
+    <dimen name="action_button_label_text_xsmall">13sp</dimen>
+
     <!-- Spacing between action buttons row, if referenced -->
     <dimen name="content_actions_button_spacing">2dp</dimen>
 </resources>
