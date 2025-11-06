@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fullscreen theme compatible with AppCompatActivity -->
+    <style name="Theme.TV.NordDark.Fullscreen" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Background and palette mapping to Nord colors -->
+        <item name="android:windowBackground">@color/nord_bg</item>
+
+        <item name="colorPrimary">@color/loader_blue</item>
+        <item name="colorOnPrimary">@color/nord_bg</item>
+        <item name="colorSecondary">@color/nord_grey_300</item>
+        <item name="colorSurface">@color/nord_surface</item>
+        <item name="colorOnSurface">@color/nord_on_surface</item>
+        <item name="colorOnBackground">@color/nord_on_surface</item>
+
+        <!-- Typography -->
+        <item name="android:fontFamily">@font/reddit_sans</item>
+        <item name="fontFamily">@font/reddit_sans</item>
+
+        <!-- Card defaults (if any card appears over video UI) -->
+        <item name="materialCardViewStyle">@style/Widget.Card.Nord</item>
+        <item name="cardViewStyle">@style/Widget.Card.Nord</item>
+
+        <!-- Rounded shapes for consistency -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Medium.Rounded</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Medium.Rounded</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Medium.Rounded</item>
+
+        <!-- Fullscreen flags -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
