@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Scale factor ~0.7 applied to visual elements -->
+    <dimen name="scale_factor">0.7</dimen>
+
+    <!-- Action button inner visuals (icon/text) scaled -->
+    <dimen name="action_button_icon_size">39dp</dimen> <!-- 56dp * 0.7 ≈ 39.2 -->
+    <dimen name="action_button_label_text">13sp</dimen> <!-- 18sp * 0.7 ≈ 12.6 -->
+    <dimen name="action_button_inner_padding">8dp</dimen> <!-- 12dp * 0.7 ≈ 8.4 -->
+    <dimen name="action_button_label_margin_top">7dp</dimen> <!-- 10dp * 0.7 ≈ 7 -->
+
+    <!-- Optional scaled spacings if needed -->
+    <dimen name="ci_spacing_small">4dp</dimen>
+    <dimen name="ci_spacing_medium">10dp</dimen>
+    <dimen name="ci_spacing_large">34dp</dimen>
+</resources>

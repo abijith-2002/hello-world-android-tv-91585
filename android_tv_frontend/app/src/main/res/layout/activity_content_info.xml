@@ -26,17 +26,28 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_horizontal_overlay" />
 
-    <!-- Main Content Container - Fixed positioning at x:96, y:108 -->
-    <LinearLayout
-        android:id="@+id/metadataPanel"
-        android:layout_width="1150dp"
+    <!-- Main Content Container - wrapped in scale container to reduce visual footprint by ~30% -->
+    <FrameLayout
+        android:id="@+id/metadataPanelScaleContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="96dp"
         android:layout_marginTop="108dp"
         android:layout_gravity="start|top"
         android:clipChildren="false"
         android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/metadataPanel"
+            android:layout_width="1150dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:pivotX="575"
+            android:pivotY="0">
 
         <!-- Channel Information Row - Height: 40dp -->
         <LinearLayout
@@ -288,6 +299,7 @@
         </LinearLayout>
 
         <!-- Description - 49dp gap from time row, width: 925dp, maxLines: 3 -->
+        </LinearLayout>
         <TextView
             android:id="@+id/description"
             android:layout_width="925dp"
@@ -355,7 +367,7 @@
                 android:layout_height="160dp"
                 android:layout_marginStart="2dp" />
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 
     <!-- System Date/Time (Top Right) - Position: x:1724, y:55 -->
     <LinearLayout
