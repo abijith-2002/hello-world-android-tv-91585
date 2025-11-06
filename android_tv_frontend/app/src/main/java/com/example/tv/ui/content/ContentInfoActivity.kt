@@ -6,33 +6,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.widget.FrameLayout
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.example.tv.R
 import java.text.SimpleDateFormat
-import java.util.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * PUBLIC_INTERFACE
  * ContentInfoActivity
- * 
- * Displays detailed content information screen matching Figma design screen 35 (4077:14472).
- * Uses Roboto fonts, exact pixel values, and native Android TV components.
- * Background image from attachments with gradient overlay for text readability.
- * 
+ *
+ * Displays detailed content information screen matching design with background, metadata, and action buttons.
+ *
  * Features:
- * - Full-screen background with horizontal gradient overlay
- * - Channel info, program title, metadata with age rating
- * - Time display with status tag
- * - 3-line description with ellipsis
+ * - Full-screen background with overlay
+ * - Metadata and description
  * - 6 focusable action buttons with focus states
  * - System date/time in top-right corner
  * - D-PAD navigation (left/right) across buttons
- * 
+ *
  * Intent extras:
  * - EXTRA_CHANNEL_NUMBER: String - Channel number (default "242")
  * - EXTRA_CHANNEL_NAME: String - Channel name (default "TNT")
@@ -43,13 +38,14 @@ import okhttp3.RequestBody.Companion.toRequestBody
  * - EXTRA_AGE_RATING: String - Age rating (default "+ 16 Años")
  * - EXTRA_TIME_START: String - Start time (default "20:00")
  * - EXTRA_TIME_END: String - End time (default "22:20")
- * 
+ *
  * @param None
  * @return Displays UI and handles user interaction
  */
 class ContentInfoActivity : ComponentActivity() {
 
-    private lateinit var actionButtons: List<FrameLayout>
+    // Root containers for action buttons; type-neutral to avoid ClassCastException with layout changes
+    private lateinit var actionButtons: List<ViewGroup>
     private var currentFocusIndex = 0
 
     // Defer resource access until onCreate() to avoid NPE before context is ready
@@ -80,46 +76,46 @@ class ContentInfoActivity : ComponentActivity() {
     private fun setupSystemDateTime() {
         val timeView = findViewById<TextView>(R.id.systemTime)
         val dateView = findViewById<TextView>(R.id.systemDate)
-        
+
         val currentTime = Calendar.getInstance()
         val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val dateFormat = SimpleDateFormat("d MMM", Locale("es", "ES"))
-        
+
         timeView.text = timeFormat.format(currentTime.time)
         dateView.text = dateFormat.format(currentTime.time).replace(".", "")
     }
 
     private fun populateContentData() {
         // Get data from intent or use defaults
-        findViewById<TextView>(R.id.channelNumber).text = 
+        findViewById<TextView>(R.id.channelNumber).text =
             intent.getStringExtra(EXTRA_CHANNEL_NUMBER) ?: "242"
-        
-        findViewById<TextView>(R.id.channelName).text = 
+
+        findViewById<TextView>(R.id.channelName).text =
             intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: "TNT"
-        
-        findViewById<TextView>(R.id.programTitle).text = 
+
+        findViewById<TextView>(R.id.programTitle).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiador II"
-        
-        findViewById<TextView>(R.id.metadataOriginal).text = 
+
+        findViewById<TextView>(R.id.metadataOriginal).text =
             intent.getStringExtra(EXTRA_PROGRAM_TITLE) ?: "Gladiator II"
-        
-        findViewById<TextView>(R.id.metadataGenres).text = 
+
+        findViewById<TextView>(R.id.metadataGenres).text =
             intent.getStringExtra(EXTRA_GENRES) ?: "Acción, aventura, drama"
-        
-        findViewById<TextView>(R.id.metadataDuration).text = 
+
+        findViewById<TextView>(R.id.metadataDuration).text =
             intent.getStringExtra(EXTRA_DURATION) ?: "2 h 28 min"
-        
-        findViewById<TextView>(R.id.ageRating).text = 
+
+        findViewById<TextView>(R.id.ageRating).text =
             intent.getStringExtra(EXTRA_AGE_RATING) ?: "+ 16 Años"
-        
-        findViewById<TextView>(R.id.timeStart).text = 
+
+        findViewById<TextView>(R.id.timeStart).text =
             intent.getStringExtra(EXTRA_TIME_START) ?: "20:00"
-        
-        findViewById<TextView>(R.id.timeEnd).text = 
+
+        findViewById<TextView>(R.id.timeEnd).text =
             intent.getStringExtra(EXTRA_TIME_END) ?: "22:20"
-        
-        findViewById<TextView>(R.id.description).text = 
-            intent.getStringExtra(EXTRA_DESCRIPTION) ?: 
+
+        findViewById<TextView>(R.id.description).text =
+            intent.getStringExtra(EXTRA_DESCRIPTION) ?:
             "Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
     }
 
@@ -135,21 +131,22 @@ class ContentInfoActivity : ComponentActivity() {
 
         actionButtons.forEachIndexed { index, button ->
             val config = buttonConfigs[index]
-            
+
             // Set icon and label
             button.findViewById<ImageView>(R.id.buttonIcon).setImageResource(config.iconRes)
             button.findViewById<TextView>(R.id.buttonLabel).text = config.label
-            
+
             // Setup focus handling
             button.isFocusable = true
             button.isFocusableInTouchMode = true
             button.setOnFocusChangeListener { view, hasFocus ->
-                animateButtonFocus(view as FrameLayout, hasFocus)
+                val vg = view as? ViewGroup ?: return@setOnFocusChangeListener
+                animateButtonFocus(vg, hasFocus)
                 if (hasFocus) {
                     currentFocusIndex = index
                 }
             }
-            
+
             // Setup click handling
             button.setOnClickListener {
                 handleButtonAction(index)
@@ -157,61 +154,52 @@ class ContentInfoActivity : ComponentActivity() {
         }
     }
 
-    private fun animateButtonFocus(button: FrameLayout, focused: Boolean) {
-        val iconContainer = button.findViewById<FrameLayout>(R.id.iconContainer)
-        val label = button.findViewById<TextView>(R.id.buttonLabel)
-        
+    private fun animateButtonFocus(buttonRoot: ViewGroup, focused: Boolean) {
+        val iconContainer = buttonRoot.findViewById<View>(R.id.iconContainer)
+        val label = buttonRoot.findViewById<TextView>(R.id.buttonLabel)
         val duration = 200L
-        
+
+        if (iconContainer == null || label == null) return
+
         if (focused) {
-            // Focused state - reduced scale to 1.04 and increased elevation
             ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -4f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.04f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 12f).apply {
                 this.duration = duration
                 start()
             }
-            
-            ObjectAnimator.ofFloat(label, "alpha", 0f, 1f).apply {
+            ObjectAnimator.ofFloat(label, "alpha", label.alpha, 1f).apply {
                 this.duration = duration
                 start()
             }
         } else {
-            // Unfocused state
             ObjectAnimator.ofFloat(iconContainer, "translationY", iconContainer.translationY, 0f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleX", iconContainer.scaleX, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "scaleY", iconContainer.scaleY, 1f).apply {
                 this.duration = duration
                 start()
             }
-            
             ObjectAnimator.ofFloat(iconContainer, "elevation", iconContainer.elevation, 0f).apply {
                 this.duration = duration
                 start()
             }
-            
-            ObjectAnimator.ofFloat(label, "alpha", label.alpha, 0f).apply {
+            ObjectAnimator.ofFloat(label, "alpha", label.alpha, 0.9f).apply {
                 this.duration = duration
                 start()
             }
@@ -233,7 +221,7 @@ class ContentInfoActivity : ComponentActivity() {
                     .start()
             }
             .start()
-        
+
         // Handle specific button actions
         when (index) {
             0 -> handlePlay()        // Play
@@ -271,7 +259,6 @@ class ContentInfoActivity : ComponentActivity() {
         }
     }
 
-    // Placeholder action methods
     private fun handleSchedule() {
         // TODO: Implement schedule/reminder functionality
     }
@@ -408,9 +395,9 @@ class ContentInfoActivity : ComponentActivity() {
         /**
          * PUBLIC_INTERFACE
          * createIntent
-         * 
+         *
          * Factory method to create an Intent to launch ContentInfoActivity with content metadata.
-         * 
+         *
          * @param context The context from which to launch the activity
          * @param channelNumber Channel number to display
          * @param channelName Channel name to display
