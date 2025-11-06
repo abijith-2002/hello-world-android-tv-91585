@@ -8,7 +8,7 @@ import com.example.tv.BuildConfig
  * It ensures a trailing slash and defaults to the provided backend URL when not configured.
  */
 object NetworkConfig {
-    private const val DEFAULT_BASE_URL = "https://kavia-alb-bb0aa933-966825511.backend.kavia.app/"
+    private const val DEFAULT_BASE_URL = "https://d57f0cc7.api.kavia.app/"
 
     // PUBLIC_INTERFACE
     fun getBaseUrl(): String {
