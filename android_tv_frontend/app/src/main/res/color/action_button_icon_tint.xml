@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Icon tint for action buttons; mirrors text color inversion -->
+<!-- Icon tint for action buttons; mirrors text color inversion on focus/hover/selected -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/nord0" android:state_pressed="true"/>
+    <!-- Focused -->
     <item android:color="@color/nord0" android:state_focused="true"/>
+    <!-- Hovered -->
+    <item android:color="@color/nord0" android:state_hovered="true"/>
+    <!-- Selected -->
+    <item android:color="@color/nord0" android:state_selected="true"/>
+    <!-- Default -->
     <item android:color="@color/nord9"/>
 </selector>

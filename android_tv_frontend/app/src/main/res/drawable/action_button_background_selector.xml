@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Selector that swaps background color when focused, maintaining pill shape.
-  - Focused: accent background (nord9)
-  - Pressed: slightly different via ripple overlay (handled by ripple mask)
-  - Default: dark pill (nord0/nord1 blend via existing pill shape)
+  Background that inverts on TV focus/hover/selected.
+  - Use focus/hover/selected to trigger accent fill (Nord9).
+  - Do NOT rely on state_pressed for inversion (press shows ripple only).
+  - Maintain rounded pill, no elevation rectangles.
 -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/nord9">
+
+    <!-- Rounded mask to constrain ripple within pill -->
     <item android:id="@android:id/mask">
-        <!-- Use the same pill as mask for ripple bounds -->
         <shape android:shape="rectangle">
             <corners android:radius="28dp"/>
             <solid android:color="#FFFFFFFF"/>
         </shape>
     </item>
 
+    <!-- Actual background driven by state list -->
     <item>
         <selector>
-            <!-- Pressed keeps focused fill for consistency -->
-            <item android:state_pressed="true">
+            <!-- Focused -> accent background -->
+            <item android:state_focused="true">
                 <shape android:shape="rectangle">
                     <corners android:radius="28dp"/>
                     <solid android:color="@color/nord9"/>
                 </shape>
             </item>
 
-            <!-- Focused -> accent background -->
-            <item android:state_focused="true">
+            <!-- Hovered (pointer/mouse) -> accent background -->
+            <item android:state_hovered="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="28dp"/>
+                    <solid android:color="@color/nord9"/>
+                </shape>
+            </item>
+
+            <!-- Selected (Leanback/row selection) -> accent background -->
+            <item android:state_selected="true">
                 <shape android:shape="rectangle">
                     <corners android:radius="28dp"/>
                     <solid android:color="@color/nord9"/>
