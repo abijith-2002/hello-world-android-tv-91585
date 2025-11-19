@@ -328,7 +328,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/metadataPanelScaleContainer" />
 
-    <!-- Action Buttons fixed at bottom; keep IDs the same -->
+    <!-- Action Buttons row without includes -->
     <LinearLayout
         android:id="@+id/actionButtonsRow"
         android:layout_width="wrap_content"
@@ -340,47 +340,7 @@
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <include
-            android:id="@+id/btnPlay"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp" />
-
-        <include
-            android:id="@+id/btnSchedule"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="@dimen/content_actions_button_spacing" />
-
-        <include
-            android:id="@+id/btnRecord"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="@dimen/content_actions_button_spacing" />
-
-        <include
-            android:id="@+id/btnFavorite"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="@dimen/content_actions_button_spacing" />
-
-        <include
-            android:id="@+id/btnBlock"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="@dimen/content_actions_button_spacing" />
-
-        <include
-            android:id="@+id/btnAudioSubtitles"
-            layout="@layout/view_action_button"
-            android:layout_width="120dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="@dimen/content_actions_button_spacing" />
+        <!-- Removed all includes of view_action_button.xml -->
     </LinearLayout>
 
     <!-- System Date/Time top-right -->
