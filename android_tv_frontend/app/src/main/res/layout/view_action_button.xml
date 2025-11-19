@@ -2,10 +2,8 @@
 <!--
   Reusable action button view for Content Info actions (Play, Programar, Grabar, etc.)
   Focus behavior:
-    - Invert colors on focus (accent background, dark text/icon)
-    - No rectangular background/elevation focus halos
-    - Maintain large TV focus target and ripple
-  Theme: Nord dark, Reddit Sans
+    - White 2dp border on focus/selected (Android TV dpad style)
+    - Keep Nord dark/Reddit Sans styling
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,14 +14,14 @@
     android:focusable="true"
     android:clickable="true">
 
-    <!-- Visual container uses pill background that inverts on focus -->
+    <!-- Visual container uses pill background that gets white border on focus/selected -->
     <LinearLayout
         android:id="@+id/iconContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical"
-        android:background="@drawable/action_button_background_selector"
+        android:background="@drawable/action_button_white_focus_selector"
         android:padding="@dimen/action_button_inner_padding_xsmall">
 
         <ImageView
