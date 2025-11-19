@@ -5,7 +5,7 @@
     <color name="loader_blue">#5C9AEC</color>
     <color name="nord_bg">#21242A</color>
     <color name="nord_surface">#2A2E36</color>
-
+    <color name="ic_launcher_background">#292E39</color>
     <!-- Common colors -->
     <color name="white">#FFFFFF</color>
 </resources>
