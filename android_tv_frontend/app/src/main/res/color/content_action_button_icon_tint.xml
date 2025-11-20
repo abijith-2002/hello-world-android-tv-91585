@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Focused and selected states keep existing dark icon -->
+    <!-- Focused and selected should take precedence -->
     <item android:state_focused="true" android:color="#282828"/>
     <item android:state_selected="true" android:color="#282828"/>
-    <!-- Unfocused/default icon color -->
+    <!-- Pressed state should also use dark icon -->
+    <item android:state_pressed="true" android:color="#282828"/>
+    <!-- Default/unfocused -->
     <item android:color="#F4F4F4"/>
 </selector>

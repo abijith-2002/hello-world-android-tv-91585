@@ -7,7 +7,7 @@
     <!-- Outlined block/ban -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#FFFFFF"
+        android:strokeColor="?attr/colorControlNormal"
         android:strokeWidth="2"
         android:strokeLineJoin="round"
         android:strokeLineCap="round"

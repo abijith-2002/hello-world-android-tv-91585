@@ -28,7 +28,8 @@
             android:layout_height="28dp"
             android:duplicateParentState="true"
             android:src="@drawable/ic_play"
-            app:tint="@color/content_action_button_icon_tint_first"
+            app:tint="@color/content_action_button_icon_tint"
+            app:tintMode="src_in"
             android:contentDescription="@string/icon_button_desc" />
     </LinearLayout>
 </FrameLayout>

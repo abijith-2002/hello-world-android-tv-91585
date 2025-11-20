@@ -2,7 +2,7 @@
 <!--
   Outlined lock icon for the 5th Content Info button.
   Uses stroke-only paths so ImageView/app:tint ColorStateList drives stroke color:
-    - Focused/selected: #282828
+    - Focused/selected/pressed: #282828
     - Unfocused: #F4F4F4
   Size adheres to 24dp canvas; ImageView is 28dp per layout.
 -->
@@ -14,7 +14,7 @@
     <!-- Body of the lock (rectangle outline) -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#FFFFFFFF"
+        android:strokeColor="?attr/colorControlNormal"
         android:strokeWidth="1.8"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
@@ -22,7 +22,7 @@
     <!-- Shackle (u-shaped arc) -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#FFFFFFFF"
+        android:strokeColor="?attr/colorControlNormal"
         android:strokeWidth="1.8"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
