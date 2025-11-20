@@ -27,7 +27,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_play"
-            app:tint="@color/content_action_button_icon_tint_first"
+            app:tint="@color/content_action_button_icon_tint"
             android:contentDescription="@string/icon_button_desc" />
     </LinearLayout>
 </FrameLayout>
