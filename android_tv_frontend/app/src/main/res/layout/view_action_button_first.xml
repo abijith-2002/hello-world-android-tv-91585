@@ -26,6 +26,7 @@
             android:id="@+id/buttonIconFirst"
             android:layout_width="28dp"
             android:layout_height="28dp"
+            android:duplicateParentState="true"
             android:src="@drawable/ic_play"
             app:tint="@color/content_action_button_icon_tint_first"
             android:contentDescription="@string/icon_button_desc" />
