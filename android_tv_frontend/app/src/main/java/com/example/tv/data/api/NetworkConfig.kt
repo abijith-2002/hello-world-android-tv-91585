@@ -1,19 +1,16 @@
 package com.example.tv.data.api
 
-import com.example.tv.BuildConfig
+import com.example.tv.AppConfig
 
 /**
  * PUBLIC_INTERFACE
  * NetworkConfig centralizes resolution of the backend base URL.
- * It ensures a trailing slash and defaults to the provided backend URL when not configured.
+ * It ensures a trailing slash and uses AppConfig as the single source of truth.
  */
 object NetworkConfig {
-    private const val DEFAULT_BASE_URL = "https://5bc9cfc0.api.kavia.app/"
-
     // PUBLIC_INTERFACE
     fun getBaseUrl(): String {
-        val configured = (BuildConfig.API_BASE_URL ?: "").trim()
-        val base = if (configured.isNotEmpty()) configured else DEFAULT_BASE_URL
+        val base = AppConfig.API_BASE_URL.trim()
         return if (base.endsWith("/")) base else "$base/"
     }
 }

@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "API_BASE_URL", "\"${System.getenv('API_BASE_URL') ?: (project.hasProperty('API_BASE_URL') ? project.getProperty('API_BASE_URL') : 'https://5bc9cfc0.api.kavia.app/')}\""
+        // API base URL is centralized in AppConfig.API_BASE_URL; no BuildConfig field needed here
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

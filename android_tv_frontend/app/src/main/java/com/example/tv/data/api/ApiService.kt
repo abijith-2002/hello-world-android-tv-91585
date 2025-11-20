@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import com.example.tv.BuildConfig
+
 import android.util.Log
 import okhttp3.logging.HttpLoggingInterceptor
 import com.example.tv.data.api.NetworkConfig
@@ -91,7 +91,7 @@ interface ApiService {
         /**
          * PUBLIC_INTERFACE
          * Create a singleton ApiService.
-         * Base URL is set to the provided backend, enforcing a trailing slash.
+         * Base URL is resolved via NetworkConfig (which reads AppConfig.API_BASE_URL) and enforces a trailing slash.
          */
         fun create(): ApiService {
             val baseUrl = NetworkConfig.getBaseUrl()
@@ -117,7 +117,8 @@ interface ApiService {
             }
 
             val logging = HttpLoggingInterceptor().apply {
-                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+                // Use BODY level for debug-like verbosity; adjust as needed for production
+                level = HttpLoggingInterceptor.Level.BODY
             }
 
             val client = OkHttpClient.Builder()
