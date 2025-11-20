@@ -61,7 +61,7 @@ class ContentInfoActivity : ComponentActivity() {
             ButtonConfig(getString(R.string.button_schedule), R.drawable.ic_bell),
             ButtonConfig(getString(R.string.button_record), R.drawable.ic_record),
             ButtonConfig(getString(R.string.button_favorite), R.drawable.ic_favorite),
-            ButtonConfig(getString(R.string.button_block), R.drawable.ic_block),
+            ButtonConfig(getString(R.string.button_block), R.drawable.ic_lock),
             ButtonConfig(getString(R.string.button_audio_subtitles), R.drawable.ic_audio_subtitle_button)
         )
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Outlined lock icon for the 5th Content Info button.
+  Uses stroke-only paths so ImageView/app:tint ColorStateList drives stroke color:
+    - Focused/selected: #282828
+    - Unfocused: #F4F4F4
+  Size adheres to 24dp canvas; ImageView is 28dp per layout.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Body of the lock (rectangle outline) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6,10h12v10H6z" />
+    <!-- Shackle (u-shaped arc) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,10v-3a3,3 0 1,1 6,0v3" />
+</vector>
