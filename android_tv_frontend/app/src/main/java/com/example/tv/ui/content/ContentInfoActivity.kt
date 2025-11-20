@@ -132,9 +132,8 @@ class ContentInfoActivity : ComponentActivity() {
         actionButtons.forEachIndexed { index, button ->
             val config = buttonConfigs[index]
 
-            // Set icon and label
+            // Set icon (icon-only design; no text label)
             button.findViewById<ImageView>(R.id.buttonIcon).setImageResource(config.iconRes)
-            button.findViewById<TextView>(R.id.buttonLabel).text = config.label
 
             // Setup focus handling
             button.isFocusable = true
@@ -156,29 +155,24 @@ class ContentInfoActivity : ComponentActivity() {
 
     private fun animateButtonFocus(buttonRoot: ViewGroup, focused: Boolean) {
         val iconContainer = buttonRoot.findViewById<View>(R.id.iconContainer)
-        val label = buttonRoot.findViewById<TextView>(R.id.buttonLabel)
         val duration = 200L
 
-        if (iconContainer == null || label == null) return
+        if (iconContainer == null) return
 
         if (focused) {
-            ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -4f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "translationY", 0f, -2f).apply {
                 this.duration = duration
                 start()
             }
-            ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.04f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "scaleX", 1f, 1.02f).apply {
                 this.duration = duration
                 start()
             }
-            ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.04f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "scaleY", 1f, 1.02f).apply {
                 this.duration = duration
                 start()
             }
-            ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 12f).apply {
-                this.duration = duration
-                start()
-            }
-            ObjectAnimator.ofFloat(label, "alpha", label.alpha, 1f).apply {
+            ObjectAnimator.ofFloat(iconContainer, "elevation", 0f, 8f).apply {
                 this.duration = duration
                 start()
             }
@@ -196,10 +190,6 @@ class ContentInfoActivity : ComponentActivity() {
                 start()
             }
             ObjectAnimator.ofFloat(iconContainer, "elevation", iconContainer.elevation, 0f).apply {
-                this.duration = duration
-                start()
-            }
-            ObjectAnimator.ofFloat(label, "alpha", label.alpha, 0.9f).apply {
                 this.duration = duration
                 start()
             }

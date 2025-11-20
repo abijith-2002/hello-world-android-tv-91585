@@ -24,4 +24,7 @@
 
     <!-- Focus scale factor for TV action buttons (documented for code-behind animations) -->
     <dimen name="content_action_button_focus_scale_pct">4</dimen>
+
+    <!-- Radius for Content Info action buttons -->
+    <dimen name="content_info_button_corner_radius">100dp</dimen>
 </resources>

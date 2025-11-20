@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Reusable action button view for Content Info actions (Play, Programar, Grabar, etc.)
-  Focus behavior:
-    - White 2dp border on focus/selected (Android TV dpad style)
-    - Keep Nord dark/Reddit Sans styling
+  Reusable action button view for Content Info actions.
+  Requirements implemented:
+    - Fixed size 104dp x 80dp
+    - Corner radius 100dp
+    - Focus background: #F4F4F4
+    - Unfocused background: #F4F4F4 at 15% opacity
+    - Icon-only (no text label)
+    - Proper Android TV focus (stateful selector) and pressed ripple
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/actionButtonRoot"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:minHeight="110dp"
+    android:layout_width="104dp"
+    android:layout_height="80dp"
     android:focusable="true"
-    android:clickable="true">
+    android:clickable="true"
+    android:foreground="@drawable/content_info_button_ripple">
 
-    <!-- Visual container uses pill background that gets white border on focus/selected -->
+    <!-- Visual container uses background selector that reacts to parent's focused state -->
     <LinearLayout
         android:id="@+id/iconContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal|center_vertical"
-        android:background="@drawable/action_button_white_focus_selector"
-        android:padding="@dimen/action_button_inner_padding_xsmall">
+        android:duplicateParentState="true"
+        android:gravity="center"
+        android:background="@drawable/content_info_button_background"
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/buttonIcon"
-            android:layout_width="@dimen/action_button_icon_size_xsmall"
-            android:layout_height="@dimen/action_button_icon_size_xsmall"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_play"
-            app:tint="@color/action_button_icon_tint"
+            app:tint="@color/content_action_button_icon_tint"
             android:contentDescription="@string/icon_button_desc" />
-
-        <TextView
-            android:id="@+id/buttonLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/action_button_label_margin_top_xsmall"
-            android:text="@string/button_play"
-            android:textColor="@color/action_button_text_color"
-            android:alpha="1.0"
-            android:fontFamily="@font/reddit_sans_regular"
-            style="@style/TextAppearance.Pill.Small" />
     </LinearLayout>
 </FrameLayout>
