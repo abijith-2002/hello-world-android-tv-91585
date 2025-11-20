@@ -1,5 +1,0 @@
-gradle_root=android_tv_frontend
-wrapper=android_tv_frontend/gradlew
-settings=android_tv_frontend/settings.gradle
-modules=:app,:list,:utilities
-note=This file helps external analyzers detect the Gradle project root from the container workspace.

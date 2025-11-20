@@ -1,5 +1,0 @@
-android_project_root=android_tv_frontend
-contains=settings.gradle
-modules=:app,:list,:utilities
-wrapper=android_tv_frontend/gradlew
-note=This file helps tooling detect the Android project root directory from the workspace root.
