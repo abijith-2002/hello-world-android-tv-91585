@@ -133,7 +133,10 @@ class ContentInfoActivity : ComponentActivity() {
             val config = buttonConfigs[index]
 
             // Set icon (icon-only design; no text label)
-            button.findViewById<ImageView>(R.id.buttonIcon).setImageResource(config.iconRes)
+            // Support both standard and "first" variant layouts which have different IDs.
+            val iconView = button.findViewById<ImageView>(R.id.buttonIcon)
+                ?: button.findViewById(R.id.buttonIconFirst)
+            iconView?.setImageResource(config.iconRes)
 
             // Setup focus handling
             button.isFocusable = true
@@ -155,6 +158,7 @@ class ContentInfoActivity : ComponentActivity() {
 
     private fun animateButtonFocus(buttonRoot: ViewGroup, focused: Boolean) {
         val iconContainer = buttonRoot.findViewById<View>(R.id.iconContainer)
+            ?: buttonRoot.findViewById(R.id.iconContainerFirst)
         val duration = 200L
 
         if (iconContainer == null) return
