@@ -344,14 +344,14 @@
         <include
             android:id="@+id/btnPlay"
             layout="@layout/view_action_button"
-            android:layout_width="104dp"
-            android:layout_height="80dp" />
+            android:layout_width="52dp"
+            android:layout_height="40dp" />
 
         <include
             android:id="@+id/btnSchedule"
             layout="@layout/view_action_button"
-            android:layout_width="104dp"
-            android:layout_height="80dp"
+            android:layout_width="52dp"
+            android:layout_height="40dp"
             android:layout_marginStart="@dimen/content_actions_button_spacing" />
 
         <include

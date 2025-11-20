@@ -2,8 +2,8 @@
 <!--
   Reusable action button view for Content Info actions.
   Requirements implemented:
-    - Fixed size 104dp x 80dp
-    - Corner radius 100dp
+    - Fixed size 52dp x 40dp
+    - Corner radius 50dp
     - Focus background: #F4F4F4
     - Unfocused background: #F4F4F4 at 15% opacity
     - Icon-only (no text label)
@@ -12,8 +12,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/actionButtonRoot"
-    android:layout_width="104dp"
-    android:layout_height="80dp"
+    android:layout_width="52dp"
+    android:layout_height="40dp"
     android:focusable="true"
     android:clickable="true"
     android:foreground="@drawable/content_info_button_ripple">
