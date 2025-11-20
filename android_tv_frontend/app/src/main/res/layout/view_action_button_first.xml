@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Variant for the FIRST action button.
+  Matches view_action_button.xml but uses a dedicated icon tint selector to ensure focused color #282828 and unfocused #F4F4F4.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/actionButtonRootFirst"
+    android:layout_width="52dp"
+    android:layout_height="40dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="@drawable/content_info_button_ripple">
+
+    <!-- Visual container uses background selector that reacts to parent's focused state -->
+    <LinearLayout
+        android:id="@+id/iconContainerFirst"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:duplicateParentState="true"
+        android:gravity="center"
+        android:background="@drawable/content_info_button_background"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/buttonIconFirst"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_play"
+            app:tint="@color/content_action_button_icon_tint_first"
+            android:contentDescription="@string/icon_button_desc" />
+    </LinearLayout>
+</FrameLayout>
