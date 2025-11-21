@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml:2:13-83
-INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml:2:13-83
+ADDED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml:2:13-83
+INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml:2:13-83
 	package
-		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml
+		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml
 	xmlns:android
-		ADDED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml:2:23-81
+		ADDED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml:2:23-81
 uses-sdk
-INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml reason: use-sdk injection requested
-INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml
-INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml
+INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml reason: use-sdk injection requested
+INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml
+INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml
 	android:targetSdkVersion
-		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml
+		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml
 	android:minSdkVersion
-		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13964561587705278903.xml
+		INJECTED from /home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/utilities/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest706694436567526867.xml
