@@ -197,6 +197,11 @@ class HomeActivity : AppCompatActivity() {
                             }
 
                             // DPAD wrap LEFT/RIGHT within carousel
+                            // PUBLIC_INTERFACE
+                            // Intercepts KEYCODE_DPAD_LEFT/RIGHT to provide wrap-around behavior:
+                            // - When focused child is leftmost, LEFT wraps to rightmost.
+                            // - When focused child is rightmost, RIGHT wraps to leftmost.
+                            // UP maps to top menu; DOWN is left to default system behavior.
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
@@ -214,6 +219,7 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             return@setOnKeyListener true
                                         }
+                                        return@setOnKeyListener false
                                     }
                                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
                                         if (idx >= last) {
@@ -226,20 +232,22 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             return@setOnKeyListener true
                                         }
+                                        return@setOnKeyListener false
                                     }
                                     KeyEvent.KEYCODE_DPAD_UP -> {
-                                        // Up from banners goes to top menu default
+                                        // Up from banners goes to top menu default (preserve default down behavior)
                                         if (::topMenuDefaultChild.isInitialized) {
                                             topMenuDefaultChild.requestFocus()
                                             return@setOnKeyListener true
                                         }
+                                        return@setOnKeyListener false
                                     }
                                     KeyEvent.KEYCODE_DPAD_DOWN -> {
-                                        // Down from banners goes to the first rail first card (set later in setupRails)
-                                        // Let system handle based on nextFocusDown if available.
+                                        // Let system handle default DOWN behavior to rails via focus search
+                                        return@setOnKeyListener false
                                     }
+                                    else -> return@setOnKeyListener false
                                 }
-                                false
                             }
 
                             bannerRow.addView(card)
