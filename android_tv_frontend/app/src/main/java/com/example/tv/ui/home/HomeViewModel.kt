@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.tv.data.CategoryRepository
 import com.example.tv.data.api.ContentItem
 import com.example.tv.data.api.HomeCategory
+import com.example.tv.data.api.ApiService
+import com.example.tv.data.api.BannerResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +29,8 @@ data class RailState(
  * Triggers initial load of all categories. Exposes a StateFlow of rail states keyed by category.
  */
 class HomeViewModel(
-    private val repository: CategoryRepository = CategoryRepository()
+    private val repository: CategoryRepository = CategoryRepository(),
+    private val api: ApiService = ApiService.create()
 ) : ViewModel() {
 
     private val categories = listOf(
@@ -45,11 +48,25 @@ class HomeViewModel(
     )
     val state: StateFlow<Map<HomeCategory, RailState>> = _state
 
+    /** PUBLIC_INTERFACE
+     * UI state for hero banner carousel.
+     */
+    data class BannerState(
+        val isLoading: Boolean = false,
+        val error: String? = null,
+        val banners: List<String> = emptyList()
+    )
+
+    private val _bannerState = MutableStateFlow(BannerState(isLoading = true))
+    val bannerState: StateFlow<BannerState> = _bannerState
+
     /**
      * PUBLIC_INTERFACE
      * Start loading all categories in parallel.
      */
     fun loadAll() {
+        // Load banners and rails in parallel
+        loadBanners()
         categories.forEach { category ->
             loadCategory(category, refresh = true)
         }
@@ -60,6 +77,23 @@ class HomeViewModel(
      * Reload a specific category.
      */
     fun reload(category: HomeCategory) = loadCategory(category, refresh = true)
+
+    /** PUBLIC_INTERFACE
+     * Load banners from the backend.
+     * Gracefully handle failures by exposing an empty list and error message.
+     */
+    fun loadBanners() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _bannerState.value = BannerState(isLoading = true, error = null, banners = emptyList())
+            try {
+                val response: BannerResponse = api.getBanners()
+                val urls = response.banners.filter { it.isNotBlank() }
+                _bannerState.value = BannerState(isLoading = false, error = null, banners = urls)
+            } catch (t: Throwable) {
+                _bannerState.value = BannerState(isLoading = false, error = t.message ?: "Failed to load banners", banners = emptyList())
+            }
+        }
+    }
 
     private fun loadCategory(category: HomeCategory, refresh: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {

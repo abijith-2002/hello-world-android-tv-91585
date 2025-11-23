@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import com.example.tv.data.api.BannerResponse
 
 import android.util.Log
 import okhttp3.logging.HttpLoggingInterceptor
@@ -86,6 +87,14 @@ interface ApiService {
      */
     @GET("api/drama")
     suspend fun getDrama(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch hero banners for the home screen.
+     * @return BannerResponse with a list of banner image URLs.
+     */
+    @GET("api/banner")
+    suspend fun getBanners(): BannerResponse
 
     companion object {
         /**

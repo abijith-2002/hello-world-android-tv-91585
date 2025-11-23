@@ -31,7 +31,7 @@ import coil.Coil
 /**
  * PUBLIC_INTERFACE
  * HomeActivity
- * The TV Home screen with a top menu (Home, Login, Setting, My Plan), a banner,
+ * The TV Home screen with a top menu (Home, Login, Setting, My Plan), a hero banner carousel,
  * and multiple horizontal rails of content loaded from the API.
  * D-pad focus is enabled across interactive elements.
  *
@@ -58,6 +58,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setupTopMenu()
+        setupHeroCarousel()
         setupRails()
 
         // Optional: clear Coil memory cache in debug builds to better simulate first-run verification
@@ -91,6 +92,161 @@ class HomeActivity : AppCompatActivity() {
 
     /**
      * PUBLIC_INTERFACE
+     * Sets up the hero banner carousel between top menu and rails.
+     * - Fetches banners via ViewModel.bannerState
+     * - Renders 480dp x 270dp cards matching rail card style
+     * - Uses Coil with CENTER_CROP and measured size
+     * - DPAD left/right wraps around (cyclic)
+     * - Focused card animates and is centered horizontally via smoothScroll
+     */
+    private fun setupHeroCarousel() {
+        val heroScroll = findViewById<HorizontalScrollView>(R.id.heroScroll)
+        val heroRow = findViewById<LinearLayout>(R.id.heroRow)
+
+        // Early return if layout not present (safety)
+        if (heroScroll == null || heroRow == null) return
+
+        fun centerFocusedChild(child: View) {
+            // Smoothly center the focused child in the HorizontalScrollView
+            val scrollView = heroScroll
+            val childCenter = child.left + child.width / 2
+            val containerCenter = scrollView.width / 2
+            val targetScrollX = (childCenter - containerCenter).coerceAtLeast(0)
+            scrollView.smoothScrollTo(targetScrollX, 0)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bannerState.collect { state ->
+                    // Clear previous views
+                    heroRow.removeAllViews()
+
+                    if (state.isLoading) {
+                        // Optional: show placeholder later if desired
+                    } else if (state.error != null) {
+                        // Graceful failure: leave empty and optionally notify once
+                        Toast.makeText(this@HomeActivity, "Failed to load banners: ${state.error}", Toast.LENGTH_SHORT).show()
+                    }
+
+                    val urls = state.banners
+                    if (urls.isEmpty()) {
+                        // Nothing to render
+                        return@collect
+                    }
+
+                    // Build hero cards
+                    urls.forEachIndexed { _, url ->
+                        val card = layoutInflater.inflate(R.layout.view_hero_card, heroRow, false)
+                        val img = card.findViewById<ImageView>(R.id.heroImage)
+
+                        // Ensure clipping to rounded outline
+                        card.clipToOutline = true
+                        img.adjustViewBounds = false
+                        img.scaleType = ImageView.ScaleType.CENTER_CROP
+                        img.cropToPadding = false
+
+                        // Image loader consistent with rails
+                        fun startLoadWithMeasuredSize() {
+                            val w = img.width
+                            val h = img.height
+                            if (w <= 0 || h <= 0) return
+                            try {
+                                ImageCacheUtils.cancelOngoingRequest(img)
+                            } catch (_: Throwable) { }
+                            val data = url.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
+                            img.load(data) {
+                                scale(Scale.FILL)
+                                size(w, h)
+                                crossfade(false)
+                                allowHardware(true)
+                                memoryCachePolicy(CachePolicy.ENABLED)
+                                placeholder(R.drawable.thumb_1)
+                                error(R.drawable.thumb_2)
+                                transformations(listOf())
+                            }
+                        }
+                        if (img.width == 0 || img.height == 0) {
+                            img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
+                                override fun onPreDraw(): Boolean {
+                                    if (img.width > 0 && img.height > 0) {
+                                        img.viewTreeObserver.removeOnPreDrawListener(this)
+                                        startLoadWithMeasuredSize()
+                                    }
+                                    return true
+                                }
+                            })
+                        } else {
+                            startLoadWithMeasuredSize()
+                        }
+
+                        card.isFocusable = true
+                        card.isFocusableInTouchMode = true
+                        card.nextFocusUpId = R.id.topMenu
+                        card.setOnFocusChangeListener { v, hasFocus ->
+                            v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
+                                .scaleY(if (hasFocus) 1.06f else 1.0f)
+                                .setDuration(140)
+                                .start()
+                            v.elevation = if (hasFocus)
+                                resources.getDimension(R.dimen.card_elevation_focused)
+                            else
+                                resources.getDimension(R.dimen.card_elevation)
+
+                            if (hasFocus) {
+                                centerFocusedChild(v)
+                            }
+                        }
+
+                        // Cyclic DPAD navigation
+                        card.setOnKeyListener { v, keyCode, event ->
+                            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                            when (keyCode) {
+                                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                    val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
+                                    val currentIndex = parent.indexOfChild(v).coerceAtLeast(0)
+                                    val lastIndex = (parent.childCount - 1).coerceAtLeast(0)
+                                    val atStart = currentIndex <= 0
+                                    val atEnd = currentIndex >= lastIndex
+
+                                    if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && atStart) {
+                                        // Wrap to last
+                                        parent.getChildAt(lastIndex)?.requestFocus()
+                                        return@setOnKeyListener true
+                                    }
+                                    if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && atEnd) {
+                                        // Wrap to first
+                                        parent.getChildAt(0)?.requestFocus()
+                                        return@setOnKeyListener true
+                                    }
+                                    false
+                                }
+                                else -> false
+                            }
+                        }
+
+                        heroRow.addView(card)
+                    }
+
+                    // Ensure top menu DPAD_DOWN targets the first hero card if present
+                    if (heroRow.childCount > 0) {
+                        val firstHero = heroRow.getChildAt(0)
+                        val menuHome = findViewById<TextView>(R.id.menuHome)
+                        val menuLogin = findViewById<TextView>(R.id.menuLogin)
+                        val menuSetting = findViewById<TextView>(R.id.menuSetting)
+                        val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+                        arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan).forEach { menuItem ->
+                            menuItem?.nextFocusDownId = firstHero.id
+                        }
+                        // Also set container fallback
+                        findViewById<LinearLayout>(R.id.topMenu)?.nextFocusDownId = firstHero.id
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * PUBLIC_INTERFACE
      * Ensures the top menu has a stable focus target and basic interactions.
      */
     private fun setupTopMenu() {
@@ -114,7 +270,7 @@ class HomeActivity : AppCompatActivity() {
             it.isFocusable = true
             it.isFocusableInTouchMode = true
             it.onFocusChangeListener = focusScaler
-            // Allow DPAD_DOWN from any menu item to return focus to the first rail's first item
+            // Allow DPAD_DOWN from any menu item to return focus to the rails/hero
             it.nextFocusDownId = R.id.railsContainer
         }
 
@@ -162,12 +318,11 @@ class HomeActivity : AppCompatActivity() {
          * PUBLIC_INTERFACE
          * handleDpadUpWithinRails
          * General DPAD_UP mapping across rails: for any row r > 0, focus the corresponding
-         * item by index in the immediate row above (r-1). For the first row (r == 0), keep
-         * default behavior (no remap to top menu unless explicitly intended elsewhere).
+         * item by index in the immediate row above (r-1). For the first row (r == 0), jump to top menu.
          *
          * @param currentCard View currently focused within its row
          * @param currentCategory Category of the row containing currentCard
-         * @return true if focus was remapped to the row above; false if boundary/no-op
+         * @return true if focus was remapped; false otherwise
          */
         fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
@@ -241,21 +396,13 @@ class HomeActivity : AppCompatActivity() {
                             val titleTv = card.findViewById<TextView>(R.id.thumbTitle)
                             val overlay = card.findViewById<View>(R.id.overlayGrad)
 
-                            // Ensure images are clipped to rounded corners (card_bg sets rounded outline)
-                            (card.parent as? View)?.let { container ->
-                                // For the inner FrameLayout we set outline to background; enable clip
-                                container.clipToOutline = true
-                            }
-                            // Also ensure the card itself honors outline clipping and uses compatibility padding
+                            // Ensure the card itself honors outline clipping and uses compatibility padding
                             card.clipToOutline = true
 
                             // Ensure ImageView fills card with no empty borders
                             img.adjustViewBounds = false
                             img.scaleType = ImageView.ScaleType.CENTER_CROP
                             img.cropToPadding = false
-
-                            // Load image with Coil using placeholder/error
-                            Log.d("CoilFirstLoad", "Loading image URL: ${item.poster}")
 
                             // PUBLIC_INTERFACE
                             // Image loading behavior:
@@ -320,19 +467,13 @@ class HomeActivity : AppCompatActivity() {
                             // overridden by our key listener mapping for rows > 0.
                             card.nextFocusUpId = R.id.topMenu
 
-                            // Intercept DPAD_UP across all rows:
-                            // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, do nothing special here (do not jump to menu).
+                            // Intercept DPAD_UP across all rows
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_UP -> {
                                         val handled = handleDpadUpWithinRails(v, category)
-                                        if (handled) {
-                                            true
-                                        } else {
-                                            false
-                                        }
+                                        handled
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
                                         // Prevent moving past horizontal bounds in the current rail row.
@@ -385,7 +526,7 @@ class HomeActivity : AppCompatActivity() {
                             row.addView(card)
                         }
 
-                        // Keep focusUp hints for container views (no change needed)
+                        // Keep focusUp hints for container views
                         scrollView.nextFocusUpId = R.id.topMenu
                         row.nextFocusUpId = R.id.topMenu
 

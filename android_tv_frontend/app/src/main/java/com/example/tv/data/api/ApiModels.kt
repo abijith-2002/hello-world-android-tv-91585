@@ -23,3 +23,12 @@ enum class HomeCategory(val path: String, val title: String) {
     FAMILY("family", "Family"),
     COMEDY("comedy", "Comedy");
 }
+
+/**
+ * PUBLIC_INTERFACE
+ * Response for GET /api/banner
+ * Format: { "banners": ["URL1", "URL2", ...] }
+ */
+data class BannerResponse(
+    val banners: List<String>
+)
