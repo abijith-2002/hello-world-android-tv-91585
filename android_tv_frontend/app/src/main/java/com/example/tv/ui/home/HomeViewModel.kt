@@ -30,6 +30,17 @@ class HomeViewModel(
     private val repository: CategoryRepository = CategoryRepository()
 ) : ViewModel() {
 
+    // PUBLIC_INTERFACE
+    /** UI state for the hero banner carousel. */
+    data class BannerState(
+        val isLoading: Boolean = false,
+        val error: String? = null,
+        val banners: List<String> = emptyList()
+    )
+
+    private val _bannerState = MutableStateFlow(BannerState(isLoading = true))
+    val bannerState: StateFlow<BannerState> = _bannerState
+
     private val categories = listOf(
         HomeCategory.TRENDING,
         HomeCategory.CONTINUE_WATCHING,
@@ -60,6 +71,21 @@ class HomeViewModel(
      * Reload a specific category.
      */
     fun reload(category: HomeCategory) = loadCategory(category, refresh = true)
+
+    /**
+     * PUBLIC_INTERFACE
+     * Load hero banners from repository with loading and error states.
+     */
+    fun loadBanners() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _bannerState.value = _bannerState.value.copy(isLoading = true, error = null)
+            val result = repository.fetchBanners()
+            _bannerState.value = result.fold(
+                onSuccess = { BannerState(isLoading = false, error = null, banners = it) },
+                onFailure = { e -> BannerState(isLoading = false, error = e.message ?: "Failed to load banners") }
+            )
+        }
+    }
 
     private fun loadCategory(category: HomeCategory, refresh: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -19,6 +19,8 @@ import coil.load
 import coil.request.CachePolicy
 import coil.size.Scale
 import coil.dispose
+import coil.request.ImageRequest
+import coil.size.Size
 import com.example.tv.MainActivity
 import com.example.tv.BuildConfig
 import com.example.tv.R
@@ -59,6 +61,7 @@ class HomeActivity : AppCompatActivity() {
 
         setupTopMenu()
         setupRails()
+        setupBannerCarousel()
 
         // Optional: clear Coil memory cache in debug builds to better simulate first-run verification
         if (BuildConfig.DEBUG) {
@@ -71,6 +74,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Trigger loads
         viewModel.loadAll()
+        viewModel.loadBanners()
 
         // Observe combined loading state to toggle global spinner AND hide other UI
         val loadingOverlay: View = findViewById(R.id.loading_overlay)
@@ -275,21 +279,15 @@ class HomeActivity : AppCompatActivity() {
                                 }
 
                                 val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
-                                img.load(data) {
-                                    // Fill to avoid empty borders; minimal crop as needed
-                                    scale(Scale.FILL)
-                                    // Use exact target size for decode
-                                    size(w, h)
-                                    // Disable crossfade and transformations to avoid initial zoom/shift
-                                    crossfade(false)
-                                    // Prefer hardware when available, Coil will fallback if needed
-                                    allowHardware(true)
-                                    memoryCachePolicy(CachePolicy.ENABLED)
-                                    placeholder(R.drawable.thumb_1)
-                                    error(R.drawable.thumb_2)
-                                    // Ensure no transformations are applied (stays empty)
-                                    transformations(listOf())
-                                }
+                                val req = ImageRequest.Builder(this@HomeActivity)
+                                    .data(data)
+                                    .target(img)
+                                    .size(w, h)
+                                    .memoryCachePolicy(CachePolicy.ENABLED)
+                                    .placeholder(R.drawable.thumb_1)
+                                    .error(R.drawable.thumb_2)
+                                    .build()
+                                Coil.imageLoader(this@HomeActivity).enqueue(req)
                             }
 
                             if (img.width == 0 || img.height == 0) {
@@ -417,5 +415,177 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /**
+     * PUBLIC_INTERFACE
+     * Setup hero banner carousel positioned between top navigation and rails.
+     * - Fetches banners via ViewModel.bannerState.
+     * - Each card is 480x270dp using same card style as rails.
+     * - 4dp spacing between cards.
+     * - DPAD focus: Down from top menu focuses first banner; Up from first rails row should be set externally to this container; items focusable.
+     * - Cyclic horizontal navigation with wrap-around on DPAD LEFT/RIGHT.
+     * - Center focused card horizontally with smooth scroll.
+     * - Handles loading, error, and empty states gracefully (hides row on empty).
+     */
+    private fun setupBannerCarousel() {
+        val scroll = findViewById<HorizontalScrollView>(R.id.bannerCarouselScroll)
+        val row = findViewById<LinearLayout>(R.id.bannerCarouselRow)
+
+        // Observe banner state
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bannerState.collect { state ->
+                    // Clear previous
+                    row.removeAllViews()
+
+                    // Loading: show a single non-focusable placeholder card
+                    if (state.isLoading) {
+                        val placeholder = layoutInflater.inflate(R.layout.view_banner_card, row, false)
+                        placeholder.isFocusable = false
+                        val img = placeholder.findViewById<ImageView>(R.id.bannerImage)
+                        img.setImageResource(R.drawable.thumb_1)
+                        row.addView(placeholder)
+                        return@collect
+                    }
+
+                    // Error or empty: do not render banners
+                    if (state.error != null || state.banners.isEmpty()) {
+                        return@collect
+                    }
+
+                    // Build cards
+                    val urls = state.banners
+                    urls.forEachIndexed { _, url ->
+                        val card = layoutInflater.inflate(R.layout.view_banner_card, row, false)
+                        val img = card.findViewById<ImageView>(R.id.bannerImage)
+
+                        img.scaleType = ImageView.ScaleType.CENTER_CROP
+                        img.adjustViewBounds = false
+                        img.cropToPadding = false
+
+                        card.clipToOutline = true
+
+                        fun startLoad() {
+                            val w = img.width
+                            val h = img.height
+                            if (w <= 0 || h <= 0) return
+                            try {
+                                ImageCacheUtils.cancelOngoingRequest(img)
+                            } catch (_: Throwable) {}
+                            val req = ImageRequest.Builder(this@HomeActivity)
+                                .data(url)
+                                .target(img)
+                                .size(w, h)
+                                .memoryCachePolicy(CachePolicy.ENABLED)
+                                .placeholder(R.drawable.thumb_1)
+                                .error(R.drawable.thumb_2)
+                                .build()
+                            Coil.imageLoader(this@HomeActivity).enqueue(req)
+                        }
+                        if (img.width == 0 || img.height == 0) {
+                            img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
+                                override fun onPreDraw(): Boolean {
+                                    if (img.width > 0 && img.height > 0) {
+                                        img.viewTreeObserver.removeOnPreDrawListener(this)
+                                        startLoad()
+                                    }
+                                    return true
+                                }
+                            })
+                        } else {
+                            startLoad()
+                        }
+
+                        card.isFocusable = true
+                        card.isFocusableInTouchMode = true
+                        card.setOnFocusChangeListener { v, hasFocus ->
+                            v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
+                                .scaleY(if (hasFocus) 1.06f else 1.0f)
+                                .setDuration(120)
+                                .start()
+                            v.elevation = if (hasFocus)
+                                resources.getDimension(R.dimen.card_elevation_focused)
+                            else
+                                resources.getDimension(R.dimen.card_elevation)
+                            if (hasFocus) {
+                                centerChildInScroll(scroll, v)
+                            }
+                        }
+
+                        card.setOnKeyListener { v, keyCode, event ->
+                            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                            val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
+                            val count = parent.childCount
+                            val index = parent.indexOfChild(v).coerceAtLeast(0)
+                            when (keyCode) {
+                                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                    if (index == 0) {
+                                        val last = parent.getChildAt(count - 1)
+                                        last?.requestFocus()
+                                        centerChildInScroll(scroll, last)
+                                        return@setOnKeyListener true
+                                    }
+                                    false
+                                }
+                                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                    if (index == count - 1) {
+                                        val first = parent.getChildAt(0)
+                                        first?.requestFocus()
+                                        centerChildInScroll(scroll, first)
+                                        return@setOnKeyListener true
+                                    }
+                                    false
+                                }
+                                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                    val railsContainer = findViewById<LinearLayout>(R.id.railsContainer)
+                                    val firstRail = railsContainer.getChildAt(0)
+                                    val firstRailRow = firstRail?.findViewById<LinearLayout>(R.id.railRow)
+                                    if (firstRailRow != null && firstRailRow.childCount > 0) {
+                                        firstRailRow.getChildAt(0)?.requestFocus()
+                                        return@setOnKeyListener true
+                                    }
+                                    false
+                                }
+                                KeyEvent.KEYCODE_DPAD_UP -> {
+                                    if (::topMenuDefaultChild.isInitialized) {
+                                        topMenuDefaultChild.requestFocus()
+                                        return@setOnKeyListener true
+                                    }
+                                    false
+                                }
+                                else -> false
+                            }
+                        }
+
+                        row.addView(card)
+                    }
+
+                    // Ensure nextFocusDown from top menu goes to first banner if available
+                    if (row.childCount > 0) {
+                        val firstCard = row.getChildAt(0)
+                        val menuHome = findViewById<TextView>(R.id.menuHome)
+                        val menuLogin = findViewById<TextView>(R.id.menuLogin)
+                        val menuSetting = findViewById<TextView>(R.id.menuSetting)
+                        val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+                        arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan).forEach { it.nextFocusDownId = firstCard.id }
+                        topMenu.nextFocusDownId = firstCard.id
+                    }
+
+                    // Bottom padding to separate from rails title
+                    scroll.setPadding(scroll.paddingLeft, scroll.paddingTop, scroll.paddingRight, 8)
+                }
+            }
+        }
+    }
+
+    // PUBLIC_INTERFACE
+    /** Smoothly center a child view inside a HorizontalScrollView. */
+    private fun centerChildInScroll(scroll: HorizontalScrollView, child: View?) {
+        if (child == null) return
+        val childCenter = child.left + child.width / 2
+        val scrollCenter = scroll.scrollX + scroll.width / 2
+        val dx = childCenter - scrollCenter
+        scroll.smoothScrollBy(dx, 0)
     }
 }

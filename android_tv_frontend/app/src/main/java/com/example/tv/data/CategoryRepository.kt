@@ -16,6 +16,22 @@ class CategoryRepository(
     private val api: ApiService = ApiService.create()
 ) {
 
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch hero banner URLs from API and gracefully handle errors.
+     * Falls back to an empty list when request fails or payload is empty.
+     */
+    suspend fun fetchBanners(): Result<List<String>> {
+        return try {
+            val resp = api.getBanners()
+            val list = resp.banners.filter { it.isNotBlank() }
+            Result.success(list)
+        } catch (t: Throwable) {
+            Log.e("CategoryRepository", "Failed to fetch banners: ${t.message}", t)
+            Result.success(emptyList())
+        }
+    }
+
     // Simple sample content used when network fails
     private fun sampleItemsFor(category: HomeCategory): List<ContentItem> {
         val baseNames = listOf(

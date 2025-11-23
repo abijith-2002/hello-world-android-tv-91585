@@ -1,26 +1,24 @@
 package com.example.tv.data.api
 
+import android.util.Log
 import com.example.tv.data.api.dto.ShowDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-
-import android.util.Log
-import okhttp3.logging.HttpLoggingInterceptor
-import com.example.tv.data.api.NetworkConfig
 import java.util.concurrent.TimeUnit
-import okhttp3.Interceptor
-import okhttp3.HttpUrl
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 /**
  * PUBLIC_INTERFACE
- * Retrofit API interface for home content rails.
+ * Retrofit API interface for home content rails and banner carousel.
  *
  * Endpoints:
+ * - GET /api/banner
  * - GET /api/trending
  * - GET /api/continue_watching
  * - GET /api/action
@@ -30,6 +28,20 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
  * - GET /api/drama
  */
 interface ApiService {
+
+    // PUBLIC_INTERFACE
+    /** Response model for GET /api/banner containing a list of banner image URLs. */
+    data class BannersResponse(
+        val banners: List<String> = emptyList()
+    )
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch hero banners.
+     * Returns an object { "banners": [urls...] }.
+     */
+    @GET("api/banner")
+    suspend fun getBanners(): BannersResponse
 
     /**
      * PUBLIC_INTERFACE
