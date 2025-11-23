@@ -146,6 +146,49 @@ class HomeActivity : AppCompatActivity() {
         val errorText: TextView = findViewById(R.id.bannerErrorText)
         val retry: TextView = findViewById(R.id.bannerRetry)
 
+        // PUBLIC_INTERFACE
+        // Intercept DPAD at the banner container level as a safety net to prevent fallback to rails
+        // on certain devices that dispatch key events to the parent.
+        bannerScroll.setOnKeyListener { _, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    val focused = bannerRow.focusedChild ?: return@setOnKeyListener false
+                    val idx = bannerRow.indexOfChild(focused).coerceAtLeast(0)
+                    val last = (bannerRow.childCount - 1).coerceAtLeast(0)
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && idx <= 0) {
+                        val target = bannerRow.getChildAt(last)
+                        target?.requestFocus()
+                        bannerScroll.post {
+                            val cx = computeCenterScrollX(bannerScroll, target)
+                            bannerScroll.smoothScrollTo(cx, 0)
+                        }
+                        return@setOnKeyListener true
+                    }
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && idx >= last) {
+                        val target = bannerRow.getChildAt(0)
+                        target?.requestFocus()
+                        bannerScroll.post {
+                            val cx = computeCenterScrollX(bannerScroll, target)
+                            bannerScroll.smoothScrollTo(cx, 0)
+                        }
+                        return@setOnKeyListener true
+                    }
+                    false
+                }
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    // Route UP to top navigation by id
+                    val topNav: View? = findViewById(R.id.topMenu)
+                    if (topNav != null) {
+                        topNav.requestFocus()
+                        return@setOnKeyListener true
+                    }
+                    false
+                }
+                else -> false
+            }
+        }
+
         // Retry affordance
         retry.setOnClickListener { viewModel.reloadBanners() }
 
@@ -170,6 +213,8 @@ class HomeActivity : AppCompatActivity() {
                     if (banners.isNotEmpty()) {
                         banners.forEachIndexed { index, url ->
                             val card = layoutInflater.inflate(R.layout.view_banner_card, bannerRow, false)
+                            // Ensure unique ID per card for precise focus targeting
+                            card.id = View.generateViewId()
                             val img = card.findViewById<ImageView>(R.id.bannerImage)
 
                             // Load with Coil (simple call; CENTER_CROP set in XML to minimize cropping)
@@ -201,7 +246,7 @@ class HomeActivity : AppCompatActivity() {
                             // Intercepts KEYCODE_DPAD_LEFT/RIGHT to provide wrap-around behavior:
                             // - When focused child is leftmost, LEFT wraps to rightmost.
                             // - When focused child is rightmost, RIGHT wraps to leftmost.
-                            // UP maps to top menu; DOWN is left to default system behavior.
+                            // UP maps to top menu by id; DOWN is left to default system behavior.
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
@@ -235,7 +280,13 @@ class HomeActivity : AppCompatActivity() {
                                         return@setOnKeyListener false
                                     }
                                     KeyEvent.KEYCODE_DPAD_UP -> {
-                                        // Up from banners goes to top menu default (preserve default down behavior)
+                                        // Up from banners goes to top navigation view by id
+                                        val topNav: View? = findViewById(R.id.topMenu)
+                                        if (topNav != null) {
+                                            topNav.requestFocus()
+                                            return@setOnKeyListener true
+                                        }
+                                        // Fallback to default child if container not focusable for some reason
                                         if (::topMenuDefaultChild.isInitialized) {
                                             topMenuDefaultChild.requestFocus()
                                             return@setOnKeyListener true
