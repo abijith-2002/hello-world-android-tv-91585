@@ -59,6 +59,7 @@ class HomeActivity : AppCompatActivity() {
 
         setupTopMenu()
         setupRails()
+        setupBannerCarousel()
 
         // Optional: clear Coil memory cache in debug builds to better simulate first-run verification
         if (BuildConfig.DEBUG) {
@@ -127,6 +128,165 @@ class HomeActivity : AppCompatActivity() {
         menuHome.requestFocus()
     }
 
+    private lateinit var bannerScroll: HorizontalScrollView
+    private lateinit var bannerRow: LinearLayout
+
+    /**
+     * PUBLIC_INTERFACE
+     * Setup the hero banner carousel: binds loading/error UI, inflates cards from URLs,
+     * handles DPAD focus wrap and smooth centering, and integrates focus transitions with
+     * top menu and rails.
+     */
+    private fun setupBannerCarousel() {
+        bannerScroll = findViewById(R.id.bannerScroll)
+        bannerRow = findViewById(R.id.bannerRow)
+
+        val stateRow: View = findViewById(R.id.bannerStateRow)
+        val loading: View = findViewById(R.id.bannerLoading)
+        val errorText: TextView = findViewById(R.id.bannerErrorText)
+        val retry: TextView = findViewById(R.id.bannerRetry)
+
+        // Retry affordance
+        retry.setOnClickListener { viewModel.reloadBanners() }
+
+        // Observe banner state
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bannerState.collect { bState ->
+                    // Toggle state views
+                    val showLoading = bState.isLoading
+                    val showError = bState.error != null
+                    stateRow.visibility = if (showLoading || showError) View.VISIBLE else View.GONE
+                    loading.visibility = if (showLoading) View.VISIBLE else View.GONE
+                    errorText.visibility = if (showError) View.VISIBLE else View.GONE
+                    retry.visibility = if (showError) View.VISIBLE else View.GONE
+
+                    errorText.text = bState.error ?: getString(R.string.banner_error_generic)
+
+                    // Populate banner cards
+                    bannerRow.removeAllViews()
+                    val banners = bState.banners
+
+                    if (banners.isNotEmpty()) {
+                        banners.forEachIndexed { index, url ->
+                            val card = layoutInflater.inflate(R.layout.view_banner_card, bannerRow, false)
+                            val img = card.findViewById<ImageView>(R.id.bannerImage)
+
+                            // Load with Coil (simple call; CENTER_CROP set in XML to minimize cropping)
+                            try {
+                                ImageCacheUtils.cancelOngoingRequest(img)
+                            } catch (_: Throwable) {}
+                            img.load(url)
+
+                            // Focus animations + center on focus
+                            card.setOnFocusChangeListener { v, hasFocus ->
+                                v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.06f else 1.0f)
+                                    .setDuration(140)
+                                    .start()
+                                v.elevation = if (hasFocus)
+                                    resources.getDimension(R.dimen.card_elevation_focused)
+                                else
+                                    resources.getDimension(R.dimen.card_elevation)
+
+                                if (hasFocus) {
+                                    val centerTarget = computeCenterScrollX(bannerScroll, v)
+                                    bannerScroll.smoothScrollTo(centerTarget, 0)
+                                    viewModel.setBannerFocusedIndex(index)
+                                }
+                            }
+
+                            // DPAD wrap LEFT/RIGHT within carousel
+                            card.setOnKeyListener { v, keyCode, event ->
+                                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                                val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
+                                val idx = parent.indexOfChild(v).coerceAtLeast(0)
+                                val last = (parent.childCount - 1).coerceAtLeast(0)
+                                when (keyCode) {
+                                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                        if (idx <= 0) {
+                                            // wrap to last
+                                            val target = parent.getChildAt(last)
+                                            target?.requestFocus()
+                                            bannerScroll.post {
+                                                val cx = computeCenterScrollX(bannerScroll, target)
+                                                bannerScroll.smoothScrollTo(cx, 0)
+                                            }
+                                            return@setOnKeyListener true
+                                        }
+                                    }
+                                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                        if (idx >= last) {
+                                            // wrap to first
+                                            val target = parent.getChildAt(0)
+                                            target?.requestFocus()
+                                            bannerScroll.post {
+                                                val cx = computeCenterScrollX(bannerScroll, target)
+                                                bannerScroll.smoothScrollTo(cx, 0)
+                                            }
+                                            return@setOnKeyListener true
+                                        }
+                                    }
+                                    KeyEvent.KEYCODE_DPAD_UP -> {
+                                        // Up from banners goes to top menu default
+                                        if (::topMenuDefaultChild.isInitialized) {
+                                            topMenuDefaultChild.requestFocus()
+                                            return@setOnKeyListener true
+                                        }
+                                    }
+                                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                        // Down from banners goes to the first rail first card (set later in setupRails)
+                                        // Let system handle based on nextFocusDown if available.
+                                    }
+                                }
+                                false
+                            }
+
+                            bannerRow.addView(card)
+                        }
+
+                        // Restore focus to saved index if possible; else focus first
+                        val toFocus = viewModel.bannerState.value.focusedIndex
+                            .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
+                        val focusView = bannerRow.getChildAt(toFocus)
+                        if (focusView != null) {
+                            // Ensure nextFocusDown from menu points here
+                            val menuHome = findViewById<TextView>(R.id.menuHome)
+                            val menuLogin = findViewById<TextView>(R.id.menuLogin)
+                            val menuSetting = findViewById<TextView>(R.id.menuSetting)
+                            val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+
+                            menuHome?.nextFocusDownId = focusView.id
+                            menuLogin?.nextFocusDownId = focusView.id
+                            menuSetting?.nextFocusDownId = focusView.id
+                            menuMyPlan?.nextFocusDownId = focusView.id
+                            topMenu.nextFocusDownId = focusView.id
+
+                            // Center the initially focused banner without animation
+                            bannerScroll.post {
+                                val cx = computeCenterScrollX(bannerScroll, focusView)
+                                bannerScroll.scrollTo(cx, 0)
+                            }
+                        }
+                    } else {
+                        // No banners: keep spacing (state row may show error/retry)
+                        // Also keep nextFocusDown to rails (updated in setupRails)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Compute scroll X to center the child view inside the given HorizontalScrollView.
+     */
+    private fun computeCenterScrollX(scroll: HorizontalScrollView, child: View?): Int {
+        if (child == null) return 0
+        val scrollWidth = scroll.width
+        val childCenter = (child.left + child.right) / 2
+        return childCenter - scrollWidth / 2
+    }
+
     private fun setupRails() {
         val container = findViewById<LinearLayout>(R.id.railsContainer)
         val categories = listOf(
@@ -172,13 +332,27 @@ class HomeActivity : AppCompatActivity() {
         fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
             if (currentRowIdx <= 0) {
-                // First/top row: jump to the top menu default item
-                if (::topMenuDefaultChild.isInitialized) {
-                    topMenuDefaultChild.requestFocus()
-                    if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: moving focus to top menu default")
+                // First/top row: move focus to banner carousel aligned by index
+                if (::bannerRow.isInitialized && bannerRow.childCount > 0) {
+                    val parentRow = currentCard.parent as? LinearLayout
+                    val currentIndex = parentRow?.indexOfChild(currentCard)?.coerceAtLeast(0) ?: 0
+                    val targetIndex = currentIndex.coerceAtMost(bannerRow.childCount - 1)
+                    val target = bannerRow.getChildAt(targetIndex)
+                    target?.requestFocus()
+                    bannerScroll.post {
+                        val cx = computeCenterScrollX(bannerScroll, target)
+                        bannerScroll.smoothScrollTo(cx, 0)
+                    }
+                    if (focusDebug) Log.d("FocusNav", "DPAD_UP from first rail -> banner idx=$targetIndex")
                     return true
                 }
-                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: top menu default not initialized")
+                // Fallback to top menu if banner not initialized
+                if (::topMenuDefaultChild.isInitialized) {
+                    topMenuDefaultChild.requestFocus()
+                    if (focusDebug) Log.d("FocusNav", "DPAD_UP first rail fallback -> top menu")
+                    return true
+                }
+                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: banner/menu not ready")
                 return false
             }
 
@@ -385,9 +559,15 @@ class HomeActivity : AppCompatActivity() {
                             row.addView(card)
                         }
 
-                        // Keep focusUp hints for container views (no change needed)
-                        scrollView.nextFocusUpId = R.id.topMenu
-                        row.nextFocusUpId = R.id.topMenu
+                        // Focus up: prefer banner row if it exists; fallback to top menu
+                        if (::bannerRow.isInitialized && bannerRow.childCount > 0) {
+                            val firstBanner = bannerRow.getChildAt(0)
+                            scrollView.nextFocusUpId = firstBanner?.id ?: R.id.topMenu
+                            row.nextFocusUpId = firstBanner?.id ?: R.id.topMenu
+                        } else {
+                            scrollView.nextFocusUpId = R.id.topMenu
+                            row.nextFocusUpId = R.id.topMenu
+                        }
 
                         // If this is the first row, set it as the nextFocusDown for the entire topMenu
                         if (categories.indexOf(category) == 0) {

@@ -12,6 +12,15 @@ data class ContentItem(
 
 /**
  * PUBLIC_INTERFACE
+ * Response model for /api/banner endpoint.
+ * JSON shape: { "banners": ["URL1", "URL2", ...] }
+ */
+data class BannerResponse(
+    val banners: List<String> = emptyList()
+)
+
+/**
+ * PUBLIC_INTERFACE
  * Enum of supported home categories with their API path and user-facing title.
  */
 enum class HomeCategory(val path: String, val title: String) {

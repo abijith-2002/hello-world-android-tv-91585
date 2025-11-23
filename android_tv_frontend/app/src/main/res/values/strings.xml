@@ -14,6 +14,12 @@
     <!-- Content descriptions -->
     <string name="thumb_image_cd">Content thumbnail</string>
 
+    <!-- Banner carousel -->
+    <string name="banner_card_cd">Hero banner card</string>
+    <string name="banner_image_cd">Banner image</string>
+    <string name="banner_error_generic">Unable to load banners</string>
+    <string name="retry">Retry</string>
+
     <!-- Login -->
     <string name="login_title">Sign in</string>
     <string name="label_username_email">Email or Username</string>

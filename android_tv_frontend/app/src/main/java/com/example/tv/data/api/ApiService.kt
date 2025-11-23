@@ -1,6 +1,7 @@
 package com.example.tv.data.api
 
 import com.example.tv.data.api.dto.ShowDto
+import com.example.tv.data.api.BannerResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -86,6 +87,14 @@ interface ApiService {
      */
     @GET("api/drama")
     suspend fun getDrama(): List<ShowDto>
+
+    /**
+     * PUBLIC_INTERFACE
+     * Fetch hero banner image URLs for the home screen carousel.
+     * @return BannerResponse containing a list of absolute image URLs.
+     */
+    @GET("api/banner")
+    suspend fun getBanners(): BannerResponse
 
     companion object {
         /**
