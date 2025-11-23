@@ -11,32 +11,41 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <!-- Content host -->
-    <LinearLayout
+    <!-- Content host now wrapped in a single ScrollView so banner scrolls with rails -->
+    <ScrollView
         android:id="@+id/homeContent"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="24dp"
+        android:fillViewport="true"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:overScrollMode="never">
 
-        <!-- Top Menu -->
         <LinearLayout
-            android:id="@+id/topMenu"
-            android:orientation="horizontal"
+            android:id="@+id/homeContentInner"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:gravity="center_vertical"
+            android:paddingTop="24dp"
             android:clipChildren="false"
-            android:clipToPadding="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:nextFocusDown="@id/railsContainer">
+            android:clipToPadding="false">
+
+            <!-- Top Menu -->
+            <LinearLayout
+                android:id="@+id/topMenu"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:gravity="center_vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:nextFocusDown="@id/railsContainer">
 
             <TextView
                 android:id="@+id/menuHome"
@@ -134,17 +143,17 @@
                 android:includeFontPadding="false"/>
         </LinearLayout>
 
-        <!-- Hero Banner Carousel -->
-        <LinearLayout
-            android:id="@+id/bannerContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:paddingStart="48dp"
-            android:paddingEnd="48dp"
-            android:clipChildren="false"
-            android:clipToPadding="false">
+            <!-- Hero Banner Carousel -->
+            <LinearLayout
+                android:id="@+id/bannerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:paddingStart="48dp"
+                android:paddingEnd="48dp"
+                android:clipChildren="false"
+                android:clipToPadding="false">
 
             <!-- Loading / Error Row (keeps spacing so it doesn't overlap with rails) -->
             <LinearLayout
@@ -198,6 +207,7 @@
                 android:scrollbars="none"
                 android:clipChildren="false"
                 android:clipToPadding="false"
+                android:paddingBottom="8dp"
                 android:nextFocusUp="@id/topMenu">
 
                 <LinearLayout
@@ -210,27 +220,21 @@
             </HorizontalScrollView>
         </LinearLayout>
 
-        <!-- Rails list -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:fillViewport="true">
-
+            <!-- Rails list lives in the same scroll container so banner scrolls away with it -->
             <LinearLayout
                 android:id="@+id/railsContainer"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
                 android:paddingStart="48dp"
                 android:paddingEnd="48dp"
-                android:paddingBottom="32dp"
+                android:paddingBottom="48dp"
                 android:clipChildren="false"
                 android:clipToPadding="false" />
 
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Global loading indicator centered above content -->
     <FrameLayout
