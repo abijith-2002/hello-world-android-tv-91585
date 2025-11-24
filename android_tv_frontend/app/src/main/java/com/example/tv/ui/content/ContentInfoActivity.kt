@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import coil.load
+import coil.request.CachePolicy
+import coil.size.Scale
 import com.example.tv.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -67,6 +70,7 @@ class ContentInfoActivity : ComponentActivity() {
 
         setupSystemDateTime()
         populateContentData()
+        setupBackdropImage()
         setupActionButtons()
 
         // Focus first button by default
@@ -117,6 +121,37 @@ class ContentInfoActivity : ComponentActivity() {
         findViewById<TextView>(R.id.description).text =
             intent.getStringExtra(EXTRA_DESCRIPTION) ?:
             "Lucio es obligado a entrar en el Coliseo después de que su hogar sea conquistado por los tiránicos emperadores que ahora dirigen Roma con puño de hierro. Con la ira en su corazón y el futuro del Imperio en juego, Lucio debe mirar hacia atrás para encontrar fuerza y devolver la gloria de Roma a su pueblo."
+    }
+
+    private fun setupBackdropImage() {
+        // Try to find the background ImageView from layout
+        val bgView = findViewById<ImageView?>(R.id.backgroundImage)
+        val posterUrl = intent.getStringExtra(EXTRA_POSTER_URL)?.takeIf { !it.isNullOrBlank() }
+
+        if (bgView == null) {
+            // No background view present; nothing to bind. We simply rely on gradient background.
+            return
+        }
+
+        // Always ensure contentDescription for accessibility
+        bgView.contentDescription = getString(R.string.content_background_description)
+
+        if (posterUrl == null) {
+            // No URL passed; keep existing gradient/placeholder background drawable
+            // Optionally, we could set a neutral placeholder image drawable behind gradient
+            return
+        }
+
+        // Load with Coil using safe defaults and placeholders
+        bgView.load(posterUrl) {
+            crossfade(true)
+            crossfade(200)
+            scale(Scale.FILL) // match centerCrop feel
+            memoryCachePolicy(CachePolicy.ENABLED)
+            placeholder(R.drawable.bg_content_info_gradient)
+            error(R.drawable.bg_content_info_gradient)
+            // size will be measured automatically to view's size; no transformations for TV background
+        }
     }
 
     private fun setupActionButtons() {
@@ -385,6 +420,7 @@ class ContentInfoActivity : ComponentActivity() {
         const val EXTRA_AGE_RATING = "age_rating"
         const val EXTRA_TIME_START = "time_start"
         const val EXTRA_TIME_END = "time_end"
+        const val EXTRA_POSTER_URL = "poster_url"
 
         /**
          * PUBLIC_INTERFACE
@@ -414,7 +450,8 @@ class ContentInfoActivity : ComponentActivity() {
             duration: String = "2 h 28 min",
             ageRating: String = "+ 16 Años",
             timeStart: String = "20:00",
-            timeEnd: String = "22:20"
+            timeEnd: String = "22:20",
+            posterUrl: String? = null
         ): Intent {
             return Intent(context, ContentInfoActivity::class.java).apply {
                 putExtra(EXTRA_CHANNEL_NUMBER, channelNumber)
@@ -426,6 +463,9 @@ class ContentInfoActivity : ComponentActivity() {
                 putExtra(EXTRA_AGE_RATING, ageRating)
                 putExtra(EXTRA_TIME_START, timeStart)
                 putExtra(EXTRA_TIME_END, timeEnd)
+                if (!posterUrl.isNullOrBlank()) {
+                    putExtra(EXTRA_POSTER_URL, posterUrl)
+                }
             }
         }
     }

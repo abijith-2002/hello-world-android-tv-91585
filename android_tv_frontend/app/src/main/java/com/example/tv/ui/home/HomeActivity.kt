@@ -604,13 +604,14 @@ class HomeActivity : AppCompatActivity() {
                                     resources.getDimension(R.dimen.card_elevation)
                             }
 
-                            // Open ContentInfoActivity on click with name
+                            // Open ContentInfoActivity on click with name and pass poster URL for background
                             card.setOnClickListener {
                                 val intent = ContentInfoActivity.createIntent(
                                     context = this@HomeActivity,
                                     programTitle = item.name,
                                     description = "Details for ${item.name}",
-                                    genres = "TV Show"
+                                    genres = "TV Show",
+                                    posterUrl = item.poster // may be null/blank; handled gracefully in ContentInfoActivity
                                 )
                                 startActivity(intent)
                             }
