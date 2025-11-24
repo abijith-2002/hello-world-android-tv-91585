@@ -180,9 +180,16 @@ class HomeActivity : AppCompatActivity() {
                     // Route UP to top navigation by id
                     val topNav: View? = findViewById(R.id.topMenu)
                     if (topNav != null) {
-                        topNav.requestFocus()
+                        if (focusDebug) Log.d("FocusNav", "BannerScroll UP -> topMenu")
+                        // Prefer default child within top menu if initialized
+                        if (::topMenuDefaultChild.isInitialized) {
+                            topMenuDefaultChild.requestFocus()
+                        } else {
+                            topNav.requestFocus()
+                        }
                         return@setOnKeyListener true
                     }
+                    if (focusDebug) Log.d("FocusNav", "BannerScroll UP but topMenu not found")
                     false
                 }
                 else -> false
@@ -240,6 +247,9 @@ class HomeActivity : AppCompatActivity() {
                                     viewModel.setBannerFocusedIndex(index)
                                 }
                             }
+
+                            // Ensure system focus search knows where UP should go
+                            card.nextFocusUpId = R.id.topMenu
 
                             // DPAD wrap LEFT/RIGHT within carousel
                             // PUBLIC_INTERFACE
