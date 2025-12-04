@@ -36,10 +36,11 @@ interface ApiService {
     )
 
     /**
-     * PUBLIC_INTERFACE
-     * Fetch hero banners.
-     * Returns an object { "banners": [urls...] }.
-     */
+    * PUBLIC_INTERFACE
+    * Fetch hero banners.
+    * (Response: { "banners": [ ... ] })
+    */
+
     @GET("api/banner")
     suspend fun getBanners(): BannersResponse
 

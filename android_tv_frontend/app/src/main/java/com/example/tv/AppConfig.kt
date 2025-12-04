@@ -9,5 +9,5 @@ package com.example.tv
  */
 object AppConfig {
     /** Base URL for the backend API. Must include scheme and trailing slash normalized by callers if needed. */
-    const val API_BASE_URL: String = "https://25942d6e.api.kavia.app/"
+    const val API_BASE_URL: String = "https://4b746313.api.kavia.app/"
 }
