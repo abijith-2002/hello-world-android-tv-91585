@@ -30,6 +30,7 @@ import com.example.tv.ui.content.ContentInfoActivity
 import com.example.tv.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import coil.Coil
+import com.google.android.material.card.MaterialCardView
 
 /**
  * PUBLIC_INTERFACE
@@ -310,22 +311,31 @@ class HomeActivity : AppCompatActivity() {
                             img.load(url)
 
                             // Focus animations + center on focus; also ensure scroll-to-top if entering via DPAD_UP
-                            // 2. Focused visual: scale 1.03f + translationZ
+                            // 2. Focused visual: scale 1.03f + translationZ and elevate the MaterialCardView
                             card.setOnFocusChangeListener { v, hasFocus ->
                                 v.animate().scaleX(if (hasFocus) 1.03f else 1.0f)
                                     .scaleY(if (hasFocus) 1.03f else 1.0f)
                                     .translationZ(if (hasFocus) 8f else 0f)
                                     .setDuration(140)
                                     .start()
-                                v.elevation = if (hasFocus)
+
+                                // Apply elevation using MaterialCardView for consistent shadows on TV
+                                val mc = v as? MaterialCardView
+                                val elev = if (hasFocus)
                                     resources.getDimension(R.dimen.card_elevation_focused)
                                 else
                                     resources.getDimension(R.dimen.card_elevation)
+                                if (mc != null) {
+                                    mc.cardElevation = elev
+                                } else {
+                                    v.elevation = elev
+                                }
 
                                 if (hasFocus) {
                                     ensureTopScrollIfNeeded(trigger = "hero-card-focus")
                                     val centerTarget = computeCenterScrollX(bannerScroll, v)
                                     bannerScroll.smoothScrollTo(centerTarget, 0)
+                                    // Update focused index every time focus moves via DPAD LEFT/RIGHT
                                     viewModel.setBannerFocusedIndex(index)
                                 }
                             }
@@ -635,10 +645,17 @@ class HomeActivity : AppCompatActivity() {
                                     .scaleY(if (hasFocus) 1.06f else 1.0f)
                                     .setDuration(120)
                                     .start()
-                                v.elevation = if (hasFocus)
+
+                                val mc = v as? MaterialCardView
+                                val elev = if (hasFocus)
                                     resources.getDimension(R.dimen.card_elevation_focused)
                                 else
                                     resources.getDimension(R.dimen.card_elevation)
+                                if (mc != null) {
+                                    mc.cardElevation = elev
+                                } else {
+                                    v.elevation = elev
+                                }
                             }
 
                             // Open ContentInfoActivity on click with name and pass poster URL for background
