@@ -1,6 +1,7 @@
 package com.example.tv.ui.home
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -9,6 +10,7 @@ import android.util.Log
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -41,6 +43,10 @@ import coil.Coil
  * - DPAD_UP from any item in the first rails row focuses the hero banner (container).
  * - DPAD_UP from the hero banner focuses the 'Home' button (topNavHome).
  * - DPAD_DOWN from the hero banner focuses the first item of the first rails row.
+ *
+ * Additionally:
+ * - Detects when focus enters the hero carousel due to DPAD_UP and scrolls the parent
+ *   ScrollView to the very top so the top navigation bar is fully visible.
  */
 class HomeActivity : AppCompatActivity() {
 
@@ -50,9 +56,15 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var topMenu: LinearLayout
     private lateinit var topMenuDefaultChild: View
 
+    // Parent vertical scroll container
+    private lateinit var contentScroll: ScrollView
+
     // Hero banner widgets
     private lateinit var bannerScroll: HorizontalScrollView
     private lateinit var bannerRow: LinearLayout
+
+    // Tracks the last navigation direction key (true when last ACTION_DOWN was DPAD_UP)
+    private var lastNavWasUp: Boolean = false
 
     // Debug flag for focus mapping logs
     private val focusDebug = true
@@ -60,6 +72,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        // Scroll container for the whole screen
+        contentScroll = findViewById(R.id.homeContent)
 
         setupTopMenu()
         setupRails()
@@ -92,6 +107,19 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /**
+     * PUBLIC_INTERFACE
+     * Overrides key dispatch to capture DPAD_UP navigation intent.
+     * This does not consume the event; it only records that the last navigation was an UP,
+     * allowing focus listeners to adjust scroll position after focus changes.
+     */
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (event.action == KeyEvent.ACTION_DOWN) {
+            lastNavWasUp = (event.keyCode == KeyEvent.KEYCODE_DPAD_UP)
+        }
+        return super.dispatchKeyEvent(event)
     }
 
     /**
@@ -161,6 +189,9 @@ class HomeActivity : AppCompatActivity() {
      * Setup the hero banner carousel: binds loading/error UI, inflates cards from URLs,
      * handles DPAD focus wrap and smooth centering, and integrates focus transitions with
      * top menu and rails.
+     *
+     * Also detects when focus enters the hero carousel due to DPAD_UP and scrolls the parent
+     * ScrollView to the top to ensure the top navigation bar is fully visible.
      */
     private fun setupBannerCarousel() {
         bannerScroll = findViewById(R.id.heroBanner)
@@ -183,13 +214,17 @@ class HomeActivity : AppCompatActivity() {
         bannerScroll.isFocusableInTouchMode = true
         bannerScroll.descendantFocusability = ViewGroup.FOCUS_AFTER_DESCENDANTS
 
-        // When hero banner container receives focus, forward it to first/selected child if present
+        // When hero banner container receives focus, forward it to first/selected child if present,
+        // and ensure scroll-to-top if focus entered due to DPAD_UP from below.
         bannerScroll.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus && bannerRow.childCount > 0) {
-                val preferredIndex = viewModel.bannerState.value.focusedIndex
-                    .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
-                val target = bannerRow.getChildAt(preferredIndex) ?: bannerRow.getChildAt(0)
-                target?.requestFocus()
+            if (hasFocus) {
+                ensureTopScrollIfNeeded(trigger = "hero-container-focus")
+                if (bannerRow.childCount > 0) {
+                    val preferredIndex = viewModel.bannerState.value.focusedIndex
+                        .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
+                    val target = bannerRow.getChildAt(preferredIndex) ?: bannerRow.getChildAt(0)
+                    target?.requestFocus()
+                }
             }
         }
 
@@ -270,7 +305,7 @@ class HomeActivity : AppCompatActivity() {
                             } catch (_: Throwable) {}
                             img.load(url)
 
-                            // Focus animations + center on focus
+                            // Focus animations + center on focus; also ensure scroll-to-top if entering via DPAD_UP
                             card.setOnFocusChangeListener { v, hasFocus ->
                                 v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
                                     .scaleY(if (hasFocus) 1.06f else 1.0f)
@@ -282,6 +317,7 @@ class HomeActivity : AppCompatActivity() {
                                     resources.getDimension(R.dimen.card_elevation)
 
                                 if (hasFocus) {
+                                    ensureTopScrollIfNeeded(trigger = "hero-card-focus")
                                     val centerTarget = computeCenterScrollX(bannerScroll, v)
                                     bannerScroll.smoothScrollTo(centerTarget, 0)
                                     viewModel.setBannerFocusedIndex(index)
@@ -695,6 +731,39 @@ class HomeActivity : AppCompatActivity() {
         if (row.childCount <= 0) return false
         val first = row.getChildAt(0) ?: return false
         return first.requestFocus()
+    }
+
+    /**
+     * When focus enters the hero carousel due to DPAD_UP from a lower section,
+     * scroll the parent container to top so the top navigation bar is fully visible.
+     * This runs immediately via scrollTo(0,0) to avoid visual jitter.
+     */
+    private fun ensureTopScrollIfNeeded(trigger: String = "unknown") {
+        if (!::contentScroll.isInitialized) return
+        if (!lastNavWasUp) return
+
+        if (contentScroll.scrollY > 0) {
+            // Immediate scroll to the very top to avoid jitter and ensure full visibility
+            contentScroll.scrollTo(0, 0)
+
+            // Verify nav bar visibility; if any clipping, enforce top again on next frame
+            topMenu.post {
+                val fullyVisible = isViewFullyVisible(topMenu)
+                if (!fullyVisible) {
+                    contentScroll.scrollTo(0, 0)
+                }
+            }
+            if (focusDebug) Log.d("FocusNav", "Scroll-to-top executed on '$trigger'")
+        }
+
+        // Reset the flag so subsequent focus changes (e.g., LEFT/RIGHT in hero) do not retrigger
+        lastNavWasUp = false
+    }
+
+    private fun isViewFullyVisible(v: View): Boolean {
+        val r = Rect()
+        val visible = v.getGlobalVisibleRect(r)
+        return visible && r.height() >= v.height && r.width() >= v.width
     }
 
     private fun isDescendantOf(view: View?, parentId: Int): Boolean {
