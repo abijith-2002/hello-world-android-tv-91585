@@ -233,26 +233,16 @@ class HomeActivity : AppCompatActivity() {
             if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
             when (keyCode) {
                 KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                    // Maintain wrap-around behavior at container-level for edge focus
+                    // Block wrap-around behavior at container-level for edge focus
                     val focused = bannerRow.focusedChild ?: return@setOnKeyListener false
                     val idx = bannerRow.indexOfChild(focused).coerceAtLeast(0)
                     val last = (bannerRow.childCount - 1).coerceAtLeast(0)
                     if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && idx <= 0) {
-                        val target = bannerRow.getChildAt(last)
-                        target?.requestFocus()
-                        bannerScroll.post {
-                            val cx = computeCenterScrollX(bannerScroll, target)
-                            bannerScroll.smoothScrollTo(cx, 0)
-                        }
+                        // Consume event at start edge (no wrap)
                         return@setOnKeyListener true
                     }
                     if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && idx >= last) {
-                        val target = bannerRow.getChildAt(0)
-                        target?.requestFocus()
-                        bannerScroll.post {
-                            val cx = computeCenterScrollX(bannerScroll, target)
-                            bannerScroll.smoothScrollTo(cx, 0)
-                        }
+                        // Consume event at end edge (no wrap)
                         return@setOnKeyListener true
                     }
                     false
@@ -297,6 +287,20 @@ class HomeActivity : AppCompatActivity() {
                             val card = layoutInflater.inflate(R.layout.view_banner_card, bannerRow, false)
                             // Ensure unique ID per card for precise focus targeting
                             card.id = View.generateViewId()
+
+                            // 1. Increase horizontal spacing between items (~16dp)
+                            //    Existing XML has marginEnd=4dp. We override it here programmatically.
+                            val params = card.layoutParams as? LinearLayout.LayoutParams
+                                ?: LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                )
+                            // 16dp in pixels
+                            val density = resources.displayMetrics.density
+                            val spacingPx = (16 * density).toInt()
+                            params.marginEnd = spacingPx
+                            card.layoutParams = params
+
                             val img = card.findViewById<ImageView>(R.id.bannerImage)
 
                             // Load with Coil (simple call; CENTER_CROP set in XML to minimize cropping)
@@ -306,9 +310,11 @@ class HomeActivity : AppCompatActivity() {
                             img.load(url)
 
                             // Focus animations + center on focus; also ensure scroll-to-top if entering via DPAD_UP
+                            // 2. Focused visual: scale 1.03f + translationZ
                             card.setOnFocusChangeListener { v, hasFocus ->
-                                v.animate().scaleX(if (hasFocus) 1.06f else 1.0f)
-                                    .scaleY(if (hasFocus) 1.06f else 1.0f)
+                                v.animate().scaleX(if (hasFocus) 1.03f else 1.0f)
+                                    .scaleY(if (hasFocus) 1.03f else 1.0f)
+                                    .translationZ(if (hasFocus) 8f else 0f)
                                     .setDuration(140)
                                     .start()
                                 v.elevation = if (hasFocus)
@@ -328,6 +334,7 @@ class HomeActivity : AppCompatActivity() {
                             card.nextFocusUpId = R.id.topNavHome
 
                             // Intercepts LEFT/RIGHT wrap-around; UP -> Home; DOWN -> first rail first item
+                            // 3. DPAD Edges: prevent focus moving past last item on RIGHT and before first on LEFT
                             card.setOnKeyListener { _, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 val parent = card.parent as? LinearLayout ?: return@setOnKeyListener false
@@ -336,24 +343,14 @@ class HomeActivity : AppCompatActivity() {
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_LEFT -> {
                                         if (idx <= 0) {
-                                            val target = parent.getChildAt(last)
-                                            target?.requestFocus()
-                                            bannerScroll.post {
-                                                val cx = computeCenterScrollX(bannerScroll, target)
-                                                bannerScroll.smoothScrollTo(cx, 0)
-                                            }
+                                            // Consume event at start edge (no wrap)
                                             return@setOnKeyListener true
                                         }
                                         false
                                     }
                                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
                                         if (idx >= last) {
-                                            val target = parent.getChildAt(0)
-                                            target?.requestFocus()
-                                            bannerScroll.post {
-                                                val cx = computeCenterScrollX(bannerScroll, target)
-                                                bannerScroll.smoothScrollTo(cx, 0)
-                                            }
+                                            // Consume event at end edge (no wrap)
                                             return@setOnKeyListener true
                                         }
                                         false
