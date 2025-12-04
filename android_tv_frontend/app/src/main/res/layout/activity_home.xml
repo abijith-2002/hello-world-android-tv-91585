@@ -46,10 +46,10 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:descendantFocusability="afterDescendants"
-                android:nextFocusDown="@id/railsContainer">
+                android:nextFocusDown="@id/heroBanner">
 
             <TextView
-                android:id="@+id/menuHome"
+                android:id="@+id/topNavHome"
                 style="@style/TextAppearance.Pill.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
@@ -201,7 +201,7 @@
 
             <!-- Horizontal carousel -->
             <HorizontalScrollView
-                android:id="@+id/bannerScroll"
+                android:id="@+id/heroBanner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
@@ -209,6 +209,9 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:paddingBottom="8dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:descendantFocusability="afterDescendants"
                 android:nextFocusUp="@id/topMenu">
 
                 <LinearLayout

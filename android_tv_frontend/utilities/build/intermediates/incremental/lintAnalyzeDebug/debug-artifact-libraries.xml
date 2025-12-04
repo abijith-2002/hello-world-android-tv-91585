@@ -1,0 +1,28 @@
+<libraries>
+  <library
+      name=":@@:list::debug"
+      jars="/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out/jars/classes.jar:/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out/jars/libs/R.jar"
+      resolved="android_tv_frontend:list:unspecified"
+      partialResultsDir="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list/build/intermediates/lint_partial_results/debug/lintAnalyzeDebug/out"
+      folder="/home/kavia/.gradle/caches/9.0.0/transforms/0ed416cb2b8e28ee51229438ca2897a8/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.annotation:annotation-jvm:1.8.2@jar"
+      jars="/home/kavia/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.8.2/b8a16fe526014b7941c1debaccaf9c5153692dbb/annotation-jvm-1.8.2.jar"
+      resolved="androidx.annotation:annotation-jvm:1.8.2"/>
+  <library
+      name="org.jetbrains.kotlin:kotlin-stdlib:1.9.24@jar"
+      jars="/home/kavia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.24/9928532f12c66ad816a625b3f9984f8368ca6d2b/kotlin-stdlib-1.9.24.jar"
+      resolved="org.jetbrains.kotlin:kotlin-stdlib:1.9.24"/>
+  <library
+      name="org.jetbrains:annotations:13.0@jar"
+      jars="/home/kavia/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar"
+      resolved="org.jetbrains:annotations:13.0"/>
+</libraries>

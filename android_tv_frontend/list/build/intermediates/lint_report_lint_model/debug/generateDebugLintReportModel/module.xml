@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="/home/kavia/workspace/code-generation/hello-world-android-tv-91585/android_tv_frontend/list"
+    name=":list"
+    type="LIBRARY"
+    maven="android_tv_frontend:list:unspecified"
+    agpVersion="8.6.1"
+    buildFolder="build"
+    bootClassPath="/opt/android-sdk-linux/platforms/android-34/android.jar:/opt/android-sdk-linux/build-tools/34.0.0/core-lambda-stubs.jar"
+    javaSourceLevel="17"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="debug"/>
+</lint-module>

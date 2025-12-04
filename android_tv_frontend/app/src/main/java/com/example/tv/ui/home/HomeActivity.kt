@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup
 import android.util.Log
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
@@ -35,12 +36,11 @@ import coil.Coil
  * and multiple horizontal rails of content loaded from the API.
  * D-pad focus is enabled across interactive elements.
  *
- * DPAD_UP behavior:
- * - From any content row r > 0, DPAD_UP moves focus to the corresponding item in row r-1.
- * - For the first content row (r == 0), DPAD_UP moves focus to the top menu default item.
- *
- * - Accepts no parameters.
- * - Returns no value; displays UI.
+ * Custom DPAD behavior implemented:
+ * - DPAD_DOWN from any top nav item focuses the hero banner (container).
+ * - DPAD_UP from any item in the first rails row focuses the hero banner (container).
+ * - DPAD_UP from the hero banner focuses the 'Home' button (topNavHome).
+ * - DPAD_DOWN from the hero banner focuses the first item of the first rails row.
  */
 class HomeActivity : AppCompatActivity() {
 
@@ -49,6 +49,10 @@ class HomeActivity : AppCompatActivity() {
     // Keep a stable reference to a focusable element in the top menu for requestFocus()
     private lateinit var topMenu: LinearLayout
     private lateinit var topMenuDefaultChild: View
+
+    // Hero banner widgets
+    private lateinit var bannerScroll: HorizontalScrollView
+    private lateinit var bannerRow: LinearLayout
 
     // Debug flag for focus mapping logs
     private val focusDebug = true
@@ -96,12 +100,12 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupTopMenu() {
         topMenu = findViewById(R.id.topMenu)
-        val menuHome = findViewById<TextView>(R.id.menuHome)
+        val menuHome = findViewById<TextView>(R.id.topNavHome)
         val menuLogin = findViewById<TextView>(R.id.menuLogin)
         val menuSetting = findViewById<TextView>(R.id.menuSetting)
         val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
 
-        // Default child to receive focus when navigating up from rails
+        // Default child to receive focus when navigating up from hero banner
         topMenuDefaultChild = menuHome
 
         val focusScaler = View.OnFocusChangeListener { v, hasFocus ->
@@ -115,8 +119,32 @@ class HomeActivity : AppCompatActivity() {
             it.isFocusable = true
             it.isFocusableInTouchMode = true
             it.onFocusChangeListener = focusScaler
-            // Allow DPAD_DOWN from any menu item to return focus to the first rail's first item
-            it.nextFocusDownId = R.id.railsContainer
+
+            // Custom: DPAD_DOWN from any top nav item -> hero banner
+            it.nextFocusDownId = R.id.heroBanner
+            it.setOnKeyListener { _, keyCode, event ->
+                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    val moved = moveFocusToHeroBanner()
+                    if (focusDebug) Log.d("FocusNav", "TopNav DOWN -> heroBanner (moved=$moved)")
+                    moved
+                } else {
+                    false
+                }
+            }
+        }
+
+        // Also set container-level mapping just in case container itself gets focus
+        topMenu.nextFocusDownId = R.id.heroBanner
+        topMenu.setOnKeyListener { _, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                val moved = moveFocusToHeroBanner()
+                if (focusDebug) Log.d("FocusNav", "topMenu DOWN -> heroBanner (moved=$moved)")
+                moved
+            } else {
+                false
+            }
         }
 
         menuLogin.setOnClickListener {
@@ -128,9 +156,6 @@ class HomeActivity : AppCompatActivity() {
         menuHome.requestFocus()
     }
 
-    private lateinit var bannerScroll: HorizontalScrollView
-    private lateinit var bannerRow: LinearLayout
-
     /**
      * PUBLIC_INTERFACE
      * Setup the hero banner carousel: binds loading/error UI, inflates cards from URLs,
@@ -138,7 +163,7 @@ class HomeActivity : AppCompatActivity() {
      * top menu and rails.
      */
     private fun setupBannerCarousel() {
-        bannerScroll = findViewById(R.id.bannerScroll)
+        bannerScroll = findViewById(R.id.heroBanner)
         bannerRow = findViewById(R.id.bannerRow)
 
         val stateRow: View = findViewById(R.id.bannerStateRow)
@@ -146,13 +171,27 @@ class HomeActivity : AppCompatActivity() {
         val errorText: TextView = findViewById(R.id.bannerErrorText)
         val retry: TextView = findViewById(R.id.bannerRetry)
 
-        // PUBLIC_INTERFACE
-        // Intercept DPAD at the banner container level as a safety net to prevent fallback to rails
-        // on certain devices that dispatch key events to the parent.
+        // Ensure hero banner container is focusable and prioritizes children for focus resolution
+        bannerScroll.isFocusable = true
+        bannerScroll.isFocusableInTouchMode = true
+        bannerScroll.descendantFocusability = ViewGroup.FOCUS_AFTER_DESCENDANTS
+
+        // When hero banner container receives focus, forward it to first/selected child if present
+        bannerScroll.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && bannerRow.childCount > 0) {
+                val preferredIndex = viewModel.bannerState.value.focusedIndex
+                    .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
+                val target = bannerRow.getChildAt(preferredIndex) ?: bannerRow.getChildAt(0)
+                target?.requestFocus()
+            }
+        }
+
+        // Intercept DPAD at the banner container level to support UP -> Home, DOWN -> First rail
         bannerScroll.setOnKeyListener { _, keyCode, event ->
             if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
             when (keyCode) {
                 KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    // Maintain wrap-around behavior at container-level for edge focus
                     val focused = bannerRow.focusedChild ?: return@setOnKeyListener false
                     val idx = bannerRow.indexOfChild(focused).coerceAtLeast(0)
                     val last = (bannerRow.childCount - 1).coerceAtLeast(0)
@@ -177,20 +216,14 @@ class HomeActivity : AppCompatActivity() {
                     false
                 }
                 KeyEvent.KEYCODE_DPAD_UP -> {
-                    // Route UP to top navigation by id
-                    val topNav: View? = findViewById(R.id.topMenu)
-                    if (topNav != null) {
-                        if (focusDebug) Log.d("FocusNav", "BannerScroll UP -> topMenu")
-                        // Prefer default child within top menu if initialized
-                        if (::topMenuDefaultChild.isInitialized) {
-                            topMenuDefaultChild.requestFocus()
-                        } else {
-                            topNav.requestFocus()
-                        }
-                        return@setOnKeyListener true
-                    }
-                    if (focusDebug) Log.d("FocusNav", "BannerScroll UP but topMenu not found")
-                    false
+                    val moved = moveFocusToTopNavHome()
+                    if (focusDebug) Log.d("FocusNav", "HeroBanner UP -> topNavHome (moved=$moved)")
+                    moved
+                }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    val moved = moveFocusToFirstRailFirstItem()
+                    if (focusDebug) Log.d("FocusNav", "HeroBanner DOWN -> firstRailFirstItem (moved=$moved)")
+                    moved
                 }
                 else -> false
             }
@@ -248,24 +281,18 @@ class HomeActivity : AppCompatActivity() {
                                 }
                             }
 
-                            // Ensure system focus search knows where UP should go
-                            card.nextFocusUpId = R.id.topMenu
+                            // Ensure system focus search knows where UP should go (Home)
+                            card.nextFocusUpId = R.id.topNavHome
 
-                            // DPAD wrap LEFT/RIGHT within carousel
-                            // PUBLIC_INTERFACE
-                            // Intercepts KEYCODE_DPAD_LEFT/RIGHT to provide wrap-around behavior:
-                            // - When focused child is leftmost, LEFT wraps to rightmost.
-                            // - When focused child is rightmost, RIGHT wraps to leftmost.
-                            // UP maps to top menu by id; DOWN is left to default system behavior.
-                            card.setOnKeyListener { v, keyCode, event ->
+                            // Intercepts LEFT/RIGHT wrap-around; UP -> Home; DOWN -> first rail first item
+                            card.setOnKeyListener { _, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
-                                val parent = v.parent as? LinearLayout ?: return@setOnKeyListener false
-                                val idx = parent.indexOfChild(v).coerceAtLeast(0)
+                                val parent = card.parent as? LinearLayout ?: return@setOnKeyListener false
+                                val idx = parent.indexOfChild(card).coerceAtLeast(0)
                                 val last = (parent.childCount - 1).coerceAtLeast(0)
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_LEFT -> {
                                         if (idx <= 0) {
-                                            // wrap to last
                                             val target = parent.getChildAt(last)
                                             target?.requestFocus()
                                             bannerScroll.post {
@@ -274,11 +301,10 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             return@setOnKeyListener true
                                         }
-                                        return@setOnKeyListener false
+                                        false
                                     }
                                     KeyEvent.KEYCODE_DPAD_RIGHT -> {
                                         if (idx >= last) {
-                                            // wrap to first
                                             val target = parent.getChildAt(0)
                                             target?.requestFocus()
                                             bannerScroll.post {
@@ -287,27 +313,19 @@ class HomeActivity : AppCompatActivity() {
                                             }
                                             return@setOnKeyListener true
                                         }
-                                        return@setOnKeyListener false
+                                        false
                                     }
                                     KeyEvent.KEYCODE_DPAD_UP -> {
-                                        // Up from banners goes to top navigation view by id
-                                        val topNav: View? = findViewById(R.id.topMenu)
-                                        if (topNav != null) {
-                                            topNav.requestFocus()
-                                            return@setOnKeyListener true
-                                        }
-                                        // Fallback to default child if container not focusable for some reason
-                                        if (::topMenuDefaultChild.isInitialized) {
-                                            topMenuDefaultChild.requestFocus()
-                                            return@setOnKeyListener true
-                                        }
-                                        return@setOnKeyListener false
+                                        val moved = moveFocusToTopNavHome()
+                                        if (focusDebug) Log.d("FocusNav", "BannerCard UP -> topNavHome (moved=$moved)")
+                                        moved
                                     }
                                     KeyEvent.KEYCODE_DPAD_DOWN -> {
-                                        // Let system handle default DOWN behavior to rails via focus search
-                                        return@setOnKeyListener false
+                                        val moved = moveFocusToFirstRailFirstItem()
+                                        if (focusDebug) Log.d("FocusNav", "BannerCard DOWN -> firstRailFirstItem (moved=$moved)")
+                                        moved
                                     }
-                                    else -> return@setOnKeyListener false
+                                    else -> false
                                 }
                             }
 
@@ -318,18 +336,19 @@ class HomeActivity : AppCompatActivity() {
                         val toFocus = viewModel.bannerState.value.focusedIndex
                             .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
                         val focusView = bannerRow.getChildAt(toFocus)
+
                         if (focusView != null) {
-                            // Ensure nextFocusDown from menu points here
-                            val menuHome = findViewById<TextView>(R.id.menuHome)
+                            // Keep top nav DOWN directed to hero banner container per requirement
+                            val menuHome = findViewById<TextView>(R.id.topNavHome)
                             val menuLogin = findViewById<TextView>(R.id.menuLogin)
                             val menuSetting = findViewById<TextView>(R.id.menuSetting)
                             val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
 
-                            menuHome?.nextFocusDownId = focusView.id
-                            menuLogin?.nextFocusDownId = focusView.id
-                            menuSetting?.nextFocusDownId = focusView.id
-                            menuMyPlan?.nextFocusDownId = focusView.id
-                            topMenu.nextFocusDownId = focusView.id
+                            menuHome?.nextFocusDownId = R.id.heroBanner
+                            menuLogin?.nextFocusDownId = R.id.heroBanner
+                            menuSetting?.nextFocusDownId = R.id.heroBanner
+                            menuMyPlan?.nextFocusDownId = R.id.heroBanner
+                            topMenu.nextFocusDownId = R.id.heroBanner
 
                             // Center the initially focused banner without animation
                             bannerScroll.post {
@@ -338,8 +357,7 @@ class HomeActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        // No banners: keep spacing (state row may show error/retry)
-                        // Also keep nextFocusDown to rails (updated in setupRails)
+                        // No banners; nothing special
                     }
                 }
             }
@@ -384,45 +402,26 @@ class HomeActivity : AppCompatActivity() {
             railScrolls[category] = railView.findViewById(R.id.railScroll)
         }
 
-        // Helpers to compute row index and remap focus up
         fun rowIndexOf(category: HomeCategory): Int = categories.indexOf(category).coerceAtLeast(0)
 
         /**
          * PUBLIC_INTERFACE
          * handleDpadUpWithinRails
-         * General DPAD_UP mapping across rails: for any row r > 0, focus the corresponding
-         * item by index in the immediate row above (r-1). For the first row (r == 0), keep
-         * default behavior (no remap to top menu unless explicitly intended elsewhere).
+         * General DPAD_UP mapping across rails:
+         * - For any row r > 0, focus the corresponding item by index in the immediate row above (r-1).
+         * - For the first content row (r == 0), DPAD_UP moves focus to the hero banner container.
          *
          * @param currentCard View currently focused within its row
          * @param currentCategory Category of the row containing currentCard
-         * @return true if focus was remapped to the row above; false if boundary/no-op
+         * @return true if focus was remapped; false if boundary/no-op
          */
         fun handleDpadUpWithinRails(currentCard: View, currentCategory: HomeCategory): Boolean {
             val currentRowIdx = rowIndexOf(currentCategory)
             if (currentRowIdx <= 0) {
-                // First/top row: move focus to banner carousel aligned by index
-                if (::bannerRow.isInitialized && bannerRow.childCount > 0) {
-                    val parentRow = currentCard.parent as? LinearLayout
-                    val currentIndex = parentRow?.indexOfChild(currentCard)?.coerceAtLeast(0) ?: 0
-                    val targetIndex = currentIndex.coerceAtMost(bannerRow.childCount - 1)
-                    val target = bannerRow.getChildAt(targetIndex)
-                    target?.requestFocus()
-                    bannerScroll.post {
-                        val cx = computeCenterScrollX(bannerScroll, target)
-                        bannerScroll.smoothScrollTo(cx, 0)
-                    }
-                    if (focusDebug) Log.d("FocusNav", "DPAD_UP from first rail -> banner idx=$targetIndex")
-                    return true
-                }
-                // Fallback to top menu if banner not initialized
-                if (::topMenuDefaultChild.isInitialized) {
-                    topMenuDefaultChild.requestFocus()
-                    if (focusDebug) Log.d("FocusNav", "DPAD_UP first rail fallback -> top menu")
-                    return true
-                }
-                if (focusDebug) Log.d("FocusNav", "DPAD_UP at first row: banner/menu not ready")
-                return false
+                // Requirement: From first rail UP -> hero banner
+                val moved = moveFocusToHeroBanner()
+                if (focusDebug) Log.d("FocusNav", "DPAD_UP from first rail -> heroBanner (moved=$moved)")
+                return moved
             }
 
             val targetRowCategory = categories[currentRowIdx - 1]
@@ -486,7 +485,6 @@ class HomeActivity : AppCompatActivity() {
 
                             // Ensure images are clipped to rounded corners (card_bg sets rounded outline)
                             (card.parent as? View)?.let { container ->
-                                // For the inner FrameLayout we set outline to background; enable clip
                                 container.clipToOutline = true
                             }
                             // Also ensure the card itself honors outline clipping and uses compatibility padding
@@ -500,17 +498,12 @@ class HomeActivity : AppCompatActivity() {
                             // Load image with Coil using placeholder/error
                             Log.d("CoilFirstLoad", "Loading image URL: ${item.poster}")
 
-                            // PUBLIC_INTERFACE
                             // Image loading behavior:
-                            // - Wait until the ImageView is laid out to avoid 0x0 target size.
-                            // - Provide exact size(img.width, img.height) and use Scale.FILL to match CENTER_CROP.
-                            // - Disable crossfade/transformations to prevent visual zoom shifts.
                             fun startLoadWithMeasuredSize() {
                                 val w = img.width
                                 val h = img.height
                                 if (w <= 0 || h <= 0) return
 
-                                // Cancel any previous pending request tied to this ImageView to prevent reuse artifacts
                                 try {
                                     ImageCacheUtils.cancelOngoingRequest(img)
                                 } catch (_: Throwable) {
@@ -519,24 +512,18 @@ class HomeActivity : AppCompatActivity() {
 
                                 val data = item.poster?.takeIf { it.isNotBlank() } ?: R.drawable.thumb_1
                                 img.load(data) {
-                                    // Fill to avoid empty borders; minimal crop as needed
                                     scale(Scale.FILL)
-                                    // Use exact target size for decode
                                     size(w, h)
-                                    // Disable crossfade and transformations to avoid initial zoom/shift
                                     crossfade(false)
-                                    // Prefer hardware when available, Coil will fallback if needed
                                     allowHardware(true)
                                     memoryCachePolicy(CachePolicy.ENABLED)
                                     placeholder(R.drawable.thumb_1)
                                     error(R.drawable.thumb_2)
-                                    // Ensure no transformations are applied (stays empty)
                                     transformations(listOf())
                                 }
                             }
 
                             if (img.width == 0 || img.height == 0) {
-                                // Defer until first pre-draw (one-time listener)
                                 img.viewTreeObserver.addOnPreDrawListener(object : android.view.ViewTreeObserver.OnPreDrawListener {
                                     override fun onPreDraw(): Boolean {
                                         if (img.width > 0 && img.height > 0) {
@@ -559,26 +546,26 @@ class HomeActivity : AppCompatActivity() {
                             card.isFocusable = true
                             card.isFocusableInTouchMode = true
 
-                            // Hint upwards to menu via XML nextFocusUp, but actual behavior will be
-                            // overridden by our key listener mapping for rows > 0.
-                            card.nextFocusUpId = R.id.topMenu
+                            // Hint upwards to Home for general fallback (listeners will override)
+                            card.nextFocusUpId = R.id.topNavHome
 
                             // Intercept DPAD_UP across all rows:
                             // - If row index > 0, focus the corresponding index in row-1.
-                            // - If row index == 0, do nothing special here (do not jump to menu).
+                            // - If row index == 0, move focus to hero banner container.
                             card.setOnKeyListener { v, keyCode, event ->
                                 if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
                                 when (keyCode) {
                                     KeyEvent.KEYCODE_DPAD_UP -> {
                                         val handled = handleDpadUpWithinRails(v, category)
-                                        if (handled) {
-                                            true
-                                        } else {
-                                            false
-                                        }
+                                        handled
+                                    }
+                                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                        // If this is the first row, DOWN remains default (to row 2).
+                                        // No special handling for rows > 0.
+                                        false
                                     }
                                     KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                        // Prevent moving past horizontal bounds in the current rail row.
+                                        // Maintain boundary consumption to avoid leaking focus vertically/horizontally
                                         val parentRow = v.parent as? LinearLayout
                                         if (parentRow != null) {
                                             val index = parentRow.indexOfChild(v).coerceAtLeast(0)
@@ -594,10 +581,10 @@ class HomeActivity : AppCompatActivity() {
                                                         "DPAD_${if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) "LEFT" else "RIGHT"} at boundary (index=$index, last=$lastIndex) — consuming."
                                                     )
                                                 }
-                                                return@setOnKeyListener true // consume to do nothing at bounds
+                                                return@setOnKeyListener true
                                             }
                                         }
-                                        false // let normal navigation proceed between intermediate items
+                                        false
                                     }
                                     else -> false
                                 }
@@ -629,32 +616,31 @@ class HomeActivity : AppCompatActivity() {
                             row.addView(card)
                         }
 
-                        // Focus up: prefer banner row if it exists; fallback to top menu
-                        if (::bannerRow.isInitialized && bannerRow.childCount > 0) {
-                            val firstBanner = bannerRow.getChildAt(0)
-                            scrollView.nextFocusUpId = firstBanner?.id ?: R.id.topMenu
-                            row.nextFocusUpId = firstBanner?.id ?: R.id.topMenu
-                        } else {
-                            scrollView.nextFocusUpId = R.id.topMenu
-                            row.nextFocusUpId = R.id.topMenu
+                        val rowIndex = categories.indexOf(category)
+
+                        // Focus up: for first row, UP should go to hero banner container
+                        if (::bannerScroll.isInitialized) {
+                            if (rowIndex == 0) {
+                                scrollView.nextFocusUpId = R.id.heroBanner
+                                row.nextFocusUpId = R.id.heroBanner
+                            } else {
+                                // For other rows, fallback to top menu if search fails (listeners handle exact mapping)
+                                scrollView.nextFocusUpId = R.id.topMenu
+                                row.nextFocusUpId = R.id.topMenu
+                            }
                         }
 
-                        // If this is the first row, set it as the nextFocusDown for the entire topMenu
-                        if (categories.indexOf(category) == 0) {
-                            // Assign nextFocusDown of each menu item to the first card if present
+                        // If this is the first row, assign IDs for references and connect hero banner DOWN to its first item
+                        if (rowIndex == 0) {
+                            // Assign stable IDs to first rail row and its first item if present
+                            row.id = R.id.firstRailRow
                             val firstCard = if (row.childCount > 0) row.getChildAt(0) else null
                             if (firstCard != null) {
-                                val menuHome = findViewById<TextView>(R.id.menuHome)
-                                val menuLogin = findViewById<TextView>(R.id.menuLogin)
-                                val menuSetting = findViewById<TextView>(R.id.menuSetting)
-                                val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
-
-                                arrayOf(menuHome, menuLogin, menuSetting, menuMyPlan).forEach { menuItem ->
-                                    menuItem?.nextFocusDownId = firstCard.id
+                                firstCard.id = R.id.firstRailFirstItem
+                                // From hero banner DOWN -> first rail first item
+                                if (::bannerScroll.isInitialized) {
+                                    bannerScroll.nextFocusDownId = firstCard.id
                                 }
-
-                                // Also set container-level fallback
-                                topMenu.nextFocusDownId = firstCard.id
                             }
                         }
                     }
@@ -662,10 +648,56 @@ class HomeActivity : AppCompatActivity() {
                     // Verification logs for multiple rows
                     val counts = categories.mapIndexed { idx, c -> "row$idx=${railRows[c]?.childCount ?: 0}" }
                     if (focusDebug) {
-                        Log.d("FocusNavVerify", "Rows children counts: ${counts.joinToString(", ")}. DPAD_UP maps r->r-1 by index with clamping.")
+                        Log.d("FocusNavVerify", "Rows children counts: ${counts.joinToString(", ")}. Custom DPAD rules active for top/hero/first-row.")
                     }
                 }
             }
         }
+    }
+
+    // Utils
+
+    private fun moveFocusToHeroBanner(): Boolean {
+        // Prefer focusing a child card if available
+        val row = if (::bannerRow.isInitialized) bannerRow else null
+        if (row != null && row.childCount > 0) {
+            val preferredIndex = viewModel.bannerState.value.focusedIndex
+                .coerceAtMost((row.childCount - 1).coerceAtLeast(0))
+            val target = row.getChildAt(preferredIndex) ?: row.getChildAt(0)
+            return target?.requestFocus() == true
+        }
+        val hero = findViewById<View>(R.id.heroBanner) ?: return false
+        return hero.requestFocus()
+    }
+
+    private fun moveFocusToTopNavHome(): Boolean {
+        val home = findViewById<View>(R.id.topNavHome)
+        return if (home != null) {
+            home.requestFocus()
+        } else {
+            if (::topMenuDefaultChild.isInitialized) {
+                topMenuDefaultChild.requestFocus()
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun moveFocusToFirstRailFirstItem(): Boolean {
+        val row = findViewById<LinearLayout>(R.id.firstRailRow) ?: return false
+        if (row.childCount <= 0) return false
+        val first = row.getChildAt(0) ?: return false
+        return first.requestFocus()
+    }
+
+    private fun isDescendantOf(view: View?, parentId: Int): Boolean {
+        if (view == null) return false
+        var current: View? = view
+        while (current != null) {
+            if (current.id == parentId) return true
+            val p = current.parent
+            current = if (p is View) p else null
+        }
+        return false
     }
 }
