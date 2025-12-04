@@ -70,6 +70,9 @@ class HomeActivity : AppCompatActivity() {
     // Debug flag for focus mapping logs
     private val focusDebug = true
 
+    // Cache of last banner URLs to avoid rebuilding the hero carousel on focus index updates
+    private var lastBannerList: List<String> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -279,135 +282,147 @@ class HomeActivity : AppCompatActivity() {
 
                     errorText.text = bState.error ?: getString(R.string.banner_error_generic)
 
-                    // Populate banner cards
-                    bannerRow.removeAllViews()
+                    // Populate banner cards (rebuild only when the banner list actually changes)
                     val banners = bState.banners
+                    val shouldRebuild = (banners != lastBannerList) || (bannerRow.childCount == 0 && banners.isNotEmpty())
 
-                    if (banners.isNotEmpty()) {
-                        banners.forEachIndexed { index, url ->
-                            val card = layoutInflater.inflate(R.layout.view_banner_card, bannerRow, false)
-                            // Ensure unique ID per card for precise focus targeting
-                            card.id = View.generateViewId()
+                    if (shouldRebuild) {
+                        lastBannerList = banners.toList()
+                        bannerRow.removeAllViews()
 
-                            // 1. Increase horizontal spacing between items (~16dp)
-                            //    Existing XML has marginEnd=4dp. We override it here programmatically.
-                            val params = card.layoutParams as? LinearLayout.LayoutParams
-                                ?: LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT
-                                )
-                            // 16dp in pixels
-                            val density = resources.displayMetrics.density
-                            val spacingPx = (16 * density).toInt()
-                            params.marginEnd = spacingPx
-                            card.layoutParams = params
+                        if (banners.isNotEmpty()) {
+                            banners.forEachIndexed { index, url ->
+                                val card = layoutInflater.inflate(R.layout.view_banner_card, bannerRow, false)
+                                // Ensure unique ID per card for precise focus targeting
+                                card.id = View.generateViewId()
 
-                            val img = card.findViewById<ImageView>(R.id.bannerImage)
+                                // 1. Increase horizontal spacing between items (~16dp)
+                                //    Existing XML has marginEnd=4dp. We override it here programmatically.
+                                val params = card.layoutParams as? LinearLayout.LayoutParams
+                                    ?: LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                    )
+                                // 16dp in pixels
+                                val density = resources.displayMetrics.density
+                                val spacingPx = (16 * density).toInt()
+                                params.marginEnd = spacingPx
+                                card.layoutParams = params
 
-                            // Load with Coil (simple call; CENTER_CROP set in XML to minimize cropping)
-                            try {
-                                ImageCacheUtils.cancelOngoingRequest(img)
-                            } catch (_: Throwable) {}
-                            img.load(url)
-
-                            // Focus animations + center on focus; also ensure scroll-to-top if entering via DPAD_UP
-                            // 2. Focused visual: scale 1.03f + translationZ and elevate the MaterialCardView
-                            card.setOnFocusChangeListener { v, hasFocus ->
-                                v.animate().scaleX(if (hasFocus) 1.03f else 1.0f)
-                                    .scaleY(if (hasFocus) 1.03f else 1.0f)
-                                    .translationZ(if (hasFocus) 8f else 0f)
-                                    .setDuration(140)
-                                    .start()
-
-                                // Apply elevation using MaterialCardView for consistent shadows on TV
-                                val mc = v as? MaterialCardView
-                                val elev = if (hasFocus)
-                                    resources.getDimension(R.dimen.card_elevation_focused)
-                                else
+                                // Ensure baseline (unfocused) elevation so visuals are correct before any focus events
+                                (card as? MaterialCardView)?.cardElevation =
                                     resources.getDimension(R.dimen.card_elevation)
-                                if (mc != null) {
-                                    mc.cardElevation = elev
-                                } else {
-                                    v.elevation = elev
+
+                                val img = card.findViewById<ImageView>(R.id.bannerImage)
+
+                                // Load with Coil (simple call; CENTER_CROP set in XML to minimize cropping)
+                                try {
+                                    ImageCacheUtils.cancelOngoingRequest(img)
+                                } catch (_: Throwable) {}
+                                img.load(url)
+
+                                // Focus animations + center on focus; also ensure scroll-to-top if entering via DPAD_UP
+                                // 2. Focused visual: scale 1.03f + translationZ and elevate the MaterialCardView
+                                card.setOnFocusChangeListener { v, hasFocus ->
+                                    if (focusDebug) {
+                                        Log.d("FocusNav", "BannerCard[$index] onFocusChange hasFocus=$hasFocus")
+                                    }
+                                    v.animate().scaleX(if (hasFocus) 1.03f else 1.0f)
+                                        .scaleY(if (hasFocus) 1.03f else 1.0f)
+                                        .translationZ(if (hasFocus) 8f else 0f)
+                                        .setDuration(140)
+                                        .start()
+
+                                    // Apply elevation using MaterialCardView for consistent shadows on TV
+                                    val mc = v as? MaterialCardView
+                                    val elev = if (hasFocus)
+                                        resources.getDimension(R.dimen.card_elevation_focused)
+                                    else
+                                        resources.getDimension(R.dimen.card_elevation)
+                                    if (mc != null) {
+                                        mc.cardElevation = elev
+                                    } else {
+                                        v.elevation = elev
+                                    }
+
+                                    if (hasFocus) {
+                                        ensureTopScrollIfNeeded(trigger = "hero-card-focus")
+                                        val centerTarget = computeCenterScrollX(bannerScroll, v)
+                                        bannerScroll.smoothScrollTo(centerTarget, 0)
+                                        // Persist currently focused index without triggering a rebuild of cards
+                                        viewModel.setBannerFocusedIndex(index)
+                                    }
                                 }
 
-                                if (hasFocus) {
-                                    ensureTopScrollIfNeeded(trigger = "hero-card-focus")
-                                    val centerTarget = computeCenterScrollX(bannerScroll, v)
-                                    bannerScroll.smoothScrollTo(centerTarget, 0)
-                                    // Update focused index every time focus moves via DPAD LEFT/RIGHT
-                                    viewModel.setBannerFocusedIndex(index)
-                                }
-                            }
+                                // Ensure system focus search knows where UP should go (Home)
+                                card.nextFocusUpId = R.id.topNavHome
 
-                            // Ensure system focus search knows where UP should go (Home)
-                            card.nextFocusUpId = R.id.topNavHome
-
-                            // Intercepts LEFT/RIGHT wrap-around; UP -> Home; DOWN -> first rail first item
-                            // 3. DPAD Edges: prevent focus moving past last item on RIGHT and before first on LEFT
-                            card.setOnKeyListener { _, keyCode, event ->
-                                if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
-                                val parent = card.parent as? LinearLayout ?: return@setOnKeyListener false
-                                val idx = parent.indexOfChild(card).coerceAtLeast(0)
-                                val last = (parent.childCount - 1).coerceAtLeast(0)
-                                when (keyCode) {
-                                    KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                        if (idx <= 0) {
-                                            // Consume event at start edge (no wrap)
-                                            return@setOnKeyListener true
+                                // Intercepts LEFT/RIGHT wrap-around; UP -> Home; DOWN -> first rail first item
+                                // 3. DPAD Edges: prevent focus moving past last item on RIGHT and before first on LEFT
+                                card.setOnKeyListener { _, keyCode, event ->
+                                    if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+                                    val parent = card.parent as? LinearLayout ?: return@setOnKeyListener false
+                                    val idx = parent.indexOfChild(card).coerceAtLeast(0)
+                                    val last = (parent.childCount - 1).coerceAtLeast(0)
+                                    when (keyCode) {
+                                        KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                            if (idx <= 0) {
+                                                // Consume event at start edge (no wrap)
+                                                return@setOnKeyListener true
+                                            }
+                                            false
                                         }
-                                        false
-                                    }
-                                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                        if (idx >= last) {
-                                            // Consume event at end edge (no wrap)
-                                            return@setOnKeyListener true
+                                        KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                            if (idx >= last) {
+                                                // Consume event at end edge (no wrap)
+                                                return@setOnKeyListener true
+                                            }
+                                            false
                                         }
-                                        false
+                                        KeyEvent.KEYCODE_DPAD_UP -> {
+                                            val moved = moveFocusToTopNavHome()
+                                            if (focusDebug) Log.d("FocusNav", "BannerCard UP -> topNavHome (moved=$moved)")
+                                            moved
+                                        }
+                                        KeyEvent.KEYCODE_DPAD_DOWN -> {
+                                            val moved = moveFocusToFirstRailFirstItem()
+                                            if (focusDebug) Log.d("FocusNav", "BannerCard DOWN -> firstRailFirstItem (moved=$moved)")
+                                            moved
+                                        }
+                                        else -> false
                                     }
-                                    KeyEvent.KEYCODE_DPAD_UP -> {
-                                        val moved = moveFocusToTopNavHome()
-                                        if (focusDebug) Log.d("FocusNav", "BannerCard UP -> topNavHome (moved=$moved)")
-                                        moved
-                                    }
-                                    KeyEvent.KEYCODE_DPAD_DOWN -> {
-                                        val moved = moveFocusToFirstRailFirstItem()
-                                        if (focusDebug) Log.d("FocusNav", "BannerCard DOWN -> firstRailFirstItem (moved=$moved)")
-                                        moved
-                                    }
-                                    else -> false
+                                }
+
+                                bannerRow.addView(card)
+                            }
+
+                            // Restore focus to saved index if possible; else focus first
+                            val toFocus = bState.focusedIndex
+                                .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
+                            val focusView = bannerRow.getChildAt(toFocus)
+
+                            if (focusView != null) {
+                                // Keep top nav DOWN directed to hero banner container per requirement
+                                val menuHome = findViewById<TextView>(R.id.topNavHome)
+                                val menuLogin = findViewById<TextView>(R.id.menuLogin)
+                                val menuSetting = findViewById<TextView>(R.id.menuSetting)
+                                val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
+
+                                menuHome?.nextFocusDownId = R.id.heroBanner
+                                menuLogin?.nextFocusDownId = R.id.heroBanner
+                                menuSetting?.nextFocusDownId = R.id.heroBanner
+                                menuMyPlan?.nextFocusDownId = R.id.heroBanner
+                                topMenu.nextFocusDownId = R.id.heroBanner
+
+                                // Center the initially focused banner without animation
+                                bannerScroll.post {
+                                    val cx = computeCenterScrollX(bannerScroll, focusView)
+                                    bannerScroll.scrollTo(cx, 0)
                                 }
                             }
-
-                            bannerRow.addView(card)
+                        } else {
+                            // No banners; nothing special
                         }
-
-                        // Restore focus to saved index if possible; else focus first
-                        val toFocus = viewModel.bannerState.value.focusedIndex
-                            .coerceAtMost((bannerRow.childCount - 1).coerceAtLeast(0))
-                        val focusView = bannerRow.getChildAt(toFocus)
-
-                        if (focusView != null) {
-                            // Keep top nav DOWN directed to hero banner container per requirement
-                            val menuHome = findViewById<TextView>(R.id.topNavHome)
-                            val menuLogin = findViewById<TextView>(R.id.menuLogin)
-                            val menuSetting = findViewById<TextView>(R.id.menuSetting)
-                            val menuMyPlan = findViewById<TextView>(R.id.menuMyPlan)
-
-                            menuHome?.nextFocusDownId = R.id.heroBanner
-                            menuLogin?.nextFocusDownId = R.id.heroBanner
-                            menuSetting?.nextFocusDownId = R.id.heroBanner
-                            menuMyPlan?.nextFocusDownId = R.id.heroBanner
-                            topMenu.nextFocusDownId = R.id.heroBanner
-
-                            // Center the initially focused banner without animation
-                            bannerScroll.post {
-                                val cx = computeCenterScrollX(bannerScroll, focusView)
-                                bannerScroll.scrollTo(cx, 0)
-                            }
-                        }
-                    } else {
-                        // No banners; nothing special
                     }
                 }
             }
