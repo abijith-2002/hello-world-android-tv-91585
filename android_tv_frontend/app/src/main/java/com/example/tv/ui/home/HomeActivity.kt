@@ -166,6 +166,13 @@ class HomeActivity : AppCompatActivity() {
         bannerScroll = findViewById(R.id.heroBanner)
         bannerRow = findViewById(R.id.bannerRow)
 
+        // Ensure UP from any hero banner descendant targets the Home button explicitly
+        bannerScroll.nextFocusUpId = R.id.topNavHome
+        bannerRow.nextFocusUpId = R.id.topNavHome
+        if (focusDebug) {
+            Log.d("FocusNavVerify", "nextFocusUp configured: heroBanner->topNavHome")
+        }
+
         val stateRow: View = findViewById(R.id.bannerStateRow)
         val loading: View = findViewById(R.id.bannerLoading)
         val errorText: TextView = findViewById(R.id.bannerErrorText)

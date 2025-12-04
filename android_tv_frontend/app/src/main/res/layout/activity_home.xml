@@ -212,7 +212,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:descendantFocusability="afterDescendants"
-                android:nextFocusUp="@id/topMenu">
+                android:nextFocusUp="@id/topNavHome">
 
                 <LinearLayout
                     android:id="@+id/bannerRow"
@@ -221,7 +221,7 @@
                     android:orientation="horizontal"
                     android:clipChildren="false"
                     android:clipToPadding="false"
-                    android:nextFocusUp="@id/topMenu"
+                    android:nextFocusUp="@id/topNavHome"
                     android:focusable="true"
                     android:focusableInTouchMode="true" />
             </HorizontalScrollView>
